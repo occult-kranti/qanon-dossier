@@ -71,8 +71,151 @@
       </div>
     </header>
 
+    <div class="pagebody">
+      <p class="lede">Every other page on this site presents findings. This page interrogates them. Good faith in a contested area means holding the strongest version of each side, naming the limits of one's own sources, and refusing to let a tidy narrative outrun the data. The QAnon literature is unusually prone to two opposite failures — <em>threat inflation</em> (every believer a budding terrorist) and <em>threat dismissal</em> (just internet weirdness) — and much of the real disagreement below is about calibrating between them. Section numbers map to live scholarly debates; the closing scorecard rates how well-supported each load-bearing claim in the dossier really is.</p>
+    </div>
+
+    <!-- Q1 -->
+    <section class="dz" id="q1" style="border-top:none">
+      <div class="sechd"><div class="secno">1</div>
+        <div><h2 class="sech">Is the threat inflated or real?</h2>
+        <p class="sectag">The central, still-unsettled disagreement</p></div></div>
+      <div class="secbody">
+        <p>The sharpest fault line in the field is also the most policy-relevant. Two serious, well-credentialed camps read the same incidents differently.</p>
+        <div class="dgrid">
+          <div class="dcard">
+            <h4>Position A · A genuine security threat</h4>
+            <div class="tech">CSIS · CTC Sentinel · Argentino · Garry et al.</div>
+            <p>QAnon has a documented violence nexus — armed standoffs, a murder, a role in January 6 — and an unusually short radicalization-to-mobilization window (sometimes days). Its decentralisation makes it <em>harder</em> to police than a hierarchical group, not easier. The FBI flagged it as a potential domestic-terror motivator as early as 2019.</p>
+          </div>
+          <div class="dcard">
+            <h4>Position B · A radical idea, rarely radical action</h4>
+            <div class="tech">Moskalenko &amp; McCauley · Jensen &amp; Kane</div>
+            <p>Most believers hold radical <em>opinions</em> without taking radical <em>action</em>. Moskalenko argues QAnon is better described as a "radical idea collective" entangled with a mental-health crisis than a violent ideology, noting far higher lethality from organised right-wing militias. Over-policing may backfire by confirming the "persecution by the cabal" frame.</p>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-hd"><span>A critical synthesis</span><span class="src">Both can be true</span></div>
+          <div class="panel-bd">
+            <p>These positions are less contradictory than they appear. A movement can have a <em>low base rate</em> of violence and still produce a dangerous <em>high-consequence tail</em> — plus diffuse, non-violent harms (eroded institutional trust, fractured families, public-health damage) that the "is it terrorism?" frame misses entirely. The dossier's stance: the violent-actor count is real but small relative to total adherents; the larger damage is societal and relational. Both over-inflation and dismissal are analytic errors. <span class="ep ep--dis">Contested</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Q2 -->
+    <section class="dz" id="q2">
+      <div class="sechd"><div class="secno">2</div>
+        <div><h2 class="sech">Who — or what — is "Q"?</h2>
+        <p class="sectag">The single-author assumption, stress-tested</p></div></div>
+      <div class="secbody">
+        <p>Popular coverage treats "Q" as a person to be unmasked. The strongest evidence cuts against that framing.</p>
+        <p>The iDRAMA Lab's <b>Gospel According to Q</b> (ICWSM 2022) compared writing style across the most-used tripcodes and found statistically significant differences — pointing to <em>multiple authors</em>, not one. Independent forensic-linguistics teams (reported by the NYT in 2022) likewise attribute the early drops to Paul Furber and the later run to Ron Watkins. Both men deny it.</p>
+        <div class="panel">
+          <div class="panel-hd"><span>Limits to keep in view</span><span class="src">Method caveats</span></div>
+          <div class="panel-bd">
+            <p>Stylometry on short, formulaic, deliberately cryptic imageboard posts is <em>noisy</em>: authors imitate a house style, copy phrasings, and post under compromised tripcodes (8chan passwords were trivially crackable, and the Q tripcode was hijacked more than once). So "multiple authors" is well-supported, but mapping specific drops to specific named individuals is far weaker. The defensible conclusion is structural: <strong>"Q" is better modelled as a role or franchise than as a single hidden insider</strong> — which also dissolves the movement's foundational premise of one high-clearance source. <span class="ep ep--doc">Strong (multiple authors)</span> <span class="ep ep--dis">Contested (named identity)</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Q3 -->
+    <section class="dz" id="q3">
+      <div class="sechd"><div class="secno">3</div>
+        <div><h2 class="sech">Sampling &amp; platform bias in the data</h2>
+        <p class="sectag">We measure where the data is, not where the belief is</p></div></div>
+      <div class="secbody">
+        <p>The computational corpus is the field's empirical backbone — and it has a structural blind spot worth stating plainly.</p>
+        <p>Big-data QAnon studies cluster on the platforms that <em>retained and exposed</em> their data: 4chan, Voat, Parler, Gettr, Telegram, Poal. That is a kind of <span class="term">survivorship bias</span>. The places where QAnon arguably did most of its <em>mainstreaming</em> — private Facebook groups, Instagram wellness aesthetics, TikTok, family text threads — are precisely the hardest to scrape and are correspondingly under-represented in the literature. The picture is sharpest for the fringe and blurriest for the mainstream.</p>
+        <ul class="tl">
+          <li><span class="dt">Tooling</span><span class="ev"><b>Toxicity APIs &amp; topic models have known failure modes.</b> Google's Perspective API and BERT-based topic modelling (used across the Telegram and Voat work) miss irony, code words and context, and were tuned largely on English.</span></li>
+          <li><span class="dt">Language</span><span class="ev"><b>English-centrism — with a corrective.</b> Most tools and most studies are anglophone, yet Hoseini et al. found German <em>overshadowing</em> English on Telegram after 2020. The field's own data shows its tools were pointed at the wrong language for part of the story.</span></li>
+          <li><span class="dt">Platform</span><span class="ev"><b>Each platform skews the sample.</b> Parler over-represents the J6 cohort; Voat over-represents post-ban hardcore users. Generalising from any one platform to "QAnon" risks mistaking a fragment for the whole.</span></li>
+        </ul>
+        <p>None of this invalidates the work — it is careful and reproducible. But the honest reading is that quantitative findings describe <em>the measured platforms</em>, and the mainstream middle of the movement remains under-counted. <span class="ep ep--all">Moderate confidence in scope</span></p>
+      </div>
+    </section>
+
+    <!-- Q4 -->
+    <section class="dz" id="q4">
+      <div class="sechd"><div class="secno">4</div>
+        <div><h2 class="sech">Is "cult" the right word?</h2>
+        <p class="sectag">A useful lens that the movement also breaks</p></div></div>
+      <div class="secbody">
+        <p>The dossier applies the BITE model and Lifton's and Langone's criteria — frameworks built for <em>bounded, leader-led</em> groups. QAnon is neither. It has no compound, no membership roll, and (per §2) no single living leader. That mismatch is not a detail to paper over.</p>
+        <div class="dgrid">
+          <div class="dcard">
+            <h4>Where the cult lens fits</h4>
+            <div class="tech">Belief · thought-terminating clichés · us/them</div>
+            <p>Sacred doctrine, an in-group/out-group cosmology, loaded language ("sheep," "WWG1WGA"), demand for purity, and a millenarian payoff all map cleanly onto Lifton and BITE. The dossier scores most criteria as met.</p>
+          </div>
+          <div class="dcard">
+            <h4>Where it strains</h4>
+            <div class="tech">No leader · no enclosure · voluntary exit</div>
+            <p>"Milieu control" and "dispensing of existence" only partly apply to a leaderless, non-residential, online movement people can leave by closing a tab. The dossier flags exactly these as <em>partial</em> — a sign the model is being stretched.</p>
+          </div>
+        </div>
+        <p>Competing framings each capture part of the truth: Argentino's <em>hyper-real religion</em>, Cohen's <em>online-facilitated cult</em>, Moskalenko's <em>radical idea collective</em>, and this dossier's <em>distributed digital cult</em>. The critical point is to hold the label loosely: it is an analytic instrument, not a verdict, and its non-fitting items are themselves informative about what kind of thing QAnon is. <span class="ep ep--dis">Contested framing</span></p>
+      </div>
+    </section>
+
+    <!-- Q5 -->
+    <section class="dz" id="q5">
+      <div class="sechd"><div class="secno">5</div>
+        <div><h2 class="sech">Failed prophecy &amp; falsifiability</h2>
+        <p class="sectag">Why being wrong didn't end it</p></div></div>
+      <div class="secbody">
+        <p>The <a href="timeline.html" style="color:var(--rep);text-decoration:none;border-bottom:1px solid rgba(46,85,117,.4)">Timeline</a> records a string of specific, checkable predictions that simply failed — mass arrests, "The Storm," the March 2021 "restoration." On a naive model, disconfirmation should have collapsed belief. It didn't.</p>
+        <p>Two literatures explain why. Festinger's classic <em>When Prophecy Fails</em> (1956) showed that disconfirmation can <em>intensify</em> commitment in a tight-knit group by triggering rationalisation. Priniski, McClay &amp; Holyoak (CogSci 2021) give the contemporary version: QAnon functions as a mental model that re-absorbs contradictions rather than being refuted by them. Amarasingam &amp; Argentino documented the real-time reinterpretation after each failed date.</p>
+        <div class="panel">
+          <div class="panel-hd"><span>The critical implication</span><span class="src">Unfalsifiability is a feature</span></div>
+          <div class="panel-bd"><p>A belief system that treats every disconfirmation as further proof of the cover-up is, by construction, unfalsifiable — which is also why fact-checking alone rarely works, and why the post-2022 drift toward influencer-led, prophecy-free QAnon was predictable: the movement no longer needs Q to be right, only to be <em>meaningful</em>. <span class="ep ep--doc">Strong</span></p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Q6 -->
+    <section class="dz" id="q6">
+      <div class="sechd"><div class="secno">6</div>
+        <div><h2 class="sech">The antisemitism lineage</h2>
+        <p class="sectag">An old structure wearing new clothes</p></div></div>
+      <div class="secbody">
+        <p>A recurring finding across otherwise unrelated studies is that QAnon's "new" mythology recycles a very old antisemitic structure. Multiple scholars (Bloom &amp; Moskalenko; Vrzal; Miotto &amp; Droogan) note that the <span class="term">adrenochrome</span> blood-harvesting claim is a modern restatement of the medieval <em>blood libel</em>. Survey work cited in the religion literature reports that a large share of QAnon affiliates endorse claims drawn from the <em>Protocols of the Elders of Zion</em>, a fabricated antisemitic text.</p>
+        <p>This convergence matters for interpretation: it means QAnon cannot be read as a purely novel "internet" phenomenon. Its deep structure — a hidden, child-harming elite controlling world events — is the blood libel and the Protocols, re-skinned with imageboard vernacular and pop-culture references (the "red pill," "the Matrix"). Treating it as historically continuous is better supported than treating it as <em>sui generis</em>. <span class="ep ep--doc">Strong</span></p>
+      </div>
+    </section>
+
+    <!-- SCORECARD -->
+    <section class="dz" id="scorecard">
+      <div class="sechd"><div class="secno">▣</div>
+        <div><h2 class="sech">Evidence-quality scorecard</h2>
+        <p class="sectag">How well-supported is each load-bearing claim?</p></div></div>
+      <div class="secbody">
+        <p>A summary judgement on the dossier's central claims, rating the <em>strength of the underlying evidence</em> rather than the claim's importance. "Strong" = converging peer-reviewed and primary sources; "Moderate" = supported with method/coverage gaps; "Contested" = credible scholars disagree.</p>
+        <div class="tblwrap">
+          <table>
+            <thead><tr><th>Claim</th><th>Strength</th><th>Why</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Origin: first drop 28 Oct 2017 on 4chan /pol/; roots in Pizzagate</strong></td><td><span class="verdict v-met">Strong</span></td><td>Reference works, the de Zeeuw dataset, and the iDRAMA corpus all converge.</td></tr>
+              <tr><td><strong>"Q" is multiple authors, not one insider</strong></td><td><span class="verdict v-met">Strong</span></td><td>Stylometry (Gospel/ICWSM 2022) + independent forensic linguistics agree on multiplicity.</td></tr>
+              <tr><td><strong>Mapping drops to specific named individuals</strong></td><td><span class="verdict v-part">Contested</span></td><td>Attribution to Furber/Watkins is reported and denied; stylometry on short posts is noisy.</td></tr>
+              <tr><td><strong>Documented violence nexus (standoffs, a killing, J6)</strong></td><td><span class="verdict v-met">Strong</span></td><td>Court records + CSIS tally; the <em>incidents</em> are not in dispute.</td></tr>
+              <tr><td><strong>QAnon is a major, broad-based violent threat</strong></td><td><span class="verdict v-part">Contested</span></td><td>Low base rate vs. high-consequence tail; Moskalenko vs. CSIS read it differently.</td></tr>
+              <tr><td><strong>Crowdfunding ≈ $6.25M (2016–2022)</strong></td><td><span class="verdict v-part">Moderate</span></td><td>One careful ADL dataset; not independently replicated; captures named platforms only.</td></tr>
+              <tr><td><strong>Substantial foreign amplification (Russia, China)</strong></td><td><span class="verdict v-part">Moderate</span></td><td>Soufan Center analysis; plausible and sourced, but single-report and methodologically bounded.</td></tr>
+              <tr><td><strong>Global spread; German-led on Telegram post-2020</strong></td><td><span class="verdict v-met">Strong</span></td><td>Hoseini et al. (WebSci 2023), 4.5M messages, multilingual and explicit.</td></tr>
+              <tr><td><strong>Deep structure recycles blood-libel / Protocols antisemitism</strong></td><td><span class="verdict v-met">Strong</span></td><td>Convergent across religion, psychology and cultural-analysis literatures.</td></tr>
+              <tr><td><strong>Framework "scores" (BITE / Lifton / Langone)</strong></td><td><span class="verdict v-part">Contested</span></td><td>Interpretive by design; the models fit a leaderless movement only partly.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
     <div class="foot">
-      <p class="disc"><b>How to use this page.</b> Treat it as the dossier arguing with itself. Where a claim is marked <em>Strong</em>, the evidence converges from independent directions. Where it is <em>Contested</em>, reasonable experts genuinely disagree and the dossier's wording is a judgement call, not a settled fact.</p>
+      <p class="disc"><b>How to use this page.</b> Treat it as the dossier arguing with itself. Where a claim is marked <em>Strong</em>, the evidence converges from independent directions. Where it is <em>Contested</em>, reasonable experts genuinely disagree and the dossier's wording is a judgement call, not a settled fact. The aim is calibration: neither credulous acceptance nor reflexive dismissal.</p>
+      <p class="disc"><b>What would change these ratings.</b> Independent replication of the crowdfunding figure; better access to private-platform (Facebook/Instagram/TikTok) data to test the "mainstream is under-counted" worry; and longitudinal individual-level data tracking the path from belief to action would each move a "Moderate" or "Contested" toward "Strong" — in either direction.</p>
       <p style="margin-top:14px">Compiled 2026 · Critical review · Ref Q-CRIT · For academic use. · <a href="research.html" style="color:var(--rep);text-decoration:none">← Research</a> · <a href="timeline.html" style="color:var(--rep);text-decoration:none">Timeline →</a></p>
     </div>
 
