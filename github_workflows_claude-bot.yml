@@ -99,6 +99,7 @@ PY
           curl -s -X POST -H "Authorization: token $GITHUB_TOKEN" -H "Content-Type: application/json" \
             -d "$COMMENT_PAYLOAD" "$TARGET_URL"
 
+#/claude update readme with new capability
 # Notes:
 # 1) Add the repository secret named CLAUDE_API_KEY at: Settings → Secrets and variables → Actions
 # 2) Trigger the workflow by creating a comment that starts with /claude (or any comment — the workflow runs on all comments; you can require a trigger word by changing the `if:` logic).
