@@ -1,0 +1,106 @@
+name: claude-bot
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  run-claude:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build prompt from comment and include referenced files
+        run: |
+          set -euo pipefail
+          # Load the comment body from the event payload
+          COMMENT_BODY=$(python3 - <<'PY'
+import json,os
+evt=json.load(open(os.environ['GITHUB_EVENT_PATH']))
+print(evt['comment']['body'])
+PY
+)
+
+          echo "Writing comment to prompt.txt"
+          printf "%s" "$COMMENT_BODY" > prompt.txt
+
+          # Tokenize comment and look for tokens that correspond to files in the repo
+          echo "Detecting referenced files..."
+          TOKENS=$(python3 - <<'PY'
+import re,sys
+s=sys.stdin.read()
+print('\n'.join(set(re.findall(r"[\w./-]+", s))))
+PY
+ <<<"$COMMENT_BODY")
+
+          FOUND=0
+          while IFS= read -r token; do
+            candidate=$(echo "$token" | sed 's/[^A-Za-z0-9_./-]//g')
+            if [ -f "$candidate" ]; then
+              FOUND=1
+              echo "\n--- FILE: $candidate ---\n" >> prompt.txt
+              sed 's/\r$//' "$candidate" >> prompt.txt
+            fi
+          done <<<"$TOKENS"
+
+          if [ "$FOUND" -eq 0 ]; then
+            echo "No referenced files found in the repo." >&2 || true
+          fi
+
+      - name: Prepare JSON request for Anthropic (Claude)
+        env:
+          MODEL: claude-sonnet-4-6
+          MAX_TOKENS: 1024
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+import json
+prompt=open('prompt.txt','r',encoding='utf-8',errors='replace').read()
+obj={'model':'%s','max_tokens':int(%s),'messages':[{'role':'user','content':prompt}]}
+print(json.dumps(obj))
+PY
+ > request.json
+
+      - name: Call Anthropic Claude API
+        env:
+          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+          ANTHROPIC_VERSION: '2023-06-01'
+        run: |
+          set -euo pipefail
+          RESPONSE=$(curl -s -X POST "https://api.anthropic.com/v1/messages" \
+            -H "x-api-key: $CLAUDE_API_KEY" \
+            -H "anthropic-version: $ANTHROPIC_VERSION" \
+            -H "content-type: application/json" \
+            --data-binary @request.json)
+
+          printf "%s" "$RESPONSE" > response.json
+
+      - name: Post request and response back as a comment
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          TARGET_URL=${{ github.event.issue.comments_url }}
+
+          COMMENT_PAYLOAD=$(python3 - <<'PY'
+import json
+req=open('request.json','r',encoding='utf-8',errors='replace').read()
+res=open('response.json','r',encoding='utf-8',errors='replace').read()
+body=("### Claude Bot Response\n\n**Request JSON:**\n```json\n%s\n```\n\n**Response JSON:**\n```json\n%s\n```" ) % (req,res)
+print(json.dumps({"body": body}))
+PY
+)
+
+          curl -s -X POST -H "Authorization: token $GITHUB_TOKEN" -H "Content-Type: application/json" \
+            -d "$COMMENT_PAYLOAD" "$TARGET_URL"
+
+# Notes:
+# 1) Add the repository secret named CLAUDE_API_KEY at: Settings → Secrets and variables → Actions
+# 2) Trigger the workflow by creating a comment that starts with /claude (or any comment — the workflow runs on all comments; you can require a trigger word by changing the `if:` logic).
+# 3) Include repo file paths (e.g. path/to/file.ext) in the comment if you want file contents appended to the prompt.
+# 4) The workflow posts full request and response JSON back as a comment. Modify if you prefer only the response text.
