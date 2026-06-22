@@ -1,0 +1,385 @@
+{
+  "generated": "2026-06-22",
+  "method": "bertopic",
+  "n_drops": 4248,
+  "runs": [
+    {
+      "tag": "MiniLM-L6_mcs15",
+      "model": "all-MiniLM-L6-v2",
+      "mcs": 15,
+      "n_topics": 63,
+      "file": "run_MiniLM-L6_mcs15.json",
+      "silhouette": 0.6681,
+      "coherence": 0.3902,
+      "mean_persistence": 0.152
+    },
+    {
+      "tag": "MiniLM-L6_mcs25",
+      "model": "all-MiniLM-L6-v2",
+      "mcs": 25,
+      "n_topics": 20,
+      "file": "run_MiniLM-L6_mcs25.json",
+      "silhouette": 0.376,
+      "coherence": 0.3975,
+      "mean_persistence": 0.457
+    },
+    {
+      "tag": "MiniLM-L6_mcs40",
+      "model": "all-MiniLM-L6-v2",
+      "mcs": 40,
+      "n_topics": 2,
+      "file": "run_MiniLM-L6_mcs40.json",
+      "silhouette": 0.7814,
+      "coherence": 0.4178,
+      "mean_persistence": 0.358
+    }
+  ],
+  "pairwise": {
+    "MiniLM-L6_mcs15|MiniLM-L6_mcs25": 0.28,
+    "MiniLM-L6_mcs15|MiniLM-L6_mcs40": 0.024,
+    "MiniLM-L6_mcs25|MiniLM-L6_mcs40": 0.085
+  },
+  "anchor": "MiniLM-L6_mcs25",
+  "anchor_topics": [
+    {
+      "topic": 9,
+      "label": "wwg1wga wwg1wga · wwg1wga · wwg1wga people",
+      "keywords": [
+        "wwg1wga wwg1wga",
+        "wwg1wga",
+        "wwg1wga people",
+        "people wwg1wga",
+        "week coincidence",
+        "ghwb",
+        "usss code",
+        "demonstrate resolve"
+      ],
+      "size": 40,
+      "persistence": 0.753,
+      "verdict": "stable"
+    },
+    {
+      "topic": 10,
+      "label": "wwg1wga wwg1wga · wwg1wga · wwg1wga god",
+      "keywords": [
+        "wwg1wga wwg1wga",
+        "wwg1wga",
+        "wwg1wga god",
+        "enjoyed",
+        "ben",
+        "unitednotdivided wwg1wga",
+        "unitednotdivided",
+        "attention deck"
+      ],
+      "size": 39,
+      "persistence": 0.747,
+      "verdict": "stable"
+    },
+    {
+      "topic": 6,
+      "label": "covid19 · virus · virus election",
+      "keywords": [
+        "covid19",
+        "virus",
+        "virus election",
+        "homes",
+        "lockdowns",
+        "patients",
+        "positive",
+        "lockdown"
+      ],
+      "size": 55,
+      "persistence": 0.507,
+      "verdict": "stable"
+    },
+    {
+      "topic": 15,
+      "label": "worth remembering · remembering · worth",
+      "keywords": [
+        "worth remembering",
+        "remembering",
+        "worth",
+        "remember",
+        "week remember",
+        "remember important",
+        "forget",
+        "important remember"
+      ],
+      "size": 35,
+      "persistence": 0.504,
+      "verdict": "stable"
+    },
+    {
+      "topic": 17,
+      "label": "vip · vip patriot · patriot",
+      "keywords": [
+        "vip",
+        "vip patriot",
+        "patriot",
+        "enjoy",
+        "eyes",
+        "55",
+        "patriots",
+        "patriots eyes"
+      ],
+      "size": 34,
+      "persistence": 0.504,
+      "verdict": "stable"
+    },
+    {
+      "topic": 19,
+      "label": "offline · corona · snow white",
+      "keywords": [
+        "offline",
+        "corona",
+        "snow white",
+        "snow",
+        "does bird",
+        "bird",
+        "flyrothsfly",
+        "corona offline"
+      ],
+      "size": 26,
+      "persistence": 0.503,
+      "verdict": "stable"
+    },
+    {
+      "topic": 5,
+      "label": "anons · anon · impressive",
+      "keywords": [
+        "anons",
+        "anon",
+        "impressive",
+        "anons knew",
+        "pb",
+        "knew",
+        "thank anon",
+        "anons understand"
+      ],
+      "size": 71,
+      "persistence": 0.495,
+      "verdict": "borderline"
+    },
+    {
+      "topic": 8,
+      "label": "error · disregard · spelling",
+      "keywords": [
+        "error",
+        "disregard",
+        "spelling",
+        "password",
+        "click",
+        "mistake",
+        "mistakes",
+        "visit"
+      ],
+      "size": 43,
+      "persistence": 0.494,
+      "verdict": "borderline"
+    },
+    {
+      "topic": 3,
+      "label": "believe coincidences · coincidences · believe",
+      "keywords": [
+        "believe coincidences",
+        "coincidences",
+        "believe",
+        "coincidence",
+        "coincidences think",
+        "mathematically impossible",
+        "mathematically",
+        "coincidences coincidences"
+      ],
+      "size": 83,
+      "persistence": 0.493,
+      "verdict": "borderline"
+    },
+    {
+      "topic": 11,
+      "label": "coincidence · coincidence coincidence · amazing",
+      "keywords": [
+        "coincidence",
+        "coincidence coincidence",
+        "amazing",
+        "coincidence amazing",
+        "monthday",
+        "initiated",
+        "coincidences mathematically",
+        "cs"
+      ],
+      "size": 38,
+      "persistence": 0.491,
+      "verdict": "borderline"
+    },
+    {
+      "topic": 14,
+      "label": "game · shall play · jack",
+      "keywords": [
+        "game",
+        "shall play",
+        "jack",
+        "king",
+        "play game",
+        "reconcile",
+        "play",
+        "shall"
+      ],
+      "size": 36,
+      "persistence": 0.49,
+      "verdict": "borderline"
+    },
+    {
+      "topic": 4,
+      "label": "map · news unlocks · unlocks",
+      "keywords": [
+        "map",
+        "news unlocks",
+        "unlocks",
+        "future proves",
+        "proves past",
+        "proves",
+        "future",
+        "unlocks map"
+      ],
+      "size": 73,
+      "persistence": 0.489,
+      "verdict": "borderline"
+    },
+    {
+      "topic": 18,
+      "label": "truth · truth people · tell public",
+      "keywords": [
+        "truth",
+        "truth people",
+        "tell public",
+        "public truth",
+        "people change",
+        "people truth",
+        "tell",
+        "truth right"
+      ],
+      "size": 33,
+      "persistence": 0.489,
+      "verdict": "borderline"
+    },
+    {
+      "topic": 16,
+      "label": "trip · update · config",
+      "keywords": [
+        "trip",
+        "update",
+        "config",
+        "trip code",
+        "dod",
+        "compromised",
+        "code",
+        "board compromised"
+      ],
+      "size": 34,
+      "persistence": 0.451,
+      "verdict": "borderline"
+    },
+    {
+      "topic": 12,
+      "label": "armor · armor god · evil",
+      "keywords": [
+        "armor",
+        "armor god",
+        "evil",
+        "lord",
+        "spirit",
+        "stand",
+        "god",
+        "spiritual"
+      ],
+      "size": 38,
+      "persistence": 0.426,
+      "verdict": "borderline"
+    },
+    {
+      "topic": 2,
+      "label": "patriots · god · united",
+      "keywords": [
+        "patriots",
+        "god",
+        "united",
+        "patriot",
+        "bless",
+        "god bless",
+        "stand",
+        "america"
+      ],
+      "size": 263,
+      "persistence": 0.383,
+      "verdict": "borderline"
+    },
+    {
+      "topic": 7,
+      "label": "yes · aw · freedom",
+      "keywords": [
+        "yes",
+        "aw",
+        "freedom",
+        "ex",
+        "conf",
+        "stand freedom",
+        "271",
+        "ok"
+      ],
+      "size": 46,
+      "persistence": 0.349,
+      "verdict": "borderline"
+    },
+    {
+      "topic": 0,
+      "label": "potus · did · fbi",
+      "keywords": [
+        "potus",
+        "did",
+        "fbi",
+        "does",
+        "public",
+        "control",
+        "mueller",
+        "news"
+      ],
+      "size": 1554,
+      "persistence": 0.207,
+      "verdict": "fragile"
+    },
+    {
+      "topic": 1,
+      "label": "boom · boom boom · test",
+      "keywords": [
+        "boom",
+        "boom boom",
+        "test",
+        "big big",
+        "qa",
+        "week",
+        "knowingly knowingly",
+        "knowingly"
+      ],
+      "size": 445,
+      "persistence": 0.188,
+      "verdict": "fragile"
+    },
+    {
+      "topic": 13,
+      "label": "comms · board · sniffer",
+      "keywords": [
+        "comms",
+        "board",
+        "sniffer",
+        "cm",
+        "devices",
+        "privately",
+        "archive",
+        "dumps"
+      ],
+      "size": 36,
+      "persistence": 0.171,
+      "verdict": "fragile"
+    }
+  ]
+}

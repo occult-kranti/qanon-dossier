@@ -14,9 +14,10 @@ A self-contained, fully-cited academic website examining **QAnon as a documented
 | **`research.html`** | A **deep, thematically-organised bibliography** of ~27 peer-reviewed works (2017–2025) across five tracks: the **iDRAMA Lab computational corpus** (the 4chan → Voat → Parler → Telegram → Poal platform diaspora), radicalization & security studies, psychology & relational harm, religion & meaning-making, and belief/diffusion/method. Each entry shows venue, year, and verified DOI/arXiv links. Institutional reports (CSIS, ICCT, ADL, Soufan, GWU, NCRI) are listed separately as *not* peer-reviewed. |
 | **`review.html`** | A **Critical Review** that stress-tests the evidence base: the threat-inflation debate, the "who is Q" stylometry question, sampling/platform bias in computational work, whether "cult" is the right word, failed prophecy & falsifiability, the antisemitism lineage, and an **evidence-quality scorecard** rating each major claim Strong / Moderate / Contested. |
 | **`timeline.html`** | A **sourced event chronology** in seven eras — precursors, the first Q drop, platform migrations, key drops, violent incidents, parallel global events, and a final **"Current events & the news"** era (2022–2026) linking QAnon's mythology to live news: Trump's Q embrace, the January 2025 pardons of the "QAnon Shaman," and the Epstein-files fracture. |
-| **`drops.html`** | An **interactive drop-cluster explorer**. It reads `qdrops_clustered.json` (produced by the pipeline below) and renders a UMAP **cluster map**, a **topic breakdown** with sizes, and a **searchable, filterable reader** for every drop. Works the moment the JSON is present; otherwise it offers a file-picker and a schema-preview demo. |
-| `qdrops_cluster.py` | The **clustering pipeline** (run locally). Downloads the research-only [JSON-QAnon](https://github.com/jkingsman/JSON-QAnon) dataset, embeds each drop, and lets topics form themselves via **embeddings → UMAP → HDBSCAN** (wrapped by BERTopic, with `--method hdbscan` and a no-torch `--method kmeans` baseline). Exports `qdrops_clustered.json` + a CSV summary. |
-| `requirements.txt` | Python dependencies for the pipeline. |
+| **`drops.html`** | An **interactive drop-cluster explorer + analytics dashboard**. Reads `qdrops_clustered.json` and renders a UMAP **cluster map**, **topic breakdown**, **searchable reader**, drops-per-year and monthly-volume charts (with literature milestones), **per-topic temporal sparklines**, a **validity readout** (silhouette + c_v), **corpus composition** and **board-migration** charts, an **administrative-drop filter**, a **cross-reference table** vs. the peer-reviewed literature, and a **Stability panel** that loads `stability_report.json`. Works the moment the JSON is present; otherwise offers a file-picker + schema-preview demo. |
+| `qdrops_cluster.py` | The **clustering pipeline** (run locally). Downloads the research-only [JSON-QAnon](https://github.com/jkingsman/JSON-QAnon) dataset, embeds each drop, and lets topics form themselves via **embeddings → UMAP → HDBSCAN** (BERTopic; also `--method hdbscan` and a no-torch `--method kmeans`). Reports **validity** (silhouette + gensim c_v coherence), extracts **metadata** (images, references, tripcodes, source board → corpus composition + board migration), and **tags administrative drops** (`--drop-admin`). Exports `qdrops_clustered.json` + CSV. |
+| `qdrops_sweep.py` | A **multi-config sweep + stability comparator**. Runs several embedding models × `min_cluster_size` values (embedding once per model), scores each, writes one `run_*.json` per config, and measures **topic persistence** across runs by document-membership overlap — so you keep the topics that are *stable* (real) and discount the *fragile* ones (artifacts). Writes `stability_report.json` + CSV. |
+| `requirements.txt` | Python dependencies for the pipeline (gensim is optional, for c_v). |
 | `assets/style.css` | Shared stylesheet (the "forensic OSINT dossier" design system). |
 | `assets/app.js` | Shared JS (scrollspy, mobile nav, reveal-on-scroll). |
 | `.nojekyll` | Tells GitHub Pages to serve files as-is (so `assets/` isn't processed by Jekyll). |
@@ -28,18 +29,28 @@ All five pages share one stylesheet and one script and are cross-linked via the 
 ```bash
 pip install -r requirements.txt
 python qdrops_cluster.py --inspect       # sanity-check: prints the data structure + a sample
-python qdrops_cluster.py                 # recommended: BERTopic; auto-downloads posts.json
-# alternatives & accuracy levers:
+python qdrops_cluster.py                 # recommended: BERTopic + validity; auto-downloads posts.json
+# accuracy levers & analysis:
 python qdrops_cluster.py --method hdbscan              # embeddings + UMAP + HDBSCAN, no BERTopic
 python qdrops_cluster.py --method kmeans -k 14          # quick TF-IDF baseline (no torch / no model)
 python qdrops_cluster.py --model all-mpnet-base-v2      # higher-quality embeddings (slower)
 python qdrops_cluster.py --reduce-outliers             # reassign the "noise" bucket to nearest topics
+python qdrops_cluster.py --drop-admin                  # exclude operational drops (test/trip/comms…)
+python qdrops_cluster.py --no-coherence                # skip gensim c_v (faster)
 python qdrops_cluster.py --min-cluster-size 30          # coarser topics (default 15 = finer)
+
+# Don't over-trust one clustering — sweep several configs and keep the topics that PERSIST:
+python qdrops_sweep.py                                  # MiniLM × {15,25,40}
+python qdrops_sweep.py --models all-MiniLM-L6-v2,all-mpnet-base-v2 --mcs 15,25,40
 ```
 
-The dataset's top level is `{"posts": [ … ]}`; the script reads `data["posts"]` and parses each post's flat fields (`author`, `post_id`, `time`, `text`). If a future version of the file changes shape, run `--inspect` first to see it. Topic labels are stopword-filtered (clean names like *"covid 19 virus lockdown"* rather than *"the to of"*).
+Each run now reports **validity numbers**: a **silhouette** score (cluster separation on the UMAP space) and **gensim c_v topic coherence** (mean + per-topic), so "good clustering" is measured, not eyeballed. The pipeline also extracts the metadata the first version discarded — **images, `referenced_posts`, tripcodes, and source board** — and emits a corpus **composition** summary plus a **board-by-year** breakdown (the 4chan → 8chan → 8kun migration). Operational drops ("test", "trip update", "comms", "disregard spelling"…) are **heuristically tagged** so they can be filtered in the page or excluded with `--drop-admin`.
 
-**The explorer page** (`drops.html`) renders everything from `qdrops_clustered.json`: live metrics (median drop length, % ungroupable, busiest month), a **drops-per-year** chart, a **monthly-volume** chart with literature milestones marked, **per-topic temporal sparklines**, an interactive cluster map, a searchable in-panel reader, and a **cross-reference table** checking this corpus against published findings (the Gospel/iDRAMA paper, de Zeeuw's normiefication study, Hoseini's Telegram work, Priniski's mental-model paper). An **Unload** button clears the data and returns to the loader (and stays unloaded across reloads).
+`qdrops_sweep.py` loads/normalises the drops **once**, embeds **once per model**, clusters at each `min_cluster_size`, writes one `run_<model>_mcs<N>.json` per config (each openable in `drops.html`), and then matches topics across runs by **document-membership overlap (Jaccard)**. A topic's **persistence** = its mean best-overlap with the other runs: ≥0.50 = *stable* (real), 0.30–0.50 = *borderline*, <0.30 = *fragile* (an artifact of the settings). It writes **`stability_report.json`** (+ CSV), which the **Stability panel** in `drops.html` loads to show a per-run quality table and the anchor run's topics ranked by persistence.
+
+The dataset's top level is `{"posts": [ … ]}`; the script reads `data["posts"]`. Run `--inspect` first if a future file changes shape. Topic labels are stopword-filtered (clean names like *"covid 19 virus lockdown"* rather than *"the to of"*).
+
+**The explorer page** (`drops.html`) renders everything from `qdrops_clustered.json`: a validity readout (silhouette + c_v), per-topic coherence on each card, live metrics, drops-per-year and monthly-volume charts (with literature milestones), per-topic sparklines, **corpus-composition** and **board-migration** charts, an interactive cluster map, a searchable reader with a **"hide admin"** filter, a **cross-reference table** vs. the published findings (Gospel/iDRAMA, de Zeeuw, Hoseini, Priniski), and a **Stability panel**. An **Unload** button clears the data and returns to the loader (and stays unloaded across reloads). Older JSON files without the new fields still load — those panels simply show "—" until you re-run the pipeline.
 
 This writes **`qdrops_clustered.json`**; place it next to `drops.html` (or use the in-page **Load a JSON file** button) and reload. Dataset: Kingsman, J. (2025) *JSON-QAnon*, DOI 10.13140/RG.2.2.28778.32964 — archived **for research only**. Why not k-NN: it's a *supervised* classifier and can't discover topics on its own; the pipeline uses density-based clustering so the topics self-select (k-NN only enters legitimately as a graph fed to community detection, noted in the script).
 

@@ -96,6 +96,22 @@
   .q-sparkrow{display:flex;justify-content:space-between;font-family:var(--mono);font-size:8px;color:var(--ink-3);margin-top:2px;letter-spacing:-.02em}
   .src2{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);display:inline-block;margin-top:3px}
   @media(max-width:680px){ .q-metrics{grid-template-columns:repeat(3,1fr)} }
+
+  /* ---- validity, composition, board-migration, admin toggle, stability ---- */
+  .q-quality{display:flex;gap:14px;flex-wrap:wrap;margin:16px 0 2px}
+  .q-qcard{flex:1;min-width:150px;border:1px solid var(--rule);border-radius:9px;background:var(--paper);padding:12px 14px}
+  .q-qcard .k{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3)}
+  .q-qcard .v{font-family:var(--serif);font-size:26px;color:var(--ink);line-height:1.05;margin:2px 0}
+  .q-qcard .d{font-size:11.5px;color:var(--ink-2);line-height:1.4}
+  .q-comp{margin:18px 0 2px}
+  .q-compbar{display:flex;height:26px;border-radius:6px;overflow:hidden;border:1px solid var(--rule);margin:6px 0}
+  .q-compbar span{display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;color:#fff;min-width:0;overflow:hidden;white-space:nowrap}
+  .q-complegend{display:flex;gap:14px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;color:var(--ink-2);align-items:center}
+  .q-complegend i,.q-legend2 i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:middle}
+  .q-legend2{display:flex;gap:14px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;color:var(--ink-2);margin-top:8px}
+  #q-board{height:230px}
+  .q-toggle{font-family:var(--mono);font-size:12px;color:var(--ink-2);display:flex;align-items:center;gap:6px;cursor:pointer;white-space:nowrap}
+  #q-stab-runs .tnum,#q-stab-topics .tnum{font-family:var(--mono);font-size:12px;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -129,6 +145,7 @@
         <a href="#topics"><span class="n">3</span><span>The sub-topics</span></a>
         <a href="#reader"><span class="n">4</span><span>Read every drop</span></a>
         <a href="#xref"><span class="n">5</span><span>Cross-reference: the papers</span></a>
+        <a href="#stability"><span class="n">6</span><span>Stability (multi-run)</span></a>
         <a href="#dataset"><span class="n">▣</span><span>Data &amp; method</span></a>
       </nav>
 
@@ -181,6 +198,8 @@
           <div class="q-bars" id="q-bars"></div>
         </div>
         <div id="q-analytics-wrap" style="display:none">
+          <div id="q-quality"></div>
+          <div id="q-comp"></div>
           <div class="q-metrics" id="q-metrics"></div>
           <div class="q-chartblock">
             <h3>Drops per year</h3>
@@ -191,6 +210,12 @@
             <h3>Drop volume over time, by month</h3>
             <p class="cap">Monthly cadence with key milestones marked. Volume builds through 2018&ndash;2020 and stops after the final drop &mdash; the rhythm the literature describes. Milestones: dossier <a href="timeline.html" style="color:var(--rep)">Timeline</a> &amp; reference works.</p>
             <div class="q-chartwrap"><canvas id="q-month" class="q-chart"></canvas></div>
+          </div>
+          <div class="q-chartblock" id="q-board-block">
+            <h3>Board migration over time</h3>
+            <p class="cap">Where the drops were posted, by year &mdash; the platform diaspora (4chan &rarr; 8chan &rarr; 8kun) the literature tracks, visible in the corpus itself.</p>
+            <div class="q-chartwrap"><canvas id="q-board" class="q-chart"></canvas></div>
+            <div id="q-board-legend" class="q-legend2"></div>
           </div>
         </div>
       </div>
@@ -236,6 +261,7 @@
         <div id="q-reader-body" style="display:none">
           <div class="q-controls">
             <input type="search" id="q-search" class="q-search" placeholder="Search the text of every drop… (e.g. storm, cabal, trust)">
+            <label class="q-toggle" title="Hide operational drops (test / trip update / comms / disregard...)"><input type="checkbox" id="q-hideadmin"> hide admin</label>
             <span class="q-filterchip" id="q-filterchip">topic: <b id="q-filterlabel"></b><span class="x" id="q-clearfilter">✕</span></span>
             <span class="q-count" id="q-count"></span>
           </div>
@@ -267,6 +293,24 @@
           </tbody>
         </table></div>
         <p class="q-hint" style="margin-top:10px">Sources: Aliapoulios/Papasavva et&nbsp;al. (<a href="https://doi.org/10.1609/icwsm.v16i1.19330">ICWSM 2022</a>) &middot; de&nbsp;Zeeuw et&nbsp;al. (<a href="https://doi.org/10.5210/fm.v25i11.10643">First Monday 2020</a>) &middot; Hoseini et&nbsp;al. (<a href="https://doi.org/10.1145/3578503.3583603">WebSci 2023</a>) &middot; Priniski et&nbsp;al. (CogSci 2021). Full entries on the Research page.</p>
+      </div>
+    </section>
+
+    <!-- ===================== STABILITY ===================== -->
+    <section class="dz" id="stability">
+      <div class="sechd"><div class="secno">6</div>
+        <div><h2 class="sech">Stability across runs &mdash; which topics are real?</h2>
+        <p class="sectag">Clustering is parameter-sensitive; trust the topics that persist</p></div></div>
+      <div class="secbody">
+        <p style="color:var(--ink-2);margin-top:0">A single clustering can mislead. Run the corpus several ways (different embedding models and <code>min_cluster_size</code> values) and a topic that keeps reappearing is probably real; one that shows up under only one setting is likely an artifact. This panel reads <code>stability_report.json</code> from <code>qdrops_sweep.py</code>, which matches topics across runs by document-membership overlap.</p>
+        <div id="q-stab-banner" class="q-banner"><span class="tag">Stability</span><span class="grow" id="q-stab-status">Looking for <code>stability_report.json</code>&hellip;</span><span id="q-stab-actions"></span></div>
+        <div id="q-stab-body" style="display:none">
+          <h3 style="font-family:var(--serif);font-size:17px;margin:14px 0 4px">Per-run quality</h3>
+          <div class="tblwrap"><table id="q-stab-runs"></table></div>
+          <h3 style="font-family:var(--serif);font-size:17px;margin:20px 0 4px">Topics ranked by persistence<span id="q-stab-anchor" style="font-family:var(--mono);font-size:11px;color:var(--ink-3)"></span></h3>
+          <p class="q-hint" style="margin:0 0 8px">Persistence = mean membership overlap with the other runs. <span class="verdict v-met">stable</span> &ge;0.50 &middot; <span class="verdict v-part">borderline</span> 0.30&ndash;0.50 &middot; <span class="verdict v-no">fragile</span> &lt;0.30.</p>
+          <div class="tblwrap"><table id="q-stab-topics"></table></div>
+        </div>
       </div>
     </section>
 
@@ -427,10 +471,14 @@ python qdrops_cluster.py --method kmeans -k 14                     # quick basel
     $("q-setup-wrap").innerHTML="";
 
     setDataVisible(true);
+    STATE.hideAdmin=false; var ha=$("q-hideadmin"); if(ha) ha.checked=false;
     buildBars();
     buildMetrics();
     drawYearChart();
     drawMonthChart();
+    buildQuality();
+    buildComposition();
+    drawBoardChart();
     buildTopics();
     drawScatter();
     wireReader();
@@ -463,7 +511,7 @@ python qdrops_cluster.py --method kmeans -k 14                     # quick basel
       var counts = topicYearCounts(t.topic, years);
       return '<div class="q-tcard" data-t="'+t.topic+'" style="border-left-color:'+col+'">'+
         '<h4>'+esc(t.label)+'</h4>'+
-        '<div class="meta">topic #'+t.topic+' · '+t.size+' drops · '+t.share+'% of corpus</div>'+
+        '<div class="meta">topic #'+t.topic+' · '+t.size+' drops · '+t.share+'% of corpus'+(t.coherence!=null?' · c_v '+t.coherence:'')+'</div>'+
         '<div class="kw">'+esc((t.keywords||[]).join(" · "))+'</div>'+
         sparkHTML(counts, years, col)+
       '</div>';
@@ -527,7 +575,7 @@ python qdrops_cluster.py --method kmeans -k 14                     # quick basel
       for(var i=0;i<SC.pts.length;i++){var p=SC.pts[i];var dd=(p.x-mx)*(p.x-mx)+(p.y-my)*(p.y-my);if(dd<bd){bd=dd;best=p;}}
       if(best){ setFilter(best.d.topic); $("reader").scrollIntoView({behavior:"smooth"}); }
     });
-    window.addEventListener("resize",function(){ if(STATE.drops.length){ drawScatter(); drawYearChart(); drawMonthChart(); } });
+    window.addEventListener("resize",function(){ if(STATE.drops.length){ drawScatter(); drawYearChart(); drawMonthChart(); drawBoardChart(); } });
   }
 
   function topicLabel(t){
@@ -549,6 +597,7 @@ python qdrops_cluster.py --method kmeans -k 14                     # quick basel
         if(box.scrollTop+box.clientHeight >= box.scrollHeight-420){ renderReader(false); }
       });
     }
+    var ha=$("q-hideadmin"); if(ha && !ha.__w){ ha.__w=1; ha.addEventListener("change",function(){ STATE.hideAdmin=ha.checked; renderReader(true); }); }
   }
 
   function setFilter(t){
@@ -567,6 +616,7 @@ python qdrops_cluster.py --method kmeans -k 14                     # quick basel
     var q=STATE.query, a=STATE.active;
     return STATE.drops.filter(function(d){
       if(a!=null && d.topic!==a) return false;
+      if(STATE.hideAdmin && d.admin) return false;
       if(q && (d.text||"").toLowerCase().indexOf(q)===-1) return false;
       return true;
     });
@@ -688,6 +738,85 @@ python qdrops_cluster.py --method kmeans -k 14                     # quick basel
     });
   }
 
+
+  /* ---------- validity, composition, board migration ---------- */
+  function buildQuality(){
+    var v=(STATE.meta&&STATE.meta.validity)||{};
+    var sil=v.silhouette, coh=v.coherence_cv_mean;
+    function rs(x){ if(x==null) return "not computed"; if(x>=0.5) return "strong separation"; if(x>=0.25) return "moderate separation"; if(x>=0.1) return "weak / overlapping"; return "little separation"; }
+    function rc(x){ if(x==null) return "not computed (install gensim)"; if(x>=0.55) return "coherent topics"; if(x>=0.45) return "fairly coherent"; if(x>=0.35) return "mixed coherence"; return "low coherence"; }
+    $("q-quality").innerHTML =
+      '<div class="q-qcard"><div class="k">Silhouette (separation)</div><div class="v">'+(sil==null?"\u2014":sil)+'</div><div class="d">'+rs(sil)+' &middot; \u22121&hellip;1, higher = cleaner clusters</div></div>'+
+      '<div class="q-qcard"><div class="k">Topic coherence c_v</div><div class="v">'+(coh==null?"\u2014":coh)+'</div><div class="d">'+rc(coh)+' &middot; 0&hellip;1, higher = more interpretable</div></div>'+
+      '<div class="q-qcard"><div class="k">How to read this</div><div class="v" style="font-size:15px;font-family:var(--sans);font-weight:600">Validity, not truth</div><div class="d">Good scores mean the maths grouped the text well \u2014 not that any claim is true. Cross-check on the Stability panel.</div></div>';
+  }
+
+  function buildComposition(){
+    var c=(STATE.meta&&STATE.meta.composition)||null;
+    if(!c||!c.total){ $("q-comp").innerHTML=""; return; }
+    var tot=c.total||1;
+    var segs=[["Text drops",c.text||0,COL.rep],["Image-only",c.image_only||0,"#86641A"],["Empty / reference-only",c.empty||0,"#9a9486"]];
+    var bar=segs.map(function(s){ var p=100*s[1]/tot; return p>0?'<span style="width:'+p.toFixed(1)+'%;background:'+s[2]+'" title="'+s[0]+': '+s[1]+'">'+(p>7?Math.round(p)+'%':'')+'</span>':''; }).join("");
+    var leg=segs.map(function(s){ return '<span><i style="background:'+s[2]+'"></i>'+s[0]+' &middot; '+s[1].toLocaleString()+'</span>'; }).join("");
+    var extra='<span style="color:var(--ink-3)"><i style="background:var(--ink-3)"></i>with images '+Math.round(100*(c.with_images||0)/tot)+'% &middot; with refs '+Math.round(100*(c.with_refs||0)/tot)+'% &middot; admin '+Math.round(100*(c.admin||0)/(c.text||1))+'% of text</span>';
+    $("q-comp").innerHTML='<h3 style="font-family:var(--serif);font-size:17px;margin:0 0 2px">Corpus composition</h3>'+
+      '<p class="cap" style="font-family:var(--mono);font-size:11px;color:var(--ink-3);margin:0 0 4px">What the ~'+tot.toLocaleString()+' archived posts actually are \u2014 much of the corpus is images or bare references, not prose.</p>'+
+      '<div class="q-compbar">'+bar+'</div><div class="q-complegend">'+leg+extra+'</div>';
+  }
+
+  function boardCount(by,b,top,y){ if(b==="other"){ var s=0; for(var k in by){ if(top.indexOf(k)<0) s+=(by[k][y]||0); } return s; } return (by[b]&&by[b][y])||0; }
+  function drawBoardChart(){
+    var c=(STATE.meta&&STATE.meta.composition)||{}; var by=c.board_year||{};
+    var boards=Object.keys(by);
+    var yset={}; boards.forEach(function(b){ Object.keys(by[b]).forEach(function(y){ yset[y]=1; }); });
+    var years=Object.keys(yset).map(Number).sort(function(a,b){return a-b;});
+    var blk=$("q-board-block");
+    if(!boards.length||!years.length){ if(blk) blk.style.display="none"; return; }
+    if(blk) blk.style.display="block";
+    var ctx0=fitCanvas($("q-board")); if(!ctx0) return; var ctx=ctx0.ctx,W=ctx0.w,H=ctx0.h;
+    var totals=boards.map(function(b){ return [b, years.reduce(function(s,y){return s+(by[b][y]||0);},0)]; }).sort(function(a,b){return b[1]-a[1];});
+    var top=totals.slice(0,7).map(function(x){return x[0];}); var useOther=totals.length>7;
+    var cats=top.concat(useOther?["other"]:[]); var colors={}; cats.forEach(function(b,i){ colors[b]=PALETTE[i%PALETTE.length]; });
+    var padL=8,padR=8,padT=12,padB=22,n=years.length;
+    var colMax=Math.max.apply(null,years.map(function(y){ return cats.reduce(function(s,b){ return s+boardCount(by,b,top,y); },0); }))||1;
+    var bw=(W-padL-padR)/n, gap=Math.min(bw*0.25,12);
+    ctx.strokeStyle=COL.rule; ctx.beginPath(); ctx.moveTo(padL,H-padB+.5); ctx.lineTo(W-padR,H-padB+.5); ctx.stroke();
+    ctx.textAlign="center"; ctx.font="10px 'IBM Plex Mono',monospace";
+    years.forEach(function(y,i){
+      var x=padL+i*bw+gap/2, w=bw-gap, yy=H-padB;
+      cats.forEach(function(b){ var val=boardCount(by,b,top,y); if(!val) return; var h=(H-padT-padB)*(val/colMax); yy-=h; ctx.fillStyle=colors[b]; ctx.globalAlpha=.9; ctx.fillRect(x,yy,w,h); ctx.globalAlpha=1; });
+      ctx.fillStyle=COL.ink3; ctx.fillText(y, x+w/2, H-7);
+    });
+    $("q-board-legend").innerHTML=cats.map(function(b){ return '<span><i style="background:'+colors[b]+'"></i>'+esc(b)+'</span>'; }).join("");
+  }
+
+  /* ---------- stability report (multi-run) ---------- */
+  function fmt(x){ return x==null?"n/a":x; }
+  function shortModel(m){ return String(m||"").split("/").pop().replace("all-","").replace("-v2",""); }
+  function bootStability(){
+    fetch("stability_report.json",{cache:"no-store"})
+      .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+      .then(renderStability).catch(function(){ stabSetup(); });
+  }
+  function stabSetup(){
+    $("q-stab-status").innerHTML='No <code>stability_report.json</code> yet. Generate it with <code>python qdrops_sweep.py</code>, or load it:';
+    $("q-stab-actions").innerHTML='<label class="q-btn sm" style="cursor:pointer">Load file<input id="q-stab-file" type="file" accept="application/json,.json" style="display:none"></label>';
+    $("q-stab-file").addEventListener("change",function(ev){ var f=ev.target.files[0]; if(!f) return; var rd=new FileReader(); rd.onload=function(){ try{ renderStability(JSON.parse(rd.result)); }catch(e){ alert("Could not parse stability_report.json"); } }; rd.readAsText(f); });
+  }
+  function renderStability(rep){
+    if(!rep||!rep.runs){ stabSetup(); return; }
+    $("q-stab-banner").className="q-banner ok"; $("q-stab-actions").innerHTML="";
+    $("q-stab-status").innerHTML='<b>Loaded.</b> '+rep.runs.length+' runs over '+(rep.n_drops?rep.n_drops.toLocaleString():"?")+' drops &middot; anchor: '+esc(rep.anchor||"\u2014")+'.';
+    $("q-stab-body").style.display="block";
+    var rt='<thead><tr><th>Run</th><th>Model</th><th>min&middot;clu</th><th>Topics</th><th>Silhouette</th><th>c_v</th><th>Mean persistence</th></tr></thead><tbody>';
+    rep.runs.forEach(function(r){ rt+='<tr><td class="tnum">'+esc(r.tag)+'</td><td class="tnum">'+esc(shortModel(r.model))+'</td><td class="tnum">'+esc(r.mcs)+'</td><td class="tnum">'+esc(r.n_topics)+'</td><td class="tnum">'+fmt(r.silhouette)+'</td><td class="tnum">'+fmt(r.coherence)+'</td><td class="tnum">'+fmt(r.mean_persistence)+(r.tag===rep.anchor?' \u25C0':'')+'</td></tr>'; });
+    $("q-stab-runs").innerHTML=rt+'</tbody>';
+    var tt='<thead><tr><th>#</th><th>Topic (anchor run)</th><th>Size</th><th>Persist</th><th>Verdict</th></tr></thead><tbody>';
+    (rep.anchor_topics||[]).forEach(function(t){ var cls=t.verdict==="stable"?"v-met":(t.verdict==="borderline"?"v-part":"v-no"); tt+='<tr><td class="tnum">'+esc(t.topic)+'</td><td>'+esc((t.keywords||[]).slice(0,5).join(" · ")||t.label||"")+'</td><td class="tnum">'+esc(t.size)+'</td><td class="tnum">'+fmt(t.persistence)+'</td><td><span class="verdict '+cls+'">'+esc(t.verdict)+'</span></td></tr>'; });
+    $("q-stab-topics").innerHTML=tt+'</tbody>';
+    $("q-stab-anchor").textContent=" \u2014 anchor: "+(rep.anchor||"");
+  }
+
   /* ---------- sample/demo data (placeholder text, NOT real drops) ---------- */
   function DEMO(){
     var topics=[
@@ -721,7 +850,7 @@ python qdrops_cluster.py --method kmeans -k 14                     # quick basel
   }
 
   /* ---------- go ---------- */
-  function init(){ wireScatter(); boot(); }
+  function init(){ wireScatter(); boot(); bootStability(); }
   if(document.readyState!=="loading"){ init(); }
   else document.addEventListener("DOMContentLoaded", init);
 })();
