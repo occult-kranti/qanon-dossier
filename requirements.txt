@@ -1,0 +1,19 @@
+# Q-drops clustering pipeline — dependencies
+#
+#   pip install -r requirements.txt
+#
+# For --method bertopic (recommended) and --method hdbscan you need the full stack.
+# For --method kmeans you only need scikit-learn (no torch / no model download).
+
+# --- core (all methods) ---
+scikit-learn>=1.3
+numpy>=1.24
+
+# --- embeddings + density clustering (bertopic / hdbscan methods) ---
+bertopic>=0.16            # wraps embeddings + UMAP + HDBSCAN + c-TF-IDF labelling
+sentence-transformers>=2.2
+umap-learn>=0.5
+hdbscan>=0.8
+
+# sentence-transformers will pull in torch automatically. If you are on Apple Silicon
+# or want a CPU-only build, install torch first per https://pytorch.org/get-started/.

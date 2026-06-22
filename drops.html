@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Drops · Quantified &amp; Clustered</title>
+<meta name="description" content="Every QAnon drop, embedded and clustered into self-forming topics — an interactive map, a topic breakdown, and a searchable reader. Built on the research-only JSON-QAnon dataset.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  /* ---- page-specific components (use the shared design tokens) ---- */
+  .q-banner{border:1px solid var(--rule-2);background:var(--paper-2);border-radius:8px;padding:13px 16px;margin:0 0 20px;font-family:var(--mono);font-size:12.5px;color:var(--ink-2);display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .q-banner .tag{font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;font-size:11px;white-space:nowrap}
+  .q-banner.ok{border-color:var(--doc);background:var(--doc-bg)} .q-banner.ok .tag{color:var(--doc)}
+  .q-banner.demo{border-color:var(--all);background:var(--all-bg)} .q-banner.demo .tag{color:var(--all)}
+  .q-banner .grow{flex:1;min-width:120px}
+  .q-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+  .q-btn{font-family:var(--mono);font-size:12px;border:1px solid var(--rule-2);background:var(--paper);color:var(--ink);padding:7px 12px;border-radius:6px;cursor:pointer;transition:.15s;white-space:nowrap}
+  .q-btn:hover{background:var(--paper-3);border-color:var(--ink-3)}
+  .q-btn.pri{background:var(--accent);color:#F4EFE6;border-color:var(--accent)}
+  .q-btn.pri:hover{background:var(--accent-2)}
+  .q-btn.sm{font-size:11px;padding:5px 10px}
+  label.q-btn{display:inline-block}
+
+  .q-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin:0 0 22px}
+  .q-stats>div{background:var(--paper);padding:14px 16px}
+  .q-stats .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+  .q-stats .v{font-family:var(--serif);font-size:24px;color:var(--ink);margin-top:3px;line-height:1.1}
+
+  .q-bars{display:flex;flex-direction:column;gap:7px;margin-top:4px}
+  .q-bar{display:grid;grid-template-columns:230px 1fr 86px;gap:12px;align-items:center;font-size:13px;cursor:pointer}
+  .q-bar:hover .q-bname{color:var(--accent)}
+  .q-bname{font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .q-btrack{height:14px;background:var(--paper-3);border-radius:3px;overflow:hidden}
+  .q-bfill{height:100%;border-radius:3px}
+  .q-bval{font-family:var(--mono);font-size:11px;color:var(--ink-2);text-align:right}
+
+  .q-scatter-wrap{position:relative;border:1px solid var(--rule);border-radius:10px;background:var(--paper-2);padding:8px;overflow:hidden}
+  #q-canvas{display:block;width:100%;height:440px;cursor:crosshair}
+  .q-tip{position:absolute;pointer-events:none;z-index:5;max-width:280px;background:var(--ink);color:#EDE7DA;font-size:12px;line-height:1.45;border-radius:7px;padding:8px 10px;box-shadow:0 6px 22px rgba(0,0,0,.28);opacity:0;transition:opacity .1s;font-family:var(--sans)}
+  .q-tip b{font-family:var(--mono);font-size:11px;color:#C8BEA8}
+  .q-hint{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin-top:9px}
+
+  .q-topics{display:grid;grid-template-columns:repeat(auto-fill,minmax(244px,1fr));gap:12px;margin-top:6px}
+  .q-tcard{border:1px solid var(--rule);border-left:4px solid var(--ink-3);border-radius:8px;background:var(--paper);padding:12px 14px;cursor:pointer;transition:.15s}
+  .q-tcard:hover{background:var(--paper-2);transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.07)}
+  .q-tcard.active{outline:2px solid var(--accent);outline-offset:1px}
+  .q-tcard h4{font-family:var(--serif);font-size:16px;font-weight:600;margin:0 0 3px;color:var(--ink);line-height:1.2}
+  .q-tcard .meta{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-bottom:7px}
+  .q-tcard .kw{font-size:12px;color:var(--ink-2);line-height:1.5}
+
+  /* reader: controls sit above a fixed-height internal scroll box */
+  .q-controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+  .q-search{flex:1;min-width:220px;font-family:var(--sans);font-size:14px;padding:9px 13px;border:1px solid var(--rule-2);border-radius:7px;background:var(--paper);color:var(--ink)}
+  .q-search:focus{outline:none;border-color:var(--accent)}
+  .q-filterchip{font-family:var(--mono);font-size:12px;display:none;align-items:center;gap:8px;background:var(--paper-3);border:1px solid var(--rule-2);border-radius:20px;padding:5px 12px;color:var(--ink)}
+  .q-filterchip b{max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .q-filterchip .x{cursor:pointer;font-weight:600;color:var(--accent)}
+  .q-count{font-family:var(--mono);font-size:12px;color:var(--ink-3);white-space:nowrap}
+
+  .q-scrollbox{max-height:68vh;overflow-y:auto;border:1px solid var(--rule);border-radius:10px;background:var(--paper-2);padding:12px;overscroll-behavior:contain}
+  .q-card{border:1px solid var(--rule);border-radius:9px;background:var(--paper);padding:13px 15px;margin-bottom:10px}
+  .q-card:last-child{margin-bottom:0}
+  .q-cardhd{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;padding-bottom:8px;border-bottom:1px dashed var(--rule)}
+  .q-id{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--ink)}
+  .q-date{font-family:var(--mono);font-size:11.5px;color:var(--ink-3)}
+  .q-pill{font-family:var(--mono);font-size:10.5px;color:#fff;padding:3px 9px;border-radius:20px;cursor:pointer;letter-spacing:.02em;margin-left:auto;max-width:60%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .q-body{font-family:var(--mono);font-size:12.5px;line-height:1.6;color:var(--ink);white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;max-height:260px;overflow:auto}
+  .q-body mark{background:rgba(134,100,26,.30);color:inherit;padding:0 1px;border-radius:2px}
+  .q-more{display:block;width:100%;margin:4px 0 2px;text-align:center}
+  .q-empty{font-family:var(--mono);font-size:13px;color:var(--ink-3);padding:30px;text-align:center}
+
+  .q-setup{border:1px solid var(--rule);border-radius:10px;background:var(--paper-2);padding:18px 20px}
+  .q-setup ol{margin:10px 0 0;padding-left:20px} .q-setup li{margin-bottom:10px;font-size:14px;color:var(--ink-2)}
+  .q-code{font-family:var(--mono);font-size:12.5px;background:var(--ink);color:#E7E0D2;border-radius:7px;padding:11px 13px;overflow-x:auto;white-space:pre;margin:7px 0}
+  @media(max-width:680px){
+    .q-stats{grid-template-columns:repeat(2,1fr)} .q-bar{grid-template-columns:120px 1fr 64px}
+    #q-canvas{height:340px} .q-scrollbox{max-height:74vh}
+  }
+
+  /* ---- analytics: metrics, charts, sparklines, cross-ref ---- */
+  .q-metrics{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin:18px 0 4px}
+  .q-metrics>div{background:var(--paper);padding:11px 12px}
+  .q-metrics .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3)}
+  .q-metrics .v{font-family:var(--serif);font-size:19px;color:var(--ink);margin-top:2px;line-height:1.05}
+  .q-chartblock{margin-top:20px}
+  .q-chartblock h3{font-family:var(--serif);font-size:17px;font-weight:600;margin:0 0 2px;color:var(--ink)}
+  .q-chartblock .cap{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin:0 0 8px;line-height:1.5}
+  .q-chartwrap{border:1px solid var(--rule);border-radius:9px;background:var(--paper-2);padding:10px}
+  canvas.q-chart{display:block;width:100%}
+  #q-year{height:200px} #q-month{height:240px}
+  .q-spark{display:flex;align-items:flex-end;gap:2px;height:24px;margin-top:10px}
+  .q-spark i{flex:1;border-radius:1px;min-height:1px;display:block}
+  .q-sparkrow{display:flex;justify-content:space-between;font-family:var(--mono);font-size:8px;color:var(--ink-3);margin-top:2px;letter-spacing:-.02em}
+  .src2{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);display:inline-block;margin-top:3px}
+  @media(max-width:680px){ .q-metrics{grid-template-columns:repeat(3,1fr)} }
+</style>
+</head>
+<body>
+
+<button class="railtoggle" id="railtoggle" aria-label="Open contents">☰ Contents</button>
+<div class="scrim" id="scrim"></div>
+
+<div class="shell">
+  <!-- ================= RAIL ================= -->
+  <aside class="rail">
+    <div class="rail-inner" id="rail">
+      <div class="seal"><b>The Drops</b><span>Clustered</span></div>
+      <nav class="xnav">
+        <a href="index.html">Dossier</a>
+        <a href="research.html">Research</a>
+        <a href="review.html">Review</a>
+        <a href="timeline.html">Timeline</a>
+        <a href="drops.html" class="here">Drops</a>
+      </nav>
+      <div class="reffile">
+        REF · <span>Q-DROPS/CLUSTER</span><br>
+        SOURCE · <span>JSON-QAnon (research only)</span><br>
+        METHOD · <span>Embeddings → UMAP → HDBSCAN</span><br>
+        DROPS · <span id="ref-n">load data…</span>
+      </div>
+
+      <p class="railhead">On this page</p>
+      <nav class="toc" id="toc">
+        <a href="#overview"><span class="n">1</span><span>Overview &amp; topic sizes</span></a>
+        <a href="#map"><span class="n">2</span><span>Cluster map</span></a>
+        <a href="#topics"><span class="n">3</span><span>The sub-topics</span></a>
+        <a href="#reader"><span class="n">4</span><span>Read every drop</span></a>
+        <a href="#xref"><span class="n">5</span><span>Cross-reference: the papers</span></a>
+        <a href="#dataset"><span class="n">▣</span><span>Data &amp; method</span></a>
+      </nav>
+
+      <div class="legend">
+        <p class="railhead">How clusters form</p>
+        <div class="row"><span class="chip ep--rep">Embed</span><span class="def">Each drop → a sentence-embedding vector (semantic meaning).</span></div>
+        <div class="row"><span class="chip ep--doc">Cluster</span><span class="def">HDBSCAN groups nearby vectors and picks the topic count itself.</span></div>
+        <div class="row"><span class="chip ep--all">Label</span><span class="def">Class-based TF-IDF names each topic by its most distinctive words.</span></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ================= MAIN ================= -->
+  <main>
+    <header class="mast">
+      <div class="classbar">
+        <span><span class="dot"></span>Primary Source</span>
+        <span class="sep">/</span><span>Quantified for analysis</span>
+        <span class="sep">/</span><span>Self-forming topics</span>
+        <span class="sep">/</span><span id="cb-n">— drops</span>
+      </div>
+      <h1 class="title">The <span class="q">Drops</span>, Quantified</h1>
+      <p class="subtitle">Every Q drop turned into a vector, then clustered into topics that organise themselves — mapped, counted, and made searchable. Read here as discourse objects: the point is to <em>measure</em> the drops (their themes, repetition, and vagueness), not to amplify them.</p>
+      <div class="q-stats">
+        <div><div class="k">Drops Analysed</div><div class="v" id="m-drops">—</div></div>
+        <div><div class="k">Topics Found</div><div class="v" id="m-topics">—</div></div>
+        <div><div class="k">Date Span</div><div class="v" id="m-span">—</div></div>
+        <div><div class="k">Embedding</div><div class="v" id="m-model" style="font-size:14px">—</div></div>
+      </div>
+    </header>
+
+    <div class="pagebody">
+      <p class="lede">This page reads the output of the clustering pipeline (<code>qdrops_clustered.json</code>). The underlying corpus is the research-only <strong>JSON-QAnon</strong> archive — all known drops through November 2022 — whose own author prefaces it: "QAnon is a dangerous cult… for research purposes only." The analytical value of clustering is exactly that it makes the drops <em>legible as data</em>: it shows how a handful of themes recur across thousands of posts, and how much of the corpus is too generic to cluster at all — a quantitative footprint of the vagueness that lets believers retrofit meaning onto almost anything.</p>
+    </div>
+
+    <!-- ===================== OVERVIEW ===================== -->
+    <section class="dz" id="overview" style="border-top:none">
+      <div class="sechd"><div class="secno">1</div>
+        <div><h2 class="sech">Overview &amp; topic sizes</h2>
+        <p class="sectag">How the corpus divides — largest themes first</p></div></div>
+      <div class="secbody">
+        <div id="q-banner" class="q-banner">
+          <span class="tag">Status</span>
+          <span class="grow" id="q-status">Looking for <code>qdrops_clustered.json</code> in this folder…</span>
+          <span id="q-banner-actions"></span>
+        </div>
+        <div id="q-setup-wrap"></div>
+        <div id="q-bars-wrap" style="display:none">
+          <p style="color:var(--ink-2);margin-top:0">Each bar is one self-formed topic, sized by how many drops fall in it. Click any bar to read that topic's drops. The grey <em>noise</em> bucket holds drops too generic or idiosyncratic to group — a direct measure of the corpus's vagueness.</p>
+          <div class="q-bars" id="q-bars"></div>
+        </div>
+        <div id="q-analytics-wrap" style="display:none">
+          <div class="q-metrics" id="q-metrics"></div>
+          <div class="q-chartblock">
+            <h3>Drops per year</h3>
+            <p class="cap">Annual volume of text drops in this corpus.</p>
+            <div class="q-chartwrap"><canvas id="q-year" class="q-chart"></canvas></div>
+          </div>
+          <div class="q-chartblock">
+            <h3>Drop volume over time, by month</h3>
+            <p class="cap">Monthly cadence with key milestones marked. Volume builds through 2018&ndash;2020 and stops after the final drop &mdash; the rhythm the literature describes. Milestones: dossier <a href="timeline.html" style="color:var(--rep)">Timeline</a> &amp; reference works.</p>
+            <div class="q-chartwrap"><canvas id="q-month" class="q-chart"></canvas></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== MAP ===================== -->
+    <section class="dz" id="map">
+      <div class="sechd"><div class="secno">2</div>
+        <div><h2 class="sech">The cluster map</h2>
+        <p class="sectag">Each dot is a drop; proximity ≈ semantic similarity (2-D UMAP)</p></div></div>
+      <div class="secbody">
+        <div id="q-map-body" style="display:none">
+          <div class="q-scatter-wrap">
+            <canvas id="q-canvas"></canvas>
+            <div class="q-tip" id="q-tip"></div>
+          </div>
+          <p class="q-hint">Hover a point to preview a drop · click a point to filter the reader to its topic.</p>
+        </div>
+        <p class="q-hint" id="q-map-placeholder">Load data to render the cluster map.</p>
+      </div>
+    </section>
+
+    <!-- ===================== TOPICS ===================== -->
+    <section class="dz" id="topics">
+      <div class="sechd"><div class="secno">3</div>
+        <div><h2 class="sech">The sub-topics</h2>
+        <p class="sectag">What the algorithm decided the drops are "about"</p></div></div>
+      <div class="secbody">
+        <div id="q-topics-body" style="display:none">
+          <p style="color:var(--ink-2);margin-top:0">These labels are generated, not hand-written: each is the set of words most distinctive to that cluster (class-based TF-IDF). They are descriptive handles for navigation, not endorsements of the framing. Click a card to read its drops.</p>
+          <div class="q-topics" id="q-topics"></div>
+        </div>
+        <p class="q-hint" id="q-topics-placeholder">Load data to list the sub-topics.</p>
+      </div>
+    </section>
+
+    <!-- ===================== READER ===================== -->
+    <section class="dz" id="reader">
+      <div class="sechd"><div class="secno">4</div>
+        <div><h2 class="sech">Read every drop</h2>
+        <p class="sectag">Search, filter by topic, and scroll the full corpus (in-panel)</p></div></div>
+      <div class="secbody">
+        <div id="q-reader-body" style="display:none">
+          <div class="q-controls">
+            <input type="search" id="q-search" class="q-search" placeholder="Search the text of every drop… (e.g. storm, cabal, trust)">
+            <span class="q-filterchip" id="q-filterchip">topic: <b id="q-filterlabel"></b><span class="x" id="q-clearfilter">✕</span></span>
+            <span class="q-count" id="q-count"></span>
+          </div>
+          <div class="q-scrollbox" id="q-scrollbox">
+            <div id="q-list"></div>
+          </div>
+        </div>
+        <p class="q-hint" id="q-reader-placeholder">Load data to browse the drops.</p>
+      </div>
+    </section>
+
+    <!-- ===================== XREF ===================== -->
+    <section class="dz" id="xref">
+      <div class="sechd"><div class="secno">5</div>
+        <div><h2 class="sech">Cross-reference: this corpus vs. the papers</h2>
+        <p class="sectag">Does what we measure here line up with the peer-reviewed findings?</p></div></div>
+      <div class="secbody">
+        <p style="color:var(--ink-2);margin-top:0">The charts above are computed from the loaded drops; the milestones and the rows below come from the published literature (see the <a href="research.html" style="color:var(--rep);text-decoration:none;border-bottom:1px solid rgba(46,85,117,.4)">Research</a> page). This is a consistency check, not a replication: clustering measures <em>themes and timing</em>, so some published findings (authorship, toxicity, other platforms) are explicitly out of scope here and marked as such.</p>
+        <div class="tblwrap"><table>
+          <thead><tr><th>Published finding (source)</th><th>What this corpus shows</th><th>Verdict</th></tr></thead>
+          <tbody>
+            <tr><td><b>~4,949 canonical drops; aggregators disagree on the canon, so some drops are apocryphal.</b><br><span class="src2">Gospel / iDRAMA, ICWSM 2022</span></td><td>This archive collates ~4,966 posts (~4,248 with text) from multiple aggregators &mdash; the same order of magnitude. That very disagreement is why drop counts differ slightly between sources.</td><td><span class="verdict v-met">Consistent</span></td></tr>
+            <tr><td><b>Stylometry indicates multiple authors, not a single "Q."</b><br><span class="src2">Gospel / iDRAMA, ICWSM 2022</span></td><td>Topic clustering cannot test authorship (that needs stylometry on tripcodes). Flagged out of scope; discussed on the <a href="review.html" style="color:var(--rep);text-decoration:none">Critical Review</a>.</td><td><span class="verdict v-part">Needs stylometry</span></td></tr>
+            <tr><td><b>4chan incubation from 28 Oct 2017, then platform migration; news coverage lagged.</b><br><span class="src2">de Zeeuw et al., First Monday 2020</span></td><td>The monthly-volume chart begins Oct 2017 and ramps through 2018 &mdash; the incubation-then-growth shape the study describes.</td><td><span class="verdict v-met">Consistent</span></td></tr>
+            <tr><td><b>Drops run to Dec 2020, then near-silence (a brief 2022 return aside).</b><br><span class="src2">Dossier Timeline &middot; reference works</span></td><td>Monthly volume collapses to ~zero after the 8 Dec 2020 final drop &mdash; visible directly in the chart and its "Last drop" marker.</td><td><span class="verdict v-met">Consistent</span></td></tr>
+            <tr><td><b>The drops themselves are not especially toxic; harm lives in interpretation.</b><br><span class="src2">Gospel / iDRAMA, ICWSM 2022</span></td><td>This page clusters topics, not toxicity. The large "ungroupable / noise" share is a vagueness proxy, congruent with generic text that invites projection.</td><td><span class="verdict v-part">Adjacent</span></td></tr>
+            <tr><td><b>A good-vs-evil "mental model" structures belief.</b><br><span class="src2">Priniski, McClay &amp; Holyoak, CogSci 2021</span></td><td>Topics such as "armor of god / evil" and "patriots / god / america" surface exactly this moral-binary framing.</td><td><span class="verdict v-met">Consistent</span></td></tr>
+            <tr><td><b>Post-2020 the movement globalised; German overshadowed English on Telegram.</b><br><span class="src2">Hoseini et al., WebSci 2023</span></td><td>This corpus is the English imageboard drops only, so it cannot show that &mdash; a coverage boundary, not a contradiction.</td><td><span class="verdict v-part">Out of scope</span></td></tr>
+          </tbody>
+        </table></div>
+        <p class="q-hint" style="margin-top:10px">Sources: Aliapoulios/Papasavva et&nbsp;al. (<a href="https://doi.org/10.1609/icwsm.v16i1.19330">ICWSM 2022</a>) &middot; de&nbsp;Zeeuw et&nbsp;al. (<a href="https://doi.org/10.5210/fm.v25i11.10643">First Monday 2020</a>) &middot; Hoseini et&nbsp;al. (<a href="https://doi.org/10.1145/3578503.3583603">WebSci 2023</a>) &middot; Priniski et&nbsp;al. (CogSci 2021). Full entries on the Research page.</p>
+      </div>
+    </section>
+
+    <!-- ===================== DATASET ===================== -->
+    <section class="dz" id="dataset">
+      <div class="sechd"><div class="secno">▣</div>
+        <div><h2 class="sech">Data &amp; method — reproduce it</h2>
+        <p class="sectag">Download the dataset, run the pipeline, refresh this page</p></div></div>
+      <div class="secbody">
+        <div class="panel">
+          <div class="panel-hd"><span>Why HDBSCAN, not k-NN</span><span class="src">Method note</span></div>
+          <div class="panel-bd"><p style="margin:0">k-NN is a <em>supervised</em> classifier — it needs labels and so cannot discover topics on its own. To let clusters form themselves on short, cryptic text, the pipeline embeds each drop, reduces dimensionality with <strong>UMAP</strong>, and clusters with <strong>HDBSCAN</strong> (density-based: it chooses the number of topics itself and sets genuine outliers aside as "noise"). <strong>BERTopic</strong> wraps this and labels topics with class-based TF-IDF. The legitimate way k-NN enters clustering is as a <em>graph</em> — a k-nearest-neighbour graph fed to Leiden/Louvain community detection — which the code notes as an alternative; a plain TF-IDF + KMeans baseline is also included.</p></div>
+        </div>
+
+        <ol class="papers" style="margin-top:18px;list-style:none;padding:0">
+          <li class="paper"><div class="yr">1</div><div class="pmain">
+            <h3>Get the dataset &amp; the pipeline</h3>
+            <p class="ab" style="margin-top:4px">The script downloads the corpus automatically, or grab it yourself:</p>
+            <div class="q-code">pip install -r requirements.txt
+python qdrops_cluster.py --inspect   # sanity-check the data shape (optional)
+python qdrops_cluster.py             # recommended: BERTopic (auto-downloads posts.json)</div>
+            <div class="plinks">
+              <a href="https://github.com/jkingsman/JSON-QAnon">JSON-QAnon (GitHub)</a>
+              <a href="https://www.kaggle.com/datasets/jkingsman/qanondrops">Kaggle mirror</a>
+              <a href="https://doi.org/10.13140/RG.2.2.28778.32964">DOI</a>
+            </div>
+          </div></li>
+          <li class="paper"><div class="yr">2</div><div class="pmain">
+            <h3>Pick a clustering technique</h3>
+            <div class="q-code">python qdrops_cluster.py --method bertopic --min-cluster-size 15   # default, self-forming topics
+python qdrops_cluster.py --method hdbscan                          # same, without BERTopic
+python qdrops_cluster.py --method kmeans -k 14                     # quick baseline, no torch</div>
+            <p class="ab" style="margin-top:6px">Smaller <code>--min-cluster-size</code> = more, finer topics (and a smaller "noise" bucket). Output: <code>qdrops_clustered.json</code> + a CSV summary.</p>
+          </div></li>
+          <li class="paper"><div class="yr">3</div><div class="pmain">
+            <h3>View it here</h3>
+            <p class="ab" style="margin-top:4px">Drop <code>qdrops_clustered.json</code> into the same folder as this page (or use the <b>Load a JSON file</b> button up top) and reload. Use <b>Unload</b> in the status bar to clear it and load a different file.</p>
+          </div></li>
+        </ol>
+
+        <div class="panel" style="margin-top:16px">
+          <div class="panel-hd"><span>Citation &amp; ethics</span><span class="src">Research only</span></div>
+          <div class="panel-bd"><p style="margin:0">Cite the dataset as Kingsman, J. (2025), <em>JSON-QAnon</em>, DOI 10.13140/RG.2.2.28778.32964. The drops are reproduced here as primary-source artifacts for analysis only; this dossier treats them critically throughout (see the <a href="review.html" style="color:var(--rep);text-decoration:none;border-bottom:1px solid rgba(46,85,117,.4)">Critical Review</a>) and does not endorse their content. Images referenced by the drops are deliberately excluded.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="foot">
+      <p class="disc"><b>What the clustering shows — and doesn't.</b> Topic clusters reveal recurring <em>themes</em> and the share of the corpus that resists grouping; they do not measure truth, intent, or authorship. Cluster boundaries shift with parameters (embedding model, <code>min_cluster_size</code>, UMAP settings), so treat topic counts as a structured reading of the corpus rather than a fixed fact — exactly the calibration argued on the Critical Review page.</p>
+      <p style="margin-top:14px">Compiled 2026 · Drop-cluster explorer · Ref Q-DROPS/CLUSTER · For academic use. · <a href="timeline.html" style="color:var(--rep);text-decoration:none">← Timeline</a> · <a href="index.html" style="color:var(--rep);text-decoration:none">Dossier →</a></p>
+    </div>
+
+  </main>
+</div>
+
+<script src="assets/app.js"></script>
+<script>
+/* ===================== Q-DROPS EXPLORER ===================== */
+(function(){
+  "use strict";
+  var DATA_URL = "qdrops_clustered.json";
+  var PALETTE = ["#6E2A28","#2E5575","#245C4D","#86641A","#5A4A72","#7A2E2E",
+                 "#3E6B5A","#9A5B2A","#445C86","#6B4A6E","#857430","#2F6E6A",
+                 "#8C3A33","#4D5A2E","#6E3A55","#356a86","#7a5a2e","#4a4a72",
+                 "#5b6e2a","#2a6e5b","#6e2a4a","#2a4a6e"];
+  var STATE = {meta:null, topics:[], drops:[], colorOf:{}, active:null, query:""};
+  var R = 0;            // render cursor for the reader
+  var BATCH = 60;
+
+  function $(id){return document.getElementById(id);}
+  function esc(s){return (s==null?"":String(s)).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+  /* sessionStorage, but never throw if unavailable */
+  function ssGet(k){try{return window.sessionStorage.getItem(k);}catch(e){return null;}}
+  function ssSet(k,v){try{window.sessionStorage.setItem(k,v);}catch(e){}}
+  function ssDel(k){try{window.sessionStorage.removeItem(k);}catch(e){}}
+
+  /* ---------- boot ---------- */
+  function boot(){
+    if(ssGet("qUnloaded")==="1"){ showSetup("You unloaded the data. Re-load it below."); return; }
+    fetch(DATA_URL,{cache:"no-store"})
+      .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+      .then(function(d){ render(d,"file"); })
+      .catch(function(){ showSetup(); });
+  }
+
+  function setDataVisible(on){
+    ["q-bars-wrap","q-analytics-wrap","q-map-body","q-topics-body","q-reader-body"].forEach(function(id){ $(id).style.display = on?"block":"none"; });
+    ["q-map-placeholder","q-topics-placeholder","q-reader-placeholder"].forEach(function(id){ $(id).style.display = on?"none":"block"; });
+  }
+
+  function showSetup(msg){
+    setDataVisible(false);
+    var b=$("q-banner"); b.className="q-banner demo";
+    $("q-status").innerHTML = msg || 'No <code>qdrops_clustered.json</code> found yet. Generate it with the pipeline, load a file, or preview the interface with sample data.';
+    $("q-banner-actions").innerHTML = '<button class="q-btn sm" id="q-reload">↻ Try reload</button>';
+    $("q-reload").addEventListener("click",function(){ ssDel("qUnloaded"); $("q-banner-actions").innerHTML=""; $("q-status").textContent="Reloading…"; boot(); });
+    $("q-setup-wrap").innerHTML =
+      '<div class="q-setup">'+
+        '<div class="q-actions">'+
+          '<label class="q-btn pri">Load a JSON file<input id="q-file" type="file" accept="application/json,.json" style="display:none"></label>'+
+          '<button class="q-btn" id="q-reload2">↻ Load qdrops_clustered.json from this folder</button>'+
+          '<button class="q-btn" id="q-demo">Preview with sample data</button>'+
+          '<a class="q-btn" href="https://github.com/jkingsman/JSON-QAnon" style="text-decoration:none">Get the dataset ↗</a>'+
+        '</div>'+
+        '<ol>'+
+          '<li>Install &amp; run the pipeline (see <a href="#dataset" style="color:var(--rep)">Data &amp; method</a> below):<div class="q-code">pip install -r requirements.txt\npython qdrops_cluster.py</div></li>'+
+          '<li>It writes <code>qdrops_clustered.json</code>. Put it next to this page and reload — or use <b>Load a JSON file</b> above.</li>'+
+        '</ol>'+
+      '</div>';
+    $("q-file").addEventListener("change",function(ev){
+      var f=ev.target.files[0]; if(!f) return;
+      var rd=new FileReader();
+      rd.onload=function(){ try{ render(JSON.parse(rd.result),"upload"); }catch(e){ alert("Could not parse that JSON file."); } };
+      rd.readAsText(f);
+    });
+    $("q-reload2").addEventListener("click",function(){ ssDel("qUnloaded"); boot(); });
+    $("q-demo").addEventListener("click",function(){ ssDel("qUnloaded"); render(DEMO(),"demo"); });
+  }
+
+  function unload(){
+    ssSet("qUnloaded","1");
+    STATE = {meta:null, topics:[], drops:[], colorOf:{}, active:null, query:""};
+    if($("q-search")) $("q-search").value="";
+    $("m-drops").textContent="—"; $("m-topics").textContent="—"; $("m-span").textContent="—"; $("m-model").textContent="—";
+    $("ref-n").textContent="load data…"; $("cb-n").textContent="— drops";
+    showSetup("Data unloaded. Load a different file, reload from the folder, or preview sample data.");
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+
+  /* ---------- render ---------- */
+  function render(data, mode){
+    if(!data || !Array.isArray(data.drops)){ alert("Unexpected JSON shape."); return; }
+    ssDel("qUnloaded");
+    STATE.meta = data.meta||{};
+    STATE.drops = data.drops;
+    STATE.topics = (data.topics||[]).slice();
+    STATE.active = null; STATE.query="";
+
+    var realTopics = STATE.topics.filter(function(t){return t.topic!==-1;});
+    STATE.colorOf = {"-1":"#9a9486"};
+    realTopics.forEach(function(t,i){ STATE.colorOf[t.topic]=PALETTE[i%PALETTE.length]; });
+
+    var years = STATE.drops.map(function(d){return d.year;}).filter(Boolean);
+    var span = years.length ? (Math.min.apply(null,years)+"–"+Math.max.apply(null,years)) : "—";
+    var nTopics = realTopics.length || (STATE.meta.n_topics||0);
+    $("m-drops").textContent = STATE.drops.length.toLocaleString();
+    $("m-topics").textContent = nTopics;
+    $("m-span").textContent = span;
+    $("m-model").textContent = STATE.meta.embedding_model || (mode==="kmeans"?"TF-IDF":"—");
+    $("ref-n").textContent = STATE.drops.length.toLocaleString()+" drops";
+    $("cb-n").textContent = STATE.drops.length.toLocaleString()+" drops";
+
+    var b=$("q-banner"), s=$("q-status");
+    if(mode==="demo"){ b.className="q-banner demo"; s.innerHTML='<b>Sample preview.</b> Placeholder data showing how the page works — run the pipeline for the real analysis.'; }
+    else { b.className="q-banner ok"; s.innerHTML='<b>Loaded.</b> '+STATE.drops.length.toLocaleString()+' drops in '+nTopics+' self-formed topics'+(STATE.meta.generated&&STATE.meta.generated!=="sample"?(' · generated '+esc(STATE.meta.generated)):'')+'.'; }
+    $("q-banner-actions").innerHTML = '<button class="q-btn sm" id="q-unload">✕ Unload</button>';
+    $("q-unload").addEventListener("click",unload);
+    $("q-setup-wrap").innerHTML="";
+
+    setDataVisible(true);
+    buildBars();
+    buildMetrics();
+    drawYearChart();
+    drawMonthChart();
+    buildTopics();
+    drawScatter();
+    wireReader();
+    renderReader(true);
+  }
+
+  /* ---------- topic size bars ---------- */
+  function buildBars(){
+    var max = Math.max.apply(null, STATE.topics.map(function(t){return t.size;})) || 1;
+    var html = STATE.topics.map(function(t){
+      var col = STATE.colorOf[t.topic];
+      var name = t.topic===-1 ? "noise / outliers" : ("#"+t.topic+" · "+esc(t.label));
+      return '<div class="q-bar" data-t="'+t.topic+'">'+
+        '<span class="q-bname" title="'+esc(name)+'">'+name+'</span>'+
+        '<span class="q-btrack"><span class="q-bfill" style="width:'+(100*t.size/max).toFixed(1)+'%;background:'+col+'"></span></span>'+
+        '<span class="q-bval">'+t.size+' · '+t.share+'%</span>'+
+      '</div>';
+    }).join("");
+    $("q-bars").innerHTML = html;
+    Array.prototype.forEach.call($("q-bars").querySelectorAll(".q-bar"),function(el){
+      el.addEventListener("click",function(){ setFilter(parseInt(el.getAttribute("data-t"),10)); $("reader").scrollIntoView({behavior:"smooth"}); });
+    });
+  }
+
+  /* ---------- topic cards ---------- */
+  function buildTopics(){
+    var years = yearRange();
+    var html = STATE.topics.filter(function(t){return t.topic!==-1;}).map(function(t){
+      var col = STATE.colorOf[t.topic];
+      var counts = topicYearCounts(t.topic, years);
+      return '<div class="q-tcard" data-t="'+t.topic+'" style="border-left-color:'+col+'">'+
+        '<h4>'+esc(t.label)+'</h4>'+
+        '<div class="meta">topic #'+t.topic+' · '+t.size+' drops · '+t.share+'% of corpus</div>'+
+        '<div class="kw">'+esc((t.keywords||[]).join(" · "))+'</div>'+
+        sparkHTML(counts, years, col)+
+      '</div>';
+    }).join("");
+    $("q-topics").innerHTML = html || '<p class="q-empty">No named topics in this dataset.</p>';
+    Array.prototype.forEach.call($("q-topics").querySelectorAll(".q-tcard"),function(el){
+      el.addEventListener("click",function(){
+        setFilter(parseInt(el.getAttribute("data-t"),10));
+        $("reader").scrollIntoView({behavior:"smooth"});
+      });
+    });
+  }
+
+  /* ---------- scatter (canvas) ---------- */
+  var SC = {pts:[], w:0, h:0};
+  function drawScatter(){
+    var cv=$("q-canvas"); if(!cv) return;
+    var dpr=window.devicePixelRatio||1;
+    var cssW=cv.clientWidth, cssH=cv.clientHeight;
+    if(!cssW){ return; }
+    cv.width=cssW*dpr; cv.height=cssH*dpr;
+    var ctx=cv.getContext("2d"); ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,cssW,cssH);
+    SC.w=cssW; SC.h=cssH; SC.pts=[];
+
+    var xs=STATE.drops.map(function(d){return d.x;}), ys=STATE.drops.map(function(d){return d.y;});
+    var minX=Math.min.apply(null,xs),maxX=Math.max.apply(null,xs);
+    var minY=Math.min.apply(null,ys),maxY=Math.max.apply(null,ys);
+    var pad=22, sx=(cssW-2*pad)/((maxX-minX)||1), sy=(cssH-2*pad)/((maxY-minY)||1);
+
+    STATE.drops.forEach(function(d){
+      var px=pad+(d.x-minX)*sx, py=cssH-(pad+(d.y-minY)*sy);
+      SC.pts.push({x:px,y:py,d:d});
+      var dim = STATE.active!=null && d.topic!==STATE.active;
+      ctx.beginPath(); ctx.arc(px,py,dim?1.5:2.3,0,6.2832);
+      ctx.fillStyle = dim ? "rgba(150,148,134,.30)" : (STATE.colorOf[d.topic]||"#9a9486");
+      ctx.globalAlpha = dim?0.5:0.82; ctx.fill();
+    });
+    ctx.globalAlpha=1;
+  }
+
+  function wireScatter(){
+    var cv=$("q-canvas"), tip=$("q-tip");
+    if(!cv) return;
+    cv.addEventListener("mousemove",function(ev){
+      if(!STATE.drops.length){ return; }
+      var r=cv.getBoundingClientRect(), mx=ev.clientX-r.left, my=ev.clientY-r.top;
+      var best=null,bd=64;
+      for(var i=0;i<SC.pts.length;i++){var p=SC.pts[i];var dd=(p.x-mx)*(p.x-mx)+(p.y-my)*(p.y-my);if(dd<bd){bd=dd;best=p;}}
+      if(best){
+        var d=best.d;
+        tip.innerHTML='<b>#'+esc(d.id)+(d.date?(" · "+esc(d.date)):"")+' · '+esc(topicLabel(d.topic))+'</b><br>'+esc((d.text||"").slice(0,160))+((d.text||"").length>160?"…":"");
+        tip.style.left=Math.min(mx+14,SC.w-200)+"px"; tip.style.top=(my+14)+"px"; tip.style.opacity=1;
+      } else { tip.style.opacity=0; }
+    });
+    cv.addEventListener("mouseleave",function(){ tip.style.opacity=0; });
+    cv.addEventListener("click",function(ev){
+      if(!STATE.drops.length){ return; }
+      var r=cv.getBoundingClientRect(), mx=ev.clientX-r.left, my=ev.clientY-r.top;
+      var best=null,bd=80;
+      for(var i=0;i<SC.pts.length;i++){var p=SC.pts[i];var dd=(p.x-mx)*(p.x-mx)+(p.y-my)*(p.y-my);if(dd<bd){bd=dd;best=p;}}
+      if(best){ setFilter(best.d.topic); $("reader").scrollIntoView({behavior:"smooth"}); }
+    });
+    window.addEventListener("resize",function(){ if(STATE.drops.length){ drawScatter(); drawYearChart(); drawMonthChart(); } });
+  }
+
+  function topicLabel(t){
+    if(t===-1) return "noise";
+    var f=STATE.topics.filter(function(x){return x.topic===t;})[0];
+    return f?f.label:("topic "+t);
+  }
+
+  /* ---------- reader ---------- */
+  function wireReader(){
+    var s=$("q-search");
+    if(s && !s.__w){ s.__w=1;
+      var deb;
+      s.addEventListener("input",function(){ clearTimeout(deb); deb=setTimeout(function(){ STATE.query=s.value.trim().toLowerCase(); renderReader(true); },170); });
+    }
+    var cf=$("q-clearfilter"); if(cf && !cf.__w){ cf.__w=1; cf.addEventListener("click",function(){ setFilter(null); }); }
+    var box=$("q-scrollbox"); if(box && !box.__w){ box.__w=1;
+      box.addEventListener("scroll",function(){
+        if(box.scrollTop+box.clientHeight >= box.scrollHeight-420){ renderReader(false); }
+      });
+    }
+  }
+
+  function setFilter(t){
+    STATE.active = (t===STATE.active? null : (t==null?null:t));
+    var chip=$("q-filterchip");
+    if(STATE.active==null){ chip.style.display="none"; }
+    else { chip.style.display="inline-flex"; $("q-filterlabel").textContent = (STATE.active===-1?"noise / outliers":("#"+STATE.active+" "+topicLabel(STATE.active))); }
+    Array.prototype.forEach.call(document.querySelectorAll(".q-tcard"),function(el){
+      el.classList.toggle("active", parseInt(el.getAttribute("data-t"),10)===STATE.active);
+    });
+    drawScatter();
+    renderReader(true);
+  }
+
+  function currentList(){
+    var q=STATE.query, a=STATE.active;
+    return STATE.drops.filter(function(d){
+      if(a!=null && d.topic!==a) return false;
+      if(q && (d.text||"").toLowerCase().indexOf(q)===-1) return false;
+      return true;
+    });
+  }
+
+  function renderReader(reset){
+    var list=$("q-list"); if(!list) return;
+    var data=currentList();
+    if(reset){ list.innerHTML=""; R=0; var box=$("q-scrollbox"); if(box) box.scrollTop=0; }
+    $("q-count").textContent = data.length.toLocaleString()+" drop"+(data.length===1?"":"s")+(STATE.active!=null||STATE.query?" shown":"");
+    if(data.length===0){ list.innerHTML='<p class="q-empty">No drops match this filter/search.</p>'; return; }
+    if(R>=data.length){ return; }
+
+    var end=Math.min(R+BATCH, data.length);
+    var frag="";
+    for(var i=R;i<end;i++){ frag+=card(data[i]); }
+    var oldMore=$("q-morebtn"); if(oldMore) oldMore.parentNode.removeChild(oldMore);
+    list.insertAdjacentHTML("beforeend", frag);
+    R=end;
+    Array.prototype.forEach.call(list.querySelectorAll(".q-pill[data-t]"),function(el){
+      if(el.__w) return; el.__w=1;
+      el.addEventListener("click",function(){ setFilter(parseInt(el.getAttribute("data-t"),10)); });
+    });
+    if(R<data.length){
+      var btn=document.createElement("button");
+      btn.id="q-morebtn"; btn.className="q-btn q-more";
+      btn.textContent="Load "+Math.min(BATCH,data.length-R)+" more  ("+R+" / "+data.length+")";
+      btn.addEventListener("click",function(){ renderReader(false); });
+      list.appendChild(btn);
+    }
+  }
+
+  function card(d){
+    var col=STATE.colorOf[d.topic]||"#9a9486";
+    var body=esc(d.text||"");
+    if(STATE.query){
+      var re=new RegExp("("+STATE.query.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+")","ig");
+      body=body.replace(re,"<mark>$1</mark>");
+    }
+    return '<div class="q-card">'+
+      '<div class="q-cardhd">'+
+        '<span class="q-id">#'+esc(d.id)+'</span>'+
+        (d.date?'<span class="q-date">'+esc(d.date)+'</span>':'')+
+        '<span class="q-pill" data-t="'+d.topic+'" style="background:'+col+'" title="'+esc(topicLabel(d.topic))+'">'+esc(d.topic===-1?"noise":topicLabel(d.topic))+'</span>'+
+      '</div>'+
+      '<div class="q-body">'+body+'</div>'+
+    '</div>';
+  }
+
+
+  /* ---------- analytics: metrics + charts + sparklines ---------- */
+  var COL={ink:"#1B1A16",ink2:"#45413A",ink3:"#6B6557",rule:"#C4BEAF",rule2:"#A69E8C",accent:"#6E2A28",rep:"#2E5575"};
+  function median(a){ if(!a.length) return 0; var s=a.slice().sort(function(x,y){return x-y;}); var m=Math.floor(s.length/2); return s.length%2?s[m]:Math.round((s[m-1]+s[m])/2); }
+  function countBy(arr){ var m={}; arr.forEach(function(v){ if(v==null||v==="") return; m[v]=(m[v]||0)+1; }); return m; }
+  function topKey(m){ var best=null,bv=-1; for(var k in m){ if(m[k]>bv){bv=m[k];best=k;} } return best; }
+  function yearRange(){ var ys=STATE.drops.map(function(d){return d.year;}).filter(Boolean); if(!ys.length) return []; var a=Math.min.apply(null,ys),b=Math.max.apply(null,ys),o=[]; for(var y=a;y<=b;y++) o.push(y); return o; }
+  function topicYearCounts(tid, years){ var m={}; years.forEach(function(y){m[y]=0;}); STATE.drops.forEach(function(d){ if(d.topic===tid && d.year && (d.year in m)) m[d.year]++; }); return years.map(function(y){return m[y];}); }
+  function sparkHTML(counts, years, col){ if(!years.length) return ""; var mx=Math.max.apply(null,counts)||1; var bars=counts.map(function(c,i){ var h=c>0?Math.max(Math.round(100*c/mx),9):2; return '<i title="'+years[i]+': '+c+'" style="height:'+h+'%;background:'+(c>0?col:"var(--rule)")+'"></i>'; }).join(""); var labs=years.map(function(y){return '<span>\u2019'+String(y).slice(2)+'</span>';}).join(""); return '<div class="q-spark">'+bars+'</div><div class="q-sparkrow">'+labs+'</div>'; }
+
+  function buildMetrics(){
+    var d=STATE.drops;
+    var words=d.map(function(x){return (x.text||"").trim().split(/\s+/).filter(Boolean).length;});
+    var noise=STATE.topics.filter(function(t){return t.topic===-1;})[0];
+    var byMonth=countBy(d.map(function(x){return x.date?x.date.slice(0,7):null;}));
+    var cells=[
+      ["Median length", median(words)+" words"],
+      ["Short (<10w)", Math.round(100*words.filter(function(w){return w<10;}).length/(d.length||1))+"%"],
+      ["Ungroupable", (noise?noise.share:0)+"%"],
+      ["Busiest year", topKey(countBy(d.map(function(x){return x.year;})))||"\u2014"],
+      ["Busiest month", topKey(byMonth)||"\u2014"],
+      ["Active months", Object.keys(byMonth).length]
+    ];
+    $("q-metrics").innerHTML=cells.map(function(c){return '<div><div class="k">'+c[0]+'</div><div class="v">'+esc(c[1])+'</div></div>';}).join("");
+  }
+
+  function fitCanvas(cv){ if(!cv) return null; var dpr=window.devicePixelRatio||1; var w=cv.clientWidth,h=cv.clientHeight; if(!w||!h) return null; cv.width=w*dpr; cv.height=h*dpr; var ctx=cv.getContext("2d"); ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,w,h); return {ctx:ctx,w:w,h:h}; }
+
+  function drawYearChart(){
+    var by=countBy(STATE.drops.map(function(x){return x.year;}));
+    var years=Object.keys(by).map(Number).sort(function(a,b){return a-b;});
+    var c=fitCanvas($("q-year")); if(!c) return; var ctx=c.ctx,W=c.w,H=c.h;
+    var padL=8,padR=8,padT=20,padB=22,n=years.length; if(!n) return;
+    var vals=years.map(function(y){return by[y];}), max=Math.max.apply(null,vals)||1, bw=(W-padL-padR)/n, gap=Math.min(bw*0.22,10);
+    ctx.strokeStyle=COL.rule; ctx.beginPath(); ctx.moveTo(padL,H-padB+.5); ctx.lineTo(W-padR,H-padB+.5); ctx.stroke();
+    ctx.textAlign="center"; ctx.font="11px 'IBM Plex Mono',monospace";
+    years.forEach(function(y,i){
+      var x=padL+i*bw+gap/2, w=bw-gap, bh=(H-padT-padB)*(vals[i]/max), yy=H-padB-bh;
+      ctx.fillStyle=COL.accent; ctx.globalAlpha=.88; ctx.fillRect(x,yy,w,bh); ctx.globalAlpha=1;
+      ctx.fillStyle=COL.ink2; ctx.fillText(vals[i], x+w/2, yy-5);
+      ctx.fillStyle=COL.ink3; ctx.fillText(y, x+w/2, H-7);
+    });
+  }
+
+  function monthSeq(a,b){ var o=[],y=+a.slice(0,4),m=+a.slice(5,7),ye=+b.slice(0,4),me=+b.slice(5,7); while(y<ye||(y===ye&&m<=me)){ o.push(y+"-"+(m<10?"0":"")+m); m++; if(m>12){m=1;y++;} if(o.length>1200) break; } return o; }
+  function drawMonthChart(){
+    var d=STATE.drops, dates=d.map(function(x){return x.date;}).filter(Boolean).sort();
+    var c=fitCanvas($("q-month")); if(!c) return; var ctx=c.ctx,W=c.w,H=c.h;
+    if(!dates.length) return;
+    var months=monthSeq(dates[0].slice(0,7), dates[dates.length-1].slice(0,7));
+    var by=countBy(d.map(function(x){return x.date?x.date.slice(0,7):null;}));
+    var vals=months.map(function(m){return by[m]||0;}), max=Math.max.apply(null,vals)||1;
+    var padL=8,padR=8,padT=32,padB=22,n=months.length,bw=(W-padL-padR)/n;
+    ctx.strokeStyle=COL.rule; ctx.beginPath(); ctx.moveTo(padL,H-padB+.5); ctx.lineTo(W-padR,H-padB+.5); ctx.stroke();
+    ctx.textAlign="center"; ctx.font="9px 'IBM Plex Mono',monospace";
+    months.forEach(function(m,i){
+      var x=padL+i*bw, bh=(H-padT-padB)*(vals[i]/max), yy=H-padB-bh;
+      ctx.fillStyle=COL.rep; ctx.globalAlpha=.85; ctx.fillRect(x,yy,Math.max(bw-1,1),bh); ctx.globalAlpha=1;
+      if(m.slice(5)==="01"){ ctx.fillStyle=COL.ink3; ctx.fillText(m.slice(0,4), x+bw/2, H-7); }
+    });
+    var marks=[["2017-10","First drop"],["2018-08","8chan era"],["2020-03","COVID fusion"],["2020-12","Last drop"]];
+    ctx.textAlign="left";
+    marks.forEach(function(mk,j){
+      var idx=months.indexOf(mk[0]); if(idx<0) return;
+      var x=padL+idx*bw+bw/2;
+      ctx.strokeStyle=COL.accent; ctx.globalAlpha=.5; ctx.setLineDash([3,3]);
+      ctx.beginPath(); ctx.moveTo(x,padT-4); ctx.lineTo(x,H-padB); ctx.stroke(); ctx.setLineDash([]); ctx.globalAlpha=1;
+      ctx.fillStyle=COL.accent; ctx.font="9px 'IBM Plex Mono',monospace";
+      ctx.fillText("\u25D7 "+mk[1], Math.min(x+3, W-78), (j%2===0)?11:21);
+    });
+  }
+
+  /* ---------- sample/demo data (placeholder text, NOT real drops) ---------- */
+  function DEMO(){
+    var topics=[
+      {topic:0,label:"storm · arrests · plan",keywords:["storm","arrests","plan","justice","soon"],size:5,share:33.3},
+      {topic:1,label:"media · fake · news",keywords:["media","fake","news","narrative","control"],size:4,share:26.7},
+      {topic:2,label:"trust · research · light",keywords:["trust","research","light","truth","find"],size:3,share:20.0},
+      {topic:-1,label:"noise / outliers",keywords:[],size:3,share:20.0}
+    ];
+    var L=[[0,"[SAMPLE] Placeholder text standing in for a drop about the coming 'storm'."],
+           [0,"[SAMPLE] Another placeholder in the storm/arrests cluster."],
+           [0,"[SAMPLE] Placeholder — trust the plan, nothing can stop what is coming."],
+           [0,"[SAMPLE] Placeholder drop, justice theme."],
+           [0,"[SAMPLE] Placeholder drop, arrests theme."],
+           [1,"[SAMPLE] Placeholder about the 'fake news media'."],
+           [1,"[SAMPLE] Placeholder, media narrative control."],
+           [1,"[SAMPLE] Placeholder, distrust of press."],
+           [1,"[SAMPLE] Placeholder, news theme."],
+           [2,"[SAMPLE] Placeholder — do your own research."],
+           [2,"[SAMPLE] Placeholder, follow the light / truth."],
+           [2,"[SAMPLE] Placeholder, find the truth."],
+           [-1,"[SAMPLE] Generic placeholder that won't cluster."],
+           [-1,"[SAMPLE] Another ungroupable placeholder."],
+           [-1,"[SAMPLE] Idiosyncratic placeholder drop."]];
+    var drops=L.map(function(r,i){
+      var ang=i*0.6, rad=(r[0]===-1?3.2:1.1+r[0]);
+      return {id:1000+i, date:"2018-0"+(1+(i%9))+"-15", year:2018, text:r[1], topic:r[0],
+        topic_label:(topics.filter(function(t){return t.topic===r[0];})[0]||{}).label,
+        x: Math.cos(ang+r[0])*rad + r[0]*2.2, y: Math.sin(ang+r[0])*rad + (r[0]===-1?0:r[0]*0.4), conf:0.5};
+    });
+    return {meta:{embedding_model:"all-MiniLM-L6-v2 (sample)",generated:"sample",n_topics:3,n_drops:drops.length},topics:topics,drops:drops};
+  }
+
+  /* ---------- go ---------- */
+  function init(){ wireScatter(); boot(); }
+  if(document.readyState!=="loading"){ init(); }
+  else document.addEventListener("DOMContentLoaded", init);
+})();
+</script>
+</body>
+</html>

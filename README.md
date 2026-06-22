@@ -14,11 +14,34 @@ A self-contained, fully-cited academic website examining **QAnon as a documented
 | **`research.html`** | A **deep, thematically-organised bibliography** of ~27 peer-reviewed works (2017–2025) across five tracks: the **iDRAMA Lab computational corpus** (the 4chan → Voat → Parler → Telegram → Poal platform diaspora), radicalization & security studies, psychology & relational harm, religion & meaning-making, and belief/diffusion/method. Each entry shows venue, year, and verified DOI/arXiv links. Institutional reports (CSIS, ICCT, ADL, Soufan, GWU, NCRI) are listed separately as *not* peer-reviewed. |
 | **`review.html`** | A **Critical Review** that stress-tests the evidence base: the threat-inflation debate, the "who is Q" stylometry question, sampling/platform bias in computational work, whether "cult" is the right word, failed prophecy & falsifiability, the antisemitism lineage, and an **evidence-quality scorecard** rating each major claim Strong / Moderate / Contested. |
 | **`timeline.html`** | A **sourced event chronology** in seven eras — precursors, the first Q drop, platform migrations, key drops, violent incidents, parallel global events, and a final **"Current events & the news"** era (2022–2026) linking QAnon's mythology to live news: Trump's Q embrace, the January 2025 pardons of the "QAnon Shaman," and the Epstein-files fracture. |
+| **`drops.html`** | An **interactive drop-cluster explorer**. It reads `qdrops_clustered.json` (produced by the pipeline below) and renders a UMAP **cluster map**, a **topic breakdown** with sizes, and a **searchable, filterable reader** for every drop. Works the moment the JSON is present; otherwise it offers a file-picker and a schema-preview demo. |
+| `qdrops_cluster.py` | The **clustering pipeline** (run locally). Downloads the research-only [JSON-QAnon](https://github.com/jkingsman/JSON-QAnon) dataset, embeds each drop, and lets topics form themselves via **embeddings → UMAP → HDBSCAN** (wrapped by BERTopic, with `--method hdbscan` and a no-torch `--method kmeans` baseline). Exports `qdrops_clustered.json` + a CSV summary. |
+| `requirements.txt` | Python dependencies for the pipeline. |
 | `assets/style.css` | Shared stylesheet (the "forensic OSINT dossier" design system). |
 | `assets/app.js` | Shared JS (scrollspy, mobile nav, reveal-on-scroll). |
 | `.nojekyll` | Tells GitHub Pages to serve files as-is (so `assets/` isn't processed by Jekyll). |
 
-All four pages share one stylesheet and one script and are cross-linked via the navigation in the left rail.
+All five pages share one stylesheet and one script and are cross-linked via the navigation in the left rail.
+
+## Generating the drop clusters
+
+```bash
+pip install -r requirements.txt
+python qdrops_cluster.py --inspect       # sanity-check: prints the data structure + a sample
+python qdrops_cluster.py                 # recommended: BERTopic; auto-downloads posts.json
+# alternatives & accuracy levers:
+python qdrops_cluster.py --method hdbscan              # embeddings + UMAP + HDBSCAN, no BERTopic
+python qdrops_cluster.py --method kmeans -k 14          # quick TF-IDF baseline (no torch / no model)
+python qdrops_cluster.py --model all-mpnet-base-v2      # higher-quality embeddings (slower)
+python qdrops_cluster.py --reduce-outliers             # reassign the "noise" bucket to nearest topics
+python qdrops_cluster.py --min-cluster-size 30          # coarser topics (default 15 = finer)
+```
+
+The dataset's top level is `{"posts": [ … ]}`; the script reads `data["posts"]` and parses each post's flat fields (`author`, `post_id`, `time`, `text`). If a future version of the file changes shape, run `--inspect` first to see it. Topic labels are stopword-filtered (clean names like *"covid 19 virus lockdown"* rather than *"the to of"*).
+
+**The explorer page** (`drops.html`) renders everything from `qdrops_clustered.json`: live metrics (median drop length, % ungroupable, busiest month), a **drops-per-year** chart, a **monthly-volume** chart with literature milestones marked, **per-topic temporal sparklines**, an interactive cluster map, a searchable in-panel reader, and a **cross-reference table** checking this corpus against published findings (the Gospel/iDRAMA paper, de Zeeuw's normiefication study, Hoseini's Telegram work, Priniski's mental-model paper). An **Unload** button clears the data and returns to the loader (and stays unloaded across reloads).
+
+This writes **`qdrops_clustered.json`**; place it next to `drops.html` (or use the in-page **Load a JSON file** button) and reload. Dataset: Kingsman, J. (2025) *JSON-QAnon*, DOI 10.13140/RG.2.2.28778.32964 — archived **for research only**. Why not k-NN: it's a *supervised* classifier and can't discover topics on its own; the pipeline uses density-based clustering so the topics self-select (k-NN only enters legitimately as a graph fed to community detection, noted in the script).
 
 ---
 
