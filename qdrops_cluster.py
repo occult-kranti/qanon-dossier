@@ -93,9 +93,31 @@ def inspect_structure(data):
     if posts and isinstance(posts[0], dict):
         p0 = posts[0]
         print("first post keys:", list(p0.keys()))
-        print("  author/post_id/time:", p0.get("author"), "/", p0.get("post_id") or p0.get("id"), "/", p0.get("time"))
-        print("  source:", p0.get("source"))
-        print("  text[:160]:", repr((p0.get("text") or "")[:160]))
+        meta0 = _meta(p0)
+        if meta0 is not p0:
+            print("post_metadata keys:", list(meta0.keys()))
+        print("  author/id/time (via _meta):", _get_author(p0), "/", _get_id(p0), "/", _get_time(p0))
+        print("  source (via _meta):", meta0.get("source") if isinstance(meta0, dict) else None)
+        print("  text[:140]:", repr((_get_text(p0))[:140]))
+        # corpus-wide scan: where do tripcodes live?
+        trips, authors = {}, []
+        has_trip_field = 0
+        for p in posts:
+            if not isinstance(p, dict):
+                continue
+            mm = _meta(p)
+            a = str(mm.get("author") or p.get("author") or "")
+            if a and a not in authors and len(authors) < 8:
+                authors.append(a)
+            if (mm.get("tripcode") or p.get("tripcode") or "").strip():
+                has_trip_field += 1
+            tc = _get_tripcode(p)
+            if tc:
+                trips[tc] = trips.get(tc, 0) + 1
+        print("  distinct authors (sample):", authors)
+        print(f"  posts with explicit 'tripcode' field: {has_trip_field}")
+        print(f"  tripcodes detected (field OR parsed from author): {len(trips)} distinct ->",
+              dict(list(trips.items())[:8]))
     print("------------------------")
 
 
@@ -154,8 +176,18 @@ def _get_refs(p):
     return r if isinstance(r, list) else []
 
 
+TRIP_RE = re.compile(r"(!{1,2}[A-Za-z0-9+/.]{8,15})")
+
+
 def _get_tripcode(p):
-    return (_meta(p).get("tripcode") or p.get("tripcode") or "") or ""
+    m = _meta(p)
+    t = (m.get("tripcode") or p.get("tripcode") or "").strip()
+    if t:
+        return t
+    # chan archives often fold the tripcode into the author string, e.g. "Q !!Hs1Jq13jV6"
+    author = str(m.get("author") or p.get("author") or "")
+    mt = TRIP_RE.search(author)
+    return mt.group(1) if mt else ""
 
 
 def _get_board(p):
@@ -228,6 +260,8 @@ def normalise(posts, author_filter=None, drop_admin=False):
             "with_images": 0, "with_refs": 0, "admin": 0}
     boards = Counter()
     board_year = defaultdict(Counter)
+    trip_count = Counter()
+    trip_first, trip_last = {}, {}
     no_text = filtered = admin_excluded = 0
 
     for p in posts:
@@ -239,6 +273,16 @@ def normalise(posts, author_filter=None, drop_admin=False):
         refs = _get_refs(p)
         dt = _get_time(p)
         board = _get_board(p)
+        trip = (_get_tripcode(p) or "").strip()
+        if trip:
+            trip_count[trip] += 1
+            if dt:
+                ts = int(dt.timestamp())
+                ds = dt.strftime("%Y-%m-%d")
+                if trip not in trip_first or ts < trip_first[trip][0]:
+                    trip_first[trip] = (ts, ds)
+                if trip not in trip_last or ts > trip_last[trip][0]:
+                    trip_last[trip] = (ts, ds)
         if imgs:
             comp["with_images"] += 1
         if refs:
@@ -281,6 +325,16 @@ def normalise(posts, author_filter=None, drop_admin=False):
 
     comp["boards"] = dict(boards.most_common())
     comp["board_year"] = {b: dict(sorted(y.items())) for b, y in board_year.items()}
+    trips = []
+    for t, cnt in trip_count.items():
+        f, l = trip_first.get(t), trip_last.get(t)
+        trips.append({"trip": t, "count": cnt,
+                      "first": f[1] if f else None, "last": l[1] if l else None,
+                      "secure": t.startswith("!!"), "_t": f[0] if f else 0})
+    trips.sort(key=lambda d: d["_t"])
+    for d in trips:
+        d.pop("_t", None)
+    comp["tripcodes"] = trips
     msg = f"[norm] kept {len(rows)} drops; skipped {no_text} (image-only/empty)"
     if author_filter:
         msg += f"; filtered {filtered} (author!={author_filter})"
@@ -289,6 +343,12 @@ def normalise(posts, author_filter=None, drop_admin=False):
     print(msg)
     print(f"[norm] composition: {comp['text']} text · {comp['image_only']} image-only · "
           f"{comp['empty']} empty · {comp['admin']} admin(text) · boards={list(comp['boards'])[:6]}")
+    if comp["tripcodes"]:
+        print(f"[norm] tripcodes: {len(comp['tripcodes'])} distinct "
+              f"({sum(1 for t in comp['tripcodes'] if t['secure'])} secure '!!')")
+        for t in comp["tripcodes"]:
+            sec = "secure" if t["secure"] else "single"
+            print(f"        {t['trip']:<16} {t['count']:>4} drops  {t['first']} → {t['last']}  [{sec}]")
     return rows, comp
 
 

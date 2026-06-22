@@ -112,6 +112,23 @@
   #q-board{height:230px}
   .q-toggle{font-family:var(--mono);font-size:12px;color:var(--ink-2);display:flex;align-items:center;gap:6px;cursor:pointer;white-space:nowrap}
   #q-stab-runs .tnum,#q-stab-topics .tnum{font-family:var(--mono);font-size:12px;white-space:nowrap}
+
+  /* ---- tripcode rotation timeline ---- */
+  .q-trip{position:relative;margin-top:8px}
+  .q-trip-axis{position:relative;height:15px;margin-left:172px;margin-right:54px;border-bottom:1px solid var(--rule)}
+  .q-trip-axis span{position:absolute;transform:translateX(-50%);font-family:var(--mono);font-size:9px;color:var(--ink-3);top:1px}
+  .q-trip-row{display:grid;grid-template-columns:172px 1fr 54px;gap:8px;align-items:center;margin-top:5px}
+  .q-trip-lab{font-family:var(--mono);font-size:11px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .q-trip-lab b{color:var(--accent);font-size:8.5px;letter-spacing:.02em}
+  .q-trip-track{position:relative;height:14px;background:var(--paper-3);border-radius:3px}
+  .q-trip-bar{position:absolute;top:0;height:100%;border-radius:3px;min-width:3px}
+  .q-trip-n{font-family:var(--mono);font-size:11px;color:var(--ink-2);text-align:right}
+  /* ---- stability: clickable topic rows + hint ---- */
+  #q-stab-topics tbody tr{cursor:pointer}
+  #q-stab-topics tbody tr:hover{background:var(--paper-2)}
+  .q-stab-read{font-family:var(--mono);font-size:11px;color:var(--accent);white-space:nowrap}
+  #q-stab-hint{display:none;font-family:var(--mono);font-size:11.5px;color:var(--accent-2);margin-top:10px;background:rgba(110,42,40,.06);border:1px solid var(--rule-2);border-radius:6px;padding:8px 11px}
+  @media(max-width:680px){ .q-trip-axis{margin-left:104px;margin-right:40px} .q-trip-row{grid-template-columns:104px 1fr 40px} }
 </style>
 </head>
 <body>
@@ -125,7 +142,8 @@
     <div class="rail-inner" id="rail">
       <div class="seal"><b>The Drops</b><span>Clustered</span></div>
       <nav class="xnav">
-        <a href="index.html">Dossier</a>
+        <a href="index.html">Home</a>
+        <a href="dossier.html">Dossier</a>
         <a href="research.html">Research</a>
         <a href="review.html">Review</a>
         <a href="timeline.html">Timeline</a>
@@ -217,6 +235,11 @@
             <div class="q-chartwrap"><canvas id="q-board" class="q-chart"></canvas></div>
             <div id="q-board-legend" class="q-legend2"></div>
           </div>
+          <div class="q-chartblock" id="q-trip-block">
+            <h3>Tripcode rotations over time</h3>
+            <p class="cap">Each row is a cryptographic tripcode Q posted under; the bar spans its first&rarr;last drop. Rotations &mdash; one code ending and another beginning &mdash; are the documented authenticity fault-lines: every handoff is a moment where control of the account could change. <b>&Vert;secure</b> marks 8chan/8kun <em>secure</em> tripcodes (<code>!!</code>, server-side salted); single-<code>!</code> codes were brute-forceable. See the <a href="review.html" style="color:var(--rep)">Critical Review</a> on the "who is Q" question.</p>
+            <div id="q-trip"></div>
+          </div>
         </div>
       </div>
     </section>
@@ -285,7 +308,9 @@
           <tbody>
             <tr><td><b>~4,949 canonical drops; aggregators disagree on the canon, so some drops are apocryphal.</b><br><span class="src2">Gospel / iDRAMA, ICWSM 2022</span></td><td>This archive collates ~4,966 posts (~4,248 with text) from multiple aggregators &mdash; the same order of magnitude. That very disagreement is why drop counts differ slightly between sources.</td><td><span class="verdict v-met">Consistent</span></td></tr>
             <tr><td><b>Stylometry indicates multiple authors, not a single "Q."</b><br><span class="src2">Gospel / iDRAMA, ICWSM 2022</span></td><td>Topic clustering cannot test authorship (that needs stylometry on tripcodes). Flagged out of scope; discussed on the <a href="review.html" style="color:var(--rep);text-decoration:none">Critical Review</a>.</td><td><span class="verdict v-part">Needs stylometry</span></td></tr>
+            <tr><td><b>Tripcode rotations punctuate the drops; each change is a documented authenticity fault-line.</b><br><span class="src2">Gospel / iDRAMA &middot; chan trip history</span></td><td>The <b>tripcode-rotation timeline</b> now quantifies this from the corpus: each signature Q posted under and when it changed, separating brute-forceable single-<code>!</code> codes from the server-salted secure <code>!!</code> codes adopted after the early 4chan compromise. Rotations mark where account control <em>could</em> hand off &mdash; the substrate for the multiple-author question, though attribution itself still needs stylometry.</td><td><span class="verdict v-met">Consistent</span></td></tr>
             <tr><td><b>4chan incubation from 28 Oct 2017, then platform migration; news coverage lagged.</b><br><span class="src2">de Zeeuw et al., First Monday 2020</span></td><td>The monthly-volume chart begins Oct 2017 and ramps through 2018 &mdash; the incubation-then-growth shape the study describes.</td><td><span class="verdict v-met">Consistent</span></td></tr>
+            <tr><td><b>Q migrated across imageboards: 4chan &rarr; 8chan &rarr; 8kun (2017&ndash;2020).</b><br><span class="src2">Gospel / iDRAMA &middot; de&nbsp;Zeeuw et&nbsp;al.</span></td><td>The <b>board-migration chart</b> reproduces the diaspora from the corpus&rsquo;s own metadata &mdash; drops sit on <code>4ch</code> in 2017, shift to <code>8ch</code> across 2018&ndash;2019, then <code>8kun</code> from late 2019 &mdash; recovering the documented platform history with no external labelling.</td><td><span class="verdict v-met">Consistent</span></td></tr>
             <tr><td><b>Drops run to Dec 2020, then near-silence (a brief 2022 return aside).</b><br><span class="src2">Dossier Timeline &middot; reference works</span></td><td>Monthly volume collapses to ~zero after the 8 Dec 2020 final drop &mdash; visible directly in the chart and its "Last drop" marker.</td><td><span class="verdict v-met">Consistent</span></td></tr>
             <tr><td><b>The drops themselves are not especially toxic; harm lives in interpretation.</b><br><span class="src2">Gospel / iDRAMA, ICWSM 2022</span></td><td>This page clusters topics, not toxicity. The large "ungroupable / noise" share is a vagueness proxy, congruent with generic text that invites projection.</td><td><span class="verdict v-part">Adjacent</span></td></tr>
             <tr><td><b>A good-vs-evil "mental model" structures belief.</b><br><span class="src2">Priniski, McClay &amp; Holyoak, CogSci 2021</span></td><td>Topics such as "armor of god / evil" and "patriots / god / america" surface exactly this moral-binary framing.</td><td><span class="verdict v-met">Consistent</span></td></tr>
@@ -310,6 +335,7 @@
           <h3 style="font-family:var(--serif);font-size:17px;margin:20px 0 4px">Topics ranked by persistence<span id="q-stab-anchor" style="font-family:var(--mono);font-size:11px;color:var(--ink-3)"></span></h3>
           <p class="q-hint" style="margin:0 0 8px">Persistence = mean membership overlap with the other runs. <span class="verdict v-met">stable</span> &ge;0.50 &middot; <span class="verdict v-part">borderline</span> 0.30&ndash;0.50 &middot; <span class="verdict v-no">fragile</span> &lt;0.30.</p>
           <div class="tblwrap"><table id="q-stab-topics"></table></div>
+          <p id="q-stab-hint"></p>
         </div>
       </div>
     </section>
@@ -360,7 +386,7 @@ python qdrops_cluster.py --method kmeans -k 14                     # quick basel
 
     <div class="foot">
       <p class="disc"><b>What the clustering shows — and doesn't.</b> Topic clusters reveal recurring <em>themes</em> and the share of the corpus that resists grouping; they do not measure truth, intent, or authorship. Cluster boundaries shift with parameters (embedding model, <code>min_cluster_size</code>, UMAP settings), so treat topic counts as a structured reading of the corpus rather than a fixed fact — exactly the calibration argued on the Critical Review page.</p>
-      <p style="margin-top:14px">Compiled 2026 · Drop-cluster explorer · Ref Q-DROPS/CLUSTER · For academic use. · <a href="timeline.html" style="color:var(--rep);text-decoration:none">← Timeline</a> · <a href="index.html" style="color:var(--rep);text-decoration:none">Dossier →</a></p>
+      <p style="margin-top:14px">Compiled 2026 · Drop-cluster explorer · Ref Q-DROPS/CLUSTER · For academic use. · <a href="timeline.html" style="color:var(--rep);text-decoration:none">← Timeline</a> · <a href="dossier.html" style="color:var(--rep);text-decoration:none">Dossier →</a></p>
     </div>
 
   </main>
@@ -479,6 +505,7 @@ python qdrops_cluster.py --method kmeans -k 14                     # quick basel
     buildQuality();
     buildComposition();
     drawBoardChart();
+    buildTripcodes();
     buildTopics();
     drawScatter();
     wireReader();
@@ -764,6 +791,7 @@ python qdrops_cluster.py --method kmeans -k 14                     # quick basel
       '<div class="q-compbar">'+bar+'</div><div class="q-complegend">'+leg+extra+'</div>';
   }
 
+  function prettyBoard(b){ var m={"4ch":"4chan","8ch":"8chan","8kun":"8kun"}; return m[b]||b; }
   function boardCount(by,b,top,y){ if(b==="other"){ var s=0; for(var k in by){ if(top.indexOf(k)<0) s+=(by[k][y]||0); } return s; } return (by[b]&&by[b][y])||0; }
   function drawBoardChart(){
     var c=(STATE.meta&&STATE.meta.composition)||{}; var by=c.board_year||{};
@@ -787,7 +815,63 @@ python qdrops_cluster.py --method kmeans -k 14                     # quick basel
       cats.forEach(function(b){ var val=boardCount(by,b,top,y); if(!val) return; var h=(H-padT-padB)*(val/colMax); yy-=h; ctx.fillStyle=colors[b]; ctx.globalAlpha=.9; ctx.fillRect(x,yy,w,h); ctx.globalAlpha=1; });
       ctx.fillStyle=COL.ink3; ctx.fillText(y, x+w/2, H-7);
     });
-    $("q-board-legend").innerHTML=cats.map(function(b){ return '<span><i style="background:'+colors[b]+'"></i>'+esc(b)+'</span>'; }).join("");
+    $("q-board-legend").innerHTML=cats.map(function(b){ return '<span><i style="background:'+colors[b]+'"></i>'+esc(prettyBoard(b))+'</span>'; }).join("");
+  }
+
+  /* ---------- tripcode rotations ---------- */
+  function tripStats(){
+    var c=(STATE.meta&&STATE.meta.composition)||{};
+    if(Array.isArray(c.tripcodes)&&c.tripcodes.length) return c.tripcodes.slice();
+    var m={};
+    STATE.drops.forEach(function(d){ var t=(d.tripcode||"").trim(); if(!t||!d.date) return; if(!m[t]) m[t]={trip:t,count:0,first:d.date,last:d.date,secure:/^!!/.test(t)}; var o=m[t]; o.count++; if(d.date<o.first)o.first=d.date; if(d.date>o.last)o.last=d.date; });
+    var arr=Object.keys(m).map(function(k){return m[k];});
+    arr.sort(function(a,b){ return a.first<b.first?-1:(a.first>b.first?1:0); });
+    return arr;
+  }
+  function buildTripcodes(){
+    var blk=$("q-trip-block"), arr=tripStats();
+    if(!arr.length){ if(blk) blk.style.display="none"; return; }
+    if(blk) blk.style.display="block";
+    var mins=arr.map(function(t){return Date.parse(t.first);}).filter(function(x){return !isNaN(x);});
+    var maxs=arr.map(function(t){return Date.parse(t.last);}).filter(function(x){return !isNaN(x);});
+    if(!mins.length||!maxs.length){ if(blk) blk.style.display="none"; return; }
+    var gmin=Math.min.apply(null,mins), gmax=Math.max.apply(null,maxs), span=(gmax-gmin)||1;
+    var y0=new Date(gmin).getUTCFullYear(), y1=new Date(gmax).getUTCFullYear(), ticks="";
+    for(var y=y0;y<=y1;y++){ var p=100*(Date.UTC(y,0,1)-gmin)/span; if(p>=-1&&p<=101) ticks+='<span style="left:'+Math.max(0,Math.min(100,p)).toFixed(2)+'%">'+y+'</span>'; }
+    var rows=arr.map(function(t){
+      var sec=t.secure||/^!!/.test(t.trip);
+      var l=100*(Date.parse(t.first)-gmin)/span, w=Math.max(100*(Date.parse(t.last)-Date.parse(t.first))/span,1.2);
+      var col=sec?COL.accent:COL.rep;
+      return '<div class="q-trip-row">'+
+        '<div class="q-trip-lab" title="'+esc(t.trip)+'">'+esc(t.trip||"(none)")+(sec?' <b>\u2016secure</b>':'')+'</div>'+
+        '<div class="q-trip-track"><span class="q-trip-bar" style="left:'+l.toFixed(2)+'%;width:'+w.toFixed(2)+'%;background:'+col+'" title="'+esc(t.first)+' \u2192 '+esc(t.last)+' \u00b7 '+t.count+' drops"></span></div>'+
+        '<div class="q-trip-n">'+t.count+'</div>'+
+      '</div>';
+    }).join("");
+    $("q-trip").innerHTML='<div class="q-trip-axis">'+ticks+'</div>'+rows;
+  }
+
+  /* ---------- stability -> reader cross-link ---------- */
+  var STAB=null;
+  function stabHint(msg){ var el=$("q-stab-hint"); if(!el) return; el.innerHTML=msg||""; el.style.display=msg?"block":"none"; }
+  function stabAnchorRun(rep){ return (rep&&rep.runs||[]).filter(function(r){return r.tag===rep.anchor;})[0]||null; }
+  function stabMatchesLoaded(rep){
+    if(!STATE.meta||!STATE.drops.length) return false;
+    var a=stabAnchorRun(rep); if(!a) return false;
+    var m=STATE.meta, em=(m.embedding_model||"");
+    var sameModel = em===a.model || em.indexOf(shortModel(a.model))>=0 || shortModel(a.model).indexOf(shortModel(em))>=0;
+    var sameMcs = m.params && Number(m.params.min_cluster_size)===Number(a.mcs);
+    return sameModel && !!sameMcs;
+  }
+  function gotoStabTopic(topic){
+    var rep=STAB; if(!rep) return; topic=parseInt(topic,10);
+    if(stabMatchesLoaded(rep)){ stabHint(""); setFilter(topic); $("reader").scrollIntoView({behavior:"smooth"}); return; }
+    var a=stabAnchorRun(rep), file=a&&a.file;
+    if(!file){ stabHint("This report doesn\u2019t name the run file. Load the matching <code>run_*.json</code> via the loader at the top of the page, then click again."); return; }
+    stabHint("Loading <code>"+esc(file)+"</code> (the anchor run) so you can read topic #"+topic+"\u2026");
+    fetch(file,{cache:"no-store"}).then(function(r){ if(!r.ok) throw 0; return r.json(); })
+      .then(function(d){ ssDel("qUnloaded"); render(d,"file"); setFilter(topic); $("reader").scrollIntoView({behavior:"smooth"}); stabHint("Loaded <code>"+esc(file)+"</code> &mdash; reader filtered to topic #"+topic+"."); })
+      .catch(function(){ stabHint("Couldn\u2019t fetch <code>"+esc(file)+"</code>. Put the sweep\u2019s run files next to <code>drops.html</code> (or open <code>"+esc(file)+"</code> with <b>Load a JSON file</b> at the top), then click the row again."); });
   }
 
   /* ---------- stability report (multi-run) ---------- */
@@ -805,16 +889,18 @@ python qdrops_cluster.py --method kmeans -k 14                     # quick basel
   }
   function renderStability(rep){
     if(!rep||!rep.runs){ stabSetup(); return; }
+    STAB=rep; stabHint("");
     $("q-stab-banner").className="q-banner ok"; $("q-stab-actions").innerHTML="";
     $("q-stab-status").innerHTML='<b>Loaded.</b> '+rep.runs.length+' runs over '+(rep.n_drops?rep.n_drops.toLocaleString():"?")+' drops &middot; anchor: '+esc(rep.anchor||"\u2014")+'.';
     $("q-stab-body").style.display="block";
     var rt='<thead><tr><th>Run</th><th>Model</th><th>min&middot;clu</th><th>Topics</th><th>Silhouette</th><th>c_v</th><th>Mean persistence</th></tr></thead><tbody>';
     rep.runs.forEach(function(r){ rt+='<tr><td class="tnum">'+esc(r.tag)+'</td><td class="tnum">'+esc(shortModel(r.model))+'</td><td class="tnum">'+esc(r.mcs)+'</td><td class="tnum">'+esc(r.n_topics)+'</td><td class="tnum">'+fmt(r.silhouette)+'</td><td class="tnum">'+fmt(r.coherence)+'</td><td class="tnum">'+fmt(r.mean_persistence)+(r.tag===rep.anchor?' \u25C0':'')+'</td></tr>'; });
     $("q-stab-runs").innerHTML=rt+'</tbody>';
-    var tt='<thead><tr><th>#</th><th>Topic (anchor run)</th><th>Size</th><th>Persist</th><th>Verdict</th></tr></thead><tbody>';
-    (rep.anchor_topics||[]).forEach(function(t){ var cls=t.verdict==="stable"?"v-met":(t.verdict==="borderline"?"v-part":"v-no"); tt+='<tr><td class="tnum">'+esc(t.topic)+'</td><td>'+esc((t.keywords||[]).slice(0,5).join(" · ")||t.label||"")+'</td><td class="tnum">'+esc(t.size)+'</td><td class="tnum">'+fmt(t.persistence)+'</td><td><span class="verdict '+cls+'">'+esc(t.verdict)+'</span></td></tr>'; });
+    var tt='<thead><tr><th>#</th><th>Topic (anchor run)</th><th>Size</th><th>Persist</th><th>Verdict</th><th></th></tr></thead><tbody>';
+    (rep.anchor_topics||[]).forEach(function(t){ var cls=t.verdict==="stable"?"v-met":(t.verdict==="borderline"?"v-part":"v-no"); tt+='<tr data-topic="'+esc(t.topic)+'" title="Read this topic\u2019s drops in the reader"><td class="tnum">'+esc(t.topic)+'</td><td>'+esc((t.keywords||[]).slice(0,5).join(" · ")||t.label||"")+'</td><td class="tnum">'+esc(t.size)+'</td><td class="tnum">'+fmt(t.persistence)+'</td><td><span class="verdict '+cls+'">'+esc(t.verdict)+'</span></td><td><span class="q-stab-read">read \u2192</span></td></tr>'; });
     $("q-stab-topics").innerHTML=tt+'</tbody>';
-    $("q-stab-anchor").textContent=" \u2014 anchor: "+(rep.anchor||"");
+    Array.prototype.forEach.call($("q-stab-topics").querySelectorAll("tbody tr"),function(row){ row.addEventListener("click",function(){ gotoStabTopic(row.getAttribute("data-topic")); }); });
+    $("q-stab-anchor").textContent=" \u2014 anchor: "+(rep.anchor||"")+" \u00b7 click a row to read its drops";
   }
 
   /* ---------- sample/demo data (placeholder text, NOT real drops) ---------- */
