@@ -216,18 +216,24 @@ ADMIN_RE = [
     re.compile(r"\btest\b", re.I),
     re.compile(r"\btrip(code)?\b.*\b(code|update|confirm|compromis|new|change)\b", re.I),
     re.compile(r"\bnew\s+trip", re.I),
+    re.compile(r"\btrip(code)?\s+(reset|rotate|switched?)\b", re.I),
     re.compile(r"\bcomm?s\b", re.I),
     re.compile(r"\bsniffer\b", re.I),
     re.compile(r"\bdisregard\b", re.I),
+    re.compile(r"\bdisregard\s+(last|prev|prior)\b", re.I),
     re.compile(r"\bspelling\b", re.I),
     re.compile(r"\bcorrection\b", re.I),
     re.compile(r"\bpassword\b", re.I),
     re.compile(r"\bconfig(uration)?\b", re.I),
     re.compile(r"\b(board|bo|cm)\b.*\b(access|owner|control|created|down|migrat)\b", re.I),
+    re.compile(r"\bnew\s+board\b", re.I),
+    re.compile(r"\bboard\s+(moved|move|migration)\b", re.I),
     re.compile(r"\b(offline|online)\b", re.I),
     re.compile(r"\bstations?\b", re.I),
     re.compile(r"\binput\s+error\b", re.I),
     re.compile(r"\bdevice\b", re.I),
+    re.compile(r"\b(re)?posting\s+error\b", re.I),
+    re.compile(r"\bplease\s+re-?read\b", re.I),
     re.compile(r"\bre-?post(ing)?\b", re.I),
 ]
 ADMIN_STRONG = [
@@ -246,10 +252,11 @@ def is_admin(clean_text):
         if rx.search(clean_text):
             return True
     words = len(clean_text.split())
-    if words <= 15:
-        for rx in ADMIN_RE:
-            if rx.search(clean_text):
-                return True
+    hits = sum(1 for rx in ADMIN_RE if rx.search(clean_text))
+    if words <= 15 and hits >= 1:
+        return True
+    if words <= 40 and hits >= 2:
+        return True
     return False
 
 
