@@ -2,175 +2,191 @@
   "dataset_id": "reddit_qanon",
   "n_posts": 500,
   "cluster": {
-    "method": "kmeans",
-    "n_clusters": 10,
+    "method": "bertopic",
+    "n_clusters": 11,
     "metrics": {
-      "silhouette": 1.0,
-      "n_clusters": 10
+      "n_clusters": 11,
+      "silhouette": null
     },
     "topics": [
       {
         "id": 0,
-        "label": "1234 says · dark light · dark",
+        "label": "coming · storm · nothing",
         "keywords": [
-          "1234 says",
-          "dark light",
-          "dark",
-          "game",
-          "game dark",
-          "drop 1234",
-          "drop",
-          "news trust"
+          "coming",
+          "storm",
+          "nothing",
+          "can",
+          "stop",
+          "patriots",
+          "is",
+          "and"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 1,
-        "label": "warned truth · warned · truth",
+        "label": "has · given · exposed",
         "keywords": [
-          "warned truth",
-          "warned",
-          "truth",
-          "rescued",
-          "coming god",
-          "children",
-          "children rescued",
-          "truth coming"
+          "has",
+          "given",
+          "exposed",
+          "future",
+          "state",
+          "proves",
+          "map",
+          "past"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 2,
-        "label": "trust · wray · wray trust",
+        "label": "up · covering · msm",
         "keywords": [
-          "trust",
-          "wray",
-          "wray trust",
-          "huber",
-          "fisa",
-          "fisa abuse",
-          "huber trust",
-          "plan wwg1wga"
+          "up",
+          "covering",
+          "msm",
+          "of",
+          "do",
+          "terrified",
+          "research",
+          "own"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 3,
-        "label": "ago crumbs · crumbs · crumbs lead",
+        "label": "lead · everything · anons",
         "keywords": [
-          "ago crumbs",
-          "crumbs",
-          "crumbs lead",
-          "offline",
-          "offline qanon",
-          "knew months",
           "lead",
-          "lead archive"
+          "everything",
+          "anons",
+          "archive",
+          "months",
+          "offline",
+          "here",
+          "knew"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 4,
-        "label": "deep state · exposed given · exposed",
+        "label": "every · in · great",
         "keywords": [
-          "deep state",
-          "exposed given",
-          "exposed",
-          "past wwg1wga",
-          "past",
-          "map",
-          "map future",
-          "proves past"
+          "every",
+          "in",
+          "great",
+          "dc",
+          "panic",
+          "real",
+          "people",
+          "more"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 5,
-        "label": "waking day · day · day panic",
+        "label": "trust · them · bring",
         "keywords": [
-          "waking day",
-          "day",
-          "day panic",
-          "great awakening",
-          "great",
-          "panic",
-          "panic dc",
-          "people"
+          "trust",
+          "them",
+          "bring",
+          "down",
+          "fisa",
+          "abuse",
+          "wray",
+          "huber"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 6,
-        "label": "won report · won · fear happens",
+        "label": "dark · drop · 1234",
         "keywords": [
-          "won report",
-          "won",
-          "fear happens",
-          "happens wake",
-          "news media",
-          "media won",
-          "media",
-          "report fear"
+          "dark",
+          "drop",
+          "1234",
+          "game",
+          "to",
+          "not",
+          "it",
+          "says"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 7,
-        "label": "waking trust · terrified waking · terrified",
+        "label": "when · report · media",
         "keywords": [
-          "waking trust",
-          "terrified waking",
-          "terrified",
-          "covering research",
-          "covering",
-          "msm",
-          "msm covering",
-          "research"
+          "when",
+          "report",
+          "media",
+          "happens",
+          "fear",
+          "fake",
+          "wake",
+          "won"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 8,
-        "label": "coming · stop coming · wwg1wga patriots",
+        "label": "warned · truth · out",
         "keywords": [
-          "coming",
-          "stop coming",
-          "wwg1wga patriots",
-          "storm",
-          "coming stop",
-          "plan storm",
-          "patriots",
-          "stop"
+          "warned",
+          "truth",
+          "out",
+          "children",
+          "being",
+          "about",
+          "rescued",
+          "is"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 9,
-        "label": "god · bless · god bless",
+        "label": "god · bless · evil",
         "keywords": [
           "god",
           "bless",
-          "god bless",
-          "potus",
+          "evil",
+          "defeat",
+          "fighting",
+          "darkness",
           "pure",
-          "pure evil",
-          "light defeat",
-          "potus fighting"
+          "potus"
         ],
-        "size": 50,
-        "share_pct": 10.0
+        "size": 26,
+        "share_pct": 5.2
+      },
+      {
+        "id": 10,
+        "label": "god · bless · evil",
+        "keywords": [
+          "god",
+          "bless",
+          "evil",
+          "defeat",
+          "fighting",
+          "darkness",
+          "pure",
+          "potus"
+        ],
+        "size": 24,
+        "share_pct": 4.8
       }
     ],
-    "time_s": 0.06
+    "time_s": 8.46
   },
   "bite": {
     "aggregate": {

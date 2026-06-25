@@ -2,175 +2,207 @@
   "dataset_id": "telegram",
   "n_posts": 500,
   "cluster": {
-    "method": "kmeans",
-    "n_clusters": 10,
+    "method": "bertopic",
+    "n_clusters": 12,
     "metrics": {
-      "silhouette": 1.0,
-      "n_clusters": 10
+      "n_clusters": 12,
+      "silhouette": null
     },
     "topics": [
       {
         "id": 0,
-        "label": "white rabbit · white · follow",
+        "label": "upon · posted · get",
         "keywords": [
-          "white rabbit",
-          "white",
-          "follow",
-          "link",
-          "map",
-          "latest drops",
-          "map complete",
-          "link map"
+          "upon",
+          "posted",
+          "get",
+          "in",
+          "new",
+          "drop",
+          "storm",
+          "us"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 1,
-        "label": "want distracted · cabal · afraid god",
+        "label": "mass · media · according",
         "keywords": [
-          "want distracted",
-          "cabal",
-          "afraid god",
-          "afraid",
-          "distracted",
-          "distracted afraid",
-          "awake",
-          "population want"
-        ],
-        "size": 50,
-        "share_pct": 10.0
-      },
-      {
-        "id": 2,
-        "label": "wins wwg1wga · banned facebook · facebook",
-        "keywords": [
-          "wins wwg1wga",
-          "banned facebook",
-          "facebook",
-          "facebook truth",
-          "censored",
-          "censored twitter",
-          "truth wins",
-          "truth"
-        ],
-        "size": 50,
-        "share_pct": 10.0
-      },
-      {
-        "id": 3,
-        "label": "new · storm · drop storm",
-        "keywords": [
-          "new",
-          "storm",
-          "drop storm",
-          "drop",
-          "posted",
-          "new drop",
-          "just posted",
-          "posted new"
-        ],
-        "size": 50,
-        "share_pct": 10.0
-      },
-      {
-        "id": 4,
-        "label": "major · major fisa · tick",
-        "keywords": [
-          "major",
-          "major fisa",
-          "tick",
-          "revelations",
-          "revelations coming",
-          "traitors trust",
-          "tick tock",
-          "tock"
-        ],
-        "size": 50,
-        "share_pct": 10.0
-      },
-      {
-        "id": 5,
-        "label": "wwg1wga qanon · trying silence · silence archive",
-        "keywords": [
-          "wwg1wga qanon",
-          "trying silence",
-          "silence archive",
-          "silence",
-          "archive",
-          "archive wwg1wga",
-          "trying",
-          "qanon"
-        ],
-        "size": 50,
-        "share_pct": 10.0
-      },
-      {
-        "id": 6,
-        "label": "worldwide · worldwide ready · coming patriots",
-        "keywords": [
-          "worldwide",
-          "worldwide ready",
-          "coming patriots",
-          "patriots worldwide",
-          "patriots",
-          "stop",
-          "ready",
-          "stop coming"
-        ],
-        "size": 50,
-        "share_pct": 10.0
-      },
-      {
-        "id": 7,
-        "label": "course · course wwg1wga · mass arrests",
-        "keywords": [
-          "course",
-          "course wwg1wga",
-          "mass arrests",
-          "media silent",
-          "media",
           "mass",
-          "mainstream media",
+          "media",
+          "according",
+          "arrests",
+          "silent",
+          "of",
+          "imminent",
           "mainstream"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
-        "id": 8,
-        "label": "boom latest · came · doubt",
+        "id": 2,
+        "label": "fisa · it · has",
         "keywords": [
-          "boom latest",
-          "came",
-          "doubt",
-          "prediction just",
-          "plan qanon",
-          "just came",
-          "latest prediction",
-          "prediction"
+          "fisa",
+          "it",
+          "has",
+          "tick",
+          "revelations",
+          "tock",
+          "traitors",
+          "major"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
-        "id": 9,
-        "label": "god · wins evil · evil",
+        "id": 3,
+        "label": "god · know · evil",
         "keywords": [
           "god",
-          "wins evil",
-          "evil",
-          "god wins",
-          "forward know",
-          "forward",
           "know",
-          "plan forward"
+          "evil",
+          "exposed",
+          "be",
+          "forward",
+          "this",
+          "will"
         ],
         "size": 50,
         "share_pct": 10.0
+      },
+      {
+        "id": 4,
+        "label": "trying · too · archive",
+        "keywords": [
+          "trying",
+          "too",
+          "archive",
+          "everything",
+          "silence",
+          "re",
+          "us",
+          "qanon"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 5,
+        "label": "censored · from · facebook",
+        "keywords": [
+          "censored",
+          "from",
+          "facebook",
+          "but",
+          "truth",
+          "twitter",
+          "we",
+          "on"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 6,
+        "label": "the · decode · drops",
+        "keywords": [
+          "the",
+          "decode",
+          "drops",
+          "follow",
+          "complete",
+          "link",
+          "white",
+          "map"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 7,
+        "label": "prediction · how · came",
+        "keywords": [
+          "prediction",
+          "how",
+          "came",
+          "doubt",
+          "anyone",
+          "boom",
+          "true",
+          "can"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 8,
+        "label": "distracted · cabal · awake",
+        "keywords": [
+          "distracted",
+          "cabal",
+          "awake",
+          "want",
+          "that",
+          "why",
+          "population",
+          "fears"
+        ],
+        "size": 36,
+        "share_pct": 7.2
+      },
+      {
+        "id": 9,
+        "label": "nothing · worldwide · what",
+        "keywords": [
+          "nothing",
+          "worldwide",
+          "what",
+          "ready",
+          "patriots",
+          "said",
+          "stop",
+          "coming"
+        ],
+        "size": 32,
+        "share_pct": 6.4
+      },
+      {
+        "id": 10,
+        "label": "nothing · worldwide · what",
+        "keywords": [
+          "nothing",
+          "worldwide",
+          "what",
+          "ready",
+          "patriots",
+          "said",
+          "stop",
+          "coming"
+        ],
+        "size": 18,
+        "share_pct": 3.6
+      },
+      {
+        "id": 11,
+        "label": "distracted · cabal · awake",
+        "keywords": [
+          "distracted",
+          "cabal",
+          "awake",
+          "want",
+          "that",
+          "why",
+          "population",
+          "fears"
+        ],
+        "size": 14,
+        "share_pct": 2.8
       }
     ],
-    "time_s": 0.06
+    "time_s": 6.06
   },
   "bite": {
     "aggregate": {

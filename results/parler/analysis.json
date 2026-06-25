@@ -2,175 +2,191 @@
   "dataset_id": "parler",
   "n_posts": 500,
   "cluster": {
-    "method": "kmeans",
-    "n_clusters": 10,
+    "method": "bertopic",
+    "n_clusters": 11,
     "metrics": {
-      "silhouette": 1.0,
-      "n_clusters": 10
+      "n_clusters": 11,
+      "silhouette": null
     },
     "topics": [
       {
         "id": 0,
-        "label": "msm connected · state msm · state",
+        "label": "told · show · won",
         "keywords": [
-          "msm connected",
-          "state msm",
-          "state",
-          "wake sheeple",
-          "big pharma",
-          "connected wake",
-          "deep",
-          "big"
+          "told",
+          "show",
+          "won",
+          "you",
+          "months",
+          "great",
+          "real",
+          "ago"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 1,
-        "label": "years ago · years · true wake",
+        "label": "knows · maga · trump",
         "keywords": [
-          "years ago",
-          "years",
-          "true wake",
-          "wake america",
-          "pilled years",
-          "america god",
-          "true",
-          "pilled"
+          "knows",
+          "maga",
+          "trump",
+          "our",
+          "plan",
+          "bless",
+          "everything",
+          "god"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 2,
-        "label": "movement greatawakening · movement · theory",
+        "label": "they · banned · because",
         "keywords": [
-          "movement greatawakening",
-          "movement",
-          "theory",
-          "theory awakening",
-          "awakening movement",
-          "conspiracy",
-          "greatawakening qanon",
-          "greatawakening"
+          "they",
+          "banned",
+          "because",
+          "fear",
+          "silenced",
+          "the",
+          "be",
+          "but"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 3,
-        "label": "won told · told · told months",
+        "label": "whole · fisa · corrupt",
         "keywords": [
-          "won told",
-          "told",
-          "told months",
-          "won",
-          "awakening real",
-          "ago great",
-          "great awakening",
-          "msm won"
+          "whole",
+          "fisa",
+          "corrupt",
+          "down",
+          "bring",
+          "them",
+          "for",
+          "justice"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 4,
-        "label": "qanon maga · plan qanon · trump",
+        "label": "stopped · link · cannot",
         "keywords": [
-          "qanon maga",
-          "plan qanon",
-          "trump",
-          "trump knows",
-          "bless patriots",
-          "knows",
-          "knows trust",
-          "maga"
+          "stopped",
+          "link",
+          "cannot",
+          "censored",
+          "else",
+          "join",
+          "telegram",
+          "be"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 5,
-        "label": "today · today confirms · storm",
+        "label": "stolen · line · happen",
         "keywords": [
-          "today",
-          "today confirms",
-          "storm",
-          "trusttheplan",
-          "drop today",
-          "drop",
-          "confirms storm",
-          "confirms"
+          "stolen",
+          "line",
+          "happen",
+          "hold",
+          "and",
+          "election",
+          "would",
+          "warned"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 6,
-        "label": "telegram link · telegram · stopped qanon",
+        "label": "pharma · sheeple · deep",
         "keywords": [
-          "telegram link",
-          "telegram",
-          "stopped qanon",
-          "truth stopped",
-          "join telegram",
-          "censored",
-          "censored truth",
-          "link censored"
+          "pharma",
+          "sheeple",
+          "deep",
+          "state",
+          "connected",
+          "big",
+          "up",
+          "msm"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 7,
-        "label": "stolen warned · stolen · warned",
+        "label": "we · are · theory",
         "keywords": [
-          "stolen warned",
-          "stolen",
-          "warned",
-          "warned happen",
-          "happen",
-          "election stolen",
-          "election",
-          "hold line"
+          "we",
+          "are",
+          "theory",
+          "conspiracy",
+          "movement",
+          "greatawakening",
+          "an",
+          "awakening"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 8,
-        "label": "fear truth · silenced · silenced trust",
+        "label": "said · pilled · true",
         "keywords": [
-          "fear truth",
-          "silenced",
-          "silenced trust",
-          "truth silenced",
-          "banned",
-          "banned fear",
-          "fear",
-          "truth"
+          "said",
+          "pilled",
+          "true",
+          "years",
+          "red",
+          "america",
+          "coming",
+          "ago"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 9,
-        "label": "coming god · cabal · corrupt",
+        "label": "storm · ready · trusttheplan",
         "keywords": [
-          "coming god",
-          "cabal",
-          "corrupt",
-          "corrupt cabal",
-          "justice",
-          "fisa",
-          "justice coming",
-          "bring corrupt"
+          "storm",
+          "ready",
+          "trusttheplan",
+          "incoming",
+          "drop",
+          "confirms",
+          "today",
+          "patriots"
         ],
-        "size": 50,
-        "share_pct": 10.0
+        "size": 34,
+        "share_pct": 6.8
+      },
+      {
+        "id": 10,
+        "label": "storm · ready · trusttheplan",
+        "keywords": [
+          "storm",
+          "ready",
+          "trusttheplan",
+          "incoming",
+          "drop",
+          "confirms",
+          "today",
+          "patriots"
+        ],
+        "size": 16,
+        "share_pct": 3.2
       }
     ],
-    "time_s": 0.06
+    "time_s": 4.91
   },
   "bite": {
     "aggregate": {

@@ -2,175 +2,223 @@
   "dataset_id": "8kun_qresearch",
   "n_posts": 500,
   "cluster": {
-    "method": "kmeans",
-    "n_clusters": 10,
+    "method": "bertopic",
+    "n_clusters": 13,
     "metrics": {
-      "silhouette": 1.0,
-      "n_clusters": 10
+      "n_clusters": 13,
+      "silhouette": null
     },
     "topics": [
       {
         "id": 0,
-        "label": "wonderland reference · wonderland · latest",
+        "label": "top · general · at",
         "keywords": [
-          "wonderland reference",
-          "wonderland",
-          "latest",
-          "alice wonderland",
-          "alice",
-          "drop connected",
-          "connected",
-          "confirmed latest"
+          "top",
+          "general",
+          "at",
+          "bread",
+          "edition",
+          "14576",
+          "research",
+          "of"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 1,
-        "label": "wwg1wga shield · want · want divide",
+        "label": "map · island · epstein",
         "keywords": [
-          "wwg1wga shield",
-          "want",
-          "want divide",
-          "shield qanon",
-          "shield",
-          "shill id",
-          "shill",
-          "divide wwg1wga"
+          "map",
+          "island",
+          "epstein",
+          "everything",
+          "connects",
+          "see",
+          "refers",
+          "rc"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 2,
-        "label": "shift · shift best · stop",
+        "label": "notables · huber · barr",
         "keywords": [
-          "shift",
-          "shift best",
-          "stop",
-          "stop coming",
-          "shift godspeed",
-          "dark",
-          "dark light",
-          "godspeed anons"
+          "notables",
+          "huber",
+          "barr",
+          "durham",
+          "imminent",
+          "activated",
+          "ticking",
+          "report"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 3,
-        "label": "storm · storm confirmed · 10 days",
+        "label": "on · our · move",
         "keywords": [
-          "storm",
-          "storm confirmed",
-          "10 days",
-          "10",
-          "awakening 10",
-          "darkness storm",
-          "darkness",
-          "days darkness"
+          "on",
+          "our",
+          "move",
+          "they",
+          "us",
+          "want",
+          "shield",
+          "shill"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 4,
-        "label": "trip anons · trip · matching trip",
+        "label": "proof · seconds · 17",
         "keywords": [
-          "trip anons",
-          "trip",
-          "matching trip",
-          "post confirmed",
-          "new wwg1wga",
-          "confirmed matching",
-          "anons new",
-          "baker"
-        ],
-        "size": 50,
-        "share_pct": 10.0
-      },
-      {
-        "id": 5,
-        "label": "tweet post · tweet · timestamp delta",
-        "keywords": [
-          "tweet post",
-          "tweet",
-          "timestamp delta",
+          "proof",
+          "seconds",
+          "17",
+          "between",
+          "delta",
           "timestamp",
-          "minute 17",
-          "minute",
-          "potus tweet",
+          "tweet",
           "potus"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
-        "id": 6,
-        "label": "boom · boom boom · boom said",
+        "id": 5,
+        "label": "boom · said · week",
         "keywords": [
           "boom",
-          "boom boom",
-          "boom said",
+          "said",
           "week",
-          "week arrests",
+          "big",
+          "arrests",
           "panic",
-          "panic dc",
+          "dc",
           "incoming"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
-        "id": 7,
-        "label": "ticking trust · ticking · activated durham",
+        "id": 6,
+        "label": "shift · nothing · can",
         "keywords": [
-          "ticking trust",
-          "ticking",
-          "activated durham",
-          "barr activated",
-          "imminent barr",
-          "huber report",
-          "huber",
-          "imminent"
+          "shift",
+          "nothing",
+          "can",
+          "night",
+          "stop",
+          "godspeed",
+          "coming",
+          "light"
         ],
         "size": 50,
         "share_pct": 10.0
+      },
+      {
+        "id": 7,
+        "label": "latest · reference · connected",
+        "keywords": [
+          "latest",
+          "reference",
+          "connected",
+          "wonderland",
+          "alice",
+          "all",
+          "it",
+          "in"
+        ],
+        "size": 32,
+        "share_pct": 6.4
       },
       {
         "id": 8,
-        "label": "epstein · decode · connects",
+        "label": "this · matching · here",
         "keywords": [
-          "epstein",
-          "decode",
-          "connects",
-          "connects map",
-          "decode drop",
-          "map trust",
-          "map",
-          "island rc"
+          "this",
+          "matching",
+          "here",
+          "trip",
+          "with",
+          "baker",
+          "anons",
+          "post"
         ],
-        "size": 50,
-        "share_pct": 10.0
+        "size": 30,
+        "share_pct": 6.0
       },
       {
         "id": 9,
-        "label": "general 14576 · 14576 trust · 14576",
+        "label": "days · great · storm",
         "keywords": [
-          "general 14576",
-          "14576 trust",
-          "14576",
-          "drop bread",
-          "bread",
-          "edition",
-          "edition new",
-          "general"
+          "days",
+          "great",
+          "storm",
+          "darkness",
+          "awakening",
+          "10",
+          "before",
+          "of"
         ],
-        "size": 50,
-        "share_pct": 10.0
+        "size": 30,
+        "share_pct": 6.0
+      },
+      {
+        "id": 10,
+        "label": "this · matching · here",
+        "keywords": [
+          "this",
+          "matching",
+          "here",
+          "trip",
+          "with",
+          "baker",
+          "anons",
+          "post"
+        ],
+        "size": 20,
+        "share_pct": 4.0
+      },
+      {
+        "id": 11,
+        "label": "days · great · storm",
+        "keywords": [
+          "days",
+          "great",
+          "storm",
+          "darkness",
+          "awakening",
+          "10",
+          "before",
+          "of"
+        ],
+        "size": 20,
+        "share_pct": 4.0
+      },
+      {
+        "id": 12,
+        "label": "latest · reference · connected",
+        "keywords": [
+          "latest",
+          "reference",
+          "connected",
+          "wonderland",
+          "alice",
+          "all",
+          "it",
+          "in"
+        ],
+        "size": 18,
+        "share_pct": 3.6
       }
     ],
-    "time_s": 0.06
+    "time_s": 5.02
   },
   "bite": {
     "aggregate": {

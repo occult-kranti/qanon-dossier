@@ -1,402 +1,1786 @@
 {
   "dataset_id": "qdrops",
-  "n_posts": 500,
+  "n_posts": 4966,
   "cluster": {
-    "method": "kmeans",
-    "n_clusters": 10,
+    "method": "bertopic",
+    "n_clusters": 95,
     "metrics": {
-      "silhouette": 0.0441,
-      "n_clusters": 10
+      "n_clusters": 95,
+      "silhouette": null
     },
     "topics": [
       {
         "id": 0,
-        "label": "united · wwg1wga · fighting",
+        "label": "status · twitter · com",
         "keywords": [
-          "united",
-          "wwg1wga",
-          "fighting",
-          "strong",
-          "patriots",
-          "stand",
-          "stay",
-          "people"
-        ],
-        "size": 15,
-        "share_pct": 3.18
-      },
-      {
-        "id": 1,
-        "label": "target · intended · intended target",
-        "keywords": [
-          "target",
-          "intended",
-          "intended target",
-          "real",
-          "want",
-          "public",
-          "complete",
-          "track"
-        ],
-        "size": 11,
-        "share_pct": 2.33
-      },
-      {
-        "id": 2,
-        "label": "patriot · country · times",
-        "keywords": [
-          "patriot",
-          "country",
-          "times",
-          "harder",
-          "god country",
-          "ready",
-          "try",
-          "thank"
-        ],
-        "size": 19,
-        "share_pct": 4.03
-      },
-      {
-        "id": 3,
-        "label": "test · think · way",
-        "keywords": [
-          "test",
-          "think",
-          "way",
-          "win",
-          "game",
-          "trip",
-          "comms",
-          "boom"
-        ],
-        "size": 194,
-        "share_pct": 41.1
-      },
-      {
-        "id": 4,
-        "label": "did · public · people",
-        "keywords": [
-          "did",
-          "public",
-          "people",
-          "potus",
-          "does",
-          "relevant",
-          "private",
-          "people stupid"
-        ],
-        "size": 50,
-        "share_pct": 10.59
-      },
-      {
-        "id": 5,
-        "label": "news · fake · fake news",
-        "keywords": [
-          "news",
-          "fake",
-          "fake news",
-          "news unlocks",
-          "unlocks",
-          "fun",
-          "news media",
-          "msm"
-        ],
-        "size": 23,
-        "share_pct": 4.87
-      },
-      {
-        "id": 6,
-        "label": "coming · justice · time",
-        "keywords": [
-          "coming",
-          "justice",
-          "time",
-          "patriots",
-          "know",
-          "bring",
-          "great",
-          "autists"
-        ],
-        "size": 35,
-        "share_pct": 7.42
-      },
-      {
-        "id": 7,
-        "label": "twitter com · status · https twitter",
-        "keywords": [
-          "twitter com",
           "status",
-          "https twitter",
           "twitter",
           "com",
           "https",
-          "wwg1wga",
-          "vip"
+          "mobile",
+          "jsolomonreports",
+          "repdougcollins",
+          "thejusticedept"
         ],
-        "size": 70,
-        "share_pct": 14.83
+        "size": 194,
+        "share_pct": 3.91
+      },
+      {
+        "id": 1,
+        "label": "politics · www · trump",
+        "keywords": [
+          "politics",
+          "www",
+          "trump",
+          "nunes",
+          "foxnews",
+          "2018",
+          "com",
+          "https"
+        ],
+        "size": 146,
+        "share_pct": 2.94
+      },
+      {
+        "id": 2,
+        "label": "boom · test · qrv",
+        "keywords": [
+          "boom",
+          "test",
+          "qrv",
+          "voat",
+          "next",
+          "maggienyt",
+          "co",
+          "week"
+        ],
+        "size": 129,
+        "share_pct": 2.6
+      },
+      {
+        "id": 3,
+        "label": "qanon · conspiracy · www",
+        "keywords": [
+          "qanon",
+          "conspiracy",
+          "www",
+          "search",
+          "news",
+          "attacks",
+          "theory",
+          "msm"
+        ],
+        "size": 123,
+        "share_pct": 2.48
+      },
+      {
+        "id": 4,
+        "label": "wwg1wga · status · twitter",
+        "keywords": [
+          "wwg1wga",
+          "status",
+          "twitter",
+          "com",
+          "https",
+          "together",
+          "united",
+          "we"
+        ],
+        "size": 102,
+        "share_pct": 2.05
+      },
+      {
+        "id": 5,
+        "label": "covid · 19 · virus",
+        "keywords": [
+          "covid",
+          "19",
+          "virus",
+          "nursing",
+          "deaths",
+          "coronavirus",
+          "lockdown",
+          "2020"
+        ],
+        "size": 82,
+        "share_pct": 1.65
+      },
+      {
+        "id": 6,
+        "label": "patriot · god · bless",
+        "keywords": [
+          "patriot",
+          "god",
+          "bless",
+          "patriots",
+          "thank",
+          "you",
+          "we",
+          "great"
+        ],
+        "size": 79,
+        "share_pct": 1.59
+      },
+      {
+        "id": 7,
+        "label": "note · 1242682 · 120926",
+        "keywords": [
+          "note",
+          "1242682",
+          "120926",
+          "1366601",
+          "1393351",
+          "1413017",
+          "1413137",
+          "1432955"
+        ],
+        "size": 69,
+        "share_pct": 1.39
       },
       {
         "id": 8,
-        "label": "coincidences · believe coincidences · believe",
+        "label": "coincidences · believe · do",
         "keywords": [
           "coincidences",
-          "believe coincidences",
           "believe",
-          "house",
-          "https",
-          "20",
+          "do",
+          "coincidence",
+          "you",
+          "in",
           "com",
-          "time"
+          "https"
         ],
-        "size": 10,
-        "share_pct": 2.12
+        "size": 68,
+        "share_pct": 1.37
       },
       {
         "id": 9,
-        "label": "www · https www · https",
+        "label": "mueller · to · rr",
         "keywords": [
-          "www",
-          "https www",
-          "https",
-          "com",
-          "youtube com",
-          "com watch",
-          "www youtube",
-          "watch"
+          "mueller",
+          "to",
+          "rr",
+          "designed",
+          "barr",
+          "evidence",
+          "sessions",
+          "report"
         ],
-        "size": 45,
-        "share_pct": 9.53
+        "size": 64,
+        "share_pct": 1.29
+      },
+      {
+        "id": 10,
+        "label": "here · we · watching",
+        "keywords": [
+          "here",
+          "we",
+          "watching",
+          "things",
+          "2798428",
+          "7516469",
+          "7516470",
+          "7516476"
+        ],
+        "size": 60,
+        "share_pct": 1.21
+      },
+      {
+        "id": 11,
+        "label": "empty ·  · ",
+        "keywords": [
+          "empty",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "size": 57,
+        "share_pct": 1.15
+      },
+      {
+        "id": 12,
+        "label": "empty ·  · ",
+        "keywords": [
+          "empty",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "size": 57,
+        "share_pct": 1.15
+      },
+      {
+        "id": 13,
+        "label": "coincidence · coincidences · believe",
+        "keywords": [
+          "coincidence",
+          "coincidences",
+          "believe",
+          "boom",
+          "do",
+          "you",
+          "think",
+          "mathematically"
+        ],
+        "size": 57,
+        "share_pct": 1.15
+      },
+      {
+        "id": 14,
+        "label": "map · unlocks · stringer",
+        "keywords": [
+          "map",
+          "unlocks",
+          "stringer",
+          "past",
+          "proves",
+          "news",
+          "future",
+          "learn"
+        ],
+        "size": 44,
+        "share_pct": 0.89
+      },
+      {
+        "id": 15,
+        "label": "vip · patriot · status",
+        "keywords": [
+          "vip",
+          "patriot",
+          "status",
+          "enjoy",
+          "eyes",
+          "twitter",
+          "patriots",
+          "show"
+        ],
+        "size": 44,
+        "share_pct": 0.89
+      },
+      {
+        "id": 16,
+        "label": "potus · tweet · relevant",
+        "keywords": [
+          "potus",
+          "tweet",
+          "relevant",
+          "military",
+          "tweets",
+          "addressed",
+          "this",
+          "tracking"
+        ],
+        "size": 43,
+        "share_pct": 0.87
+      },
+      {
+        "id": 17,
+        "label": "ha · vigilant · silent",
+        "keywords": [
+          "ha",
+          "vigilant",
+          "silent",
+          "continues",
+          "something",
+          "war",
+          "light",
+          "boom"
+        ],
+        "size": 42,
+        "share_pct": 0.85
+      },
+      {
+        "id": 18,
+        "label": "fisa · signed · pg",
+        "keywords": [
+          "fisa",
+          "signed",
+          "pg",
+          "warrant",
+          "declas",
+          "firewalls",
+          "rr",
+          "warrants"
+        ],
+        "size": 41,
+        "share_pct": 0.83
+      },
+      {
+        "id": 19,
+        "label": "_freedom · pre_stage · hot",
+        "keywords": [
+          "_freedom",
+          "pre_stage",
+          "hot",
+          "go",
+          "castle",
+          "_v_stand",
+          "godspeed",
+          "lock"
+        ],
+        "size": 41,
+        "share_pct": 0.83
+      },
+      {
+        "id": 20,
+        "label": "cia · c_a · floor",
+        "keywords": [
+          "cia",
+          "c_a",
+          "floor",
+          "fbi",
+          "uk",
+          "agency",
+          "collection",
+          "intelligence"
+        ],
+        "size": 39,
+        "share_pct": 0.79
+      },
+      {
+        "id": 21,
+        "label": "empty ·  · ",
+        "keywords": [
+          "empty",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "size": 36,
+        "share_pct": 0.72
+      },
+      {
+        "id": 22,
+        "label": "youtube · watch · g2qixxafxcq",
+        "keywords": [
+          "youtube",
+          "watch",
+          "g2qixxafxcq",
+          "www",
+          "feature",
+          "youtu",
+          "com",
+          "https"
+        ],
+        "size": 34,
+        "share_pct": 0.68
+      },
+      {
+        "id": 23,
+        "label": "podesta · emails · jail",
+        "keywords": [
+          "podesta",
+          "emails",
+          "jail",
+          "arrests",
+          "emailid",
+          "fara",
+          "5926",
+          "clinton"
+        ],
+        "size": 34,
+        "share_pct": 0.68
+      },
+      {
+        "id": 24,
+        "label": "we · our · united",
+        "keywords": [
+          "we",
+          "our",
+          "united",
+          "there",
+          "time",
+          "children",
+          "freedom",
+          "god"
+        ],
+        "size": 33,
+        "share_pct": 0.66
+      },
+      {
+        "id": 25,
+        "label": "money · donations · blm",
+        "keywords": [
+          "money",
+          "donations",
+          "blm",
+          "follow",
+          "taxpayer",
+          "audits",
+          "how",
+          "goes"
+        ],
+        "size": 32,
+        "share_pct": 0.64
+      },
+      {
+        "id": 26,
+        "label": "realdonaldtrump · status · twitter",
+        "keywords": [
+          "realdonaldtrump",
+          "status",
+          "twitter",
+          "com",
+          "https",
+          "fighting",
+          "memes",
+          "1111366160975564800"
+        ],
+        "size": 32,
+        "share_pct": 0.64
+      },
+      {
+        "id": 27,
+        "label": "epstein · temple · jeffrey",
+        "keywords": [
+          "epstein",
+          "temple",
+          "jeffrey",
+          "rc",
+          "maxwell",
+          "ghislaine",
+          "circle",
+          "island"
+        ],
+        "size": 32,
+        "share_pct": 0.64
+      },
+      {
+        "id": 28,
+        "label": "empty ·  · ",
+        "keywords": [
+          "empty",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "size": 30,
+        "share_pct": 0.6
+      },
+      {
+        "id": 29,
+        "label": "trip · update · tripcode",
+        "keywords": [
+          "trip",
+          "update",
+          "tripcode",
+          "compromised",
+          "ip",
+          "devices",
+          "device",
+          "relay_1"
+        ],
+        "size": 29,
+        "share_pct": 0.58
+      },
+      {
+        "id": 30,
+        "label": "anons · anon · knew",
+        "keywords": [
+          "anons",
+          "anon",
+          "knew",
+          "here",
+          "impressive",
+          "ready",
+          "find",
+          "29"
+        ],
+        "size": 29,
+        "share_pct": 0.58
+      },
+      {
+        "id": 31,
+        "label": "nk · iran · nuke",
+        "keywords": [
+          "nk",
+          "iran",
+          "nuke",
+          "ask",
+          "yourself",
+          "tech",
+          "missile",
+          "leverage"
+        ],
+        "size": 28,
+        "share_pct": 0.56
+      },
+      {
+        "id": 32,
+        "label": "snowden · barlow · russia",
+        "keywords": [
+          "snowden",
+          "barlow",
+          "russia",
+          "perry",
+          "nsa",
+          "john",
+          "destination",
+          "securedrop"
+        ],
+        "size": 28,
+        "share_pct": 0.56
+      },
+      {
+        "id": 33,
+        "label": "move · error · spelling",
+        "keywords": [
+          "move",
+          "error",
+          "spelling",
+          "disregard",
+          "on",
+          "correction",
+          "long",
+          "misspelled"
+        ],
+        "size": 27,
+        "share_pct": 0.54
+      },
+      {
+        "id": 34,
+        "label": "2h · 382 · 5853578",
+        "keywords": [
+          "2h",
+          "382",
+          "5853578",
+          "3u2",
+          "5188784",
+          "5476324",
+          "5476370",
+          "5476411"
+        ],
+        "size": 25,
+        "share_pct": 0.5
+      },
+      {
+        "id": 35,
+        "label": "against · with · evil",
+        "keywords": [
+          "against",
+          "with",
+          "evil",
+          "stand",
+          "god",
+          "armor",
+          "your",
+          "lord"
+        ],
+        "size": 25,
+        "share_pct": 0.5
+      },
+      {
+        "id": 36,
+        "label": "voter · id · vote",
+        "keywords": [
+          "voter",
+          "id",
+          "vote",
+          "immigrants",
+          "elections",
+          "ballots",
+          "illegal",
+          "votes"
+        ],
+        "size": 24,
+        "share_pct": 0.48
+      },
+      {
+        "id": 37,
+        "label": "tweets · tweet · twitter",
+        "keywords": [
+          "tweets",
+          "tweet",
+          "twitter",
+          "mobile",
+          "accounts",
+          "thomas_drake1",
+          "spaces",
+          "paulsperry_"
+        ],
+        "size": 23,
+        "share_pct": 0.46
+      },
+      {
+        "id": 38,
+        "label": "youtube · watch · www",
+        "keywords": [
+          "youtube",
+          "watch",
+          "www",
+          "jdvt",
+          "8tufie",
+          "g2qixxafxcq",
+          "lusldzxwuu4",
+          "com"
+        ],
+        "size": 23,
+        "share_pct": 0.46
+      },
+      {
+        "id": 39,
+        "label": "antifa · da · riots",
+        "keywords": [
+          "antifa",
+          "da",
+          "riots",
+          "arrests",
+          "wing",
+          "local",
+          "happens",
+          "safe"
+        ],
+        "size": 23,
+        "share_pct": 0.46
+      },
+      {
+        "id": 40,
+        "label": "6976025 · 6976189 · 6959981",
+        "keywords": [
+          "6976025",
+          "6976189",
+          "6959981",
+          "6956274",
+          "6572785",
+          "5177926",
+          "7003276",
+          "7182843"
+        ],
+        "size": 23,
+        "share_pct": 0.46
+      },
+      {
+        "id": 41,
+        "label": "sa · relevant · what",
+        "keywords": [
+          "sa",
+          "relevant",
+          "what",
+          "why",
+          "this",
+          "was",
+          "is",
+          "who"
+        ],
+        "size": 22,
+        "share_pct": 0.44
+      },
+      {
+        "id": 42,
+        "label": "hussein · isis · backup",
+        "keywords": [
+          "hussein",
+          "isis",
+          "backup",
+          "they",
+          "did",
+          "ubl",
+          "why",
+          "therefore"
+        ],
+        "size": 22,
+        "share_pct": 0.44
+      },
+      {
+        "id": 43,
+        "label": "sec_test · sec · test",
+        "keywords": [
+          "sec_test",
+          "sec",
+          "test",
+          "conf",
+          "476325",
+          "2601407",
+          "5_read",
+          "device_1_x"
+        ],
+        "size": 22,
+        "share_pct": 0.44
+      },
+      {
+        "id": 44,
+        "label": "fb · facebook · users",
+        "keywords": [
+          "fb",
+          "facebook",
+          "users",
+          "darpa",
+          "antitrust",
+          "competition",
+          "laws",
+          "ftc"
+        ],
+        "size": 22,
+        "share_pct": 0.44
+      },
+      {
+        "id": 45,
+        "label": "empty ·  · ",
+        "keywords": [
+          "empty",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "size": 21,
+        "share_pct": 0.42
+      },
+      {
+        "id": 46,
+        "label": "iran · eu · deal",
+        "keywords": [
+          "iran",
+          "eu",
+          "deal",
+          "covered",
+          "gold",
+          "nuclear",
+          "u1",
+          "define"
+        ],
+        "size": 21,
+        "share_pct": 0.42
+      },
+      {
+        "id": 47,
+        "label": "anon · anons · impressive",
+        "keywords": [
+          "anon",
+          "anons",
+          "impressive",
+          "fight",
+          "correct",
+          "139556",
+          "11090593",
+          "228302"
+        ],
+        "size": 21,
+        "share_pct": 0.42
+      },
+      {
+        "id": 48,
+        "label": "86037 · 1057770 · 10756980",
+        "keywords": [
+          "86037",
+          "1057770",
+          "10756980",
+          "1189008",
+          "8093005",
+          "7088006",
+          "822187",
+          "825987"
+        ],
+        "size": 21,
+        "share_pct": 0.42
+      },
+      {
+        "id": 49,
+        "label": "divided · when · or",
+        "keywords": [
+          "divided",
+          "when",
+          "or",
+          "control",
+          "viewpoint",
+          "becomes",
+          "happens",
+          "define"
+        ],
+        "size": 21,
+        "share_pct": 0.42
+      },
+      {
+        "id": 50,
+        "label": "truth · only · light",
+        "keywords": [
+          "truth",
+          "only",
+          "light",
+          "people",
+          "can",
+          "will",
+          "humanity",
+          "faith"
+        ],
+        "size": 20,
+        "share_pct": 0.4
+      },
+      {
+        "id": 51,
+        "label": "how · do · impeach",
+        "keywords": [
+          "how",
+          "do",
+          "impeach",
+          "biden",
+          "potus",
+          "hillaryclinton",
+          "enough",
+          "good"
+        ],
+        "size": 20,
+        "share_pct": 0.4
+      },
+      {
+        "id": 52,
+        "label": "pedophilia · pell · trafficking",
+        "keywords": [
+          "pedophilia",
+          "pell",
+          "trafficking",
+          "vatican",
+          "foxnews",
+          "australia",
+          "www",
+          "breitbart"
+        ],
+        "size": 19,
+        "share_pct": 0.38
+      },
+      {
+        "id": 53,
+        "label": "black · party · pop",
+        "keywords": [
+          "black",
+          "party",
+          "pop",
+          "history",
+          "msdnc",
+          "leaders",
+          "racists",
+          "slavery"
+        ],
+        "size": 19,
+        "share_pct": 0.38
+      },
+      {
+        "id": 54,
+        "label": "fired · general · deputy",
+        "keywords": [
+          "fired",
+          "general",
+          "deputy",
+          "director",
+          "assistant",
+          "attorney",
+          "counterintelligence",
+          "james"
+        ],
+        "size": 19,
+        "share_pct": 0.38
+      },
+      {
+        "id": 55,
+        "label": "patriots · godspeed · fight",
+        "keywords": [
+          "patriots",
+          "godspeed",
+          "fight",
+          "celebrate",
+          "independence",
+          "we",
+          "bless",
+          "winning"
+        ],
+        "size": 19,
+        "share_pct": 0.38
+      },
+      {
+        "id": 56,
+        "label": "impossible · mathematically · deviation",
+        "keywords": [
+          "impossible",
+          "mathematically",
+          "deviation",
+          "standard",
+          "odds",
+          "islands",
+          "point",
+          "statistically"
+        ],
+        "size": 18,
+        "share_pct": 0.36
+      },
+      {
+        "id": 57,
+        "label": "divided · vote · want",
+        "keywords": [
+          "divided",
+          "vote",
+          "want",
+          "unity",
+          "they",
+          "you",
+          "together",
+          "class"
+        ],
+        "size": 18,
+        "share_pct": 0.36
+      },
+      {
+        "id": 58,
+        "label": "flagsout · love · country",
+        "keywords": [
+          "flagsout",
+          "love",
+          "country",
+          "status",
+          "twitter",
+          "com",
+          "https",
+          "1111365502243405824"
+        ],
+        "size": 17,
+        "share_pct": 0.34
+      },
+      {
+        "id": 59,
+        "label": "5801142 · 5801165 · 5801344",
+        "keywords": [
+          "5801142",
+          "5801165",
+          "5801344",
+          "5801355",
+          "5801368",
+          "5801371",
+          "5801384",
+          "5801385"
+        ],
+        "size": 17,
+        "share_pct": 0.34
+      },
+      {
+        "id": 60,
+        "label": "site · ga · sniffer",
+        "keywords": [
+          "site",
+          "ga",
+          "sniffer",
+          "devices",
+          "upload",
+          "web",
+          "archive",
+          "attacked"
+        ],
+        "size": 17,
+        "share_pct": 0.34
+      },
+      {
+        "id": 61,
+        "label": "10613821 · 10618838 · 10609637",
+        "keywords": [
+          "10613821",
+          "10618838",
+          "10609637",
+          "10609726",
+          "10608839",
+          "1080429",
+          "10758597",
+          "10685374"
+        ],
+        "size": 17,
+        "share_pct": 0.34
+      },
+      {
+        "id": 62,
+        "label": "symbolism · downfall · owl",
+        "keywords": [
+          "symbolism",
+          "downfall",
+          "owl",
+          "their",
+          "symbols",
+          "head",
+          "represent",
+          "cult"
+        ],
+        "size": 16,
+        "share_pct": 0.32
+      },
+      {
+        "id": 63,
+        "label": "clowns · so · conspiracy",
+        "keywords": [
+          "clowns",
+          "so",
+          "conspiracy",
+          "wash",
+          "largest",
+          "pac",
+          "attack",
+          "called"
+        ],
+        "size": 16,
+        "share_pct": 0.32
+      },
+      {
+        "id": 64,
+        "label": "timestamp · post · math",
+        "keywords": [
+          "timestamp",
+          "post",
+          "math",
+          "clock",
+          "past",
+          "timing",
+          "graphics",
+          "declas"
+        ],
+        "size": 16,
+        "share_pct": 0.32
+      },
+      {
+        "id": 65,
+        "label": "11 · eyes · he",
+        "keywords": [
+          "11",
+          "eyes",
+          "he",
+          "break",
+          "doesn",
+          "very",
+          "567733",
+          "5503240"
+        ],
+        "size": 16,
+        "share_pct": 0.32
+      },
+      {
+        "id": 66,
+        "label": "flynn · fisa · michael",
+        "keywords": [
+          "flynn",
+          "fisa",
+          "michael",
+          "lawmakers",
+          "fbi",
+          "html",
+          "fisc",
+          "contreras"
+        ],
+        "size": 16,
+        "share_pct": 0.32
+      },
+      {
+        "id": 67,
+        "label": "panic · dc · talking",
+        "keywords": [
+          "panic",
+          "dc",
+          "talking",
+          "ll",
+          "reveal",
+          "_reroutes_",
+          "rr",
+          "declined"
+        ],
+        "size": 16,
+        "share_pct": 0.32
+      },
+      {
+        "id": 68,
+        "label": "your · service · thank",
+        "keywords": [
+          "your",
+          "service",
+          "thank",
+          "forgotten",
+          "our",
+          "sacrifice",
+          "we",
+          "god"
+        ],
+        "size": 15,
+        "share_pct": 0.3
+      },
+      {
+        "id": 69,
+        "label": "news · pepe · fake",
+        "keywords": [
+          "news",
+          "pepe",
+          "fake",
+          "trolling",
+          "fun",
+          "libel",
+          "926634",
+          "38396"
+        ],
+        "size": 15,
+        "share_pct": 0.3
+      },
+      {
+        "id": 70,
+        "label": "empty ·  · ",
+        "keywords": [
+          "empty",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "size": 14,
+        "share_pct": 0.28
+      },
+      {
+        "id": 71,
+        "label": "remembering · worth · remember",
+        "keywords": [
+          "remembering",
+          "worth",
+          "remember",
+          "forget",
+          "reflections",
+          "week",
+          "never",
+          "isn"
+        ],
+        "size": 14,
+        "share_pct": 0.28
+      },
+      {
+        "id": 72,
+        "label": "information · warfare · socials",
+        "keywords": [
+          "information",
+          "warfare",
+          "socials",
+          "dna",
+          "midnight",
+          "bypass",
+          "riders",
+          "ride"
+        ],
+        "size": 14,
+        "share_pct": 0.28
+      },
+      {
+        "id": 73,
+        "label": "china · engine · found",
+        "keywords": [
+          "china",
+          "engine",
+          "found",
+          "google",
+          "supermicro",
+          "launch",
+          "chinese",
+          "dragonfly"
+        ],
+        "size": 14,
+        "share_pct": 0.28
+      },
+      {
+        "id": 74,
+        "label": "caucus · freedom · engine",
+        "keywords": [
+          "caucus",
+          "freedom",
+          "engine",
+          "potus",
+          "real",
+          "think",
+          "future",
+          "1419965"
+        ],
+        "size": 14,
+        "share_pct": 0.28
+      },
+      {
+        "id": 75,
+        "label": "game · play · king",
+        "keywords": [
+          "game",
+          "play",
+          "king",
+          "shall",
+          "played",
+          "dopey",
+          "chess",
+          "strategy"
+        ],
+        "size": 14,
+        "share_pct": 0.28
+      },
+      {
+        "id": 76,
+        "label": "fake · news · can",
+        "keywords": [
+          "fake",
+          "news",
+          "can",
+          "step",
+          "real",
+          "crossfire",
+          "scott",
+          "trolling"
+        ],
+        "size": 14,
+        "share_pct": 0.28
+      },
+      {
+        "id": 77,
+        "label": "5224931 · 5225131 · 5248019",
+        "keywords": [
+          "5224931",
+          "5225131",
+          "5248019",
+          "5247847",
+          "5228903",
+          "5225562",
+          "5248193",
+          "5248213"
+        ],
+        "size": 13,
+        "share_pct": 0.26
+      },
+      {
+        "id": 78,
+        "label": "hussein · timeline · protects",
+        "keywords": [
+          "hussein",
+          "timeline",
+          "protects",
+          "pics",
+          "syria",
+          "currently",
+          "cross",
+          "1123617"
+        ],
+        "size": 13,
+        "share_pct": 0.26
+      },
+      {
+        "id": 79,
+        "label": "yes · 4280192 · 1368028",
+        "keywords": [
+          "yes",
+          "4280192",
+          "1368028",
+          "4280212",
+          "4280228",
+          "4280260",
+          "4280193",
+          "4280423"
+        ],
+        "size": 13,
+        "share_pct": 0.26
+      },
+      {
+        "id": 80,
+        "label": "chandler · rachel · ray",
+        "keywords": [
+          "chandler",
+          "rachel",
+          "ray",
+          "studio",
+          "instagram",
+          "boat",
+          "handler",
+          "rc"
+        ],
+        "size": 12,
+        "share_pct": 0.24
+      },
+      {
+        "id": 81,
+        "label": "offline · corona · 00",
+        "keywords": [
+          "offline",
+          "corona",
+          "00",
+          "snow",
+          "white",
+          "now",
+          "package",
+          "deac"
+        ],
+        "size": 12,
+        "share_pct": 0.24
+      },
+      {
+        "id": 82,
+        "label": "gov · pdf · gpo",
+        "keywords": [
+          "gov",
+          "pdf",
+          "gpo",
+          "prelim",
+          "default",
+          "cdoc",
+          "20rhj",
+          "chrg"
+        ],
+        "size": 12,
+        "share_pct": 0.24
+      },
+      {
+        "id": 83,
+        "label": "placeholder · oig · non_civ",
+        "keywords": [
+          "placeholder",
+          "oig",
+          "non_civ",
+          "indictments",
+          "tracking",
+          "civ",
+          "report",
+          "acts_pub"
+        ],
+        "size": 12,
+        "share_pct": 0.24
+      },
+      {
+        "id": 84,
+        "label": "cbs_herridge · status · twitter",
+        "keywords": [
+          "cbs_herridge",
+          "status",
+          "twitter",
+          "1260635872271228928",
+          "1269345227703234560",
+          "1271078294960640001",
+          "1262820374548447238",
+          "1262441478019842048"
+        ],
+        "size": 11,
+        "share_pct": 0.22
+      },
+      {
+        "id": 85,
+        "label": "memes · ready · fire",
+        "keywords": [
+          "memes",
+          "ready",
+          "fire",
+          "deck",
+          "prep",
+          "reason",
+          "attention",
+          "3744948"
+        ],
+        "size": 11,
+        "share_pct": 0.22
+      },
+      {
+        "id": 86,
+        "label": "red · october · rig",
+        "keywords": [
+          "red",
+          "october",
+          "rig",
+          "fight",
+          "tsunami",
+          "emmy",
+          "3224486",
+          "eclas"
+        ],
+        "size": 11,
+        "share_pct": 0.22
+      },
+      {
+        "id": 87,
+        "label": "cia · readingroom · library",
+        "keywords": [
+          "cia",
+          "readingroom",
+          "library",
+          "1145669",
+          "grants",
+          "googles",
+          "partly",
+          "docs"
+        ],
+        "size": 11,
+        "share_pct": 0.22
+      },
+      {
+        "id": 88,
+        "label": "status · whitehouse · twitter",
+        "keywords": [
+          "status",
+          "whitehouse",
+          "twitter",
+          "302560295958749184",
+          "1103434110310146048",
+          "1111218929337290753",
+          "1206249638732423174",
+          "37826098"
+        ],
+        "size": 11,
+        "share_pct": 0.22
+      },
+      {
+        "id": 89,
+        "label": "pecking · 00 · confirmed",
+        "keywords": [
+          "pecking",
+          "00",
+          "confirmed",
+          "design",
+          "11_6_tp_pub",
+          "qa",
+          "phil_b_o_extract_conf",
+          "x10aby"
+        ],
+        "size": 10,
+        "share_pct": 0.2
+      },
+      {
+        "id": 90,
+        "label": "wonderland · alice · arabia",
+        "keywords": [
+          "wonderland",
+          "alice",
+          "arabia",
+          "saudi",
+          "hillary",
+          "solved",
+          "carroll",
+          "lewis"
+        ],
+        "size": 10,
+        "share_pct": 0.2
+      },
+      {
+        "id": 91,
+        "label": "future · past · proves",
+        "keywords": [
+          "future",
+          "past",
+          "proves",
+          "21",
+          "big",
+          "20277",
+          "2022584",
+          "5401939"
+        ],
+        "size": 10,
+        "share_pct": 0.2
+      },
+      {
+        "id": 92,
+        "label": "comms · board · privately",
+        "keywords": [
+          "comms",
+          "board",
+          "privately",
+          "secured",
+          "anyone",
+          "fs",
+          "comms_off",
+          "private_reg_c"
+        ],
+        "size": 10,
+        "share_pct": 0.2
+      },
+      {
+        "id": 93,
+        "label": "147 · 221 · 2601488",
+        "keywords": [
+          "147",
+          "221",
+          "2601488",
+          "2617739",
+          "2809340",
+          "2628080",
+          "2784812",
+          "2807174"
+        ],
+        "size": 10,
+        "share_pct": 0.2
+      },
+      {
+        "id": 94,
+        "label": "fear · panic · status",
+        "keywords": [
+          "fear",
+          "panic",
+          "status",
+          "1037809606364418049",
+          "1259870367818092547",
+          "1260729778983837696",
+          "1261299545968910337",
+          "1261339533905281025"
+        ],
+        "size": 10,
+        "share_pct": 0.2
       }
     ],
-    "time_s": 1.58
+    "time_s": 98.79
   },
   "bite": {
     "aggregate": {
       "B": {
-        "mean": 0.002,
+        "mean": 0.0025,
         "median": 0.0,
-        "std": 0.0184,
+        "std": 0.0202,
         "max": 0.2308,
         "dist": {
-          "not_detected": 496,
-          "weak": 4,
+          "not_detected": 4919,
+          "weak": 47,
           "moderate": 0,
           "strong": 0,
           "pervasive": 0
         }
       },
       "I": {
-        "mean": 0.0271,
+        "mean": 0.0229,
         "median": 0.0,
-        "std": 0.0829,
-        "max": 0.4737,
+        "std": 0.0725,
+        "max": 0.5,
         "dist": {
-          "not_detected": 453,
-          "weak": 40,
-          "moderate": 7,
+          "not_detected": 4531,
+          "weak": 393,
+          "moderate": 42,
           "strong": 0,
           "pervasive": 0
         }
       },
       "T": {
-        "mean": 0.0282,
+        "mean": 0.0303,
         "median": 0.0,
-        "std": 0.0827,
-        "max": 0.5161,
+        "std": 0.0808,
+        "max": 0.5455,
         "dist": {
-          "not_detected": 467,
-          "weak": 25,
-          "moderate": 8,
+          "not_detected": 4566,
+          "weak": 338,
+          "moderate": 62,
           "strong": 0,
           "pervasive": 0
         }
       },
       "E": {
-        "mean": 0.0197,
+        "mean": 0.018,
         "median": 0.0,
-        "std": 0.0584,
-        "max": 0.3023,
+        "std": 0.0591,
+        "max": 0.4545,
         "dist": {
-          "not_detected": 472,
-          "weak": 28,
-          "moderate": 0,
+          "not_detected": 4702,
+          "weak": 244,
+          "moderate": 20,
           "strong": 0,
           "pervasive": 0
         }
       },
       "total": {
-        "mean": 0.0193,
+        "mean": 0.0184,
         "median": 0.0,
-        "std": 0.0389,
+        "std": 0.0363,
         "max": 0.2726,
         "dist": {
-          "not_detected": 491,
-          "weak": 9,
+          "not_detected": 4892,
+          "weak": 74,
           "moderate": 0,
           "strong": 0,
           "pervasive": 0
         }
       },
       "corpus_dominant": "T",
-      "n_posts": 500
+      "n_posts": 4966
     },
     "timeline": [
       {
         "period": "2017-10",
-        "n": 2,
+        "n": 13,
         "B_mean": 0.0,
-        "I_mean": 0.1666,
-        "T_mean": 0.0714,
-        "E_mean": 0.0714
+        "I_mean": 0.1108,
+        "T_mean": 0.0718,
+        "E_mean": 0.0769
       },
       {
         "period": "2017-11",
-        "n": 20,
-        "B_mean": 0.0,
-        "I_mean": 0.0537,
-        "T_mean": 0.0,
-        "E_mean": 0.0178
+        "n": 226,
+        "B_mean": 0.0034,
+        "I_mean": 0.058,
+        "T_mean": 0.0287,
+        "E_mean": 0.0295
       },
       {
         "period": "2017-12",
-        "n": 22,
-        "B_mean": 0.0,
-        "I_mean": 0.0379,
-        "T_mean": 0.026,
-        "E_mean": 0.0317
+        "n": 220,
+        "B_mean": 0.0013,
+        "I_mean": 0.0257,
+        "T_mean": 0.0199,
+        "E_mean": 0.0268
       },
       {
         "period": "2018-01",
-        "n": 28,
-        "B_mean": 0.0,
-        "I_mean": 0.0341,
-        "T_mean": 0.0462,
-        "E_mean": 0.0353
+        "n": 187,
+        "B_mean": 0.0045,
+        "I_mean": 0.0292,
+        "T_mean": 0.0268,
+        "E_mean": 0.0227
       },
       {
         "period": "2018-02",
-        "n": 18,
-        "B_mean": 0.0128,
-        "I_mean": 0.0546,
-        "T_mean": 0.0079,
-        "E_mean": 0.0
+        "n": 181,
+        "B_mean": 0.0054,
+        "I_mean": 0.0223,
+        "T_mean": 0.0184,
+        "E_mean": 0.01
       },
       {
         "period": "2018-03",
-        "n": 19,
-        "B_mean": 0.0,
-        "I_mean": 0.0432,
-        "T_mean": 0.0,
-        "E_mean": 0.0
+        "n": 155,
+        "B_mean": 0.0051,
+        "I_mean": 0.0304,
+        "T_mean": 0.0233,
+        "E_mean": 0.0135
       },
       {
         "period": "2018-04",
-        "n": 29,
-        "B_mean": 0.0,
-        "I_mean": 0.0142,
-        "T_mean": 0.0428,
-        "E_mean": 0.0236
+        "n": 325,
+        "B_mean": 0.0024,
+        "I_mean": 0.0134,
+        "T_mean": 0.0249,
+        "E_mean": 0.0146
       },
       {
         "period": "2018-05",
-        "n": 12,
-        "B_mean": 0.0,
-        "I_mean": 0.0119,
-        "T_mean": 0.0787,
-        "E_mean": 0.049
+        "n": 132,
+        "B_mean": 0.0038,
+        "I_mean": 0.0209,
+        "T_mean": 0.0385,
+        "E_mean": 0.0175
       },
       {
         "period": "2018-06",
-        "n": 22,
-        "B_mean": 0.0,
-        "I_mean": 0.0065,
-        "T_mean": 0.0538,
-        "E_mean": 0.0428
+        "n": 211,
+        "B_mean": 0.0023,
+        "I_mean": 0.0182,
+        "T_mean": 0.0254,
+        "E_mean": 0.0149
       },
       {
         "period": "2018-07",
-        "n": 14,
-        "B_mean": 0.0119,
-        "I_mean": 0.015,
-        "T_mean": 0.0,
-        "E_mean": 0.0
+        "n": 127,
+        "B_mean": 0.0039,
+        "I_mean": 0.0288,
+        "T_mean": 0.0242,
+        "E_mean": 0.02
       },
       {
         "period": "2018-08",
-        "n": 36,
-        "B_mean": 0.0119,
-        "I_mean": 0.04,
-        "T_mean": 0.0104,
-        "E_mean": 0.004
+        "n": 264,
+        "B_mean": 0.0027,
+        "I_mean": 0.0347,
+        "T_mean": 0.0198,
+        "E_mean": 0.0175
       },
       {
         "period": "2018-09",
-        "n": 30,
-        "B_mean": 0.0,
-        "I_mean": 0.0,
-        "T_mean": 0.0277,
-        "E_mean": 0.0103
+        "n": 260,
+        "B_mean": 0.0031,
+        "I_mean": 0.0134,
+        "T_mean": 0.0408,
+        "E_mean": 0.0211
       },
       {
         "period": "2018-10",
-        "n": 6,
+        "n": 80,
         "B_mean": 0.0,
-        "I_mean": 0.0385,
-        "T_mean": 0.0,
-        "E_mean": 0.0
+        "I_mean": 0.0127,
+        "T_mean": 0.0358,
+        "E_mean": 0.0263
       },
       {
         "period": "2018-11",
-        "n": 12,
-        "B_mean": 0.0,
-        "I_mean": 0.0696,
-        "T_mean": 0.0327,
-        "E_mean": 0.0482
+        "n": 123,
+        "B_mean": 0.0014,
+        "I_mean": 0.0312,
+        "T_mean": 0.0563,
+        "E_mean": 0.0519
       },
       {
         "period": "2018-12",
-        "n": 13,
-        "B_mean": 0.0,
-        "I_mean": 0.084,
-        "T_mean": 0.0522,
-        "E_mean": 0.0476
+        "n": 138,
+        "B_mean": 0.0015,
+        "I_mean": 0.044,
+        "T_mean": 0.0507,
+        "E_mean": 0.0151
       },
       {
         "period": "2019-01",
-        "n": 3,
+        "n": 31,
         "B_mean": 0.0,
-        "I_mean": 0.1539,
-        "T_mean": 0.0476,
-        "E_mean": 0.0
+        "I_mean": 0.065,
+        "T_mean": 0.0424,
+        "E_mean": 0.0179
       },
       {
         "period": "2019-02",
-        "n": 21,
-        "B_mean": 0.0,
-        "I_mean": 0.0527,
-        "T_mean": 0.0159,
-        "E_mean": 0.0234
+        "n": 238,
+        "B_mean": 0.0012,
+        "I_mean": 0.0347,
+        "T_mean": 0.0291,
+        "E_mean": 0.0188
       },
       {
         "period": "2019-03",
-        "n": 37,
-        "B_mean": 0.0045,
-        "I_mean": 0.0156,
-        "T_mean": 0.0232,
-        "E_mean": 0.0304
+        "n": 399,
+        "B_mean": 0.003,
+        "I_mean": 0.0176,
+        "T_mean": 0.0336,
+        "E_mean": 0.0199
       },
       {
         "period": "2019-04",
-        "n": 2,
+        "n": 20,
         "B_mean": 0.0,
-        "I_mean": 0.0,
-        "T_mean": 0.0,
+        "I_mean": 0.0115,
+        "T_mean": 0.0427,
         "E_mean": 0.0
       },
       {
         "period": "2019-05",
+        "n": 19,
+        "B_mean": 0.0137,
+        "I_mean": 0.0197,
+        "T_mean": 0.0,
+        "E_mean": 0.0
+      },
+      {
+        "period": "2019-06",
+        "n": 3,
+        "B_mean": 0.0,
+        "I_mean": 0.0,
+        "T_mean": 0.0476,
+        "E_mean": 0.0476
+      },
+      {
+        "period": "2019-07",
+        "n": 216,
+        "B_mean": 0.0015,
+        "I_mean": 0.0182,
+        "T_mean": 0.0289,
+        "E_mean": 0.0144
+      },
+      {
+        "period": "2019-08",
         "n": 2,
         "B_mean": 0.0,
         "I_mean": 0.0,
@@ -404,134 +1788,159 @@
         "E_mean": 0.0
       },
       {
-        "period": "2019-07",
-        "n": 22,
-        "B_mean": 0.0,
-        "I_mean": 0.0086,
-        "T_mean": 0.0274,
-        "E_mean": 0.0191
-      },
-      {
         "period": "2019-11",
-        "n": 7,
-        "B_mean": 0.0,
-        "I_mean": 0.0,
-        "T_mean": 0.0687,
-        "E_mean": 0.0
+        "n": 66,
+        "B_mean": 0.0022,
+        "I_mean": 0.0329,
+        "T_mean": 0.0587,
+        "E_mean": 0.0222
       },
       {
         "period": "2019-12",
-        "n": 12,
-        "B_mean": 0.0,
-        "I_mean": 0.0277,
-        "T_mean": 0.0119,
-        "E_mean": 0.0119
+        "n": 138,
+        "B_mean": 0.0051,
+        "I_mean": 0.0106,
+        "T_mean": 0.021,
+        "E_mean": 0.0148
       },
       {
         "period": "2020-01",
-        "n": 4,
-        "B_mean": 0.0,
-        "I_mean": 0.0,
-        "T_mean": 0.0,
-        "E_mean": 0.0
+        "n": 44,
+        "B_mean": 0.0032,
+        "I_mean": 0.0123,
+        "T_mean": 0.0429,
+        "E_mean": 0.008
       },
       {
         "period": "2020-02",
-        "n": 6,
+        "n": 72,
         "B_mean": 0.0,
-        "I_mean": 0.0,
-        "T_mean": 0.0238,
-        "E_mean": 0.0
+        "I_mean": 0.0207,
+        "T_mean": 0.0242,
+        "E_mean": 0.0123
       },
       {
         "period": "2020-03",
-        "n": 3,
+        "n": 18,
         "B_mean": 0.0,
-        "I_mean": 0.1206,
-        "T_mean": 0.297,
-        "E_mean": 0.0
+        "I_mean": 0.0495,
+        "T_mean": 0.1016,
+        "E_mean": 0.0453
       },
       {
         "period": "2020-04",
-        "n": 6,
+        "n": 117,
         "B_mean": 0.0,
-        "I_mean": 0.0,
-        "T_mean": 0.0417,
-        "E_mean": 0.0
+        "I_mean": 0.0171,
+        "T_mean": 0.0569,
+        "E_mean": 0.0152
       },
       {
         "period": "2020-05",
-        "n": 27,
-        "B_mean": 0.0,
-        "I_mean": 0.0078,
-        "T_mean": 0.037,
-        "E_mean": 0.014
+        "n": 345,
+        "B_mean": 0.0009,
+        "I_mean": 0.0096,
+        "T_mean": 0.0447,
+        "E_mean": 0.0073
       },
       {
         "period": "2020-06",
-        "n": 25,
-        "B_mean": 0.0,
-        "I_mean": 0.0236,
-        "T_mean": 0.0435,
-        "E_mean": 0.0191
+        "n": 181,
+        "B_mean": 0.0012,
+        "I_mean": 0.0162,
+        "T_mean": 0.0236,
+        "E_mean": 0.0159
       },
       {
         "period": "2020-07",
-        "n": 8,
+        "n": 69,
+        "B_mean": 0.0024,
+        "I_mean": 0.0088,
+        "T_mean": 0.0227,
+        "E_mean": 0.0223
+      },
+      {
+        "period": "2020-08",
+        "n": 7,
         "B_mean": 0.0,
-        "I_mean": 0.0289,
-        "T_mean": 0.0,
-        "E_mean": 0.0208
+        "I_mean": 0.0301,
+        "T_mean": 0.0301,
+        "E_mean": 0.0408
       },
       {
         "period": "2020-09",
-        "n": 19,
-        "B_mean": 0.0,
-        "I_mean": 0.0,
-        "T_mean": 0.0121,
-        "E_mean": 0.01
+        "n": 166,
+        "B_mean": 0.0036,
+        "I_mean": 0.0118,
+        "T_mean": 0.0066,
+        "E_mean": 0.0128
       },
       {
         "period": "2020-10",
-        "n": 12,
+        "n": 154,
         "B_mean": 0.0,
-        "I_mean": 0.0,
-        "T_mean": 0.0139,
-        "E_mean": 0.0343
+        "I_mean": 0.0105,
+        "T_mean": 0.0108,
+        "E_mean": 0.0069
       },
       {
-        "period": "2022-06",
+        "period": "2020-11",
+        "n": 5,
+        "B_mean": 0.0,
+        "I_mean": 0.0,
+        "T_mean": 0.0462,
+        "E_mean": 0.0
+      },
+      {
+        "period": "2020-12",
         "n": 1,
         "B_mean": 0.0,
         "I_mean": 0.0,
         "T_mean": 0.0,
         "E_mean": 0.0
+      },
+      {
+        "period": "2022-06",
+        "n": 5,
+        "B_mean": 0.0,
+        "I_mean": 0.0,
+        "T_mean": 0.0462,
+        "E_mean": 0.0
+      },
+      {
+        "period": "2022-11",
+        "n": 8,
+        "B_mean": 0.0179,
+        "I_mean": 0.0,
+        "T_mean": 0.0179,
+        "E_mean": 0.0387
       }
     ]
   },
   "motivated_reasoning": {
-    "mean_score": 0.0333,
+    "mean_score": 0.029,
     "distribution": {
-      "low": 474,
-      "medium": 25,
-      "high": 1
+      "low": 4797,
+      "medium": 165,
+      "high": 4
     }
   },
   "corpus": {
     "boards": {
-      "/qresearch": 385,
-      "/patriotsfight": 46,
-      "/pol": 25,
-      "/cbts": 21,
-      "/greatawakening": 17,
-      "/thestorm": 6
+      "/qresearch": 3886,
+      "/patriotsfight": 416,
+      "/pol": 248,
+      "/cbts": 223,
+      "/greatawakening": 121,
+      "/thestorm": 41,
+      "/projectdcomms": 31
     },
     "by_year": {
-      "2017": 44,
-      "2018": 239,
-      "2019": 106,
-      "2020": 110,
-      "2022": 1
+      "2017": 459,
+      "2018": 2183,
+      "2019": 1132,
+      "2020": 1179,
+      "2022": 13
     }
   }
 }

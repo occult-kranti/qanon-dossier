@@ -2,175 +2,175 @@
   "dataset_id": "twitter",
   "n_posts": 500,
   "cluster": {
-    "method": "kmeans",
+    "method": "bertopic",
     "n_clusters": 10,
     "metrics": {
-      "silhouette": 1.0,
-      "n_clusters": 10
+      "n_clusters": 10,
+      "silhouette": null
     },
     "topics": [
       {
         "id": 0,
-        "label": "plan · working · wwg1wga trust",
+        "label": "money · today · everything",
         "keywords": [
-          "plan",
-          "working",
-          "wwg1wga trust",
-          "research real",
-          "real",
-          "real plan",
-          "working trusttheplan",
-          "research"
+          "money",
+          "today",
+          "everything",
+          "follow",
+          "drop",
+          "connects",
+          "trusttheplan",
+          "wwg1wga"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 1,
-        "label": "warned fakenews · warned · qanon god",
+        "label": "won · mainstream · show",
         "keywords": [
-          "warned fakenews",
-          "warned",
-          "qanon god",
-          "fakenews msm",
-          "msm",
-          "msm qanon",
-          "news warned",
-          "fakenews"
+          "won",
+          "mainstream",
+          "show",
+          "right",
+          "media",
+          "along",
+          "you",
+          "been"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 2,
-        "label": "truth qanon · qanon greatawakening · citizen journalists",
+        "label": "terrified · maga · in",
         "keywords": [
-          "truth qanon",
-          "qanon greatawakening",
-          "citizen journalists",
-          "journalists",
-          "journalists truth",
-          "greatawakening qanon",
-          "news citizen",
-          "citizen"
+          "terrified",
+          "maga",
+          "in",
+          "deep",
+          "state",
+          "control",
+          "trust",
+          "are"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 3,
-        "label": "wwg1wga trusttheplan · today connects · today",
+        "label": "and · bless · god",
         "keywords": [
-          "wwg1wga trusttheplan",
-          "today connects",
-          "today",
-          "connects follow",
-          "connects",
-          "money",
-          "money qanon",
-          "follow money"
+          "and",
+          "bless",
+          "god",
+          "freedom",
+          "fighting",
+          "all",
+          "patriots",
+          "truth"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 4,
-        "label": "won right · won · right",
+        "label": "predicting · months · wake",
         "keywords": [
-          "won right",
-          "won",
-          "right",
-          "right greatawakening",
-          "mainstream media",
-          "mainstream",
-          "media won",
-          "media"
+          "predicting",
+          "months",
+          "wake",
+          "storm",
+          "up",
+          "has",
+          "been",
+          "coming"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 5,
-        "label": "truth dangerous · banned · dangerous",
+        "label": "they · them · banned",
         "keywords": [
-          "truth dangerous",
+          "they",
+          "them",
           "banned",
-          "dangerous",
+          "because",
           "censorship",
-          "dangerous censorship",
-          "banned truth",
-          "truth",
-          "won"
+          "dangerous",
+          "everywhere",
+          "too"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 6,
-        "label": "weeks ago · weeks · told weeks",
+        "label": "weeks · ready · declas",
         "keywords": [
-          "weeks ago",
           "weeks",
-          "told weeks",
-          "ready told",
           "ready",
+          "declas",
+          "fisa",
+          "huber",
+          "ago",
           "told",
-          "coming huber",
-          "fisa"
+          "coming"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 7,
-        "label": "wake · wake storm · storm coming",
+        "label": "plan · working · your",
         "keywords": [
-          "wake",
-          "wake storm",
-          "storm coming",
-          "predicting months",
-          "qanon predicting",
-          "storm",
-          "predicting",
-          "coming qanon"
+          "plan",
+          "working",
+          "your",
+          "real",
+          "do",
+          "research",
+          "is",
+          "trusttheplan"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 8,
-        "label": "terrified patriots · state terrified · qanon maga",
+        "label": "still · on · warned",
         "keywords": [
-          "terrified patriots",
-          "state terrified",
-          "qanon maga",
-          "state",
-          "terrified",
-          "maga trust",
-          "patriots control",
-          "deep state"
+          "still",
+          "on",
+          "warned",
+          "how",
+          "msm",
+          "fakenews",
+          "not",
+          "us"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 9,
-        "label": "bless · god bless · god",
+        "label": "journalists · now · we",
         "keywords": [
-          "bless",
-          "god bless",
-          "god",
-          "patriots fighting",
-          "wwg1wga god",
-          "truth freedom",
-          "freedom",
-          "freedom wwg1wga"
+          "journalists",
+          "now",
+          "we",
+          "citizen",
+          "news",
+          "greatawakening",
+          "are",
+          "qanon"
         ],
         "size": 50,
         "share_pct": 10.0
       }
     ],
-    "time_s": 0.05
+    "time_s": 4.81
   },
   "bite": {
     "aggregate": {

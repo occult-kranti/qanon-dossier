@@ -2,175 +2,207 @@
   "dataset_id": "4chan_pol",
   "n_posts": 500,
   "cluster": {
-    "method": "kmeans",
-    "n_clusters": 10,
+    "method": "bertopic",
+    "n_clusters": 12,
     "metrics": {
-      "silhouette": 1.0,
-      "n_clusters": 10
+      "n_clusters": 12,
+      "silhouette": null
     },
     "topics": [
       {
         "id": 0,
-        "label": "week · week trust · watch",
+        "label": "get · drop · something",
         "keywords": [
-          "week",
-          "week trust",
-          "watch",
-          "watch news",
-          "cabal",
-          "cabal panicking",
-          "news week",
-          "news"
+          "get",
+          "drop",
+          "something",
+          "ready",
+          "to",
+          "verified",
+          "trip",
+          "on"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 1,
-        "label": "control god · bank rothschilds · pill",
+        "label": "they · never · because",
         "keywords": [
-          "control god",
-          "bank rothschilds",
-          "pill",
-          "pill incoming",
-          "private",
-          "rothschilds control",
-          "reserve",
-          "rothschilds"
+          "they",
+          "never",
+          "because",
+          "map",
+          "that",
+          "address",
+          "directly",
+          "how"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 2,
-        "label": "knew msm · knew · conspiracy",
+        "label": "wake · normies · controls",
         "keywords": [
-          "knew msm",
-          "knew",
-          "conspiracy",
-          "conspiracy future",
-          "claim conspiracy",
-          "claim",
-          "anons knew",
-          "historians"
+          "wake",
+          "normies",
+          "controls",
+          "media",
+          "mockingbird",
+          "cia",
+          "up",
+          "operation"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 3,
-        "label": "wwg1wga matter · target wwg1wga · heavy",
+        "label": "offline · mode · arrests",
         "keywords": [
-          "wwg1wga matter",
-          "target wwg1wga",
-          "heavy",
-          "heavy tonight",
-          "matter qanon",
-          "matter",
-          "tonight",
-          "target"
-        ],
-        "size": 50,
-        "share_pct": 10.0
-      },
-      {
-        "id": 4,
-        "label": "directly debunk · directly · address directly",
-        "keywords": [
-          "directly debunk",
-          "directly",
-          "address directly",
-          "address",
-          "map",
-          "map wwg1wga",
-          "debunk map",
-          "debunk"
-        ],
-        "size": 50,
-        "share_pct": 10.0
-      },
-      {
-        "id": 5,
-        "label": "archive · archive offline · arrests",
-        "keywords": [
-          "archive",
-          "archive offline",
-          "arrests",
-          "mode",
           "offline",
-          "offline god",
-          "panic mode",
+          "mode",
+          "arrests",
+          "hrc",
+          "now",
+          "archive",
+          "sa",
           "panic"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
-        "id": 6,
-        "label": "vs post · vs · tweet",
+        "id": 4,
+        "label": "shills · no · matter",
         "keywords": [
-          "vs post",
+          "shills",
+          "no",
+          "matter",
+          "heavy",
+          "target",
+          "tonight",
+          "what",
+          "over"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 5,
+        "label": "post · timing · vs",
+        "keywords": [
+          "post",
+          "timing",
           "vs",
-          "tweet",
-          "coincidence",
+          "at",
           "look",
-          "look timing",
-          "post coincidence",
-          "post"
+          "tweet",
+          "not",
+          "of"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 6,
+        "label": "knew · future · conspiracy",
+        "keywords": [
+          "knew",
+          "future",
+          "conspiracy",
+          "claim",
+          "historians",
+          "msm",
+          "will",
+          "we"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 7,
-        "label": "verified · verified big · confirmed",
+        "label": "private · pill · incoming",
         "keywords": [
-          "verified",
-          "verified big",
-          "confirmed",
-          "confirmed 8ch",
-          "drop",
-          "drop ready",
-          "8ch",
-          "8ch trip"
+          "private",
+          "pill",
+          "incoming",
+          "federal",
+          "reserve",
+          "red",
+          "rothschilds",
+          "it"
         ],
         "size": 50,
         "share_pct": 10.0
       },
       {
         "id": 8,
-        "label": "wake normies · wake · cia",
+        "label": "military · america · patriots",
         "keywords": [
-          "wake normies",
-          "wake",
-          "cia",
-          "normies",
-          "operation mockingbird",
-          "operation",
-          "media wake",
-          "media"
+          "military",
+          "america",
+          "patriots",
+          "in",
+          "control",
+          "bless",
+          "god",
+          "trust"
         ],
-        "size": 50,
-        "share_pct": 10.0
+        "size": 34,
+        "share_pct": 6.8
       },
       {
         "id": 9,
-        "label": "patriots control · patriots · military",
+        "label": "watch · panicking · news",
         "keywords": [
-          "patriots control",
-          "patriots",
-          "military",
-          "bless america",
-          "control trust",
-          "america",
-          "america wwg1wga",
-          "military god"
+          "watch",
+          "panicking",
+          "news",
+          "coming",
+          "resignations",
+          "cabal",
+          "week",
+          "plan"
         ],
-        "size": 50,
-        "share_pct": 10.0
+        "size": 28,
+        "share_pct": 5.6
+      },
+      {
+        "id": 10,
+        "label": "watch · panicking · news",
+        "keywords": [
+          "watch",
+          "panicking",
+          "news",
+          "coming",
+          "resignations",
+          "cabal",
+          "week",
+          "plan"
+        ],
+        "size": 22,
+        "share_pct": 4.4
+      },
+      {
+        "id": 11,
+        "label": "military · america · patriots",
+        "keywords": [
+          "military",
+          "america",
+          "patriots",
+          "in",
+          "control",
+          "bless",
+          "god",
+          "trust"
+        ],
+        "size": 16,
+        "share_pct": 3.2
       }
     ],
-    "time_s": 0.06
+    "time_s": 4.82
   },
   "bite": {
     "aggregate": {

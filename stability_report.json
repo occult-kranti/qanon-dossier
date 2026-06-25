@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-22",
+  "generated": "2026-06-25",
   "method": "bertopic",
   "n_drops": 4248,
   "runs": [
@@ -7,21 +7,21 @@
       "tag": "MiniLM-L6_mcs15",
       "model": "all-MiniLM-L6-v2",
       "mcs": 15,
-      "n_topics": 63,
+      "n_topics": 56,
       "file": "run_MiniLM-L6_mcs15.json",
-      "silhouette": 0.6681,
-      "coherence": 0.3902,
-      "mean_persistence": 0.152
+      "silhouette": 0.603,
+      "coherence": null,
+      "mean_persistence": 0.161
     },
     {
       "tag": "MiniLM-L6_mcs25",
       "model": "all-MiniLM-L6-v2",
       "mcs": 25,
-      "n_topics": 20,
+      "n_topics": 19,
       "file": "run_MiniLM-L6_mcs25.json",
-      "silhouette": 0.376,
-      "coherence": 0.3975,
-      "mean_persistence": 0.457
+      "silhouette": 0.4205,
+      "coherence": null,
+      "mean_persistence": 0.46
     },
     {
       "tag": "MiniLM-L6_mcs40",
@@ -29,20 +29,20 @@
       "mcs": 40,
       "n_topics": 2,
       "file": "run_MiniLM-L6_mcs40.json",
-      "silhouette": 0.7814,
-      "coherence": 0.4178,
-      "mean_persistence": 0.358
+      "silhouette": 0.7948,
+      "coherence": null,
+      "mean_persistence": 0.384
     }
   ],
   "pairwise": {
-    "MiniLM-L6_mcs15|MiniLM-L6_mcs25": 0.28,
-    "MiniLM-L6_mcs15|MiniLM-L6_mcs40": 0.024,
-    "MiniLM-L6_mcs25|MiniLM-L6_mcs40": 0.085
+    "MiniLM-L6_mcs15|MiniLM-L6_mcs25": 0.293,
+    "MiniLM-L6_mcs15|MiniLM-L6_mcs40": 0.029,
+    "MiniLM-L6_mcs25|MiniLM-L6_mcs40": 0.092
   },
   "anchor": "MiniLM-L6_mcs25",
   "anchor_topics": [
     {
-      "topic": 9,
+      "topic": 7,
       "label": "wwg1wga wwg1wga · wwg1wga · wwg1wga people",
       "keywords": [
         "wwg1wga wwg1wga",
@@ -59,7 +59,7 @@
       "verdict": "stable"
     },
     {
-      "topic": 10,
+      "topic": 8,
       "label": "wwg1wga wwg1wga · wwg1wga · wwg1wga god",
       "keywords": [
         "wwg1wga wwg1wga",
@@ -76,41 +76,7 @@
       "verdict": "stable"
     },
     {
-      "topic": 6,
-      "label": "covid19 · virus · virus election",
-      "keywords": [
-        "covid19",
-        "virus",
-        "virus election",
-        "homes",
-        "lockdowns",
-        "patients",
-        "positive",
-        "lockdown"
-      ],
-      "size": 55,
-      "persistence": 0.507,
-      "verdict": "stable"
-    },
-    {
-      "topic": 15,
-      "label": "worth remembering · remembering · worth",
-      "keywords": [
-        "worth remembering",
-        "remembering",
-        "worth",
-        "remember",
-        "week remember",
-        "remember important",
-        "forget",
-        "important remember"
-      ],
-      "size": 35,
-      "persistence": 0.504,
-      "verdict": "stable"
-    },
-    {
-      "topic": 17,
+      "topic": 12,
       "label": "vip · vip patriot · patriot",
       "keywords": [
         "vip",
@@ -127,41 +93,41 @@
       "verdict": "stable"
     },
     {
-      "topic": 19,
-      "label": "offline · corona · snow white",
+      "topic": 14,
+      "label": "worth remembering · remembering · worth",
       "keywords": [
-        "offline",
-        "corona",
-        "snow white",
-        "snow",
-        "does bird",
-        "bird",
-        "flyrothsfly",
-        "corona offline"
+        "worth remembering",
+        "remembering",
+        "worth",
+        "remember",
+        "week remember",
+        "remember important",
+        "forget",
+        "important remember"
       ],
-      "size": 26,
-      "persistence": 0.503,
+      "size": 34,
+      "persistence": 0.504,
       "verdict": "stable"
     },
     {
-      "topic": 5,
-      "label": "anons · anon · impressive",
+      "topic": 3,
+      "label": "believe coincidences · coincidences · believe",
       "keywords": [
-        "anons",
-        "anon",
-        "impressive",
-        "anons knew",
-        "pb",
-        "knew",
-        "thank anon",
-        "anons understand"
+        "believe coincidences",
+        "coincidences",
+        "believe",
+        "coincidence",
+        "coincidences think",
+        "mathematically impossible",
+        "mathematically",
+        "coincidences coincidences"
       ],
-      "size": 71,
-      "persistence": 0.495,
+      "size": 85,
+      "persistence": 0.499,
       "verdict": "borderline"
     },
     {
-      "topic": 8,
+      "topic": 6,
       "label": "error · disregard · spelling",
       "keywords": [
         "error",
@@ -178,75 +144,7 @@
       "verdict": "borderline"
     },
     {
-      "topic": 3,
-      "label": "believe coincidences · coincidences · believe",
-      "keywords": [
-        "believe coincidences",
-        "coincidences",
-        "believe",
-        "coincidence",
-        "coincidences think",
-        "mathematically impossible",
-        "mathematically",
-        "coincidences coincidences"
-      ],
-      "size": 83,
-      "persistence": 0.493,
-      "verdict": "borderline"
-    },
-    {
-      "topic": 11,
-      "label": "coincidence · coincidence coincidence · amazing",
-      "keywords": [
-        "coincidence",
-        "coincidence coincidence",
-        "amazing",
-        "coincidence amazing",
-        "monthday",
-        "initiated",
-        "coincidences mathematically",
-        "cs"
-      ],
-      "size": 38,
-      "persistence": 0.491,
-      "verdict": "borderline"
-    },
-    {
-      "topic": 14,
-      "label": "game · shall play · jack",
-      "keywords": [
-        "game",
-        "shall play",
-        "jack",
-        "king",
-        "play game",
-        "reconcile",
-        "play",
-        "shall"
-      ],
-      "size": 36,
-      "persistence": 0.49,
-      "verdict": "borderline"
-    },
-    {
-      "topic": 4,
-      "label": "map · news unlocks · unlocks",
-      "keywords": [
-        "map",
-        "news unlocks",
-        "unlocks",
-        "future proves",
-        "proves past",
-        "proves",
-        "future",
-        "unlocks map"
-      ],
-      "size": 73,
-      "persistence": 0.489,
-      "verdict": "borderline"
-    },
-    {
-      "topic": 18,
+      "topic": 16,
       "label": "truth · truth people · tell public",
       "keywords": [
         "truth",
@@ -263,37 +161,71 @@
       "verdict": "borderline"
     },
     {
-      "topic": 16,
-      "label": "trip · update · config",
+      "topic": 17,
+      "label": "trip · update · trip code",
       "keywords": [
         "trip",
         "update",
-        "config",
         "trip code",
-        "dod",
         "compromised",
+        "board compromised",
         "code",
-        "board compromised"
+        "verify",
+        "enter trip"
       ],
-      "size": 34,
-      "persistence": 0.451,
+      "size": 32,
+      "persistence": 0.489,
       "verdict": "borderline"
     },
     {
-      "topic": 12,
-      "label": "armor · armor god · evil",
+      "topic": 5,
+      "label": "anons · anon · impressive",
       "keywords": [
-        "armor",
-        "armor god",
-        "evil",
-        "lord",
-        "spirit",
-        "stand",
-        "god",
-        "spiritual"
+        "anons",
+        "anon",
+        "impressive",
+        "anons knew",
+        "knew",
+        "pb",
+        "thank anon",
+        "anons know"
       ],
-      "size": 38,
-      "persistence": 0.426,
+      "size": 66,
+      "persistence": 0.471,
+      "verdict": "borderline"
+    },
+    {
+      "topic": 4,
+      "label": "map · news unlocks · unlocks",
+      "keywords": [
+        "map",
+        "news unlocks",
+        "unlocks",
+        "proves past",
+        "future proves",
+        "proves",
+        "future",
+        "unlocks map"
+      ],
+      "size": 71,
+      "persistence": 0.464,
+      "verdict": "borderline"
+    },
+    {
+      "topic": 13,
+      "label": "game · shall play · king",
+      "keywords": [
+        "game",
+        "shall play",
+        "king",
+        "play game",
+        "reconcile",
+        "play",
+        "shall",
+        "chess"
+      ],
+      "size": 34,
+      "persistence": 0.461,
       "verdict": "borderline"
     },
     {
@@ -309,76 +241,127 @@
         "stand",
         "america"
       ],
-      "size": 263,
-      "persistence": 0.383,
+      "size": 266,
+      "persistence": 0.457,
       "verdict": "borderline"
     },
     {
-      "topic": 7,
+      "topic": 9,
+      "label": "armor · armor god · evil",
+      "keywords": [
+        "armor",
+        "armor god",
+        "evil",
+        "lord",
+        "spirit",
+        "stand",
+        "god",
+        "spiritual"
+      ],
+      "size": 37,
+      "persistence": 0.45,
+      "verdict": "borderline"
+    },
+    {
+      "topic": 15,
+      "label": "coincidence · coincidence coincidence · amazing coincidence",
+      "keywords": [
+        "coincidence",
+        "coincidence coincidence",
+        "amazing coincidence",
+        "coincidence amazing",
+        "amazing",
+        "cs",
+        "cfr",
+        "coincidence people"
+      ],
+      "size": 33,
+      "persistence": 0.445,
+      "verdict": "borderline"
+    },
+    {
+      "topic": 11,
+      "label": "normal · people stupid · stupid",
+      "keywords": [
+        "normal",
+        "people stupid",
+        "stupid",
+        "stupid people",
+        "ask normal",
+        "enjoy",
+        "people sick",
+        "sick"
+      ],
+      "size": 35,
+      "persistence": 0.385,
+      "verdict": "borderline"
+    },
+    {
+      "topic": 10,
       "label": "yes · aw · freedom",
       "keywords": [
         "yes",
         "aw",
         "freedom",
         "ex",
-        "conf",
         "stand freedom",
         "271",
+        "conf",
         "ok"
       ],
-      "size": 46,
-      "persistence": 0.349,
+      "size": 37,
+      "persistence": 0.347,
       "verdict": "borderline"
     },
     {
       "topic": 0,
-      "label": "potus · did · fbi",
+      "label": "potus · did · does",
       "keywords": [
         "potus",
         "did",
-        "fbi",
         "does",
         "public",
+        "fbi",
         "control",
-        "mueller",
+        "narrative",
         "news"
       ],
-      "size": 1554,
-      "persistence": 0.207,
-      "verdict": "fragile"
+      "size": 1813,
+      "persistence": 0.318,
+      "verdict": "borderline"
     },
     {
       "topic": 1,
-      "label": "boom · boom boom · test",
+      "label": "boom · boom boom · big",
       "keywords": [
         "boom",
         "boom boom",
-        "test",
-        "big big",
+        "big",
         "qa",
-        "week",
         "knowingly knowingly",
-        "knowingly"
+        "knowingly",
+        "week",
+        "000"
       ],
-      "size": 445,
-      "persistence": 0.188,
+      "size": 404,
+      "persistence": 0.233,
       "verdict": "fragile"
     },
     {
-      "topic": 13,
-      "label": "comms · board · sniffer",
+      "topic": 18,
+      "label": "comms · board created · board",
       "keywords": [
         "comms",
+        "board created",
         "board",
-        "sniffer",
         "cm",
+        "new board",
+        "return publicly",
         "devices",
-        "privately",
-        "archive",
-        "dumps"
+        "site"
       ],
-      "size": 36,
-      "persistence": 0.171,
+      "size": 28,
+      "persistence": 0.232,
       "verdict": "fragile"
     }
   ]
