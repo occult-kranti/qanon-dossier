@@ -278,18 +278,22 @@
    MULTI-PAGE ADDITIONS  (cross-page nav, research, timeline)
    ============================================================ */
 
-/* ---------- Cross-page switcher (in rail) ---------- */
-.xnav{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border:1px solid var(--rule-2); margin:0 0 16px;
-  font-family:var(--mono)}
-.xnav a{text-align:center; text-decoration:none; padding:8px 3px;
-  font-size:9.5px; letter-spacing:.1em; text-transform:uppercase;
-  color:var(--ink-3); border-right:1px solid var(--rule-2); border-bottom:1px solid var(--rule-2);
-  background:var(--paper-2); transition:background .15s,color .15s; min-width:0}
-.xnav a:nth-child(3n){border-right:none}
-.xnav a:nth-last-child(-n+3){border-bottom:none}
-.xnav a:last-child{border-right:none}
-.xnav a:hover{background:var(--paper-3); color:var(--ink)}
-.xnav a.here{background:var(--ink); color:var(--paper)}
+/* ---------- Cross-page switcher (in rail) — grouped vertical list ---------- */
+.xnav{display:flex; flex-direction:column; border:1px solid var(--rule-2); border-radius:8px;
+  overflow:hidden; margin:0 0 16px; font-family:var(--mono); background:var(--paper-2)}
+.xnav .xgroup{font-size:8.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3);
+  padding:8px 12px 4px; background:var(--paper-3); border-top:1px solid var(--rule-2)}
+.xnav .xgroup:first-child{border-top:none}
+.xnav a{display:flex; align-items:center; gap:9px; padding:7px 12px 7px 14px;
+  font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; text-decoration:none;
+  color:var(--ink-2); border-top:1px solid var(--rule);
+  border-left:3px solid transparent; transition:background .15s, color .15s, border-color .15s}
+.xnav .xgroup + a{border-top:none}
+.xnav a:hover{background:var(--paper-3); color:var(--ink); border-left-color:var(--rule-2)}
+.xnav a.here{background:var(--ink); color:var(--paper); font-weight:600; border-left-color:var(--accent)}
+.xnav a .xn{flex:none; width:13px; text-align:center; font-size:9px; color:var(--ink-3)}
+.xnav a:hover .xn{color:var(--ink-2)}
+.xnav a.here .xn{color:var(--paper)}
 
 /* ---------- Generic prose blocks on sub-pages ---------- */
 .pagebody{padding:8px 46px 0}

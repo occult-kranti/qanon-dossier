@@ -12,9 +12,6 @@
 <style>
   .shell{align-items:start}
   .rail-inner{overflow-x:hidden}
-  .xnav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
-  .xnav a{min-width:0}
-  .xnav a{font-size:9.5px;letter-spacing:.1em;padding:8px 2px}
 
   .content{padding:0 0 120px}
   .page-header{padding:30px 46px 24px;border-bottom:2px solid var(--ink)}
@@ -156,7 +153,6 @@
     .overlap-row{grid-template-columns:1fr 1fr;gap:6px}
     .overlap-row .score,.overlap-row .shared{display:none}
     #results-body section,.page-header{padding-left:22px;padding-right:22px}
-    .xnav{grid-template-columns:repeat(2,minmax(0,1fr))}
   }
 </style>
 </head>
@@ -171,15 +167,18 @@
     <div class="rail-inner" id="rail">
       <div class="seal"><b>Q Dossier</b><span>Multi-dataset results</span></div>
       <nav class="xnav">
+        <span class="xgroup">Dossier</span>
         <a href="index.html">Home</a>
         <a href="dossier.html">Dossier</a>
         <a href="research.html">Research</a>
         <a href="review.html">Review</a>
         <a href="timeline.html">Timeline</a>
+        <span class="xgroup">Computational lab</span>
         <a href="drops.html">Drops</a>
         <a href="results.html" class="here">Results</a>
         <a href="methods.html">Methods</a>
         <a href="future.html">Future</a>
+        <a href="audit.html">Audit</a>
       </nav>
       <div class="reffile">
         REF · <span>RESULTS</span><br>
