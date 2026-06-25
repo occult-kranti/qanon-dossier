@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Report · How to Use This, What It Reveals &amp; a 2026 Conclusion · QAnon Research</title>
+<meta name="description" content="A short operator's report on this QAnon dossier and computational lab: a step-by-step way to read and to run it, an honest account of what it contains and what it actually reveals, and a novel conclusion connecting the project's 'Delegated Closure' finding to the 2026 Epstein-files news cycle and the rise of AI 'platform conspiracism.'">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:8px 0}
+  .kpis>div{border:1px solid var(--rule-2);border-radius:8px;background:var(--paper-2);padding:12px 14px}
+  .kpis .v{font-family:var(--serif);font-size:24px;line-height:1.05;color:var(--ink)}
+  .kpis .k{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-top:5px}
+  .assess{border:1px solid var(--rule-2);border-left:4px solid var(--accent);background:var(--paper-2);border-radius:8px;padding:14px 18px;margin:10px 0;font-size:14px;line-height:1.62;color:var(--ink-2)}
+  .assess b{color:var(--ink)}
+  .steps{counter-reset:step;list-style:none;padding:0;margin:8px 0 0}
+  .steps li{position:relative;padding:11px 0 11px 46px;border-top:1px dashed var(--rule);min-height:30px}
+  .steps li:first-child{border-top:none}
+  .steps li::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:11px;width:30px;height:30px;border-radius:7px;background:var(--accent);color:#F4EFE6;font-family:var(--mono);font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center}
+  .steps h4{font-family:var(--serif);font-size:16px;font-weight:600;margin:2px 0 3px;color:var(--ink)}
+  .steps p{margin:0;color:var(--ink-2);font-size:13.5px;line-height:1.56}
+  .steps code{font-family:var(--mono);font-size:12px;background:var(--paper-3);padding:1px 5px;border-radius:4px}
+  .code{font-family:var(--mono);font-size:12.5px;background:var(--ink);color:#E7E0D2;border-radius:7px;padding:11px 13px;overflow-x:auto;white-space:pre;margin:8px 0;line-height:1.55}
+  table.rt{width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0}
+  table.rt th,table.rt td{border:1px solid var(--rule);padding:7px 9px;text-align:left;vertical-align:top}
+  table.rt thead th{background:var(--paper-3);color:var(--ink-2);font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;font-weight:600}
+  table.rt td .ttl{font-weight:600;color:var(--ink)}
+  table.rt code{font-family:var(--mono);font-size:11px;background:var(--paper-3);padding:1px 4px;border-radius:3px}
+  .pill{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:20px;white-space:nowrap;display:inline-block}
+  .holds{background:rgba(46,125,82,.12);color:#2e7d52;border:1px solid rgba(46,125,82,.45)}
+  .falls{background:rgba(155,44,44,.10);color:#9b2c2c;border:1px solid rgba(155,44,44,.35)}
+  .secbody p{color:var(--ink-2);line-height:1.62}
+  .secbody code{font-family:var(--mono);font-size:12px;background:var(--paper-3);padding:1px 5px;border-radius:4px}
+  .reveal{list-style:none;padding:0;margin:6px 0 0}
+  .reveal li{padding:11px 0;border-top:1px solid var(--rule);font-size:13.5px;color:var(--ink-2);line-height:1.58}
+  .reveal li:first-child{border-top:none}
+  .reveal b{color:var(--ink)}
+  .concl{border:1px solid var(--rule-2);border-left:4px solid #9b2c2c;background:var(--paper-2);border-radius:8px;padding:4px 20px 10px;margin:10px 0}
+  .concl h3{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--ink);margin:16px 0 4px}
+  .concl p{color:var(--ink-2);line-height:1.66;font-size:14px;margin:8px 0}
+  .concl b{color:var(--ink)}
+  .src{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-top:4px}
+  .src a{color:var(--rep);text-decoration:none}
+</style>
+</head>
+<body>
+
+<button class="railtoggle" id="railtoggle" aria-label="Open contents">☰ Contents</button>
+<div class="scrim" id="scrim"></div>
+
+<div class="shell">
+  <aside class="rail">
+    <div class="rail-inner" id="rail">
+      <div class="seal"><b>Report</b><span>Use it · read it · the 2026 read</span></div>
+      <nav class="xnav">
+        <span class="xgroup">Dossier</span>
+        <a href="index.html">Home</a>
+        <a href="dossier.html">Dossier</a>
+        <a href="research.html">Research</a>
+        <a href="review.html">Review</a>
+        <a href="timeline.html">Timeline</a>
+        <span class="xgroup">Computational lab</span>
+        <a href="drops.html">Drops</a>
+        <a href="results.html">Results</a>
+        <a href="methods.html">Methods</a>
+        <a href="future.html">Future</a>
+        <a href="audit.html">Audit</a>
+        <a href="report.html" class="here">Report</a>
+      </nav>
+      <div class="reffile">
+        REF · <span>OPERATOR-REPORT</span><br>
+        SCOPE · <span>use · contains · reveals</span><br>
+        CONCLUSION · <span>Delegated Closure → 2026</span><br>
+        DATED · <span>Jun 2026</span>
+      </div>
+
+      <p class="railhead">On this page</p>
+      <nav class="toc" id="toc">
+        <a href="#tldr"><span class="n">★</span><span>In one minute</span></a>
+        <a href="#use"><span class="n">1</span><span>How to use it, step by step</span></a>
+        <a href="#contains"><span class="n">2</span><span>What it contains</span></a>
+        <a href="#reveals"><span class="n">3</span><span>What it reveals</span></a>
+        <a href="#conclusion"><span class="n">▲</span><span>A 2026 conclusion</span></a>
+      </nav>
+    </div>
+  </aside>
+
+  <main>
+    <header class="mast">
+      <div class="classbar">
+        <span><span class="dot"></span>Operator's report</span>
+        <span class="sep">/</span><span>How to use</span>
+        <span class="sep">/</span><span>What it reveals</span>
+        <span class="sep">/</span><span>2026 conclusion</span>
+      </div>
+      <h1 class="title">The <span class="q">Report</span></h1>
+      <p class="subtitle">A short operator's guide to this project: how to <em>read</em> it and how to <em>run</em> it, an honest account of what it contains and what it actually reveals once the <a href="audit.html">Methods Audit</a> is applied, and a novel closing argument that connects the lab's core finding to the news of mid-2026 — the stalled Epstein-files release and the AI tools now dressing conspiracy up as "data analysis."</p>
+    </header>
+
+    <div class="pagebody">
+      <p class="lede">This site is two things welded together: a fully-cited <b>dossier</b> on QAnon as a political movement and a <b>computational lab</b> that treats 4,966 "Q drops" as data. This page is the map for both — and, at the end, the one conclusion the whole project was built to earn the right to make.</p>
+    </div>
+
+    <!-- ★ TL;DR -->
+    <section class="dz" id="tldr" style="border-top:none">
+      <div class="sechd"><div class="secno">★</div>
+        <div><h2 class="sech">In one minute</h2>
+        <p class="sectag">What this is, and the single rule for reading it</p></div></div>
+      <div class="secbody">
+        <div class="kpis">
+          <div><div class="v">4,966</div><div class="k">Real Q drops analysed</div></div>
+          <div><div class="v">11 pages</div><div class="k">Dossier + lab + this</div></div>
+          <div><div class="v">35</div><div class="k">Self-audited flaws</div></div>
+          <div><div class="v">1 rule</div><div class="k">Grade every claim by evidence</div></div>
+        </div>
+        <div class="assess">
+          <b>The contract.</b> The dossier's one rule is that every claim is graded by the evidence behind it. The project then turns that rule on itself: the <a href="audit.html">Methods Audit</a> found 35 verified flaws in its own methods. The honest one-line summary is this — <b>the descriptive findings on the real 4,966-drop corpus hold up; the cross-platform "replication" numbers rest on synthetic placeholder data and should be read as illustration, not evidence.</b> Read with that split in mind and nothing here will mislead you.
+        </div>
+      </div>
+    </section>
+
+    <!-- 1 · HOW TO USE -->
+    <section class="dz" id="use">
+      <div class="sechd"><div class="secno">1</div>
+        <div><h2 class="sech">How to use it, step by step</h2>
+        <p class="sectag">Two paths: read the argument, or re-run the analysis yourself</p></div></div>
+      <div class="secbody">
+        <p style="margin-top:0"><b>Path A — the reader.</b> You want the argument and the evidence, not a Python environment. Follow the pages in this order:</p>
+        <ul class="steps">
+          <li><h4>Start on <a href="index.html">Home</a> for the rules of reading</h4><p>It explains the epistemic tags (Documented / Reported / Alleged / Disputed / Debunked / Conspiracy) and how the analytics are meant to be read. Two minutes here keeps every later number in its proper box.</p></li>
+          <li><h4>Read the <a href="audit.html">Methods Audit</a> <em>before</em> trusting any figure</h4><p>This is the unusual step and the important one. It tells you exactly which claims survived scrutiny and which did not, so you never over-read a chart. Treat it as the lens for everything else.</p></li>
+          <li><h4>Work through the <a href="dossier.html">Dossier</a>, then the <a href="review.html">Critical Review</a></h4><p>The Dossier lays out origin, beliefs, money, violence, and the cult-framework scorecards; the Review stress-tests them and rates each major claim Strong / Moderate / Contested. Read them as claim and counter-claim.</p></li>
+          <li><h4>Open the <a href="drops.html">Drops</a> explorer to see the corpus directly</h4><p>The interactive cluster map, searchable reader, circadian and migration charts, and the Stability panel let you inspect the actual drops behind the prose. Click a stable topic to read its members.</p></li>
+          <li><h4>Finish on <a href="results.html">Results</a> + <a href="future.html">Future</a> for the quantitative claims</h4><p>Results holds the clustering scoreboard and BITE numbers; Future carries the novel <b>Delegated-Closure</b> theory and its honest scorecard (what passed, what was rejected). The <a href="timeline.html">Timeline</a> places it all against real-world events through 2026.</p></li>
+        </ul>
+        <p style="margin:16px 0 0"><b>Path B — the analyst.</b> You want to reproduce the numbers. Everything is deterministic and runs from the committed data; the only network step is the optional dataset download. From the project folder:</p>
+        <div class="code">pip install -r requirements.txt
+
+# 1 · cluster the real Q corpus (auto-downloads posts.json)
+python qdrops_cluster.py --inspect      # sanity-check the data shape first
+python qdrops_cluster.py                # embeddings -> UMAP -> HDBSCAN + validity
+
+# 2 · don't trust one clustering — sweep and keep what PERSISTS
+python qdrops_sweep.py                  # writes stability_report.json
+
+# 3 · mine the metadata the topic pipeline discards
+python qdrops_patterns.py               # circadian / style / cadence findings
+
+# 4 · the novel metric: per-drop interpretive gap-leaving
+python dci.py                           # writes results/improved/dci_findings.json
+
+# 5 · serve the site and read your own output
+python -m http.server 8009              # -> http://localhost:8009</div>
+        <p style="font-size:12.5px;color:var(--ink-3);line-height:1.6;margin-top:2px">The cross-platform scripts (<code>collect_datasets.py</code>, <code>multi_dataset_analysis.py</code>, <code>compare_results.py</code>) run too, but — per the Audit — six of their seven datasets are <em>synthetic placeholders</em> until real downstream corpora are collected (roadmap Phase&nbsp;0). Run them to see the machinery; don't cite their numbers. For a paper-style ablation with plots, <code>improved_experiment.py</code> bundles the lot (T4-GPU Colab one-liner in the <a href="https://github.com/occult-kranti/qanon-dossier">README</a>).</p>
+      </div>
+    </section>
+
+    <!-- 2 · WHAT IT CONTAINS -->
+    <section class="dz" id="contains">
+      <div class="sechd"><div class="secno">2</div>
+        <div><h2 class="sech">What it contains</h2>
+        <p class="sectag">The pages, the code, and the one dataset that is real</p></div></div>
+      <div class="secbody">
+        <table class="rt">
+          <thead><tr><th style="width:22%">Part</th><th>What it holds</th></tr></thead>
+          <tbody>
+            <tr><td><span class="ttl">The dossier</span></td><td><a href="index.html">Home</a>, <a href="dossier.html">Dossier</a>, <a href="research.html">Research</a> (~27 peer-reviewed works), <a href="review.html">Review</a>, and a sourced <a href="timeline.html">Timeline</a> running 2016→2026. Conspiracy claims are handled as <em>discourse objects</em>, tagged and rebutted, never amplified.</td></tr>
+            <tr><td><span class="ttl">The lab</span></td><td><a href="drops.html">Drops</a> explorer, <a href="results.html">Results</a> dashboard, a <a href="methods.html">Methods</a> map, the <a href="future.html">Future</a> theory page, and the <a href="audit.html">Audit</a>. All render from committed JSON.</td></tr>
+            <tr><td><span class="ttl">The real data</span></td><td><code>posts.json</code> — the <b>4,966-drop</b> JSON-QAnon archive (Kingsman 2025, research-only). This is the one corpus every defensible number rests on.</td></tr>
+            <tr><td><span class="ttl">The pipeline</span></td><td><code>qdrops_cluster.py</code> (BERTopic), <code>qdrops_sweep.py</code> (stability), <code>qdrops_patterns.py</code> (metadata), <code>bite_scorer.py</code> (cult-control lexicon), and <code>dci.py</code> (the novel Delegated-Closure Index).</td></tr>
+            <tr><td><span class="ttl">The placeholders</span></td><td>Six "downstream platform" datasets (<code>collect_datasets.py</code>) that are <b>synthetic</b> seed prose, plus the cross-platform comparison built on them. Present for the machinery and the roadmap, flagged everywhere as not-evidence.</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:12.5px;color:var(--ink-3)">Full file-by-file map: the <a href="methods.html">Methods</a> page and the <a href="https://github.com/occult-kranti/qanon-dossier">README</a>.</p>
+      </div>
+    </section>
+
+    <!-- 3 · WHAT IT REVEALS -->
+    <section class="dz" id="reveals">
+      <div class="sechd"><div class="secno">3</div>
+        <div><h2 class="sech">What it reveals</h2>
+        <p class="sectag">Sorted by what survives the audit and what does not</p></div></div>
+      <div class="secbody">
+        <p style="margin-top:0"><b>Findings that hold</b> — all computed on the real corpus and reproducible from the committed JSON:</p>
+        <ul class="reveal">
+          <li><span class="pill holds">Holds</span> &nbsp;<b>A single human clock.</b> Posting time-of-day collapses into a US-timezone band; the deepest 3-hour window (11–13&nbsp;UTC) holds just <b>0.44%</b> of drops — the sleep band for every US zone. 25.6% of consecutive drops are &lt;5&nbsp;min apart (typing sessions). Authorship stays unresolved; the <em>clock</em> does not.</li>
+          <li><span class="pill holds">Holds</span> &nbsp;<b>Style thins across the migration.</b> 4chan→8chan→8kun: median length <b>17→12→8</b> words, URLs <b>2.8%→31%→56%</b>, questions/drop <b>3.22→1.21→1.20</b>. The drops got shorter, vaguer, and more link-driven.</li>
+          <li><span class="pill holds">Holds</span> &nbsp;<b>Two robust topics, one affect blob.</b> At the coarsest setting the corpus is a slogan cluster plus a ~4,000-drop "god / patriots / time" affect mass; two independent models agree at Jaccard <b>0.928</b>. (Caveat: this is robustness, not external proof — the scoring favours coarse splits.)</li>
+          <li><span class="pill holds">Holds</span> &nbsp;<b>Delegated Closure is measurable.</b> The DCI — a per-drop, LLM-free score of how much interpretive closure a drop withholds — is non-degenerate (mean 0.329), weight-invariant, and verified <em>non-circular</em> (zero lexicon overlap with the BITE scorer, partial-r ≈ −0.05). The highest-scoring drops are literal <code>"Coincidence? Q"</code> cascades; the lowest are URL-grounded link dumps.</li>
+        </ul>
+        <p style="margin:16px 0 4px"><b>Claims that do not hold</b> — kept on the page on purpose, because burying them would break the contract:</p>
+        <ul class="reveal">
+          <li><span class="pill falls">Falls</span> &nbsp;<b>The "5.6–7.1× downstream amplification."</b> Blocked: the six downstream corpora are synthetic, so the cross-platform BITE gradient is a lexicon-and-authorship artifact, not audience manufacture.</li>
+          <li><span class="pill falls">Falls</span> &nbsp;<b>The iDRAMA "diaspora" replication.</b> Circular: each platform's first-appearance month equals a hard-coded constant the script injected.</li>
+          <li><span class="pill falls">Falls</span> &nbsp;<b>"Openness rises over time."</b> Downgraded: the drift is +0.0012/yr at permutation <b>p=0.54</b> — indistinguishable from noise. It is a <em>mode-shift</em>, not a trend. (And the falsifiability-economy ratio actually <em>fell</em>.)</li>
+        </ul>
+        <div class="assess" style="margin-top:14px">
+          <b>The net read.</b> The drops are an <b>affect-heavy, low-concreteness, vagueness-maximising stream on a US clock</b> — and, crucially, a corpus <em>engineered to be re-interpreted</em>. That last property is the one that matters next, because it does not need Q to keep working.
+        </div>
+      </div>
+    </section>
+
+    <!-- ▲ CONCLUSION -->
+    <section class="dz" id="conclusion">
+      <div class="sechd"><div class="secno">▲</div>
+        <div><h2 class="sech">A 2026 conclusion: the closure machine outlived its author</h2>
+        <p class="sectag">Where the lab's central finding meets this year's news</p></div></div>
+      <div class="secbody">
+        <div class="concl">
+          <p>The last verified Q drop was posted in <b>2022</b>. By the project's own measure, that should not have mattered — and in 2026 it plainly has not. The lab's load-bearing finding is <b>Delegated Closure</b>: the drops never <em>transmitted</em> a belief system, they <em>withheld closure</em> so the audience would author the missing meaning and own it as personal discovery. A stream optimised for that does not depend on its author. It depends on a steady supply of <em>gaps</em>. In 2026 the gap has a new name.</p>
+
+          <h3>The Epstein files are a DCI-maximal object</h3>
+          <p>Score the 2026 Epstein-files release on the same six components the DCI uses on the drops and it lights up every one: bracketed <b>redactions</b>, withheld names, a partial release that resolves nothing, and a steady drip of "why is <em>this</em> blacked out?" The single highest-DCI drop in the entire corpus is a <code>"Coincidence? Q"</code> cascade — and the 2026 news cycle ran on exactly that grammar, down to the genuinely-true, genuinely-meaningless detail that Epstein had met 4chan's founder around the launch of <code>/pol/</code>, the board where Q first appeared. A real coincidence, processed by a movement trained for years to read coincidence as cipher. The audience supplied the closure the documents withheld. That is the producer/consumer machine running with no producer at all.</p>
+          <p class="src">Reporting: <a href="https://www.npr.org/2026/02/26/nx-s1-5724228/how-the-epstein-file-saga-is-fueling-extremist-conspiracies">NPR, Feb 2026</a> · <a href="https://www.opb.org/article/2026/01/02/epstein-files-release-breeds-more-conspiracy-theories-even-less-trust/">OPB, Jan 2026</a> — a partial release breeding <em>more</em> theories and less trust; QAnon "moving the goalposts" to claim vindication; a 107% rise in adjacent conspiracy mentions.</p>
+
+          <h3>The dark mirror: "platform conspiracism"</h3>
+          <p>The most unsettling 2026 development for a project like this one is that conspiracy theorists are now <b>building AI interfaces to the Epstein files and presenting their conclusions as data analysis</b>. Tools like <em>WEBB</em> — "a slick interface with literal red threads," promising to turn three million documents into "structured, searchable intelligence" — perform exactly the gestures this lab performs: embeddings, search, clustering, graphs, the aesthetic of rigor. Researchers have a name for it now: <b>"platform conspiracism,"</b> a <em>"conspiracy of data"</em> in which misleading claims are laundered through charts until the polish reads as proof. Strip the labels off a WEBB screenshot and the <a href="drops.html">Drops</a> dashboard, and a casual visitor cannot tell which one is the conspiracy.</p>
+          <p class="src">Analysis: <a href="https://theconversation.com/conspiracy-theorists-are-building-ai-interfaces-to-the-epstein-files-and-presenting-their-views-as-data-analysis-277949">The Conversation, May 2026</a>.</p>
+
+          <h3>So what actually separates them</h3>
+          <p>Not the tools — both sides have the same embeddings and the same red thread. The difference is one page. A platform-conspiracist dashboard never ships an <a href="audit.html">audit</a> that says <em>"six of our seven datasets are fake, our headline multiplier is an artifact, and our 'rising openness' is statistical noise at p=0.54."</em> It cannot, because its purpose is to manufacture closure, not to withhold judgment until the evidence earns it. This project's only durable defense — the only thing that makes it a study of the closure machine rather than another node in it — is that it grades its own claims by evidence <em>and publishes what fails</em>. In an information environment where AI makes the <em>appearance</em> of analysis nearly free, that willingness to refute yourself is no longer a footnote of good methodology. <b>It is the entire distinction between research and recruitment.</b></p>
+
+          <p style="margin-top:14px"><b>The conclusion, in one line.</b> Q is gone and the machine he built is healthier than ever, because the scarce resource was never the drops, the platform, or even the author — it was <b>the gap</b>, and 2026 has an endless supply. The defense was never better data or better models, both of which the conspiracists now have too. The defense is <b>adversarial self-verification</b> — the discipline of the <a href="audit.html">Audit</a> page, applied relentlessly, in public. A dossier and a conspiracy can look identical right up until one of them shows you what it got wrong.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="foot">
+      <p class="disc"><b>On this report.</b> Written to be read alongside the <a href="audit.html">Methods Audit</a>, not instead of it. Every "holds / falls" verdict above is the audit's, not a fresh claim; the 2026 material is contemporaneous reporting, linked inline. The conclusion is an interpretation of the project's own findings against current events — offered as argument, graded like everything else here.</p>
+      <p style="margin-top:14px">Compiled June 2026 · QAnon research dossier · Operator's report &amp; current-events conclusion · <a href="audit.html" style="color:var(--rep);text-decoration:none">← Methods Audit</a> · <a href="future.html" style="color:var(--rep);text-decoration:none">Roadmap →</a></p>
+    </div>
+
+  </main>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
