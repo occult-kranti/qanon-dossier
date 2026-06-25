@@ -33,6 +33,15 @@
   .imp .tag{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em}
   .imp p{margin:5px 0 0;color:var(--ink-2);font-size:13.5px;line-height:1.6}
   .imp code{font-family:var(--mono);font-size:12px;background:var(--paper-3);padding:1px 5px;border-radius:4px}
+  .latest{border:1px solid var(--rule-2);border-left:4px solid var(--accent);background:var(--paper-2);border-radius:8px;padding:14px 16px;margin:0 0 8px}
+  .latest .hd{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap}
+  .latest .hd b{font-family:var(--serif);font-size:18px;color:var(--ink)}
+  .latest .meta{font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+  .latest p{margin:8px 0 0;color:var(--ink-2);font-size:14px;line-height:1.55}
+  .latest ul{margin:8px 0 0;padding-left:18px;color:var(--ink-2);font-size:13.5px;line-height:1.55}
+  .latest-links{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+  .latest-links a{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);border-radius:20px;padding:3px 9px;background:var(--paper)}
+  .latest-links a:hover{background:var(--paper-3);color:var(--ink)}
   @media(max-width:680px){ .hero-stats{grid-template-columns:repeat(2,1fr)} .guide li{grid-template-columns:40px 1fr;gap:10px} }
 </style>
 </head>
@@ -66,6 +75,7 @@
       <p class="railhead">On this page</p>
       <nav class="toc" id="toc">
         <a href="#start"><span class="n">1</span><span>What this is</span></a>
+        <a href="#latest-run"><span class="n">★</span><span>Latest run summary</span></a>
         <a href="#use"><span class="n">2</span><span>How to use the site</span></a>
         <a href="#toolkit"><span class="n">3</span><span>How the analysis was built</span></a>
         <a href="#data"><span class="n">4</span><span>Data &amp; reproducibility</span></a>
@@ -107,8 +117,39 @@
       <p class="lede">QAnon is treated here as an object of study, not a set of claims to be entertained. Every load-bearing statement carries an epistemic tag (see the rail), debunked assertions are flagged with rebuttals, and the conspiracy's own texts appear only as primary-source <em>discourse objects</em> for analysis. The aim is calibration: to say clearly what is documented, what is contested, and what is false — and, in the computational sections, to measure structure in the corpus without ever treating the maths as a verdict on truth.</p>
     </div>
 
+    <section class="dz" id="latest-run" style="border-top:none">
+      <div class="sechd"><div class="secno">★</div>
+        <div><h2 class="sech">Latest Run Summary</h2>
+        <p class="sectag">Current multi-dataset experiment snapshot, with direct links into Results</p></div></div>
+      <div class="secbody">
+        <div class="latest">
+          <div class="hd">
+            <b>Cross-platform run: BITE + replication checks</b>
+            <span class="meta" id="latest-meta">Loading compare_results.json…</span>
+          </div>
+          <p id="latest-summary">This block summarizes the most recent completed run and links directly to each analytical section in the Results page.</p>
+          <ul id="latest-bullets">
+            <li>BITE: loading dominant dimension and top/lowest platform totals.</li>
+            <li>Replications: loading Hoseini, iDRAMA, Priniski &amp; Bavel, and Hassan status.</li>
+          </ul>
+          <div class="latest-links">
+            <a href="results.html#overview">Results overview</a>
+            <a href="results.html#coverage">Coverage</a>
+            <a href="results.html#findings">Findings</a>
+            <a href="results.html#bite">BITE</a>
+            <a href="results.html#reasoning">Motivated reasoning</a>
+            <a href="results.html#overlap">Topic overlap</a>
+            <a href="results.html#migration">Migration</a>
+            <a href="results.html#topics">Topics</a>
+            <a href="results.html#replication">Replication checks</a>
+            <a href="results.html#methodology">Methodology</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ===================== WHAT THIS IS ===================== -->
-    <section class="dz" id="start" style="border-top:none">
+    <section class="dz" id="start">
       <div class="sechd"><div class="secno">1</div>
         <div><h2 class="sech">What this is — and the rules it follows</h2>
         <p class="sectag">Document and analyse; never amplify or endorse</p></div></div>
@@ -264,5 +305,54 @@ python qdrops_sweep.py                     # several configs + stability_report.
 </div>
 
 <script src="assets/app.js"></script>
+<script>
+(() => {
+  const DS = {
+    qdrops: 'Q Drops',
+    reddit_qanon: 'Reddit',
+    '4chan_pol': '4chan /pol/',
+    '8kun_qresearch': '8kun /qresearch/',
+    parler: 'Parler',
+    telegram: 'Telegram',
+    twitter: 'Twitter/X'
+  };
+
+  function text(id, value){
+    const el = document.getElementById(id);
+    if(el) el.textContent = value;
+  }
+
+  fetch('compare_results.json')
+    .then(r => {
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      return r.json();
+    })
+    .then(data => {
+      const stats = data.overview_stats || {};
+      const bite = data.bite_table || [];
+      const high = bite[0] || {};
+      const low  = bite[bite.length - 1] || {};
+      const topPair = (data.topic_overlap || [])[0] || {};
+      const rep = (data.replication_summary && data.replication_summary.experiments) || [];
+      const repLine = rep.map(r => `${r.experiment}: ${(r.match_status || 'unknown').replace('_', ' ')}`).join(' · ');
+
+      text('latest-meta', `Generated ${data.generated || '—'} · ${data.n_datasets || 0} datasets · ${stats.total_posts || 0} posts`);
+      text('latest-summary',
+        `BITE across ${data.n_datasets || 0} datasets remains dominated by Thought Control. Highest total: ${DS[high.dataset] || high.dataset || '—'} ${high.total !== undefined ? high.total.toFixed(3) : '—'}; lowest: ${DS[low.dataset] || low.dataset || '—'} ${low.total !== undefined ? low.total.toFixed(3) : '—'}.`
+      );
+
+      const bullets = document.getElementById('latest-bullets');
+      if(!bullets) return;
+      bullets.innerHTML = `
+        <li>Experiment window: ${stats.period_start || '—'} to ${stats.period_end || '—'} · overlap range ${(stats.min_overlap || 0).toFixed(3)} to ${(stats.max_overlap || 0).toFixed(3)}.</li>
+        <li>Top topic-overlap pair: ${DS[topPair.ds_a] || topPair.ds_a || '—'} × ${DS[topPair.ds_b] || topPair.ds_b || '—'} (${topPair.jaccard !== undefined ? topPair.jaccard.toFixed(3) : '—'}).</li>
+        <li>Replication checks: ${repLine || 'Replication summary unavailable.'}</li>`;
+    })
+    .catch(() => {
+      text('latest-meta', 'Unable to load compare_results.json');
+      text('latest-summary', 'Latest run stats are unavailable right now. Open Results for full details once data is regenerated.');
+    });
+})();
+</script>
 </body>
 </html>
