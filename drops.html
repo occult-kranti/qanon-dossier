@@ -148,6 +148,7 @@
         <a href="review.html">Review</a>
         <a href="timeline.html">Timeline</a>
         <a href="drops.html" class="here">Drops</a>
+        <a href="methods.html">Methods</a>
       </nav>
       <div class="reffile">
         REF · <span>Q-DROPS/CLUSTER</span><br>
@@ -219,24 +220,24 @@
           <div id="q-quality"></div>
           <div id="q-comp"></div>
           <div class="q-metrics" id="q-metrics"></div>
-          <div class="q-chartblock">
-            <h3>Drops per year</h3>
+          <div class="q-chartblock" id="fig-1-year">
+            <h3>Figure 1 · Drops per year</h3>
             <p class="cap">Annual volume of text drops in this corpus.</p>
             <div class="q-chartwrap"><canvas id="q-year" class="q-chart"></canvas></div>
           </div>
-          <div class="q-chartblock">
-            <h3>Drop volume over time, by month</h3>
+          <div class="q-chartblock" id="fig-2-month">
+            <h3>Figure 2 · Drop volume over time, by month</h3>
             <p class="cap">Monthly cadence with key milestones marked. Volume builds through 2018&ndash;2020 and stops after the final drop &mdash; the rhythm the literature describes. Milestones: dossier <a href="timeline.html" style="color:var(--rep)">Timeline</a> &amp; reference works.</p>
             <div class="q-chartwrap"><canvas id="q-month" class="q-chart"></canvas></div>
           </div>
           <div class="q-chartblock" id="q-board-block">
-            <h3>Board migration over time</h3>
+            <h3 id="fig-3-board">Figure 3 · Board migration over time</h3>
             <p class="cap">Where the drops were posted, by year &mdash; the platform diaspora (4chan &rarr; 8chan &rarr; 8kun) the literature tracks, visible in the corpus itself.</p>
             <div class="q-chartwrap"><canvas id="q-board" class="q-chart"></canvas></div>
             <div id="q-board-legend" class="q-legend2"></div>
           </div>
           <div class="q-chartblock" id="q-trip-block">
-            <h3>Tripcode rotations over time</h3>
+            <h3 id="fig-4-trip">Figure 4 · Tripcode rotations over time</h3>
             <p class="cap">Each row is a cryptographic tripcode Q posted under; the bar spans its first&rarr;last drop. Rotations &mdash; one code ending and another beginning &mdash; are the documented authenticity fault-lines: every handoff is a moment where control of the account could change. <b>&Vert;secure</b> marks 8chan/8kun <em>secure</em> tripcodes (<code>!!</code>, server-side salted); single-<code>!</code> codes were brute-forceable. See the <a href="review.html" style="color:var(--rep)">Critical Review</a> on the "who is Q" question.</p>
             <div id="q-trip"></div>
           </div>
@@ -304,19 +305,29 @@
       <div class="secbody">
         <p style="color:var(--ink-2);margin-top:0">The charts above are computed from the loaded drops; the milestones and the rows below come from the published literature (see the <a href="research.html" style="color:var(--rep);text-decoration:none;border-bottom:1px solid rgba(46,85,117,.4)">Research</a> page). This is a consistency check, not a replication: clustering measures <em>themes and timing</em>, so some published findings (authorship, toxicity, other platforms) are explicitly out of scope here and marked as such.</p>
         <div class="tblwrap"><table>
-          <thead><tr><th>Published finding (source)</th><th>What this corpus shows</th><th>Verdict</th></tr></thead>
+          <thead><tr><th>Published finding (source)</th><th>What this corpus shows</th><th>Figure / line of evidence on this page</th><th>Verdict</th></tr></thead>
           <tbody>
-            <tr><td><b>~4,949 canonical drops; aggregators disagree on the canon, so some drops are apocryphal.</b><br><span class="src2">Gospel / iDRAMA, ICWSM 2022</span></td><td>This archive collates ~4,966 posts (~4,248 with text) from multiple aggregators &mdash; the same order of magnitude. That very disagreement is why drop counts differ slightly between sources.</td><td><span class="verdict v-met">Consistent</span></td></tr>
-            <tr><td><b>Stylometry indicates multiple authors, not a single "Q."</b><br><span class="src2">Gospel / iDRAMA, ICWSM 2022</span></td><td>Topic clustering cannot test authorship (that needs stylometry on tripcodes). Flagged out of scope; discussed on the <a href="review.html" style="color:var(--rep);text-decoration:none">Critical Review</a>.</td><td><span class="verdict v-part">Needs stylometry</span></td></tr>
-            <tr><td><b>Tripcode rotations punctuate the drops; each change is a documented authenticity fault-line.</b><br><span class="src2">Gospel / iDRAMA &middot; chan trip history</span></td><td>The <b>tripcode-rotation timeline</b> now quantifies this from the corpus: each signature Q posted under and when it changed, separating brute-forceable single-<code>!</code> codes from the server-salted secure <code>!!</code> codes adopted after the early 4chan compromise. Rotations mark where account control <em>could</em> hand off &mdash; the substrate for the multiple-author question, though attribution itself still needs stylometry.</td><td><span class="verdict v-met">Consistent</span></td></tr>
-            <tr><td><b>4chan incubation from 28 Oct 2017, then platform migration; news coverage lagged.</b><br><span class="src2">de Zeeuw et al., First Monday 2020</span></td><td>The monthly-volume chart begins Oct 2017 and ramps through 2018 &mdash; the incubation-then-growth shape the study describes.</td><td><span class="verdict v-met">Consistent</span></td></tr>
-            <tr><td><b>Q migrated across imageboards: 4chan &rarr; 8chan &rarr; 8kun (2017&ndash;2020).</b><br><span class="src2">Gospel / iDRAMA &middot; de&nbsp;Zeeuw et&nbsp;al.</span></td><td>The <b>board-migration chart</b> reproduces the diaspora from the corpus&rsquo;s own metadata &mdash; drops sit on <code>4ch</code> in 2017, shift to <code>8ch</code> across 2018&ndash;2019, then <code>8kun</code> from late 2019 &mdash; recovering the documented platform history with no external labelling.</td><td><span class="verdict v-met">Consistent</span></td></tr>
-            <tr><td><b>Drops run to Dec 2020, then near-silence (a brief 2022 return aside).</b><br><span class="src2">Dossier Timeline &middot; reference works</span></td><td>Monthly volume collapses to ~zero after the 8 Dec 2020 final drop &mdash; visible directly in the chart and its "Last drop" marker.</td><td><span class="verdict v-met">Consistent</span></td></tr>
-            <tr><td><b>The drops themselves are not especially toxic; harm lives in interpretation.</b><br><span class="src2">Gospel / iDRAMA, ICWSM 2022</span></td><td>This page clusters topics, not toxicity. The large "ungroupable / noise" share is a vagueness proxy, congruent with generic text that invites projection.</td><td><span class="verdict v-part">Adjacent</span></td></tr>
-            <tr><td><b>A good-vs-evil "mental model" structures belief.</b><br><span class="src2">Priniski, McClay &amp; Holyoak, CogSci 2021</span></td><td>Topics such as "armor of god / evil" and "patriots / god / america" surface exactly this moral-binary framing.</td><td><span class="verdict v-met">Consistent</span></td></tr>
-            <tr><td><b>Post-2020 the movement globalised; German overshadowed English on Telegram.</b><br><span class="src2">Hoseini et al., WebSci 2023</span></td><td>This corpus is the English imageboard drops only, so it cannot show that &mdash; a coverage boundary, not a contradiction.</td><td><span class="verdict v-part">Out of scope</span></td></tr>
+            <tr><td><b>~4,949 canonical drops; aggregators disagree on the canon, so some drops are apocryphal.</b><br><span class="src2">Gospel / iDRAMA, ICWSM 2022</span></td><td>This archive collates ~4,966 posts (~4,248 with text) from multiple aggregators &mdash; the same order of magnitude. That very disagreement is why drop counts differ slightly between sources.</td><td>Header metrics (<b>Drops Analysed</b>) + <a href="#dataset" style="color:var(--rep)">Data &amp; method</a> dataset notes.</td><td><span class="verdict v-met">Consistent</span></td></tr>
+            <tr><td><b>Stylometry indicates multiple authors, not a single "Q."</b><br><span class="src2">Gospel / iDRAMA, ICWSM 2022</span></td><td>Topic clustering cannot test authorship (that needs stylometry on tripcodes). Flagged out of scope; discussed on the <a href="review.html" style="color:var(--rep);text-decoration:none">Critical Review</a>.</td><td><a href="#fig-4-trip" style="color:var(--rep)">Figure 4</a> gives tripcode transitions only; no authorship classifier is run.</td><td><span class="verdict v-part">Needs stylometry</span></td></tr>
+            <tr><td><b>Tripcode rotations punctuate the drops; each change is a documented authenticity fault-line.</b><br><span class="src2">Gospel / iDRAMA &middot; chan trip history</span></td><td>The <b>tripcode-rotation timeline</b> quantifies this from the corpus: each signature Q posted under and when it changed, separating brute-forceable single-<code>!</code> codes from secure <code>!!</code> codes. Rotations mark where account control <em>could</em> hand off.</td><td><a href="#fig-4-trip" style="color:var(--rep)">Figure 4</a> timeline bars and secure/non-secure labels.</td><td><span class="verdict v-met">Consistent</span></td></tr>
+            <tr><td><b>4chan incubation from 28 Oct 2017, then platform migration; news coverage lagged.</b><br><span class="src2">de Zeeuw et al., First Monday 2020</span></td><td>The monthly-volume chart begins Oct 2017 and ramps through 2018 &mdash; the incubation-then-growth shape the study describes.</td><td><a href="#fig-2-month" style="color:var(--rep)">Figure 2</a> shows the Oct 2017 start and 2018 ramp.</td><td><span class="verdict v-met">Consistent</span></td></tr>
+            <tr><td><b>Q migrated across imageboards: 4chan &rarr; 8chan &rarr; 8kun (2017&ndash;2020).</b><br><span class="src2">Gospel / iDRAMA &middot; de&nbsp;Zeeuw et&nbsp;al.</span></td><td>The board-migration chart reproduces the diaspora from corpus metadata &mdash; <code>4ch</code> in 2017, <code>8ch</code> in 2018&ndash;2019, and <code>8kun</code> from late 2019.</td><td><a href="#fig-3-board" style="color:var(--rep)">Figure 3</a> stacked yearly board distribution.</td><td><span class="verdict v-met">Consistent</span></td></tr>
+            <tr><td><b>Drops run to Dec 2020, then near-silence (a brief 2022 return aside).</b><br><span class="src2">Dossier Timeline &middot; reference works</span></td><td>Monthly volume collapses to ~zero after the 8 Dec 2020 final drop &mdash; visible directly in the chart and its "Last drop" marker.</td><td><a href="#fig-2-month" style="color:var(--rep)">Figure 2</a> line marks <b>Last drop</b> and post-2020 collapse.</td><td><span class="verdict v-met">Consistent</span></td></tr>
+            <tr><td><b>The drops themselves are not especially toxic; harm lives in interpretation.</b><br><span class="src2">Gospel / iDRAMA, ICWSM 2022</span></td><td>This page clusters topics, not toxicity. The large "ungroupable / noise" share is a vagueness proxy, congruent with generic text that invites projection.</td><td><a href="#overview" style="color:var(--rep)">Overview bars</a> + metrics cell <b>Ungroupable</b> (vagueness signal).</td><td><span class="verdict v-part">Adjacent</span></td></tr>
+            <tr><td><b>A good-vs-evil "mental model" structures belief.</b><br><span class="src2">Priniski, McClay &amp; Holyoak, CogSci 2021</span></td><td>Topics such as "armor of god / evil" and "patriots / god / america" surface this moral-binary framing.</td><td><a href="#topics" style="color:var(--rep)">Topic cards</a> and reader-filtered topic labels.</td><td><span class="verdict v-met">Consistent</span></td></tr>
+            <tr><td><b>Post-2020 the movement globalised; German overshadowed English on Telegram.</b><br><span class="src2">Hoseini et al., WebSci 2023</span></td><td>This corpus is the English imageboard drops only, so it cannot show that &mdash; a coverage boundary, not a contradiction.</td><td><a href="#dataset" style="color:var(--rep)">Dataset scope</a> explicitly states imageboard-only corpus.</td><td><span class="verdict v-part">Out of scope</span></td></tr>
           </tbody>
         </table></div>
+        <div class="panel" style="margin-top:12px">
+          <div class="panel-hd"><span>Common conclusions from this page's figures</span><span class="src">On-page synthesis</span></div>
+          <div class="panel-bd">
+            <ul style="margin:0;padding-left:18px;color:var(--ink-2);line-height:1.6">
+              <li><b>Convergence with literature:</b> Figures <a href="#fig-2-month" style="color:var(--rep)">2</a> and <a href="#fig-3-board" style="color:var(--rep)">3</a> recover the documented timeline and platform diaspora without hand labelling.</li>
+              <li><b>Authorship remains unresolved here:</b> Figure <a href="#fig-4-trip" style="color:var(--rep)">4</a> supports continuity/fault-line analysis, but attribution still requires stylometry outside this page.</li>
+              <li><b>Interpretive-not-truth boundary holds:</b> Figure <a href="#fig-1-year" style="color:var(--rep)">1</a>, the topic panels, and the noise share quantify structure and vagueness, not factual correctness of claims.</li>
+            </ul>
+          </div>
+        </div>
         <p class="q-hint" style="margin-top:10px">Sources: Aliapoulios/Papasavva et&nbsp;al. (<a href="https://doi.org/10.1609/icwsm.v16i1.19330">ICWSM 2022</a>) &middot; de&nbsp;Zeeuw et&nbsp;al. (<a href="https://doi.org/10.5210/fm.v25i11.10643">First Monday 2020</a>) &middot; Hoseini et&nbsp;al. (<a href="https://doi.org/10.1145/3578503.3583603">WebSci 2023</a>) &middot; Priniski et&nbsp;al. (CogSci 2021). Full entries on the Research page.</p>
       </div>
     </section>

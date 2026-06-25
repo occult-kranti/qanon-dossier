@@ -242,6 +242,8 @@ ADMIN_STRONG = [
     re.compile(r"trip(code)?\s+(update|confirmed|compromised)", re.I),
     re.compile(r"^\s*test\s*\.?\s*$", re.I),
 ]
+SHORT_ADMIN_WORD_THRESHOLD = 15
+EXTENDED_ADMIN_WORD_THRESHOLD = 40
 
 
 def is_admin(clean_text):
@@ -253,9 +255,11 @@ def is_admin(clean_text):
             return True
     words = len(clean_text.split())
     hits = sum(1 for rx in ADMIN_RE if rx.search(clean_text))
-    if words <= 15 and hits >= 1:
+    # Short drops are often pure ops updates, so a single operational cue is enough.
+    if words <= SHORT_ADMIN_WORD_THRESHOLD and hits >= 1:
         return True
-    if words <= 40 and hits >= 2:
+    # Longer drops need at least two cues to reduce false positives in ideological text.
+    if words <= EXTENDED_ADMIN_WORD_THRESHOLD and hits >= 2:
         return True
     return False
 
