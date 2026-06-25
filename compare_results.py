@@ -46,6 +46,24 @@ DS_PLATFORM  = {
     "telegram": "telegram",
     "twitter": "twitter",
 }
+LLM_PROFILE  = {
+    "framework": "Ollama",
+    "default_model": "qwen2.5:7b",
+    "high_quality_model": "qwen2.5:14b",
+    "fallback_model": "qwen2.5:3b",
+    "json_mode": True,
+    "generation": {
+        "temperature": 0,
+        "top_p": 0.1,
+        "top_k": 20,
+        "seed": 42,
+    },
+    "output_contract": [
+        "Return strict JSON only",
+        "No markdown or prose outside JSON",
+        "Validate schema and retry on malformed output",
+    ],
+}
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -163,6 +181,153 @@ def build_replication_summary(bite_table, topic_comp, migration, mr_comp):
             },
         ]
     }
+
+
+def build_experiment_setups(index, bite_table, topic_comp, migration, mr_comp):
+    """Detailed, report-ready setup notes for each experiment."""
+    method = index.get("method", "kmeans")
+    cluster_stack = (
+        "BERTopic (sentence-transformers + UMAP + HDBSCAN)"
+        if method == "bertopic"
+        else "TF-IDF + KMeans"
+    )
+    top_pair = topic_comp[0] if topic_comp else {}
+    top_mr = mr_comp[0] if mr_comp else {}
+    top_bite = bite_table[0] if bite_table else {}
+    low_bite = bite_table[-1] if bite_table else {}
+
+    return [
+        {
+            "id": "hoseini_topic_overlap",
+            "title": "Hoseini et al. 2021 replication: cross-platform topic overlap",
+            "status": "completed",
+            "objective": "Measure lexical convergence of QAnon narratives across platform pairs.",
+            "dataset_scope": "7 datasets, all unique platform pairs",
+            "model_family": "Keyword-set overlap with Jaccard similarity",
+            "model_details": [
+                f"Cluster generation stack: {cluster_stack}",
+                "Keywords per topic: top 10 terms",
+                "Pair scoring: Jaccard(shared/union)",
+                f"Top observed pair: {top_pair.get('ds_a', '—')} x {top_pair.get('ds_b', '—')} ({top_pair.get('jaccard', 0):.4f})",
+            ],
+            "llm_model": "Not used in this run (deterministic lexical method)",
+            "llm_setup": [
+                "Optional extension can use Ollama qwen2.5:7b for narrative label refinement",
+                "Recommended settings: JSON mode, temperature=0, seed=42",
+            ],
+            "implementation": "multi_dataset_analysis.py::cross_platform_topic_overlap",
+            "outputs": [
+                "results/index.json -> cross.topic_overlap",
+                "compare_results.json -> topic_overlap",
+            ],
+            "repro_command": "python multi_dataset_analysis.py --samples-only --method bertopic && python compare_results.py",
+        },
+        {
+            "id": "idrama_migration",
+            "title": "iDRAMA replication: platform migration timeline",
+            "status": "completed",
+            "objective": "Track monthly platform-level movement of discourse activity.",
+            "dataset_scope": "All posts with valid timestamps",
+            "model_family": "Temporal aggregation by platform and month",
+            "model_details": [
+                "Time binning: YYYY-MM (UTC)",
+                "Metric: monthly post counts per platform",
+                f"Timeline span: {len(migration)} monthly periods",
+                "Normalization: 4ch merged into 4chan, 8ch merged into 8kun for visualization",
+            ],
+            "llm_model": "Not used in this run (count-based temporal method)",
+            "llm_setup": [
+                "Optional extension can use qwen2.5:7b for event annotation/captioning",
+                "Keep extraction deterministic (temperature=0) for reproducible labels",
+            ],
+            "implementation": "multi_dataset_analysis.py::platform_migration",
+            "outputs": [
+                "results/index.json -> cross.platform_migration",
+                "compare_results.json -> migration",
+            ],
+            "repro_command": "python multi_dataset_analysis.py --samples-only --method bertopic && python compare_results.py",
+        },
+        {
+            "id": "priniski_motivated_reasoning",
+            "title": "Priniski & Bavel replication: motivated reasoning markers",
+            "status": "completed",
+            "objective": "Estimate identity-protective reasoning intensity across platforms.",
+            "dataset_scope": "Per-dataset post text",
+            "model_family": "Rule-based keyword scoring",
+            "model_details": [
+                "Categories: certainty, us-vs-them, dismissal, in-group",
+                "Score scaling: min(total_hits/8, 1.0)",
+                "Distribution bands: low (<0.25), medium (0.25-0.49), high (>=0.50)",
+                f"Highest mean observed: {top_mr.get('dataset', '—')} ({top_mr.get('mean_score', 0):.3f})",
+            ],
+            "llm_model": "Not used in this run (keyword lexicon method)",
+            "llm_setup": [
+                "Optional extension can replace lexicon with qwen2.5:7b JSON-classified rhetoric bands",
+                "Use strict schema validation and retry loop for malformed responses",
+            ],
+            "implementation": "multi_dataset_analysis.py::score_motivated_reasoning",
+            "outputs": [
+                "results/<dataset>/analysis.json -> motivated_reasoning",
+                "compare_results.json -> motivated_reasoning",
+            ],
+            "repro_command": "python multi_dataset_analysis.py --samples-only --method bertopic && python compare_results.py",
+        },
+        {
+            "id": "hassan_bite",
+            "title": "Hassan BITE replication: cult-control rhetoric scoring",
+            "status": "completed",
+            "objective": "Quantify behavior, information, thought, and emotional control rhetoric by platform.",
+            "dataset_scope": "All normalized texts (full qdrops + sampled external datasets)",
+            "model_family": "Weighted regex lexicon with dimension-wise aggregation",
+            "model_details": [
+                "Implementation: bite_scorer.py",
+                "Pattern inventory: 136 weighted patterns across B/I/T/E",
+                "Aggregation: per-post score -> corpus mean/std -> monthly timeline",
+                f"Highest total observed: {top_bite.get('dataset', '—')} ({top_bite.get('total', 0):.4f}); lowest: {low_bite.get('dataset', '—')} ({low_bite.get('total', 0):.4f})",
+            ],
+            "llm_model": "Not used in this run (lexicon baseline retained for reproducibility)",
+            "llm_setup": [
+                "Optional LLM-assisted annotation profile available via Ollama",
+                f"Default recommended model: {LLM_PROFILE['default_model']}",
+                f"Fallback model: {LLM_PROFILE['fallback_model']}",
+                "Deterministic generation: temperature=0, top_p=0.1, top_k=20",
+            ],
+            "implementation": "bite_scorer.py + multi_dataset_analysis.py::analyse_dataset",
+            "outputs": [
+                "results/<dataset>/analysis.json -> bite.aggregate and bite.timeline",
+                "compare_results.json -> bite_table and highlights",
+            ],
+            "repro_command": "python multi_dataset_analysis.py --samples-only --method bertopic && python compare_results.py",
+        },
+        {
+            "id": "llm_bite_extension",
+            "title": "LLM extension (optional): JSON BITE adjudication",
+            "status": "planned_not_executed",
+            "objective": "Augment lexicon scoring with model-based interpretation and evidence snippets.",
+            "dataset_scope": "Any dataset in datasets/normalised or datasets/samples",
+            "model_family": "Instruction-tuned local LLM JSON classification",
+            "model_details": [
+                "Prompt contract: strict JSON output with labels and evidence quotes",
+                "Validation: schema parse + bounds checks + retry on failure",
+                "Suggested batching: one post per call for maximum schema fidelity",
+            ],
+            "llm_model": (
+                f"Framework={LLM_PROFILE['framework']}, default={LLM_PROFILE['default_model']}, "
+                f"HQ={LLM_PROFILE['high_quality_model']}, fallback={LLM_PROFILE['fallback_model']}"
+            ),
+            "llm_setup": [
+                "Use JSON mode and fixed seed for reproducibility",
+                "No markdown/code-fence outputs",
+                "Persist outputs to results/<dataset>/llm_bite.json for comparison",
+            ],
+            "implementation": "Planned script: local_llm_bite.py (Ollama backend)",
+            "outputs": [
+                "results/<dataset>/llm_bite.json (planned)",
+                "compare_results.json -> llm comparison fields (planned)",
+            ],
+            "repro_command": "ollama run qwen2.5:7b (with strict JSON prompt contract)",
+        },
+    ]
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -286,6 +451,7 @@ def build_comparison(index, results):
 
     keyword_bridges = build_keyword_bridges(topic_comp)
     replication_summary = build_replication_summary(bite_table, topic_comp, migration, mr_comp)
+    experiment_setups = build_experiment_setups(index, bite_table, topic_comp, migration, mr_comp)
 
     top_bite = bite_table[0] if bite_table else {}
     bottom_bite = bite_table[-1] if bite_table else {}
@@ -318,6 +484,8 @@ def build_comparison(index, results):
         "cluster_quality":     cluster_comp,
         "highlights":          highlights,
         "replication_summary": replication_summary,
+        "experiment_setups": experiment_setups,
+        "llm_profile": LLM_PROFILE,
         "method_flags": {
             "synthetic_samples_present": any(d["sample_type"] == "sample" for d in dataset_meta),
             "note": "Q drops uses full corpus; other datasets are representative 500-post samples unless fully downloaded.",
