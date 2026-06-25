@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Methods &amp; Data · QAnon Research Setup</title>
+<meta name="description" content="Databases used, experiment setup, and grouped peer-reviewed evidence map for the QAnon dossier and drops-lab pipeline.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<button class="railtoggle" id="railtoggle" aria-label="Open contents">☰ Contents</button>
+<div class="scrim" id="scrim"></div>
+
+<div class="shell">
+  <aside class="rail">
+    <div class="rail-inner" id="rail">
+      <div class="seal"><b>Methods</b><span>Data &amp; setup</span></div>
+      <nav class="xnav">
+        <a href="index.html">Home</a>
+        <a href="dossier.html">Dossier</a>
+        <a href="research.html">Research</a>
+        <a href="review.html">Review</a>
+        <a href="timeline.html">Timeline</a>
+        <a href="drops.html">Drops</a>
+        <a href="methods.html" class="here">Methods</a>
+      </nav>
+      <div class="reffile">
+        REF · <span>Q-METHODS</span><br>
+        FOCUS · <span>Data + reproducibility</span><br>
+        OUTPUTS · <span>JSON + CSV + figures</span><br>
+        LINK · <span>Research tracks A–E</span>
+      </div>
+
+      <p class="railhead">On this page</p>
+      <nav class="toc" id="toc">
+        <a href="#db"><span class="n">1</span><span>Databases used</span></a>
+        <a href="#exp"><span class="n">2</span><span>Experiment setup</span></a>
+        <a href="#groups"><span class="n">3</span><span>Grouped peer-reviewed papers</span></a>
+      </nav>
+    </div>
+  </aside>
+
+  <main>
+    <header class="mast">
+      <div class="classbar">
+        <span><span class="dot"></span>Reproducibility</span>
+        <span class="sep">/</span><span>Data provenance</span>
+        <span class="sep">/</span><span>Experiment design</span>
+      </div>
+      <h1 class="title">Methods &amp; <span class="q">Data</span></h1>
+      <p class="subtitle">A consolidated methods page covering the datasets used, the clustering experiment setup, and the grouped peer-reviewed evidence base that the dossier cross-references.</p>
+    </header>
+
+    <div class="pagebody">
+      <p class="lede">Use this page as the implementation map: where the data comes from, how each run is executed, and which peer-reviewed track each claim is grounded in. This is designed to sit alongside <a href="research.html" style="color:var(--rep);text-decoration:none;border-bottom:1px solid rgba(46,85,117,.4)">Research</a> and <a href="drops.html" style="color:var(--rep);text-decoration:none;border-bottom:1px solid rgba(46,85,117,.4)">Drops</a>, not replace them.</p>
+    </div>
+
+    <section class="dz" id="db" style="border-top:none">
+      <div class="sechd"><div class="secno">1</div>
+        <div><h2 class="sech">Databases used</h2>
+        <p class="sectag">Primary corpus, derived analytics datasets, and literature databases</p></div></div>
+      <div class="secbody">
+        <div class="tblwrap"><table>
+          <thead><tr><th>Dataset / database</th><th>Type</th><th>What it is used for</th><th>Where it appears</th></tr></thead>
+          <tbody>
+            <tr><td><b>JSON-QAnon (`posts.json`)</b><br><span class="src2">Kingsman (2025), DOI 10.13140/RG.2.2.28778.32964</span></td><td>Primary source corpus</td><td>Canonical text/archive input for clustering, timeline metrics, board/tripcode extraction.</td><td><a href="drops.html#dataset" style="color:var(--rep)">Drops: Data &amp; method</a></td></tr>
+            <tr><td><b>`qdrops_clustered.json`</b></td><td>Derived experiment output</td><td>Per-drop topic assignment, coordinates, metadata flags, validity/composition stats for interactive figures.</td><td><a href="drops.html#overview" style="color:var(--rep)">Drops: overview + figures</a></td></tr>
+            <tr><td><b>`run_*.json`</b></td><td>Multi-config experiment outputs</td><td>Alternative model/min-cluster-size runs for robustness checks.</td><td><a href="drops.html#stability" style="color:var(--rep)">Drops: stability panel</a></td></tr>
+            <tr><td><b>`stability_report.json` + CSV</b></td><td>Cross-run comparator</td><td>Topic persistence and pairwise overlap for stable/borderline/fragile grouping.</td><td><a href="drops.html#stability" style="color:var(--rep)">Drops: stability panel</a></td></tr>
+            <tr><td><b>Peer-reviewed literature corpus</b><br><span class="src2">Tracks A–E in this repository</span></td><td>Evidence base</td><td>External scholarly benchmark for the comparison table and critical review claims.</td><td><a href="research.html" style="color:var(--rep)">Research</a> / <a href="review.html" style="color:var(--rep)">Review</a></td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <section class="dz" id="exp">
+      <div class="sechd"><div class="secno">2</div>
+        <div><h2 class="sech">Experiment setup</h2>
+        <p class="sectag">End-to-end workflow grouped by stage</p></div></div>
+      <div class="secbody">
+        <ol class="papers" style="list-style:none;padding:0;margin:0">
+          <li class="paper"><div class="yr">A</div><div class="pmain"><h3>Data acquisition &amp; normalization</h3><p class="ab">Load/archive posts, coerce shape, normalize text, preserve metadata (images, references, board/site, tripcode), and apply optional admin-drop exclusion.</p></div></li>
+          <li class="paper"><div class="yr">B</div><div class="pmain"><h3>Representation &amp; clustering</h3><p class="ab">Encode drops with sentence embeddings, reduce dimensions with UMAP, cluster with HDBSCAN/BERTopic (or TF-IDF + KMeans baseline), and produce per-topic labels from c-TF-IDF.</p></div></li>
+          <li class="paper"><div class="yr">C</div><div class="pmain"><h3>Validity &amp; robustness checks</h3><p class="ab">Score each run with silhouette and c_v coherence, then run parameter sweeps (model × min cluster size) and compute topic persistence by Jaccard overlap.</p></div></li>
+          <li class="paper"><div class="yr">D</div><div class="pmain"><h3>Output generation &amp; interpretation</h3><p class="ab">Export JSON/CSV payloads, render figures in `drops.html`, and compare computed findings against peer-reviewed conclusions with explicit scope boundaries.</p></div></li>
+        </ol>
+        <div style="font-family:var(--mono);font-size:12.5px;background:var(--ink);color:#E7E0D2;border-radius:7px;padding:11px 13px;overflow-x:auto;white-space:pre;margin:10px 0 0;line-height:1.55">pip install -r requirements.txt
+python qdrops_cluster.py
+python qdrops_sweep.py --models all-MiniLM-L6-v2,all-mpnet-base-v2 --mcs 15,25,40</div>
+      </div>
+    </section>
+
+    <section class="dz" id="groups">
+      <div class="sechd"><div class="secno">3</div>
+        <div><h2 class="sech">Grouped peer-reviewed papers</h2>
+        <p class="sectag">Organised for quick evidence lookup by research objective</p></div></div>
+      <div class="secbody">
+        <div class="tblwrap"><table>
+          <thead><tr><th>Group</th><th>Use in this project</th><th>Representative entries</th></tr></thead>
+          <tbody>
+            <tr><td><b>Track A · Computational corpus &amp; platform migration</b></td><td>Core benchmark for drop counts, migration history, and authorship/timing boundaries.</td><td><a href="research.html#tA" style="color:var(--rep)">Gospel / iDRAMA (ICWSM 2022), deplatforming migration series, Telegram globalization study</a></td></tr>
+            <tr><td><b>Track B · Radicalization &amp; security</b></td><td>Threat calibration and violence risk interpretation.</td><td><a href="research.html#tB" style="color:var(--rep)">Amarasingam &amp; Argentino; Garry et al.; Jensen &amp; Kane; Moskalenko et al.</a></td></tr>
+            <tr><td><b>Track C · Psychology &amp; relational harm</b></td><td>Identity, family/relational rupture, and cognitive-affective pathways.</td><td><a href="research.html#tC" style="color:var(--rep)">Priniski et al.; clinical/relational harm studies</a></td></tr>
+            <tr><td><b>Track D · Religion, ritual &amp; meaning-making</b></td><td>Interpretation of sacralized narratives and quasi-religious framing.</td><td><a href="research.html#tD" style="color:var(--rep)">Sociology/religious-studies work on mythic framing and ritualized belief</a></td></tr>
+            <tr><td><b>Track E · Belief diffusion &amp; methods</b></td><td>Methodology for discourse spread, social contagion, and measurement constraints.</td><td><a href="research.html#tE" style="color:var(--rep)">Diffusion and computational-method papers used for boundaries and caveats</a></td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <div class="foot">
+      <p class="disc"><b>Scope note.</b> This page organises methods and sources; detailed claim-by-claim argumentation remains on the Dossier, Review, and Drops pages.</p>
+      <p style="margin-top:14px">Compiled 2026 · Methods index · <a href="research.html" style="color:var(--rep);text-decoration:none">← Research</a> · <a href="drops.html" style="color:var(--rep);text-decoration:none">Drops →</a></p>
+    </div>
+  </main>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
