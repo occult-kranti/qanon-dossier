@@ -1,0 +1,96 @@
+{
+  "generated": "2026-06-25",
+  "method": "bertopic",
+  "n_drops": 4135,
+  "runs": [
+    {
+      "tag": "bge-large-en.5_mcs15",
+      "model": "BAAI/bge-large-en-v1.5",
+      "mcs": 15,
+      "n_topics": 43,
+      "file": "results/improved/runs/admin/run_bge-large-en.5_mcs15.json",
+      "silhouette": 0.5256,
+      "coherence": 0.4126,
+      "mean_persistence": 0.104
+    },
+    {
+      "tag": "bge-large-en.5_mcs25",
+      "model": "BAAI/bge-large-en-v1.5",
+      "mcs": 25,
+      "n_topics": 7,
+      "file": "results/improved/runs/admin/run_bge-large-en.5_mcs25.json",
+      "silhouette": 0.1597,
+      "coherence": 0.4406,
+      "mean_persistence": 0.638
+    },
+    {
+      "tag": "bge-large-en.5_mcs40",
+      "model": "BAAI/bge-large-en-v1.5",
+      "mcs": 40,
+      "n_topics": 3,
+      "file": "results/improved/runs/admin/run_bge-large-en.5_mcs40.json",
+      "silhouette": 0.6115,
+      "coherence": 0.3,
+      "mean_persistence": 0.683
+    }
+  ],
+  "pairwise": {
+    "bge-large-en.5_mcs15|bge-large-en.5_mcs25": 0.15,
+    "bge-large-en.5_mcs15|bge-large-en.5_mcs40": 0.058,
+    "bge-large-en.5_mcs25|bge-large-en.5_mcs40": 0.409
+  },
+  "anchor": "bge-large-en.5_mcs40",
+  "anchor_topics": [
+    {
+      "topic": 2,
+      "label": "vip · vip patriot · vip patriots",
+      "keywords": [
+        "vip",
+        "vip patriot",
+        "vip patriots",
+        "enjoy",
+        "patriot",
+        "eyes",
+        "55",
+        "row"
+      ],
+      "size": 43,
+      "persistence": 1.0,
+      "verdict": "stable"
+    },
+    {
+      "topic": 0,
+      "label": "know · world · united",
+      "keywords": [
+        "know",
+        "world",
+        "united",
+        "house",
+        "fight",
+        "follow",
+        "people",
+        "patriots"
+      ],
+      "size": 3996,
+      "persistence": 0.554,
+      "verdict": "stable"
+    },
+    {
+      "topic": 1,
+      "label": "wwg1wga wwg1wga · wwg1wga · wrwy",
+      "keywords": [
+        "wwg1wga wwg1wga",
+        "wwg1wga",
+        "wrwy",
+        "people wwg1wga",
+        "visible",
+        "unitednotdivided",
+        "fail wwg1wga",
+        "try harder"
+      ],
+      "size": 80,
+      "persistence": 0.494,
+      "verdict": "borderline"
+    }
+  ]
+}

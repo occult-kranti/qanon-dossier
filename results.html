@@ -12,7 +12,7 @@
 <style>
   .shell{align-items:start}
   .rail-inner{overflow-x:hidden}
-  .xnav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0}
+  .xnav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
   .xnav a{min-width:0}
   .xnav a{font-size:9.5px;letter-spacing:.1em;padding:8px 2px}
 
@@ -179,6 +179,7 @@
         <a href="drops.html">Drops</a>
         <a href="results.html" class="here">Results</a>
         <a href="methods.html">Methods</a>
+        <a href="future.html">Future</a>
       </nav>
       <div class="reffile">
         REF · <span>RESULTS</span><br>
@@ -199,7 +200,9 @@
         <a href="#topics"><span class="n">⑧</span><span>Cluster topics</span></a>
         <a href="#replication"><span class="n">⑨</span><span>Replication checks</span></a>
         <a href="#experiments"><span class="n">⑩</span><span>Experiment setup</span></a>
-        <a href="#methodology"><span class="n">⑪</span><span>Methodology</span></a>
+        <a href="#ablation"><span class="n">⑪</span><span>Ablation &amp; best result</span></a>
+        <a href="#two-readings"><span class="n">⑫</span><span>Two readings</span></a>
+        <a href="#methodology"><span class="n">⑬</span><span>Methodology</span></a>
       </nav>
 
       <div class="legend">
@@ -349,7 +352,74 @@
         <div id="exp-grid" class="exp-grid"></div>
       </section>
 
-      <!-- ── ⑪ Methodology ─────────────────────────── -->
+      <!-- ── ⑪ Ablation & best result ───────────────── -->
+      <section id="ablation" data-section="ablation">
+        <h2>Improved Experiment — Ablation &amp; Best Result
+          <span style="font-family:var(--mono);font-size:12px;font-weight:400;color:var(--ink-3);margin-left:8px">BERTopic · T4 · 12 runs</span>
+        </h2>
+        <p style="font-size:13.5px;color:var(--ink-2);margin:0 0 12px;line-height:1.6">
+          The refreshed run (<code style="font-family:var(--mono);font-size:12px;background:var(--paper-3);padding:2px 6px;border-radius:4px">improved_experiment.py</code>) re-clusters the full 4,966-drop corpus across an ablation grid: three embedding models (<strong>BAAI/bge-large-en-v1.5</strong> primary, all-mpnet-base-v2, all-MiniLM-L6-v2) × <strong>min_cluster_size {15, 25, 40}</strong>, in full and admin-filtered corpora. Each run is scored on a composite of silhouette, gensim c<sub>v</sub> coherence, and cross-run topic persistence.
+        </p>
+        <div style="overflow:auto">
+          <table style="width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12.5px">
+            <thead>
+              <tr style="background:var(--paper-3)">
+                <th style="border:1px solid var(--rule);padding:6px 9px;text-align:left">Run</th>
+                <th style="border:1px solid var(--rule);padding:6px 9px;text-align:left">Model</th>
+                <th style="border:1px solid var(--rule);padding:6px 9px;text-align:right">mcs</th>
+                <th style="border:1px solid var(--rule);padding:6px 9px;text-align:right">Topics</th>
+                <th style="border:1px solid var(--rule);padding:6px 9px;text-align:right">Silhouette</th>
+                <th style="border:1px solid var(--rule);padding:6px 9px;text-align:right">c<sub>v</sub></th>
+                <th style="border:1px solid var(--rule);padding:6px 9px;text-align:right">Persist.</th>
+                <th style="border:1px solid var(--rule);padding:6px 9px;text-align:right">Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="background:rgba(120,90,40,.10);font-weight:600">
+                <td style="border:1px solid var(--rule);padding:6px 9px">MiniLM·mcs40</td><td style="border:1px solid var(--rule);padding:6px 9px">all-MiniLM-L6-v2</td><td style="border:1px solid var(--rule);padding:6px 9px;text-align:right">40</td><td style="border:1px solid var(--rule);padding:6px 9px;text-align:right">2</td><td style="border:1px solid var(--rule);padding:6px 9px;text-align:right">0.795</td><td style="border:1px solid var(--rule);padding:6px 9px;text-align:right">0.478</td><td style="border:1px solid var(--rule);padding:6px 9px;text-align:right">0.525</td><td style="border:1px solid var(--rule);padding:6px 9px;text-align:right">0.597</td>
+              </tr>
+              <tr><td style="border:1px solid var(--rule);padding:6px 9px">bge·mcs40 (admin)</td><td style="border:1px solid var(--rule);padding:6px 9px">bge-large-en-v1.5</td><td style="border:1px solid var(--rule);padding:6px 9px;text-align:right">40</td><td style="border:1px solid var(--rule);padding:6px 9px;text-align:right">3</td><td style="border:1px solid var(--rule);padding:6px 9px;text-align:right">0.612</td><td style="border:1px solid var(--rule);padding:6px 9px;text-align:right">0.300</td><td style="border:1px solid var(--rule);padding:6px 9px;text-align:right">0.683</td><td style="border:1px solid var(--rule);padding:6px 9px;text-align:right">0.585</td></tr>
+              <tr><td style="border:1px solid var(--rule);padding:6px 9px">MPNet·mcs40</td><td style="border:1px solid var(--rule);padding:6px 9px">all-mpnet-base-v2</td><td style="border:1px solid var(--rule);padding:6px 9px;text-align:right">40</td><td style="border:1px solid var(--rule);padding:6px 9px;text-align:right">2</td><td style="border:1px solid var(--rule);padding:6px 9px;text-align:right">0.815</td><td style="border:1px solid var(--rule);padding:6px 9px;text-align:right">0.324</td><td style="border:1px solid var(--rule);padding:6px 9px;text-align:right">0.538</td><td style="border:1px solid var(--rule);padding:6px 9px;text-align:right">0.578</td></tr>
+              <tr><td style="border:1px solid var(--rule);padding:6px 9px">bge·mcs25 (admin)</td><td style="border:1px solid var(--rule);padding:6px 9px">bge-large-en-v1.5</td><td style="border:1px solid var(--rule);padding:6px 9px;text-align:right">25</td><td style="border:1px solid var(--rule);padding:6px 9px;text-align:right">7</td><td style="border:1px solid var(--rule);padding:6px 9px;text-align:right">0.160</td><td style="border:1px solid var(--rule);padding:6px 9px;text-align:right">0.441</td><td style="border:1px solid var(--rule);padding:6px 9px;text-align:right">0.638</td><td style="border:1px solid var(--rule);padding:6px 9px;text-align:right">0.455</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:12.5px;color:var(--ink-3);margin:8px 0 0;line-height:1.6">
+          The winning two-topic solutions are favoured because they are <strong>robust</strong>: MiniLM·mcs40 and MPNet·mcs40 — two independent models — agree at Jaccard <strong>0.928</strong>, while finer settings shatter into 39–56 fragile topics that don't survive a model swap. The corpus's stable structure is a WWG1WGA slogan cluster plus a ~4,000-drop affect blob. Full table &amp; plots: <a href="results/improved/improved_experiment_report.html">improved_experiment_report.html</a> · <a href="results/improved/plots/ablation_scoreboard.png">scoreboard</a>.
+        </p>
+      </section>
+
+      <!-- ── ⑫ Two readings ─────────────────────────── -->
+      <section id="two-readings" data-section="two-readings">
+        <h2>Two Readings of the Same Data</h2>
+        <p style="font-size:13.5px;color:var(--ink-2);margin:0 0 12px;line-height:1.6">
+          The identical result set yields a calibrated, data-backed theory and a QAnon-native conspiratorial reading. The latter is reproduced only as a discourse object — <strong>never endorsed</strong>. The full side-by-side, with the decisive contrast, lives on the <a href="index.html#readings">home page</a>.
+        </p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div style="border:1px solid var(--rule);border-left:4px solid #2e7d52;border-radius:8px;padding:13px 15px;background:var(--paper)">
+            <div style="font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:#2e7d52">Most backed by data</div>
+            <h3 style="font-size:15.5px;margin:6px 0 7px;color:var(--ink)">Affective engagement engine; the audience amplifies</h3>
+            <ul style="margin:0;padding-left:17px;font-size:12.5px;color:var(--ink-2);line-height:1.55">
+              <li>Thought-control dominates all 7 platforms; behaviour-control ≈ 0.</li>
+              <li>Drops are the <em>quietest</em> BITE signal (0.0184); platforms score 5.6–7.1× higher. <a href="future.html#data-integrity" style="color:#9b2c2c">⚠ provisional</a> (downstream data is synthetic).</li>
+              <li>Ablation collapses the corpus to 2 robust topics (cross-model Jaccard 0.928).</li>
+              <li>Content got vaguer as it grew (17→8 words; URLs 2.8%→56%; predictions 7.8%→3%).</li>
+            </ul>
+          </div>
+          <div style="border:1px solid var(--rule);border-left:4px solid #9b2c2c;border-radius:8px;padding:13px 15px;background:var(--paper)">
+            <div style="font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:#9b2c2c">Most conspiratorial · not endorsed</div>
+            <h3 style="font-size:15.5px;margin:6px 0 7px;color:var(--ink)">"A coordinated military-intel comms channel"</h3>
+            <ul style="margin:0;padding-left:17px;font-size:12.5px;color:var(--ink-2);line-height:1.55">
+              <li>"Operational" clusters (sec_test, dod_route, oig·indictments) read as op-orders.</li>
+              <li>"Q clock": timestamp·past·future·proves read as drop↔tweet sync.</li>
+              <li>Stable WWG1WGA + Parler×Twitter 0.273 read as coordination.</li>
+              <li><strong>Fails:</strong> unfalsifiable post-hoc matching; repetition ≠ coordination; bans ≠ orders.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── ⑬ Methodology ─────────────────────────── -->
       <section id="methodology" data-section="methodology">
         <h2>Methodology</h2>
         <div class="method-note">

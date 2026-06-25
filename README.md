@@ -21,6 +21,7 @@ python compare_results.py
 # 4 – single-dataset explorer (original pipeline)
 python qdrops_cluster.py          # Q drops only, BERTopic
 python qdrops_sweep.py            # stability sweep
+python qdrops_patterns.py        # metadata patterns → original_findings.json
 
 # 5 – view results
 python3 -m http.server 8000       # → http://localhost:8000
@@ -59,6 +60,74 @@ Paste this in one Colab cell:
 - Transfer bundle zip:
    - `/content/qanon_results_bundle_improved.zip`
 
+## Latest run — best result, setup & LLM
+
+**Experiment setup.** BERTopic (sentence-transformers → UMAP → HDBSCAN) on the full **4,966-drop** Q corpus, device target **T4 GPU**, run as a 12-cell ablation: three embedding models — **BAAI/bge-large-en-v1.5** (primary), **all-mpnet-base-v2**, **all-MiniLM-L6-v2** — crossed with **min_cluster_size ∈ {15, 25, 40}**, in both the full and admin-filtered corpora. Each run is scored on a composite of silhouette separation, gensim c<sub>v</sub> coherence, and cross-run topic persistence.
+
+**Best run (composite winner):**
+
+| Run | Model | mcs | Topics | Silhouette | c_v | Persistence | Score |
+|---|---|---:|---:|---:|---:|---:|---:|
+| **MiniLM·mcs40** | all-MiniLM-L6-v2 | 40 | 2 | **0.795** | **0.478** | 0.525 | **0.597** |
+| MPNet·mcs40 | all-mpnet-base-v2 | 40 | 2 | 0.815 | 0.324 | 0.538 | 0.578 |
+| bge·mcs40 (admin) | bge-large-en-v1.5 | 40 | 3 | 0.612 | 0.300 | 0.683 | 0.585 |
+
+The two-topic solutions win because they are **robust**, not because they are simple: MiniLM·mcs40 and MPNet·mcs40 (two independent models) agree at Jaccard **0.928**, while finer settings shatter into 39–56 fragile topics that don't survive a model swap. Full scoreboard: [`results/improved/improved_experiment_report.md`](results/improved/improved_experiment_report.md).
+
+**LLM used.** The baseline pipeline (embeddings, clustering, BITE) is **fully deterministic and LLM-free**. An LLM enters only as an *optional* extension for narrative topic-label refinement, profiled in `compare_results.json`: framework **Ollama**, default **qwen2.5:7b** (high-quality **qwen2.5:14b**, fallback **qwen2.5:3b**), strict **JSON mode**, **temperature 0, top_p 0.1, top_k 20, seed 42**, schema-validate-and-retry. No confidence scores are reported.
+
+## Patterns, commonalities & two theories
+
+A reproducible metadata pass — **`qdrops_patterns.py` → `results/improved/original_findings.json`** — mines signals the topic/BITE pipeline discards. Run it with `python qdrops_patterns.py`.
+
+**Commonalities found across the drops:**
+- **One travelling lexicon.** The same anchor words (`storm, patriots, coming, god, fisa, drop, msm, ready, wwg1wga, panic, map, trust`) recur across all 21 platform pairs; the strongest is **Parler × Twitter (Jaccard 0.273)** and **WWG1WGA** is the most stable topic across every embedding model.
+- **Affective uniformity.** At mcs40 the corpus collapses to **two robust topics** (a slogan cluster + a ~4,000-drop "god/patriots/time" affect blob).
+- **Stylistic drift across the migration.** 4chan→8chan→8kun: median length **17→12→8 words**, URL share **2.8%→31%→56%**, questions/drop **3.22→1.21→1.20**.
+- **A single human's clock.** Posting time-of-day shows a **143×** busy/quiet ratio; the deepest 3-hour window (11–13 UTC) holds just **0.44%** of all drops, landing in the sleep band for every US time zone. 25.6% of consecutive drops are <5 min apart (typing sessions).
+
+**Most data-backed theory.** *The drops are an affective engagement engine; the audience is the amplifier.* Thought-control dominates all 7 platforms while behaviour-control ≈ 0; the source is the **quietest** BITE signal (0.0184) and downstream platforms score **5.6–7.1× higher**; the corpus is mostly one affect blob; and it grew vaguer over time. Survives the stability sweep, the ablation, and directional/strong replication of Hoseini/iDRAMA/Hassan. **⚠ Caveat (added after adversarial review):** the amplification pillar rests on the six downstream datasets, which are *synthetic samples* (`collect_datasets.py make_sample`; `catalog.json` shows `local_path: null`), so the 5.6–7.1× figure is a lexicon-and-authorship artifact pending real platform data — see [`future.html`](future.html). The theory's other pillars stand on the real Q corpus.
+
+**Most conspiratorial reading (shown as a discourse object, *not endorsed*).** *"The drops are a coordinated military-intelligence comms channel (the 'Q clock')."* Believers point at "operational" clusters (`sec_test · dod_route · oig·indictments`), timestamp-sync ("future proves past"), stable cross-platform slogans, and a 2020-03 Thought-control peak as "COVID foreknowledge." Every pillar is unfalsifiable post-hoc pattern-matching: repetition ≠ coordination, deplatforming ≠ orders, and the spike is the whole internet discovering COVID. The decisive point: the backed theory *predicts* the conspiratorial one — a corpus engineered for reinterpretation is exactly one in which motivated readers always "find" a hidden signal. Full side-by-side on [`index.html#readings`](index.html) and [`results.html#two-readings`](results.html).
+
+## Original theories & designed experiments
+
+Four falsifiable hypotheses derived from the data, each with a test and a kill condition (see `index.html#theories`):
+
+| # | Theory | Designed experiment | Falsified if |
+|---|---|---|---|
+| **T1** | Single nocturnal operator, not a 24/7 team | Per-phase UTC-hour KDE + **DST-shift test** (does the trough track US daylight saving?); bootstrap a uniform null | Activity ~uniform across 24 h, or trough ignores DST |
+| **T2** | Stylometric handoff at the 8chan→8kun migration (Nov 2019) | Change-point detection on a monthly style vector; phase-A vs phase-C authorship classifier | Change-points fall at random months; A/C not separable |
+| **T3** | Engagement-maximising vagueness ("falsifiability decay") | Regress per-drop concreteness on time **and** downstream audience; interrupted time-series at failed-date events | Concreteness flat/rising; no break at failures |
+| **T4** | Affective floor, informational ceiling | Hierarchical persistence: does each drop's topic survive all 3 models? + affect-vs-info classifier over time | Many mid-sized info topics persist across all models |
+
+## New theory: Delegated Closure (`future.html` + `dci.py`)
+
+A novel **measurement** contribution (not a new narrative — the producer/consumer "guided apophenia" reading is credited to Berkowitz, Argentino, Phillips & Milner, Muirhead & Rosenblum). **Thesis:** Q drops don't *transmit* cult control; they *solicit* it by withholding interpretive closure, so the audience self-authors the missing meaning and owns it as personal discovery.
+
+The contribution is the **Delegated-Closure Index (DCI)** — the first per-post, embedding-free, LLM-free, regex-computable score of "gap-leaving":
+
+```
+DCI = clip( 0.22·INTERROGATIVE + 0.20·DECODE + 0.18·REDACTION
+          + 0.15·BREVITY + 0.13·(1−CONCRETENESS) + 0.12·(1−GROUNDING), 0, 1 )
+```
+
+Built to be **non-circular**: engagement is never an input; tokens shared with `bite_scorer.py` (`future proves past`, `trust the plan`, `map`) are removed from DECODE; word-count is partialled out of every DCI-vs-BITE comparison.
+
+**Honest results scorecard** (computed by `dci.py` on the real 4,966-drop corpus):
+
+| Claim | Verdict | Evidence |
+|---|---|---|
+| DCI computable & non-degenerate | ✅ Pass | mean 0.342 ± 0.137, range 0.00–0.90 |
+| DCI independent of BITE (non-circular) | ✅ Pass | r=0.05; partial-r (word-count out) = −0.03 |
+| DCI weight-invariant | ✅ Pass | weighted vs uniform-1/6 r=0.96 |
+| DCI discriminates gap-leaving vs self-resolving | ✅ Pass | high = "Coincidence?" cascades; low = URL-grounded links |
+| Openness drifts upward over time (ODS) | ⬇ Downgraded | overall −0.0026/yr ≈ placebo 0.0017 → a **mode-shift**, not a rise |
+| Falsifiability economy (FER rises) | ❌ Rejected | FER **falls** 0.71→0.50→0.34 across 2017–19 |
+| Source openness → downstream control (5.6–7.1×) | ⛔ Blocked | downstream corpora are **synthetic** — not computable here |
+
+The negatives are kept on purpose: a theory page that buried its rejected hypotheses and its synthetic-data problem would violate the dossier's evidence-grading contract. Full write-up, prior-research ledger, and the 5-phase roadmap (Phase 0 = collect real downstream data) live on [`future.html`](future.html).
+
 ## Datasets
 
 See [`datasets/CATALOG.md`](datasets/CATALOG.md) for the full database list with sources, licenses, and download instructions. The collector (`collect_datasets.py`) auto-downloads freely available datasets and documents the rest.
@@ -74,7 +143,7 @@ See [`datasets/CATALOG.md`](datasets/CATALOG.md) for the full database list with
 | **T** Thought | Loaded language, thought-stopping slogans, black/white thinking |
 | **E** Emotional | Fear, love-bombing, shame, urgency |
 
-Scores are produced per-document and aggregated per dataset/time-window.
+Scores are produced per-document and aggregated per dataset/time-window. **Key cross-platform finding:** Thought Control is the dominant dimension on **all 7** datasets, while the Q drops themselves are the *lowest*-scoring corpus (BITE total 0.0184) and downstream platforms score **5.6–7.1× higher**. **⚠ Important:** the six downstream datasets are *synthetic samples* (`collect_datasets.py make_sample`; `catalog.json` `local_path: null`), so the amplification figure is an artifact of researcher-authored, Q-saturated seed prose scored by a Q-keyword lexicon — **not** evidence of audience manufacture. Treat it as provisional pending real platform collection (see `future.html` and the `Delegated Closure` roadmap). Behaviour Control ≈ 0 everywhere is a genuine finding on the real Q corpus.
 
 ## Replicating related work
 
@@ -101,7 +170,10 @@ Results land in `compare_results.json` and `compare_results.html` (web dashboard
 | **`timeline.html`** | A **sourced event chronology** in seven eras — precursors, the first Q drop, platform migrations, key drops, violent incidents, parallel global events, and a final **"Current events & the news"** era (2022–2026) linking QAnon's mythology to live news: Trump's Q embrace, the January 2025 pardons of the "QAnon Shaman," and the Epstein-files fracture. |
 | **`drops.html`** | An **interactive drop-cluster explorer + analytics dashboard**. Reads `qdrops_clustered.json` and renders a UMAP **cluster map**, **topic breakdown**, **searchable reader**, drops-per-year and monthly-volume charts (with literature milestones), **per-topic temporal sparklines**, a **validity readout** (silhouette + c_v), **corpus composition** and **board-migration** charts, a **tripcode-rotation timeline** (an authenticity signal), an **administrative-drop filter**, a **cross-reference table** vs. the peer-reviewed literature, and a **Stability panel** (loads `stability_report.json`; **click a stable topic to read its drops** in the reader). Works the moment the JSON is present; otherwise offers a file-picker + schema-preview demo. |
 | **`methods.html`** | A consolidated **methods and data map**: all databases/derived files used, grouped experiment setup (normalization → clustering → validity → stability), and peer-reviewed tracks grouped by analytical role for quick reproducibility and evidence lookup. |
+| **`future.html`** | The newest page: a **novel measurement theory — "Delegated Closure"** — and its metric, the **Delegated-Closure Index (DCI)**, the first per-post, embedding-free, LLM-free, regex-computable measure of how much interpretive closure a drop withholds. Carries an honest results scorecard (4 passes, 1 downgrade, 1 rejected hypothesis, 1 blocked), the **synthetic-downstream-data disclosure**, a prior-research ledger, and a phased research roadmap. Reads `results/improved/dci_findings.json`. |
 | `qdrops_cluster.py` | The **clustering pipeline** (run locally). Downloads the research-only [JSON-QAnon](https://github.com/jkingsman/JSON-QAnon) dataset, embeds each drop, and lets topics form themselves via **embeddings → UMAP → HDBSCAN** (BERTopic; also `--method hdbscan` and a no-torch `--method kmeans`). Reports **validity** (silhouette + gensim c_v coherence), extracts **metadata** (images, references, tripcodes, source board → corpus composition + board migration), and **tags administrative drops** (`--drop-admin`). Exports `qdrops_clustered.json` + CSV. |
+| `qdrops_patterns.py` | A **metadata pattern-miner** over the raw archive. Extracts the signatures the topic/BITE pipeline discards — posting **circadian rhythm** (UTC hour-of-day), **stylistic phase shifts** across the board migration, falsifiable-claim ("concreteness") decay, source-vs-platform **BITE amplification**, and inter-drop cadence. Writes `results/improved/original_findings.json`; backs the patterns & theories panels. |
+| `dci.py` | The **Delegated-Closure Index** — a per-drop, embedding-free, LLM-free measure of interpretive gap-leaving (6 lexical components, weights sum to 1), plus its robustness battery: openness-drift slope with a time-shuffle placebo, the falsifiability-economy ratio, weight-invariance, leave-one-out ablation, and a BITE partial-correlation non-circularity check. Writes `results/improved/dci_findings.json`; backs `future.html`. Run `python dci.py`. |
 | `qdrops_sweep.py` | A **multi-config sweep + stability comparator**. Runs several embedding models × `min_cluster_size` values (embedding once per model), scores each, writes one `run_*.json` per config, and measures **topic persistence** across runs by document-membership overlap — so you keep the topics that are *stable* (real) and discount the *fragile* ones (artifacts). Writes `stability_report.json` + CSV. |
 | `requirements.txt` | Python dependencies for the pipeline (gensim is optional, for c_v). |
 | `assets/style.css` | Shared stylesheet (the "forensic OSINT dossier" design system). |

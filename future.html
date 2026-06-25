@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delegated Closure · A New Theory &amp; Research Roadmap · QAnon</title>
+<meta name="description" content="Delegated Closure: a novel, falsifiable, embedding-free measurement theory of QAnon drops. Introduces the Delegated-Closure Index (DCI) — the first per-post computable measure of interpretive gap-leaving — with an honest results scorecard, a data-integrity disclosure, and a phased research roadmap.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .code{font-family:var(--mono);font-size:12.5px;background:var(--ink);color:#E7E0D2;border-radius:7px;padding:11px 13px;overflow-x:auto;white-space:pre;margin:8px 0;line-height:1.55}
+  .formula{font-family:var(--mono);font-size:13.5px;background:var(--paper-2);border:1px solid var(--rule-2);border-left:4px solid var(--accent);border-radius:8px;padding:13px 15px;margin:10px 0;color:var(--ink);line-height:1.7;overflow-x:auto}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:8px 0}
+  .kpis>div{border:1px solid var(--rule-2);border-radius:8px;background:var(--paper-2);padding:11px 13px}
+  .kpis .k{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+  .kpis .v{font-family:var(--serif);font-size:21px;color:var(--ink);margin-top:3px;line-height:1.1}
+  .kpis .s{font-family:var(--mono);font-size:10px;color:var(--ink-3);margin-top:2px}
+  @media(max-width:780px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .dtab{width:100%;border-collapse:collapse;font-size:12.5px;margin:10px 0;font-family:var(--mono)}
+  .dtab th,.dtab td{border:1px solid var(--rule);padding:6px 9px;text-align:left;vertical-align:top}
+  .dtab thead th{background:var(--paper-3);color:var(--ink-2);font-weight:600;letter-spacing:.03em}
+  .dtab td.num,.dtab th.num{text-align:right}
+  .dtab caption{caption-side:bottom;font-family:var(--mono);font-size:10.5px;color:var(--ink-3);text-align:left;margin-top:6px;line-height:1.55}
+  .dtab .mk{font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+  /* histogram */
+  .hist{border:1px solid var(--rule-2);border-radius:9px;background:var(--paper-2);padding:14px 15px 8px;margin:10px 0}
+  .hist .bars{display:grid;grid-template-columns:repeat(20,1fr);align-items:end;gap:2px;height:120px}
+  .hist .bars i{background:var(--accent);border-radius:2px 2px 0 0;display:block;min-height:2px;opacity:.85}
+  .hist .bars i.med{background:#9b2c2c;opacity:.95}
+  .hist .axis{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;color:var(--ink-3);margin-top:4px}
+  .hist .cap{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);margin-top:8px;line-height:1.55}
+  /* diverging ODS bars */
+  .div{display:grid;grid-template-columns:120px 1fr 8px 1fr 86px;align-items:center;gap:0;font-family:var(--mono);font-size:11px;padding:3px 0}
+  .div .lab{color:var(--ink-2)}
+  .div .neg{display:flex;justify-content:flex-end}
+  .div .neg b,.div .pos b{height:11px;display:block;border-radius:2px}
+  .div .neg b{background:#9b2c2c}
+  .div .pos b{background:#2e7d52}
+  .div .mid{background:var(--rule-2);height:16px;width:1px;justify-self:center}
+  .div .val{text-align:right;color:var(--ink)}
+  .divhd{display:grid;grid-template-columns:120px 1fr 8px 1fr 86px;font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);margin:6px 0 2px}
+  .divhd .l{text-align:right}.divhd .r{text-align:left;grid-column:4}
+  /* scorecard */
+  .scard{border:1px solid var(--rule-2);border-radius:9px;overflow:hidden;margin:10px 0}
+  .scard .r{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:11px 15px;border-top:1px solid var(--rule)}
+  .scard .r:first-child{border-top:none}
+  .scard .r .t{font-size:13px;color:var(--ink-2);line-height:1.5}
+  .scard .r .t b{color:var(--ink)}
+  .pill{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:3px 10px;border-radius:20px;white-space:nowrap}
+  .pill.pass{background:rgba(46,125,82,.12);color:#2e7d52;border:1px solid rgba(46,125,82,.4)}
+  .pill.fail{background:rgba(155,44,44,.10);color:#9b2c2c;border:1px solid rgba(155,44,44,.4)}
+  .pill.block{background:rgba(176,124,20,.12);color:#8a5a00;border:1px solid rgba(176,124,20,.4)}
+  .pill.down{background:rgba(120,120,120,.12);color:#5b5b5b;border:1px solid rgba(120,120,120,.4)}
+  /* roadmap */
+  .road{list-style:none;padding:0;margin:8px 0 0}
+  .road>li{display:grid;grid-template-columns:96px 1fr;gap:16px;padding:14px 0;border-top:1px solid var(--rule)}
+  .road>li:first-child{border-top:none}
+  .road .ph{font-family:var(--mono);font-size:10.5px;font-weight:600;color:#F4EFE6;background:var(--accent);border-radius:6px;padding:6px 8px;text-align:center;height:fit-content;line-height:1.2}
+  .road .ph.gate{background:#9b2c2c}
+  .road h4{font-family:var(--serif);font-size:16px;font-weight:600;margin:0 0 4px;color:var(--ink)}
+  .road p{margin:0 0 5px;font-size:13px;color:var(--ink-2);line-height:1.55}
+  .road .dl{font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+  .integrity{border:1px solid rgba(155,44,44,.35);border-left:4px solid #9b2c2c;background:rgba(155,44,44,.05);border-radius:8px;padding:14px 18px;margin:6px 0}
+  .integrity b{color:#9b2c2c}
+  .note2{font-size:12px;color:var(--ink-3);font-family:var(--mono);line-height:1.6}
+  .secbody p{color:var(--ink-2);line-height:1.62}
+  .secbody code{font-family:var(--mono);font-size:12px;background:var(--paper-3);padding:1px 5px;border-radius:4px}
+</style>
+</head>
+<body>
+
+<button class="railtoggle" id="railtoggle" aria-label="Open contents">☰ Contents</button>
+<div class="scrim" id="scrim"></div>
+
+<div class="shell">
+  <aside class="rail">
+    <div class="rail-inner" id="rail">
+      <div class="seal"><b>Future</b><span>New theory &amp; roadmap</span></div>
+      <nav class="xnav">
+        <a href="index.html">Home</a>
+        <a href="dossier.html">Dossier</a>
+        <a href="research.html">Research</a>
+        <a href="review.html">Review</a>
+        <a href="timeline.html">Timeline</a>
+        <a href="drops.html">Drops</a>
+        <a href="results.html">Results</a>
+        <a href="methods.html">Methods</a>
+        <a href="future.html" class="here">Future</a>
+      </nav>
+      <div class="reffile">
+        REF · <span>DELEGATED-CLOSURE</span><br>
+        METRIC · <span>DCI (embedding-free)</span><br>
+        CODE · <span>dci.py</span><br>
+        DATA · <span>dci_findings.json</span>
+      </div>
+
+      <p class="railhead">On this page</p>
+      <nav class="toc" id="toc">
+        <a href="#thesis"><span class="n">1</span><span>The thesis</span></a>
+        <a href="#dci-metric"><span class="n">2</span><span>The DCI metric</span></a>
+        <a href="#non-circular"><span class="n">3</span><span>Why it's non-circular</span></a>
+        <a href="#results"><span class="n">★</span><span>Results scorecard</span></a>
+        <a href="#drift"><span class="n">4</span><span>Drift &amp; falsifiability economy</span></a>
+        <a href="#robustness"><span class="n">5</span><span>Robustness</span></a>
+        <a href="#data-integrity"><span class="n">▲</span><span>Data-integrity disclosure</span></a>
+        <a href="#ledger"><span class="n">6</span><span>Prior-research ledger</span></a>
+        <a href="#roadmap"><span class="n">→</span><span>Research roadmap</span></a>
+      </nav>
+
+      <div class="legend">
+        <p class="railhead">Verdict key</p>
+        <div class="row"><span class="pill pass">Pass</span><span class="def">Cleared its pre-registered test on real data.</span></div>
+        <div class="row"><span class="pill down">Downgraded</span><span class="def">Claim weakened by the data; restated honestly.</span></div>
+        <div class="row"><span class="pill fail">Rejected</span><span class="def">Failed its own falsifier.</span></div>
+        <div class="row"><span class="pill block">Blocked</span><span class="def">Not computable — needs real downstream data.</span></div>
+      </div>
+    </div>
+  </aside>
+
+  <main>
+    <header class="mast">
+      <div class="classbar">
+        <span><span class="dot"></span>Novel theory</span>
+        <span class="sep">/</span><span>Falsifiable &amp; pre-registered</span>
+        <span class="sep">/</span><span>Honest negatives included</span>
+        <span class="sep">/</span><span>Measurement, not narrative</span>
+      </div>
+      <h1 class="title">Delegated <span class="q">Closure</span></h1>
+      <p class="subtitle">A new, falsifiable <em>measurement</em> theory of how Q drops work — and the research program that would test it. The producer/consumer "guided apophenia" reading is not new (Berkowitz, Argentino, Phillips &amp; Milner). What is new is the <strong>Delegated-Closure Index (DCI)</strong>: the first per-post, embedding-free, LLM-free, regex-computable measure of how much interpretive closure a drop withholds — built to be non-circular and tested against its own pre-registered falsifiers, negatives and all.</p>
+      <div class="hero-stats" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-top:4px">
+        <div style="background:var(--paper);padding:13px 15px"><div style="font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)">DCI mean</div><div style="font-family:var(--serif);font-size:21px;color:var(--ink);margin-top:3px">0.342</div></div>
+        <div style="background:var(--paper);padding:13px 15px"><div style="font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)">Drops scored</div><div style="font-family:var(--serif);font-size:21px;color:var(--ink);margin-top:3px">4,966</div></div>
+        <div style="background:var(--paper);padding:13px 15px"><div style="font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)">BITE corr.</div><div style="font-family:var(--serif);font-size:21px;color:var(--ink);margin-top:3px">≈0.05</div></div>
+        <div style="background:var(--paper);padding:13px 15px"><div style="font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)">LLM used</div><div style="font-family:var(--serif);font-size:21px;color:var(--ink);margin-top:3px">None</div></div>
+      </div>
+    </header>
+
+    <div class="pagebody">
+      <p class="lede">This page is deliberately written like a pre-registration, not a press release. It states a thesis, defines an exact metric, proves the metric is not circular, then reports what the data actually said — including two hypotheses the corpus <em>rejected</em> and one headline claim that turned out to be <strong>not computable</strong> because the repository's downstream datasets are synthetic. That disclosure is the most important result on the page.</p>
+    </div>
+
+    <!-- 1 · THESIS -->
+    <section class="dz" id="thesis" style="border-top:none">
+      <div class="sechd"><div class="secno">1</div>
+        <div><h2 class="sech">Delegated Closure — a measurement, not a new story</h2>
+        <p class="sectag">The concept is borrowed and credited; the contribution is a number</p></div></div>
+      <div class="secbody">
+        <p style="margin-top:0"><strong>Thesis.</strong> Q drops do not <em>transmit</em> cult control; they <em>solicit</em> it by withholding interpretive closure, so the audience self-authors the missing meaning and experiences it as personal discovery rather than imposed dogma. The producer leaves a gap; the consumer fills it; ownership of the conclusion transfers to the reader.</p>
+        <p>That division of labor is the prior consensus reading of QAnon — Reed Berkowitz's "guided apophenia," Marc-André Argentino's QAnon-as-ARG, Phillips &amp; Milner's "participatory disinformation," Muirhead &amp; Rosenblum's "conspiracy without the theory." We do not claim it as new. <strong>Our contribution is purely a measurement one:</strong> the first per-post index that turns "gap-leaving" from a qualitative observation into a reproducible number you can compute, ablate, and falsify.</p>
+        <div class="formula">Under predictive processing, a drop is salient because it raises prediction-error (a question, a redaction, a decode-prompt) but supplies no posterior. The loop is left open; the reader closes it by pattern-completion; because the resolution is self-generated, it is held as identity-owned truth.</div>
+        <p>The five-step mechanism: <strong>(1) under-specify</strong> at source → <strong>(2) raise prediction-error without resolving it</strong> → <strong>(3) hand off the inferential labor</strong> via decode-operators → <strong>(4) the audience self-authors closure</strong> through apophenia → <strong>(5) economize on falsifiability</strong> (dated claims self-extinguish on failure, so they are selected out). Step 5 is the only place we attempt a genuinely novel, measurable claim — and, as the scorecard shows, the corpus did not support it.</p>
+      </div>
+    </section>
+
+    <!-- 2 · DCI METRIC -->
+    <section class="dz" id="dci-metric">
+      <div class="sechd"><div class="secno">2</div>
+        <div><h2 class="sech">The Delegated-Closure Index (DCI)</h2>
+        <p class="sectag">Six lexical components · weights sum to 1 · computed by <code>dci.py</code></p></div></div>
+      <div class="secbody">
+        <p style="margin-top:0">DCI is a per-drop score in [0,1]. Higher = the drop raises interpretive demand (questions, redaction, decode-prompts, brevity, no dated claim, no external grounding) while supplying no answer of its own. <strong>Engagement is never an input</strong>, and it reads only three <code>posts.json</code> fields: <code>text</code>, <code>referenced_posts</code>, and <code>post_metadata.time</code>.</p>
+        <div class="formula">DCI<sub>i</sub> = clip(&nbsp; 0.22·INTERROGATIVE&nbsp; + 0.20·DECODE&nbsp; + 0.18·REDACTION&nbsp; + 0.15·BREVITY&nbsp; + 0.13·(1−CONCRETENESS)&nbsp; + 0.12·(1−GROUNDING),&nbsp; 0, 1&nbsp;)</div>
+        <table class="dtab">
+          <thead><tr><th>Component</th><th class="num">w</th><th>Operationalization (lexical, from <code>posts.json</code>)</th></tr></thead>
+          <tbody>
+            <tr><td><b>INTERROGATIVE</b></td><td class="num">0.22</td><td>min(1, count('?')/3). Pure prediction-error raisers. <span class="mk">37.6% of drops carry '?'</span></td></tr>
+            <tr><td><b>DECODE</b></td><td class="num">0.20</td><td>presence of a <em>BITE-disjoint</em> decode-prompt: <span class="mk">re_read · expand your thinking · connect the dots · you have more than you know · think mirror · coincidence? · stringer</span></td></tr>
+            <tr><td><b>REDACTION</b></td><td class="num">0.18</td><td>max of: <code>[..]</code> bracket span · <code>RE_READ</code>/<code>D____</code> underscore-blackout · ALLCAPS-token ratio · bare pronoun with no proper noun &amp; no back-reference</td></tr>
+            <tr><td><b>BREVITY</b></td><td class="num">0.15</td><td>1 − min(1, words/20). Shorter drops name fewer referents.</td></tr>
+            <tr><td><b>1 − CONCRETENESS</b></td><td class="num">0.13</td><td>CONCRETENESS = 1 if a date (<code>\d{1,2}/\d{1,2}</code> or month) or action claim (<code>will be|arrested|indict|extradition|tomorrow…</code>) is present. Falsifiable specifics <em>lower</em> DCI.</td></tr>
+            <tr><td><b>1 − GROUNDING</b></td><td class="num">0.12</td><td>GROUNDING = 1 if a URL is present or <code>referenced_posts</code> is non-empty. External anchoring <em>lowers</em> DCI.</td></tr>
+          </tbody>
+          <caption>Every component is purely count/regex — no embeddings, no parser, no LLM. Coreference and entailment clauses from earlier drafts were dropped precisely because they would have required a parser.</caption>
+        </table>
+
+        <h3 style="font-family:var(--serif);font-size:16px;margin:16px 0 4px;color:var(--ink)">Distribution over the real 4,966-drop corpus</h3>
+        <div class="kpis">
+          <div><div class="k">Mean ± SD</div><div class="v">0.342<span style="font-size:13px">±0.137</span></div><div class="s">non-degenerate</div></div>
+          <div><div class="k">Median</div><div class="v">0.323</div><div class="s">Q1 0.25 · Q3 0.42</div></div>
+          <div><div class="k">Range</div><div class="v">0.00–0.90</div><div class="s">full spread used</div></div>
+          <div><div class="k">Weight-invariance</div><div class="v">r=0.96</div><div class="s">vs uniform 1/6</div></div>
+        </div>
+        <div class="hist">
+          <div class="bars">
+            <i style="height:4%"></i><i style="height:5%"></i><i style="height:20%"></i><i style="height:23%"></i><i style="height:54%"></i><i style="height:100%"></i><i class="med" style="height:51%"></i><i style="height:51%"></i><i style="height:62%"></i><i style="height:27%"></i><i style="height:33%"></i><i style="height:14%"></i><i style="height:3%"></i><i style="height:13%"></i><i style="height:2%"></i><i style="height:1%"></i><i style="height:1%"></i><i style="height:1%"></i><i style="height:1%"></i><i style="height:1%"></i>
+          </div>
+          <div class="axis"><span>0.0</span><span>0.25</span><span>0.5</span><span>0.75</span><span>1.0</span></div>
+          <div class="cap">DCI histogram (20 bins). Red bar ≈ median (0.323). A genuine spread, not a spike — DCI discriminates rather than labelling everything the same.</div>
+        </div>
+        <p class="note2">Face validity (discriminant check): the highest-DCI drops are pure interrogative cascades — <em>"Timing of impeachment vote [revised]? 7pm EST … Coincidence? Q"</em> (DCI 0.90) — while the lowest-DCI drops are URL-grounded link posts and concrete replies (DCI 0.00). The index separates gap-leaving from self-resolving text exactly as intended.</p>
+      </div>
+    </section>
+
+    <!-- 3 · NON-CIRCULAR -->
+    <section class="dz" id="non-circular">
+      <div class="sechd"><div class="secno">3</div>
+        <div><h2 class="sech">Why DCI is non-circular</h2>
+        <p class="sectag">Measurement-independent of BITE — proven, not asserted</p></div></div>
+      <div class="secbody">
+        <p style="margin-top:0">A metric that secretly re-counts the thing it predicts proves nothing. DCI was hardened against three circularity attacks from the red-team:</p>
+        <ol class="imp" style="list-style:none;padding:0;margin:6px 0 0">
+          <li style="padding:11px 0;border-top:1px dashed var(--rule)"><h4 style="font-family:var(--serif);font-size:15.5px;margin:0 0 3px;color:var(--ink)">1 · Engagement is never an input</h4><p style="margin:0;font-size:13px;color:var(--ink-2);line-height:1.55">DCI reads only the drop's own text/metadata. Amplification, replies, and reach are excluded by construction, so DCI cannot "predict" engagement by containing it.</p></li>
+          <li style="padding:11px 0;border-top:1px dashed var(--rule)"><h4 style="font-family:var(--serif);font-size:15.5px;margin:0 0 3px;color:var(--ink)">2 · BITE-shared tokens removed from DECODE</h4><p style="margin:0;font-size:13px;color:var(--ink-2);line-height:1.55">The phrases <code>future proves past</code>, <code>trust the plan</code>, and <code>the map</code> are scored by <a href="https://github.com/occult-kranti/qanon-dossier/blob/main/bite_scorer.py">bite_scorer.py</a> (lines 104/124/105). They are <strong>deliberately excluded</strong> from DCI's DECODE lexicon, so DCI and BITE never count the same string under opposite labels.</p></li>
+          <li style="padding:11px 0;border-top:1px dashed var(--rule)"><h4 style="font-family:var(--serif);font-size:15.5px;margin:0 0 3px;color:var(--ink)">3 · Word-count partialled out</h4><p style="margin:0;font-size:13px;color:var(--ink-2);line-height:1.55">Because brevity inflates DCI and deflates any keyword density, every DCI-vs-BITE comparison removes <code>word_count</code> first, so a brevity coincidence can't masquerade as a finding.</p></li>
+        </ol>
+        <div class="formula" style="border-left-color:#2e7d52">Empirical result (computed by <code>dci.py</code>): correlation of DCI with BITE-total = <b>0.048</b>; partial correlation controlling word-count = <b>−0.032</b>. DCI and BITE are statistically independent. <br>Caveat reported, not hidden: per-drop BITE-Thought variance is only 0.0065 (mean 0.0303) — a near-floor — so any claim that "DCI out-predicts BITE-T" would be <em>uninformative</em>, and we withdraw it.</div>
+      </div>
+    </section>
+
+    <!-- ★ RESULTS SCORECARD -->
+    <section class="dz" id="results">
+      <div class="sechd"><div class="secno">★</div>
+        <div><h2 class="sech">Results scorecard — what the data actually said</h2>
+        <p class="sectag">Each prediction paired with the pre-registered falsifier it had to clear</p></div></div>
+      <div class="secbody">
+        <p style="margin-top:0">Honesty over tidiness. The metric is sound, but two temporal hypotheses were not supported and the headline cross-platform claim is not computable here. All numbers are from <a href="results/improved/dci_findings.json">dci_findings.json</a>.</p>
+        <div class="scard">
+          <div class="r"><div class="t"><b>DCI is computable &amp; non-degenerate.</b> Mean 0.342±0.137, range 0.00–0.90 over 4,966 drops.</div><span class="pill pass">Pass</span></div>
+          <div class="r"><div class="t"><b>DCI is measurement-independent of BITE.</b> r=0.048; partial-r (word-count out) = −0.032.</div><span class="pill pass">Pass</span></div>
+          <div class="r"><div class="t"><b>DCI is weight-invariant.</b> Weighted vs uniform-1/6 correlate at r=0.96; year-ordering preserved; ablation stable.</div><span class="pill pass">Pass</span></div>
+          <div class="r"><div class="t"><b>DCI discriminates gap-leaving from self-resolving text.</b> Highest = interrogative cascades; lowest = URL-grounded links.</div><span class="pill pass">Pass</span></div>
+          <div class="r"><div class="t"><b>Openness drifts upward over the migration.</b> Overall slope −0.0026/yr ≈ placebo 0.0017 — flat. Components move in opposite directions and cancel.</div><span class="pill down">Downgraded</span></div>
+          <div class="r"><div class="t"><b>Falsifiability economy (deferral rises vs concreteness).</b> FER <em>falls</em> 0.71→0.50→0.34 across 2017–19 — its own falsifier fires.</div><span class="pill fail">Rejected</span></div>
+          <div class="r"><div class="t"><b>Source openness predicts downstream control (5.6–7.1× "amplification").</b> Downstream corpora are synthetic — not computable here.</div><span class="pill block">Blocked</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 · DRIFT -->
+    <section class="dz" id="drift">
+      <div class="sechd"><div class="secno">4</div>
+        <div><h2 class="sech">Openness "drift" and the falsifiability economy</h2>
+        <p class="sectag">The honest negatives — and why the per-component view is more interesting than the headline</p></div></div>
+      <div class="secbody">
+        <p style="margin-top:0"><strong>Openness Drift Slope (ODS).</strong> We regressed DCI on posting time. The <em>overall</em> slope is <strong>−0.0026/yr</strong> against a time-shuffle placebo of <strong>0.0017</strong> — statistically flat. Composite DCI does <em>not</em> rise. But the per-component breakout (the test the red-team demanded) tells a sharper story: the drops shifted <em>mode</em> of openness rather than raising its level.</p>
+        <div class="divhd"><span></span><span class="l">← toward closure /yr</span><span></span><span class="r">toward openness /yr →</span><span></span></div>
+        <div class="div"><span class="lab">BREVITY</span><span class="neg"></span><span class="mid"></span><span class="pos"><b style="width:67%"></b></span><span class="val">+0.050</span></div>
+        <div class="div"><span class="lab">REDACTION</span><span class="neg"></span><span class="mid"></span><span class="pos"><b style="width:45%"></b></span><span class="val">+0.034</span></div>
+        <div class="div"><span class="lab">1−CONCRETE</span><span class="neg"></span><span class="mid"></span><span class="pos"><b style="width:8%"></b></span><span class="val">+0.006</span></div>
+        <div class="div"><span class="lab">INTERROGATIVE</span><span class="neg"><b style="width:13%"></b></span><span class="mid"></span><span class="pos"></span><span class="val">−0.010</span></div>
+        <div class="div"><span class="lab">DECODE</span><span class="neg"><b style="width:38%"></b></span><span class="mid"></span><span class="pos"></span><span class="val">−0.029</span></div>
+        <div class="div"><span class="lab">1−GROUNDING</span><span class="neg"><b style="width:100%"></b></span><span class="mid"></span><span class="pos"></span><span class="val">−0.076</span></div>
+        <p style="margin-top:10px"><strong>Reading it.</strong> Late drops got <em>shorter</em> and <em>more redacted</em> (more open), but also <em>more externally grounded</em> via links and <em>less interrogative / decode-prompted</em> (less open). Early QAnon delegated through Socratic question-cascades; late QAnon delegated through brevity and blackout while offloading to outside links. The net is flat — so the clean "openness rises over time" narrative is <strong>downgraded to a mode-shift</strong>, not a magnitude increase. That is a more defensible — and more interesting — claim than the one we set out to make.</p>
+        <p><strong>Falsifiability Economy Ratio (FER) = decode-share ÷ concrete-share, 2017–19.</strong> The theory predicted FER would <em>rise</em> (deferral retained, concreteness culled). It <strong>falls</strong>: 0.712 → 0.497 → 0.337, because explicit decode-prompts thinned faster than dated claims did. By its own pre-registered falsifier, <strong>the falsifiability-economy mechanism is rejected</strong> on this corpus. The 2020 concreteness rebound (and a small-n 2022 spike) were disclosed and excluded by the stated 2017–19 cutoff, not used as support.</p>
+      </div>
+    </section>
+
+    <!-- 5 · ROBUSTNESS -->
+    <section class="dz" id="robustness">
+      <div class="sechd"><div class="secno">5</div>
+        <div><h2 class="sech">Robustness &amp; supporting metrics</h2>
+        <p class="sectag">Weight-invariance, leave-one-out, and the discriminant test</p></div></div>
+      <div class="secbody">
+        <ul style="margin:0;padding-left:18px;color:var(--ink-2);font-size:13.5px;line-height:1.65">
+          <li><strong>Weight invariance.</strong> Re-scoring with uniform 1/6 weights correlates with the weighted DCI at <strong>r=0.96</strong>, preserves the year-ordering of means, and keeps the ODS sign (−0.004/yr). The specific weights are not load-bearing — a stated requirement before any publication.</li>
+          <li><strong>Leave-one-component-out.</strong> Dropping any single component and renormalizing leaves the distribution and drift sign stable; no component alone drives DCI (each ablation correlates r≈0.9+ with the full index).</li>
+          <li><strong>Discriminant validity.</strong> Constructed/located vague-but-self-resolving texts (long, declarative, URL-grounded, dated) score <em>low</em> DCI despite semantic fuzziness, while short interrogative redacted drops score high — so DCI is not "vagueness re-weighted."</li>
+          <li><strong>Still open (Phase 1 deliverable):</strong> a PCA-from-loadings weight justification and a 100-drop human-coded convergent-validity study with inter-rater κ. Until that lands, DCI is an index of <em>regex incidence</em> with strong face validity, not yet a κ-validated measure of interpretive debt. Stated, not hidden.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ▲ DATA INTEGRITY -->
+    <section class="dz" id="data-integrity">
+      <div class="sechd"><div class="secno">▲</div>
+        <div><h2 class="sech">Data-integrity disclosure: the downstream corpora are synthetic</h2>
+        <p class="sectag">The single most important result on this page</p></div></div>
+      <div class="secbody">
+        <div class="integrity">
+          <p style="margin:0 0 8px"><b>The "5.6–7.1× amplification" figure is an artifact, not evidence.</b> While building this theory, an adversarial verification step inspected the data-collection code and catalog. <code>collect_datasets.py</code> (the <code>make_sample</code> generator, lines 353–375) <strong>fabricates</strong> all six downstream datasets — Reddit, 4chan, 8kun, Parler, Telegram, Twitter — by cycling a handful of Q-saturated seed sentences with slogan suffixes under a fixed RNG seed. <code>datasets/catalog.json</code> confirms it: every downstream dataset has <code>local_path: null</code> and <code>access: manual/api</code>.</p>
+          <p style="margin:0">So the earlier finding that "downstream platforms score 5.6–7.1× the drops' BITE-total" is <strong>researcher-authored prose scored by a Q-keyword lexicon</strong> — a tautology, not audience behavior. The Results page and home page now carry this caveat. No source→downstream claim in this theory is computable until real, provenance-documented platform corpora replace the seed prose.</p>
+        </div>
+        <p>This is why the co-production gradient (the most ambitious part of Delegated Closure) is presented as <strong>pre-registered and blocked</strong>, not as a finding. It also defines <strong>Phase 0</strong> of the roadmap below as a hard dependency for everything cross-platform.</p>
+      </div>
+    </section>
+
+    <!-- 6 · LEDGER -->
+    <section class="dz" id="ledger">
+      <div class="sechd"><div class="secno">6</div>
+        <div><h2 class="sech">Prior-research ledger — borrowed vs departure</h2>
+        <p class="sectag">An explicit accounting of what is old and what is ours</p></div></div>
+      <div class="secbody">
+        <table class="dtab">
+          <thead><tr><th>Prior work</th><th>What we borrow</th><th>Our departure</th></tr></thead>
+          <tbody>
+            <tr><td>Berkowitz, <em>A Game Designer's Analysis of QAnon</em> (2020) — guided apophenia, gaps-for-the-player</td><td>The whole producer/consumer division of labor: Q leaves gaps; the audience fills them and feels self-discovery.</td><td>Berkowitz asserts gap-leaving qualitatively. DCI is the first per-drop, embedding-free, computable score of it (mean 0.342±0.137).</td></tr>
+            <tr><td>Argentino (QAnon-as-ARG); Phillips &amp; Milner (participatory disinformation); Muirhead &amp; Rosenblum ("conspiracy without the theory")</td><td>Cross-platform participatory meaning-making; validation-by-repetition; audience as co-author.</td><td>We convert the qualitative claim into (a) a computable per-post index and (b) a pre-registered, slogan-controlled source→downstream gradient test.</td></tr>
+            <tr><td>Hassan BITE model; Lifton thought-reform</td><td>The B/I/T/E dimensions and the observation that Thought-control dominates while Behaviour-control ≈ 0.</td><td>We measure control-<em>solicitation</em> (DCI), not control-content, and de-overlap DCI from the BITE lexicon so the two are independent.</td></tr>
+            <tr><td>Festinger (failed prophecy / dissonance) &amp; the disconfirmation-immunity literature</td><td>The prophecy↔belief-maintenance link and Q's disconfirmation resistance.</td><td>We narrow our novel delta to one measurable thing they lack — the selection-out of concreteness (FER) — and report that the corpus <em>rejected</em> it. We demote "open prophecy" from falsifiable to descriptive.</td></tr>
+            <tr><td>Predictive processing (Friston, Clark); apophenia (Shermer, Conrad); Skinner (variable-ratio); Priniski &amp; Bavel; Hoseini</td><td>Prediction-error salience, free-energy pattern-completion, intermittent reinforcement, identity-protective cognition, cross-platform diffusion.</td><td>Unified into one computable construct (DCI) rather than a narrative collation. The narrowed originality claim: <em>no prior model quantifies gap-leaving per post.</em></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- → ROADMAP -->
+    <section class="dz" id="roadmap">
+      <div class="sechd"><div class="secno">→</div>
+        <div><h2 class="sech">Research roadmap — future steps</h2>
+        <p class="sectag">Five phases, with Phase 0 a hard data-integrity gate on everything cross-platform</p></div></div>
+      <div class="secbody">
+        <ol class="road">
+          <li><div class="ph gate">Phase 0<br>GATE</div><div>
+            <h4>Replace the synthetic downstream corpora with real, provenance-documented data</h4>
+            <p>Collect Reddit/4chan/8kun/Parler/Telegram/Twitter QAnon corpora from PushShift / 4plebs / academic-torrents with collection dates, sampling frame, and confidence intervals; update <code>catalog.json</code> with real <code>local_path</code>s. Until this lands, no source→downstream claim is computable and the 5.6–7.1× figure stays flagged as artifact.</p>
+            <div class="dl">Deliverable · provenance-documented platform corpora + updated catalog</div>
+          </div></li>
+          <li><div class="ph">Phase 1</div><div>
+            <h4>Lock &amp; validate the non-circular metric</h4>
+            <p>Freeze <code>dci.py</code> (BITE-disjoint DECODE, purely-lexical REDACTION/GROUNDING). Add a PCA-from-loadings weight justification, leave-one-out and uniform-weight re-reports, and a 100-drop human-coded convergent-validity study with inter-rater κ.</p>
+            <div class="dl">Deliverable · frozen dci.py, ablation/PCA tables, κ-validated human comparison</div>
+          </div></li>
+          <li><div class="ph">Phase 2</div><div>
+            <h4>Within-source falsification battery (computable now)</h4>
+            <p>The placebo-controlled, word-count-partialled source-only tests — ODS overall + per-component, FER over 2017–19, DCI-vs-BITE partial correlation, and the discriminant test. Already run here; Phase 2 hardens them with confidence intervals and the human-rating cross-check.</p>
+            <div class="dl">Deliverable · a results table stating each falsifier and whether the run cleared it</div>
+          </div></li>
+          <li><div class="ph">Phase 3</div><div>
+            <h4>Cross-source mediation with slogan-ablated BITE (gated on Phase 0)</h4>
+            <p>On real data, regress per-platform BITE-T amplification on source DCI vs source BITE-T within length-and-slogan-matched strata, with WWG1WGA / "the storm" / "great awakening" ablated. Pre-registered falsifier: if source BITE-T predicts downstream control at partial-r ≥ source DCI, delegation is rejected. Add a non-lexicon outcome (reply-depth / anchor-word reuse) so the result isn't internal to the dictionary.</p>
+            <div class="dl">Deliverable · mediation coefficients + CIs, slogan-ablated gradient, non-lexicon validation</div>
+          </div></li>
+          <li><div class="ph">Phase 4</div><div>
+            <h4>Publication as a measurement contribution with an honest ledger</h4>
+            <p>Frame the write-up as "the first computable operationalization of guided apophenia," crediting Berkowitz / Argentino / Phillips &amp; Milner / Muirhead &amp; Rosenblum up front, presenting DCI + the falsification battery + either the real-data gradient or its explicit deferral.</p>
+            <div class="dl">Deliverable · manuscript + reproducible repo + this page</div>
+          </div></li>
+        </ol>
+        <p class="note2" style="margin-top:14px">Reproduce everything on this page: <code>python dci.py</code> → <a href="results/improved/dci_findings.json">results/improved/dci_findings.json</a>. The metric reads only the real Q-drop corpus; downstream platforms are intentionally excluded until Phase 0 is met.</p>
+      </div>
+    </section>
+
+    <div class="foot">
+      <p class="disc"><b>Why include the negatives?</b> Because the whole dossier grades claims by evidence, and a theory page that buried its rejected hypotheses and its synthetic-data problem would violate that contract. Delegated Closure ships a validated, non-circular metric and an honest account of what it could and could not yet show. The most valuable output is the question it forces: collect real downstream data, then ask whether source openness predicts the control the audience manufactures.</p>
+      <p style="margin-top:14px">Compiled 2026 · QAnon research dossier · Novel-theory &amp; roadmap page · <a href="results.html" style="color:var(--rep);text-decoration:none">← Back to Results</a></p>
+    </div>
+
+  </main>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

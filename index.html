@@ -43,6 +43,57 @@
   .latest-links a{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);border-radius:20px;padding:3px 9px;background:var(--paper)}
   .latest-links a:hover{background:var(--paper-3);color:var(--ink)}
   @media(max-width:680px){ .hero-stats{grid-template-columns:repeat(2,1fr)} .guide li{grid-template-columns:40px 1fr;gap:10px} }
+  /* ---- experiment / theories / patterns blocks ---- */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:6px 0 4px}
+  .kpis>div{border:1px solid var(--rule-2);border-radius:8px;background:var(--paper-2);padding:11px 13px}
+  .kpis .k{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+  .kpis .v{font-family:var(--serif);font-size:20px;color:var(--ink);margin-top:3px;line-height:1.1}
+  .kpis .s{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);margin-top:2px}
+  @media(max-width:780px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .dtab{width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0;font-family:var(--mono)}
+  .dtab th,.dtab td{border:1px solid var(--rule);padding:5px 8px;text-align:right}
+  .dtab th:first-child,.dtab td:first-child{text-align:left}
+  .dtab thead th{background:var(--paper-3);color:var(--ink-2);font-weight:600;letter-spacing:.03em}
+  .dtab tr.best td{background:rgba(120,90,40,.10);font-weight:600;color:var(--ink)}
+  .dtab caption{caption-side:bottom;font-family:var(--mono);font-size:10.5px;color:var(--ink-3);text-align:left;margin-top:5px;line-height:1.5}
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:10px 0 2px}
+  @media(max-width:880px){.twocol{grid-template-columns:1fr}}
+  .theory{border:1px solid var(--rule-2);border-radius:9px;background:var(--paper);padding:0;overflow:hidden}
+  .theory .th{padding:12px 15px;border-bottom:1px solid var(--rule)}
+  .theory.backed{border-left:4px solid #2e7d52}
+  .theory.consp{border-left:4px solid #9b2c2c}
+  .theory .tlabel{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:20px;display:inline-block}
+  .theory.backed .tlabel{background:rgba(46,125,82,.12);color:#2e7d52;border:1px solid rgba(46,125,82,.4)}
+  .theory.consp .tlabel{background:rgba(155,44,44,.10);color:#9b2c2c;border:1px solid rgba(155,44,44,.35)}
+  .theory h3{font-family:var(--serif);font-size:17px;font-weight:600;margin:8px 0 0;color:var(--ink);line-height:1.25}
+  .theory .bd{padding:12px 15px}
+  .theory .bd p{margin:0 0 8px;font-size:13px;color:var(--ink-2);line-height:1.55}
+  .theory ul{margin:4px 0 0;padding-left:17px}
+  .theory li{font-size:12.5px;color:var(--ink-2);line-height:1.5;margin-bottom:7px}
+  .theory li b{color:var(--ink)}
+  .theory .ev{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);display:block;margin-top:1px}
+  .theory .foot-note{font-size:12px;color:var(--ink-2);background:var(--paper-2);border-top:1px solid var(--rule);padding:10px 15px;line-height:1.55;margin:0}
+  .verdictbar{border:1px solid var(--rule-2);border-radius:8px;background:var(--paper-2);padding:12px 15px;margin:12px 0 0;font-size:13px;color:var(--ink-2);line-height:1.6}
+  .verdictbar b{color:var(--ink)}
+  /* circadian mini chart */
+  .circ{border:1px solid var(--rule-2);border-radius:9px;background:var(--paper-2);padding:14px 15px 8px;margin:10px 0}
+  .circ .bars{display:grid;grid-template-columns:repeat(24,1fr);align-items:end;gap:2px;height:120px}
+  .circ .bars i{background:var(--accent);border-radius:2px 2px 0 0;display:block;min-height:2px;opacity:.85}
+  .circ .bars i.trough{background:#9b2c2c;opacity:.9}
+  .circ .axis{display:grid;grid-template-columns:repeat(24,1fr);gap:2px;font-family:var(--mono);font-size:8.5px;color:var(--ink-3);margin-top:3px}
+  .circ .axis span{text-align:center}
+  .circ .cap{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);margin-top:8px;line-height:1.55}
+  /* experiment cards */
+  .exps{list-style:none;padding:0;margin:8px 0 0}
+  .exps>li{border:1px solid var(--rule-2);border-radius:9px;background:var(--paper);padding:13px 16px;margin-bottom:12px}
+  .exps h4{font-family:var(--serif);font-size:16px;font-weight:600;margin:0 0 2px;color:var(--ink)}
+  .exps .num{font-family:var(--mono);font-size:10.5px;color:#F4EFE6;background:var(--accent);border-radius:5px;padding:2px 7px;margin-right:8px}
+  .exps .claim{font-size:13px;color:var(--ink-2);line-height:1.55;margin:6px 0 8px}
+  .exps .rowx{display:grid;grid-template-columns:88px 1fr;gap:10px;font-size:12.5px;line-height:1.55;padding:5px 0;border-top:1px dashed var(--rule)}
+  .exps .rowx .lab{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);padding-top:2px}
+  .exps .rowx .val{color:var(--ink-2)}
+  .exps .rowx .val b{color:var(--ink)}
+  .exps code{font-family:var(--mono);font-size:11.5px;background:var(--paper-3);padding:1px 5px;border-radius:4px}
 </style>
 </head>
 <body>
@@ -64,6 +115,7 @@
         <a href="drops.html">Drops</a>
         <a href="results.html">Results</a>
         <a href="methods.html">Methods</a>
+        <a href="future.html">Future</a>
       </nav>
       <div class="reffile">
         REF · <span>HOME / INDEX</span><br>
@@ -76,6 +128,10 @@
       <nav class="toc" id="toc">
         <a href="#start"><span class="n">1</span><span>What this is</span></a>
         <a href="#latest-run"><span class="n">★</span><span>Latest run summary</span></a>
+        <a href="#experiment"><span class="n">✦</span><span>Best result, setup &amp; LLM</span></a>
+        <a href="#patterns"><span class="n">❖</span><span>Patterns &amp; commonalities</span></a>
+        <a href="#readings"><span class="n">⚖</span><span>Two readings of the data</span></a>
+        <a href="#theories"><span class="n">✚</span><span>My theories &amp; experiments</span></a>
         <a href="#use"><span class="n">2</span><span>How to use the site</span></a>
         <a href="#toolkit"><span class="n">3</span><span>How the analysis was built</span></a>
         <a href="#data"><span class="n">4</span><span>Data &amp; reproducibility</span></a>
@@ -148,6 +204,169 @@
       </div>
     </section>
 
+    <!-- ===================== EXPERIMENT · BEST RESULT · LLM ===================== -->
+    <section class="dz" id="experiment">
+      <div class="sechd"><div class="secno">✦</div>
+        <div><h2 class="sech">Best result, experiment setup &amp; the LLM used</h2>
+        <p class="sectag">Improved ablation run — 3 embedding models × 3 cluster sizes, scored for stability</p></div></div>
+      <div class="secbody">
+        <p style="color:var(--ink-2);margin-top:0">The refreshed experiment (<code style="font-family:var(--mono);font-size:12px;background:var(--paper-3);padding:1px 5px;border-radius:4px">improved_experiment.py</code>, device target <strong>T4 GPU</strong>, method <strong>BERTopic</strong>) re-clusters the full <strong>4,966-drop</strong> corpus under an ablation grid — three sentence-embedding models (<strong>BAAI/bge-large-en-v1.5</strong> primary, plus all-mpnet-base-v2 and all-MiniLM-L6-v2) crossed with <strong>min_cluster_size ∈ {15, 25, 40}</strong>, in both the full and admin-filtered corpora (12 runs total). Each run is scored on a composite of silhouette separation, gensim c<sub>v</sub> coherence, and cross-run topic persistence.</p>
+        <div class="kpis">
+          <div><div class="k">Winning run</div><div class="v">MiniLM·mcs40</div><div class="s">composite 0.5966</div></div>
+          <div><div class="k">Silhouette</div><div class="v">0.795</div><div class="s">cluster separation</div></div>
+          <div><div class="k">Coherence c<sub>v</sub></div><div class="v">0.478</div><div class="s">topic interpretability</div></div>
+          <div><div class="k">Mean persistence</div><div class="v">0.525</div><div class="s">stable across runs</div></div>
+        </div>
+        <table class="dtab">
+          <caption>Top of the 12-run ablation scoreboard (composite = ⅓·silhouette + ⅓·coherence + ⅓·persistence). The two-topic solutions at mcs40 win because they are <em>robust</em>: MiniLM·mcs40 and MPNet·mcs40 agree at Jaccard <b>0.928</b> — nearly the same partition from independent models. Full table: <a href="results/improved/improved_experiment_report.md">improved_experiment_report.md</a>.</caption>
+          <thead><tr><th>Run</th><th>Model</th><th>mcs</th><th>Topics</th><th>Silhouette</th><th>c<sub>v</sub></th><th>Persist.</th><th>Score</th></tr></thead>
+          <tbody>
+            <tr class="best"><td>MiniLM·mcs40</td><td>all-MiniLM-L6-v2</td><td>40</td><td>2</td><td>0.795</td><td>0.478</td><td>0.525</td><td>0.597</td></tr>
+            <tr><td>bge·mcs40 (admin)</td><td>bge-large-en-v1.5</td><td>40</td><td>3</td><td>0.612</td><td>0.300</td><td>0.683</td><td>0.585</td></tr>
+            <tr><td>MPNet·mcs40</td><td>all-mpnet-base-v2</td><td>40</td><td>2</td><td>0.815</td><td>0.324</td><td>0.538</td><td>0.578</td></tr>
+            <tr><td>bge·mcs25 (admin)</td><td>bge-large-en-v1.5</td><td>25</td><td>7</td><td>0.160</td><td>0.441</td><td>0.638</td><td>0.455</td></tr>
+            <tr><td>bge·mcs40</td><td>bge-large-en-v1.5</td><td>40</td><td>4</td><td>0.237</td><td>0.401</td><td>0.467</td><td>0.385</td></tr>
+          </tbody>
+        </table>
+        <div class="panel" style="margin-top:12px">
+          <div class="panel-hd"><span>LLM used in this run</span><span class="src">Optional · deterministic</span></div>
+          <div class="panel-bd"><p style="margin:0;font-size:13.5px;line-height:1.6">The baseline pipeline — embeddings, UMAP, HDBSCAN/BERTopic and BITE scoring — is <strong>fully deterministic and uses no LLM</strong>. An LLM enters only as an <em>optional</em> extension for narrative topic-label refinement, profiled in <code style="font-family:var(--mono);font-size:12px;background:var(--paper-3);padding:1px 5px;border-radius:4px">compare_results.json</code>: framework <strong>Ollama</strong>, default model <strong>qwen2.5:7b</strong> (high-quality <strong>qwen2.5:14b</strong>, fallback <strong>qwen2.5:3b</strong>), run in strict <strong>JSON mode</strong> at <strong>temperature 0, top_p 0.1, top_k 20, seed 42</strong> with schema-validate-and-retry. Those settings are chosen so any LLM pass is reproducible and never invents claims; no confidence scores are reported.</p></div>
+        </div>
+        <div class="plinks" style="margin-top:8px">
+          <a href="results/improved/improved_experiment_report.html">Improved experiment report</a>
+          <a href="results/improved/plots/ablation_scoreboard.png">Ablation scoreboard plot</a>
+          <a href="stability_report.json">stability_report.json</a>
+          <a href="results.html#experiments">Full experiment setups →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PATTERNS & COMMONALITIES ===================== -->
+    <section class="dz" id="patterns">
+      <div class="sechd"><div class="secno">❖</div>
+        <div><h2 class="sech">Patterns &amp; commonalities across the drops</h2>
+        <p class="sectag">What recurs — in the text, across platforms, and in the posting metadata</p></div></div>
+      <div class="secbody">
+        <p style="color:var(--ink-2);margin-top:0">Three independent lenses agree on one thing: the corpus is far more uniform than its 4,966 drops suggest. A reproducible metadata pass (<code style="font-family:var(--mono);font-size:12px;background:var(--paper-3);padding:1px 5px;border-radius:4px">qdrops_patterns.py → results/improved/original_findings.json</code>) surfaces commonalities the topic/BITE pipeline discards.</p>
+
+        <ol class="imp">
+          <li>
+            <span class="tag">A · Shared cross-platform lexicon</span>
+            <h4>One vocabulary travels everywhere</h4>
+            <p>Across all 21 platform pairs, the same anchor words recur regardless of which two platforms are compared: <em>storm, patriots, coming, god, fisa, drop, msm, ready, wwg1wga, panic, map, trust, everything</em>. The strongest pair is <strong>Parler × Twitter (Jaccard 0.273)</strong>; the slogan <strong>WWG1WGA</strong> is the single most stable topic across every embedding model. The narrative diffuses as a fixed phrase-set, not as evolving argument.</p>
+          </li>
+          <li>
+            <span class="tag">B · Affective uniformity under clustering</span>
+            <h4>The corpus collapses to ~2 robust topics</h4>
+            <p>At the cluster size that maximises stability (mcs40), two independent models both resolve the corpus into <strong>just two topics</strong> — a WWG1WGA slogan cluster and a ~4,000-drop "god / patriots / time" affect blob — and they agree at Jaccard <strong>0.928</strong>. Finer settings shatter into 40–56 fragile topics that don't survive a model swap. The stable structure is affective, not informational.</p>
+          </li>
+          <li>
+            <span class="tag">C · Stylistic drift across the platform migration</span>
+            <h4>From Socratic essays to link-forwards</h4>
+            <p>As the drops moved 4chan → 8chan → 8kun, their form changed monotonically: median length fell <strong>17 → 12 → 8 words</strong>, the share carrying a URL rose <strong>2.8% → 31% → 56%</strong>, and questions per drop fell <strong>3.22 → 1.21 → 1.20</strong>. The early corpus asks; the late corpus forwards links.</p>
+          </li>
+        </ol>
+
+        <h3 style="font-family:var(--serif);font-size:16px;margin:16px 0 2px;color:var(--ink)">D · A single human's clock</h3>
+        <p style="color:var(--ink-2);margin:0 0 4px;font-size:13.5px">Posting time-of-day (UTC, all 4,966 drops) shows a sharp nocturnal trough: the busiest hour holds <strong>143×</strong> the volume of the quietest, and the deepest three-hour window (11–13 UTC) contains just <strong>0.44%</strong> of the entire corpus. That trough lands squarely in the human sleep band under <em>every</em> US time zone (≈03:00 PST → 06:00 EST).</p>
+        <div class="circ">
+          <div class="bars">
+            <i style="height:66%"></i><i style="height:63%"></i><i style="height:71%"></i><i style="height:58%"></i><i style="height:66%"></i><i style="height:52%"></i><i style="height:35%"></i><i style="height:16%"></i><i class="trough" style="height:6%"></i><i class="trough" style="height:2%"></i><i class="trough" style="height:5%"></i><i class="trough" style="height:3%"></i><i class="trough" style="height:1%"></i><i class="trough" style="height:1%"></i><i style="height:9%"></i><i style="height:32%"></i><i style="height:73%"></i><i style="height:97%"></i><i style="height:100%"></i><i style="height:86%"></i><i style="height:79%"></i><i style="height:72%"></i><i style="height:72%"></i><i style="height:88%"></i>
+          </div>
+          <div class="axis"><span>0</span><span></span><span></span><span>3</span><span></span><span></span><span>6</span><span></span><span></span><span>9</span><span></span><span></span><span>12</span><span></span><span></span><span>15</span><span></span><span></span><span>18</span><span></span><span></span><span>21</span><span></span><span></span></div>
+          <div class="cap">Drops per UTC hour. Red = the 08–13 UTC sleep trough (3–24 drops/hour vs. a 431-drop peak at 18:00 UTC). A 24/7 team would fill the trough; one person on a US clock leaves it empty.</div>
+        </div>
+        <p style="color:var(--ink-3);font-family:var(--mono);font-size:11px;margin:6px 0 0">Cadence corroborates the single-author read: <strong>25.6%</strong> of consecutive drops land &lt;5 minutes apart (typing sessions), with a 0.23 h median gap punctuated by multi-day silences.</p>
+      </div>
+    </section>
+
+    <!-- ===================== TWO READINGS ===================== -->
+    <section class="dz" id="readings">
+      <div class="sechd"><div class="secno">⚖</div>
+        <div><h2 class="sech">Two readings of the same data</h2>
+        <p class="sectag">The most data-backed theory vs. the most conspiratorial — built from identical numbers, side by side</p></div></div>
+      <div class="secbody">
+        <p style="color:var(--ink-2);margin-top:0">A useful stress-test: hand the <em>same</em> result set to a calibrated analyst and to a believer, and read both interpretations against each other. The left column is what the evidence actually supports after stability and ablation checks. The right column is the QAnon-native reading, reproduced strictly as a <span class="chip ep--con">Conspiracy</span> discourse object — <strong>never endorsed</strong> — so its logic can be examined and rebutted.</p>
+        <div class="twocol">
+          <div class="theory backed">
+            <div class="th"><span class="tlabel">Most backed by data</span>
+              <h3>The drops are an affective engagement engine; the audience is the amplifier</h3></div>
+            <div class="bd">
+              <p>QAnon's power lives in interpretation and emotion, not instructions — and most of the "cult-control" signal is manufactured downstream by followers, not by Q.</p>
+              <ul>
+                <li><b>Thought-control dominates all 7 platforms; behaviour-control is ~0.</b><span class="ev">BITE T is the top dimension everywhere; B = 0.0025 for drops, 0.000 on Parler &amp; Twitter — it shapes how to think, not what to do.</span></li>
+                <li><b>The source is the quietest signal.</b><span class="ev">Q-drop BITE total 0.0184 is the lowest of all datasets; Reddit/Parler/Telegram score 5.6–7.1× higher. <a href="future.html#data-integrity" style="color:#9b2c2c">⚠ provisional</a> — downstream corpora are synthetic samples; this pillar awaits real data.</span></li>
+                <li><b>The corpus is one affect blob + a slogan.</b><span class="ev">Under ablation it collapses to 2 robust topics (silhouette 0.79–0.82; cross-model Jaccard 0.928). Thin on stable information topics.</span></li>
+                <li><b>It got vaguer as it grew.</b><span class="ev">Median 17→8 words, URLs 2.8%→56%, action-predictions 7.8%→3% — optimised for open-ended reinterpretation, away from falsifiable claims.</span></li>
+              </ul>
+            </div>
+            <p class="foot-note"><b>Survives the checks.</b> Holds up under the stability sweep, the 12-run ablation, and directional/strong replication of Hoseini, iDRAMA and Hassan. States its own limits.</p>
+          </div>
+          <div class="theory consp">
+            <div class="th"><span class="tlabel">Most conspiratorial · not endorsed</span>
+              <h3>"The drops are a coordinated military-intelligence comms channel (the 'Q clock')"</h3></div>
+            <div class="bd">
+              <p>The believer's reading points at the very same artifacts and sees authentication codes, synced timestamps, and a chain of command.</p>
+              <ul>
+                <li><b>"Operational" clusters look like op-orders.</b><span class="ev">sec_test · dod_route_20 · defend_b720 · auth_hold_rel_good; placeholder · oig · indictments · tracking; trip · tripcode · compromised.</span></li>
+                <li><b>"Q clock" timestamp sync.</b><span class="ev">timestamp · past · future · proves; map · unlocks · stringer; potus · tweet · relevant — claimed to align drops to Trump tweets.</span></li>
+                <li><b>"Coordination" across platforms.</b><span class="ev">WWG1WGA is the most stable topic across every model; Parler×Twitter converge at 0.273 → read as a synchronised message.</span></li>
+                <li><b>"Foreknowledge."</b><span class="ev">The drops' Thought-control peak (0.1016) falls in 2020-03 — the pandemic month — read as Q "positioning" for COVID.</span></li>
+              </ul>
+            </div>
+            <p class="foot-note"><b>Why it fails.</b> Every pillar is unfalsifiable post-hoc pattern-matching: timestamp "proofs" mine an unbounded space; stable slogans are <em>repetition</em>, not coordination; lock-step migration is <em>deplatforming</em>, not orders; the 2020-03 spike is the whole internet discovering COVID. Tellingly, the conspiracy reading <em>requires</em> exactly the open-ended vagueness the backed theory says was engineered.</p>
+          </div>
+        </div>
+        <div class="verdictbar"><b>The decisive contrast.</b> Both columns cite the same tables. But the backed reading <em>predicts and explains</em> the conspiratorial one: a corpus engineered for reinterpretation (short, link-heavy, question-led, slogan-stable) is precisely a corpus in which motivated readers will always "find" a hidden signal. The data doesn't adjudicate Q's claims — it shows <em>why the claims feel confirmable while remaining unfalsifiable.</em></div>
+        <div class="verdictbar" style="border-left:4px solid #9b2c2c"><b>⚠ Data-integrity caveat (added after adversarial review).</b> The "5.6–7.1× amplification" pillar rests on the six downstream platform datasets, which are <strong>synthetic samples</strong> generated by <code style="font-family:var(--mono);font-size:12px;background:var(--paper-3);padding:1px 5px;border-radius:4px">collect_datasets.py</code> (<code style="font-family:var(--mono);font-size:12px;background:var(--paper-3);padding:1px 5px;border-radius:4px">catalog.json</code> shows <code style="font-family:var(--mono);font-size:12px;background:var(--paper-3);padding:1px 5px;border-radius:4px">local_path: null</code>) — so that figure is a lexicon-and-authorship artifact, not audience behaviour. The backed theory's <em>other</em> pillars (thought-control dominance, behaviour-control ≈ 0, the affect-blob, vagueness) stand on the real Q corpus; only amplification is provisional. Full disclosure and the new <strong>Delegated-Closure</strong> theory built around it: <a href="future.html" style="color:var(--rep);text-decoration:none">Future →</a></div>
+      </div>
+    </section>
+
+    <!-- ===================== MY THEORIES & EXPERIMENTS ===================== -->
+    <section class="dz" id="theories">
+      <div class="sechd"><div class="secno">✚</div>
+        <div><h2 class="sech">My own QDrop theories — and experiments to test them</h2>
+        <p class="sectag">Four falsifiable hypotheses derived from the data, each with a designed test and a kill condition</p></div></div>
+      <div class="secbody">
+        <p style="color:var(--ink-2);margin-top:0">These go beyond the existing pipeline. Each is stated as a falsifiable hypothesis with the evidence that motivates it, a concrete experiment, and the result that would <em>disprove</em> it — the discipline the Critical Review demands.</p>
+        <ol class="exps">
+          <li>
+            <h4><span class="num">T1</span>Single nocturnal operator, not a 24/7 team</h4>
+            <p class="claim">The posting clock is one human's circadian rhythm on a US time zone — inconsistent with the "team of military-intel insiders" the mythology claims.</p>
+            <div class="rowx"><div class="lab">Evidence</div><div class="val">143× busy/quiet hour ratio; deepest 3 h = <b>0.44%</b> of all drops; trough in the sleep band for every US zone; 25.6% of drops &lt;5 min apart.</div></div>
+            <div class="rowx"><div class="lab">Experiment</div><div class="val">Per-phase UTC-hour KDE (4ch / 8ch / 8kun) + a <b>DST-shift test</b>: does the trough move with US daylight-saving dates? Bootstrap a uniform null.</div></div>
+            <div class="rowx"><div class="lab">Predicts</div><div class="val">One stable trough that shifts ≤1–2 h at the 8kun handoff and tracks US DST.</div></div>
+            <div class="rowx"><div class="lab">Falsified if</div><div class="val">Activity is ~uniform across 24 h, or the trough ignores DST → consistent with automation / a distributed team.</div></div>
+          </li>
+          <li>
+            <h4><span class="num">T2</span>A stylometric handoff at the board migration</h4>
+            <p class="claim">Drop authorship/voice changes at the 8chan → 8kun boundary (Nov 2019), matching the documented Watkins-era transition — a style break, not a smooth evolution.</p>
+            <div class="rowx"><div class="lab">Evidence</div><div class="val">Across phases, median words <b>17→12→8</b>, URL share <b>2.8%→31%→56%</b>, questions/drop <b>3.22→1.21→1.20</b>; topic mix flips from essays to link-forwards.</div></div>
+            <div class="rowx"><div class="lab">Experiment</div><div class="val">Change-point detection (PELT/Bayesian) on a monthly style vector {q-rate, length, URL share, we/our rate}; train a phase-A vs phase-C authorship classifier, score cross-phase separability.</div></div>
+            <div class="rowx"><div class="lab">Predicts</div><div class="val">A significant change-point clustered at the migration boundary; high cross-phase classifier separability.</div></div>
+            <div class="rowx"><div class="lab">Falsified if</div><div class="val">Change-points fall at random months, or A/C drops are not linearly separable → continuity of voice.</div></div>
+          </li>
+          <li>
+            <h4><span class="num">T3</span>Engagement-maximising vagueness ("falsifiability decay")</h4>
+            <p class="claim">Drops became <em>deliberately less checkable</em> over time — concreteness fell as the audience grew and as dated predictions failed.</p>
+            <div class="rowx"><div class="lab">Evidence</div><div class="val">Action-prediction share <b>7.8%→3%</b>; short-drop share <b>21.6%→39.6%</b>; the famous dated "HRC arrest" prediction is drop #1 — and failed.</div></div>
+            <div class="rowx"><div class="lab">Experiment</div><div class="val">Regress per-drop concreteness (named entities + explicit dates + declarative:question ratio) on time <em>and</em> cumulative downstream audience (migration volume); interrupted time-series around known failed-date events.</div></div>
+            <div class="rowx"><div class="lab">Predicts</div><div class="val">Concreteness declines and steepens just after high-profile failed predictions.</div></div>
+            <div class="rowx"><div class="lab">Falsified if</div><div class="val">Concreteness is flat or rises over time, or shows no break at failure events.</div></div>
+          </li>
+          <li>
+            <h4><span class="num">T4</span>Affective floor, informational ceiling</h4>
+            <p class="claim">A thin layer of real information topics (FISA, Epstein, China) floats on a thick affective substrate that absorbs most drops — which is why coarse clustering collapses to two topics.</p>
+            <div class="rowx"><div class="lab">Evidence</div><div class="val">mcs40 → 2 topics (silhouette 0.79–0.82, cross-model Jaccard 0.928); the only stable/borderline anchors are WWG1WGA + a 4,000-drop "god/important/time" blob; admin-filtering barely changes it.</div></div>
+            <div class="rowx"><div class="lab">Experiment</div><div class="val">Hierarchical persistence: for each drop, does its topic survive across all 3 embedding models? Report the % absorbed by the slogan/affect supercluster vs. genuine info topics; train an affect-vs-info classifier and track class balance over time.</div></div>
+            <div class="rowx"><div class="lab">Predicts</div><div class="val">A large majority of drops live in non-persistent/affect clusters; info clusters are small, real, and front-loaded to 2018.</div></div>
+            <div class="rowx"><div class="lab">Falsified if</div><div class="val">Many mid-sized information topics persist across all models → the corpus is genuinely information-rich.</div></div>
+          </li>
+        </ol>
+        <p class="sectag" style="margin-top:14px">All four reuse the existing stack — <code style="font-family:var(--mono);font-size:12px;background:var(--paper-3);padding:1px 5px;border-radius:4px">qdrops_patterns.py</code> already emits the metadata features (T1–T3) and <code style="font-family:var(--mono);font-size:12px;background:var(--paper-3);padding:1px 5px;border-radius:4px">qdrops_sweep.py</code> the persistence machinery (T4); each is a small, self-contained add-on, not a new pipeline.</p>
+      </div>
+    </section>
+
     <!-- ===================== WHAT THIS IS ===================== -->
     <section class="dz" id="start">
       <div class="sechd"><div class="secno">1</div>
@@ -203,6 +422,11 @@
             <h3><a href="methods.html">Methods</a></h3>
             <p>A single implementation map listing the databases used, the grouped experiment setup, and the peer-reviewed tracks the comparisons are benchmarked against.</p>
             <div class="when">Use this for reproducibility and source-organization in one place.</div>
+          </div></li>
+          <li><div class="ic">FUTR</div><div>
+            <h3><a href="future.html">Future</a></h3>
+            <p>The newest, most experimental page: a novel <strong>measurement theory — "Delegated Closure"</strong> — and its metric, the <strong>Delegated-Closure Index (DCI)</strong>, the first per-post computable measure of how much interpretive closure a drop withholds. Ships an honest results scorecard (passes, a downgrade, a rejected hypothesis, and a blocked one), the synthetic-downstream-data disclosure, and a phased research roadmap.</p>
+            <div class="when">Go here for the new theory, the new calculation, and what to build next.</div>
           </div></li>
           <li><div class="ic">HOME</div><div>
             <h3><a href="index.html">Home</a> <span style="font-family:var(--mono);font-size:11px;color:var(--ink-3)">(this page)</span></h3>

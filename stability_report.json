@@ -4,14 +4,74 @@
   "n_drops": 4248,
   "runs": [
     {
+      "tag": "bge-large-en.5_mcs15",
+      "model": "BAAI/bge-large-en-v1.5",
+      "mcs": 15,
+      "n_topics": 39,
+      "file": "run_bge-large-en.5_mcs15.json",
+      "silhouette": 0.5269,
+      "coherence": 0.3948,
+      "mean_persistence": 0.192
+    },
+    {
+      "tag": "bge-large-en.5_mcs25",
+      "model": "BAAI/bge-large-en-v1.5",
+      "mcs": 25,
+      "n_topics": 18,
+      "file": "run_bge-large-en.5_mcs25.json",
+      "silhouette": 0.4798,
+      "coherence": 0.3956,
+      "mean_persistence": 0.3
+    },
+    {
+      "tag": "bge-large-en.5_mcs40",
+      "model": "BAAI/bge-large-en-v1.5",
+      "mcs": 40,
+      "n_topics": 4,
+      "file": "run_bge-large-en.5_mcs40.json",
+      "silhouette": 0.237,
+      "coherence": 0.401,
+      "mean_persistence": 0.467
+    },
+    {
+      "tag": "mpnet-base_mcs15",
+      "model": "all-mpnet-base-v2",
+      "mcs": 15,
+      "n_topics": 50,
+      "file": "run_mpnet-base_mcs15.json",
+      "silhouette": 0.5574,
+      "coherence": 0.4144,
+      "mean_persistence": 0.149
+    },
+    {
+      "tag": "mpnet-base_mcs25",
+      "model": "all-mpnet-base-v2",
+      "mcs": 25,
+      "n_topics": 4,
+      "file": "run_mpnet-base_mcs25.json",
+      "silhouette": 0.1937,
+      "coherence": 0.3718,
+      "mean_persistence": 0.467
+    },
+    {
+      "tag": "mpnet-base_mcs40",
+      "model": "all-mpnet-base-v2",
+      "mcs": 40,
+      "n_topics": 2,
+      "file": "run_mpnet-base_mcs40.json",
+      "silhouette": 0.8147,
+      "coherence": 0.3238,
+      "mean_persistence": 0.538
+    },
+    {
       "tag": "MiniLM-L6_mcs15",
       "model": "all-MiniLM-L6-v2",
       "mcs": 15,
       "n_topics": 56,
       "file": "run_MiniLM-L6_mcs15.json",
       "silhouette": 0.603,
-      "coherence": null,
-      "mean_persistence": 0.161
+      "coherence": 0.3969,
+      "mean_persistence": 0.149
     },
     {
       "tag": "MiniLM-L6_mcs25",
@@ -20,8 +80,8 @@
       "n_topics": 19,
       "file": "run_MiniLM-L6_mcs25.json",
       "silhouette": 0.4205,
-      "coherence": null,
-      "mean_persistence": 0.46
+      "coherence": 0.3798,
+      "mean_persistence": 0.291
     },
     {
       "tag": "MiniLM-L6_mcs40",
@@ -30,339 +90,83 @@
       "n_topics": 2,
       "file": "run_MiniLM-L6_mcs40.json",
       "silhouette": 0.7948,
-      "coherence": null,
-      "mean_persistence": 0.384
+      "coherence": 0.4784,
+      "mean_persistence": 0.525
     }
   ],
   "pairwise": {
+    "bge-large-en.5_mcs15|bge-large-en.5_mcs25": 0.404,
+    "bge-large-en.5_mcs15|bge-large-en.5_mcs40": 0.09,
+    "bge-large-en.5_mcs15|mpnet-base_mcs15": 0.353,
+    "bge-large-en.5_mcs15|mpnet-base_mcs25": 0.049,
+    "bge-large-en.5_mcs15|mpnet-base_mcs40": 0.038,
+    "bge-large-en.5_mcs15|MiniLM-L6_mcs15": 0.337,
+    "bge-large-en.5_mcs15|MiniLM-L6_mcs25": 0.225,
+    "bge-large-en.5_mcs15|MiniLM-L6_mcs40": 0.038,
+    "bge-large-en.5_mcs25|bge-large-en.5_mcs40": 0.198,
+    "bge-large-en.5_mcs25|mpnet-base_mcs15": 0.405,
+    "bge-large-en.5_mcs25|mpnet-base_mcs25": 0.109,
+    "bge-large-en.5_mcs25|mpnet-base_mcs40": 0.084,
+    "bge-large-en.5_mcs25|MiniLM-L6_mcs15": 0.4,
+    "bge-large-en.5_mcs25|MiniLM-L6_mcs25": 0.32,
+    "bge-large-en.5_mcs25|MiniLM-L6_mcs40": 0.082,
+    "bge-large-en.5_mcs40|mpnet-base_mcs15": 0.339,
+    "bge-large-en.5_mcs40|mpnet-base_mcs25": 0.366,
+    "bge-large-en.5_mcs40|mpnet-base_mcs40": 0.467,
+    "bge-large-en.5_mcs40|MiniLM-L6_mcs15": 0.382,
+    "bge-large-en.5_mcs40|MiniLM-L6_mcs25": 0.396,
+    "bge-large-en.5_mcs40|MiniLM-L6_mcs40": 0.45,
+    "mpnet-base_mcs15|mpnet-base_mcs25": 0.071,
+    "mpnet-base_mcs15|mpnet-base_mcs40": 0.032,
+    "mpnet-base_mcs15|MiniLM-L6_mcs15": 0.383,
+    "mpnet-base_mcs15|MiniLM-L6_mcs25": 0.162,
+    "mpnet-base_mcs15|MiniLM-L6_mcs40": 0.031,
+    "mpnet-base_mcs25|mpnet-base_mcs40": 0.49,
+    "mpnet-base_mcs25|MiniLM-L6_mcs15": 0.356,
+    "mpnet-base_mcs25|MiniLM-L6_mcs25": 0.439,
+    "mpnet-base_mcs25|MiniLM-L6_mcs40": 0.471,
+    "mpnet-base_mcs40|MiniLM-L6_mcs15": 0.281,
+    "mpnet-base_mcs40|MiniLM-L6_mcs25": 0.455,
+    "mpnet-base_mcs40|MiniLM-L6_mcs40": 0.928,
     "MiniLM-L6_mcs15|MiniLM-L6_mcs25": 0.293,
     "MiniLM-L6_mcs15|MiniLM-L6_mcs40": 0.029,
     "MiniLM-L6_mcs25|MiniLM-L6_mcs40": 0.092
   },
-  "anchor": "MiniLM-L6_mcs25",
+  "anchor": "mpnet-base_mcs40",
   "anchor_topics": [
     {
-      "topic": 7,
-      "label": "wwg1wga wwg1wga · wwg1wga · wwg1wga people",
+      "topic": 1,
+      "label": "wwg1wga wwg1wga · wwg1wga · wrwy",
       "keywords": [
         "wwg1wga wwg1wga",
         "wwg1wga",
-        "wwg1wga people",
-        "people wwg1wga",
-        "week coincidence",
-        "ghwb",
-        "usss code",
-        "demonstrate resolve"
-      ],
-      "size": 40,
-      "persistence": 0.753,
-      "verdict": "stable"
-    },
-    {
-      "topic": 8,
-      "label": "wwg1wga wwg1wga · wwg1wga · wwg1wga god",
-      "keywords": [
-        "wwg1wga wwg1wga",
-        "wwg1wga",
+        "wrwy",
         "wwg1wga god",
+        "visible",
         "enjoyed",
-        "ben",
-        "unitednotdivided wwg1wga",
-        "unitednotdivided",
-        "attention deck"
+        "wwg1wga thank",
+        "answered"
       ],
-      "size": 39,
-      "persistence": 0.747,
+      "size": 79,
+      "persistence": 0.587,
       "verdict": "stable"
-    },
-    {
-      "topic": 12,
-      "label": "vip · vip patriot · patriot",
-      "keywords": [
-        "vip",
-        "vip patriot",
-        "patriot",
-        "enjoy",
-        "eyes",
-        "55",
-        "patriots",
-        "patriots eyes"
-      ],
-      "size": 34,
-      "persistence": 0.504,
-      "verdict": "stable"
-    },
-    {
-      "topic": 14,
-      "label": "worth remembering · remembering · worth",
-      "keywords": [
-        "worth remembering",
-        "remembering",
-        "worth",
-        "remember",
-        "week remember",
-        "remember important",
-        "forget",
-        "important remember"
-      ],
-      "size": 34,
-      "persistence": 0.504,
-      "verdict": "stable"
-    },
-    {
-      "topic": 3,
-      "label": "believe coincidences · coincidences · believe",
-      "keywords": [
-        "believe coincidences",
-        "coincidences",
-        "believe",
-        "coincidence",
-        "coincidences think",
-        "mathematically impossible",
-        "mathematically",
-        "coincidences coincidences"
-      ],
-      "size": 85,
-      "persistence": 0.499,
-      "verdict": "borderline"
-    },
-    {
-      "topic": 6,
-      "label": "error · disregard · spelling",
-      "keywords": [
-        "error",
-        "disregard",
-        "spelling",
-        "password",
-        "click",
-        "mistake",
-        "mistakes",
-        "visit"
-      ],
-      "size": 43,
-      "persistence": 0.494,
-      "verdict": "borderline"
-    },
-    {
-      "topic": 16,
-      "label": "truth · truth people · tell public",
-      "keywords": [
-        "truth",
-        "truth people",
-        "tell public",
-        "public truth",
-        "people change",
-        "people truth",
-        "tell",
-        "truth right"
-      ],
-      "size": 33,
-      "persistence": 0.489,
-      "verdict": "borderline"
-    },
-    {
-      "topic": 17,
-      "label": "trip · update · trip code",
-      "keywords": [
-        "trip",
-        "update",
-        "trip code",
-        "compromised",
-        "board compromised",
-        "code",
-        "verify",
-        "enter trip"
-      ],
-      "size": 32,
-      "persistence": 0.489,
-      "verdict": "borderline"
-    },
-    {
-      "topic": 5,
-      "label": "anons · anon · impressive",
-      "keywords": [
-        "anons",
-        "anon",
-        "impressive",
-        "anons knew",
-        "knew",
-        "pb",
-        "thank anon",
-        "anons know"
-      ],
-      "size": 66,
-      "persistence": 0.471,
-      "verdict": "borderline"
-    },
-    {
-      "topic": 4,
-      "label": "map · news unlocks · unlocks",
-      "keywords": [
-        "map",
-        "news unlocks",
-        "unlocks",
-        "proves past",
-        "future proves",
-        "proves",
-        "future",
-        "unlocks map"
-      ],
-      "size": 71,
-      "persistence": 0.464,
-      "verdict": "borderline"
-    },
-    {
-      "topic": 13,
-      "label": "game · shall play · king",
-      "keywords": [
-        "game",
-        "shall play",
-        "king",
-        "play game",
-        "reconcile",
-        "play",
-        "shall",
-        "chess"
-      ],
-      "size": 34,
-      "persistence": 0.461,
-      "verdict": "borderline"
-    },
-    {
-      "topic": 2,
-      "label": "patriots · god · united",
-      "keywords": [
-        "patriots",
-        "god",
-        "united",
-        "patriot",
-        "bless",
-        "god bless",
-        "stand",
-        "america"
-      ],
-      "size": 266,
-      "persistence": 0.457,
-      "verdict": "borderline"
-    },
-    {
-      "topic": 9,
-      "label": "armor · armor god · evil",
-      "keywords": [
-        "armor",
-        "armor god",
-        "evil",
-        "lord",
-        "spirit",
-        "stand",
-        "god",
-        "spiritual"
-      ],
-      "size": 37,
-      "persistence": 0.45,
-      "verdict": "borderline"
-    },
-    {
-      "topic": 15,
-      "label": "coincidence · coincidence coincidence · amazing coincidence",
-      "keywords": [
-        "coincidence",
-        "coincidence coincidence",
-        "amazing coincidence",
-        "coincidence amazing",
-        "amazing",
-        "cs",
-        "cfr",
-        "coincidence people"
-      ],
-      "size": 33,
-      "persistence": 0.445,
-      "verdict": "borderline"
-    },
-    {
-      "topic": 11,
-      "label": "normal · people stupid · stupid",
-      "keywords": [
-        "normal",
-        "people stupid",
-        "stupid",
-        "stupid people",
-        "ask normal",
-        "enjoy",
-        "people sick",
-        "sick"
-      ],
-      "size": 35,
-      "persistence": 0.385,
-      "verdict": "borderline"
-    },
-    {
-      "topic": 10,
-      "label": "yes · aw · freedom",
-      "keywords": [
-        "yes",
-        "aw",
-        "freedom",
-        "ex",
-        "stand freedom",
-        "271",
-        "conf",
-        "ok"
-      ],
-      "size": 37,
-      "persistence": 0.347,
-      "verdict": "borderline"
     },
     {
       "topic": 0,
-      "label": "potus · did · does",
+      "label": "god · important · time",
       "keywords": [
-        "potus",
-        "did",
-        "does",
-        "public",
-        "fbi",
-        "control",
-        "narrative",
-        "news"
+        "god",
+        "important",
+        "time",
+        "follow",
+        "thank",
+        "https",
+        "left",
+        "picture"
       ],
-      "size": 1813,
-      "persistence": 0.318,
+      "size": 4169,
+      "persistence": 0.489,
       "verdict": "borderline"
-    },
-    {
-      "topic": 1,
-      "label": "boom · boom boom · big",
-      "keywords": [
-        "boom",
-        "boom boom",
-        "big",
-        "qa",
-        "knowingly knowingly",
-        "knowingly",
-        "week",
-        "000"
-      ],
-      "size": 404,
-      "persistence": 0.233,
-      "verdict": "fragile"
-    },
-    {
-      "topic": 18,
-      "label": "comms · board created · board",
-      "keywords": [
-        "comms",
-        "board created",
-        "board",
-        "cm",
-        "new board",
-        "return publicly",
-        "devices",
-        "site"
-      ],
-      "size": 28,
-      "persistence": 0.232,
-      "verdict": "fragile"
     }
   ]
 }

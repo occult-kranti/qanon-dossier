@@ -1,0 +1,227 @@
+{
+  "generated": "2026-06-25T11:00:08.101658+00:00",
+  "n_drops": 4966,
+  "source": "posts.json (JSON-QAnon) + results/index.json",
+  "circadian": {
+    "utc_hist": {
+      "0": 286,
+      "1": 270,
+      "2": 308,
+      "3": 252,
+      "4": 285,
+      "5": 224,
+      "6": 149,
+      "7": 68,
+      "8": 24,
+      "9": 9,
+      "10": 20,
+      "11": 14,
+      "12": 3,
+      "13": 5,
+      "14": 38,
+      "15": 137,
+      "16": 316,
+      "17": 416,
+      "18": 431,
+      "19": 372,
+      "20": 341,
+      "21": 309,
+      "22": 309,
+      "23": 380
+    },
+    "busiest_hours_utc": [
+      16,
+      17,
+      18,
+      19,
+      20,
+      23
+    ],
+    "quietest_hours_utc": [
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "busy_quiet_ratio": 143.7,
+    "deep_trough_utc": "11-13",
+    "deep_trough_pct": 0.44,
+    "trough_center_local": {
+      "PST": 3,
+      "MST": 4,
+      "CST": 5,
+      "EST": 6,
+      "EDT": 7
+    }
+  },
+  "weekday": {
+    "Mon": 657,
+    "Tue": 694,
+    "Wed": 740,
+    "Thu": 907,
+    "Fri": 743,
+    "Sat": 590,
+    "Sun": 635
+  },
+  "style_by_year": {
+    "2017": {
+      "n": 459,
+      "med_words": 17,
+      "pct_short": 21.6,
+      "pct_question": 38.3,
+      "pct_url": 2.8,
+      "q_per_drop": 3.22
+    },
+    "2018": {
+      "n": 2183,
+      "med_words": 13,
+      "pct_short": 24.7,
+      "pct_question": 38.7,
+      "pct_url": 26.0,
+      "q_per_drop": 1.19
+    },
+    "2019": {
+      "n": 1132,
+      "med_words": 10.0,
+      "pct_short": 30.7,
+      "pct_question": 38.0,
+      "pct_url": 45.6,
+      "q_per_drop": 1.32
+    },
+    "2020": {
+      "n": 1179,
+      "med_words": 8,
+      "pct_short": 39.6,
+      "pct_question": 34.5,
+      "pct_url": 58.1,
+      "q_per_drop": 1.11
+    },
+    "2022": {
+      "n": 13,
+      "med_words": 25,
+      "pct_short": 15.4,
+      "pct_question": 61.5,
+      "pct_url": 0.0,
+      "q_per_drop": 3.85
+    }
+  },
+  "phases": {
+    "early_2017_4ch_8ch": {
+      "n": 459,
+      "med_words": 17,
+      "pct_short": 21.6,
+      "pct_question": 38.3,
+      "pct_url": 2.8,
+      "q_per_drop": 3.22
+    },
+    "mid_2018_2019_8ch": {
+      "n": 3111,
+      "med_words": 12,
+      "pct_short": 26.5,
+      "pct_question": 38.1,
+      "pct_url": 31.5,
+      "q_per_drop": 1.21
+    },
+    "late_8kun": {
+      "n": 1396,
+      "med_words": 8.0,
+      "pct_short": 38.3,
+      "pct_question": 36.2,
+      "pct_url": 56.4,
+      "q_per_drop": 1.2
+    }
+  },
+  "concreteness_by_year": {
+    "2017": {
+      "date_or_month_pct": 5.2,
+      "action_prediction_pct": 7.8
+    },
+    "2018": {
+      "date_or_month_pct": 9.6,
+      "action_prediction_pct": 4.4
+    },
+    "2019": {
+      "date_or_month_pct": 6.6,
+      "action_prediction_pct": 2.1
+    },
+    "2020": {
+      "date_or_month_pct": 9.8,
+      "action_prediction_pct": 3.0
+    },
+    "2022": {
+      "date_or_month_pct": 0.0,
+      "action_prediction_pct": 15.4
+    }
+  },
+  "amplification": {
+    "qdrops": {
+      "total": 0.0184,
+      "T": 0.0303,
+      "B": 0.0025,
+      "mult": 1.0
+    },
+    "reddit_qanon": {
+      "total": 0.13,
+      "T": 0.2792,
+      "B": 0.0398,
+      "mult": 7.1
+    },
+    "4chan_pol": {
+      "total": 0.1054,
+      "T": 0.1958,
+      "B": 0.0231,
+      "mult": 5.7
+    },
+    "8kun_qresearch": {
+      "total": 0.1027,
+      "T": 0.3223,
+      "B": 0.0143,
+      "mult": 5.6
+    },
+    "parler": {
+      "total": 0.1277,
+      "T": 0.2574,
+      "B": 0.0,
+      "mult": 6.9
+    },
+    "telegram": {
+      "total": 0.1116,
+      "T": 0.2657,
+      "B": 0.0231,
+      "mult": 6.1
+    },
+    "twitter": {
+      "total": 0.1073,
+      "T": 0.2422,
+      "B": 0.0,
+      "mult": 5.8
+    }
+  },
+  "cadence": {
+    "median_gap_h": 0.23,
+    "mean_gap_h": 8.97,
+    "burst_share_lt5min": 25.6,
+    "silence_share_gt7d": 0.6
+  },
+  "site_by_year": {
+    "2017": {
+      "4ch": 233,
+      "8ch": 226
+    },
+    "2018": {
+      "8ch": 2183
+    },
+    "2019": {
+      "8ch": 928,
+      "8kun": 204
+    },
+    "2020": {
+      "8kun": 1179
+    },
+    "2022": {
+      "8kun": 13
+    }
+  }
+}

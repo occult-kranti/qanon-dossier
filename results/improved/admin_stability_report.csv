@@ -1,0 +1,4 @@
+anchor_run,topic,label,size,persistence,verdict,keywords
+bge-large-en.5_mcs40,2,vip · vip patriot · vip patriots,43,1.0,stable,"vip, vip patriot, vip patriots, enjoy, patriot, eyes, 55, row"
+bge-large-en.5_mcs40,0,know · world · united,3996,0.554,stable,"know, world, united, house, fight, follow, people, patriots"
+bge-large-en.5_mcs40,1,wwg1wga wwg1wga · wwg1wga · wrwy,80,0.494,borderline,"wwg1wga wwg1wga, wwg1wga, wrwy, people wwg1wga, visible, unitednotdivided, fail wwg1wga, try harder"

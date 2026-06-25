@@ -1,0 +1,212 @@
+{
+  "generated": "2026-06-25T11:49:23.218136+00:00",
+  "theory": "Delegated Closure",
+  "metric": "Delegated-Closure Index (DCI)",
+  "weights": {
+    "INTERROGATIVE": 0.22,
+    "DECODE": 0.2,
+    "REDACTION": 0.18,
+    "BREVITY": 0.15,
+    "NONCONCRETE": 0.13,
+    "NONGROUNDED": 0.12
+  },
+  "n_drops": 4966,
+  "source": "posts.json (real 4,966-drop Q corpus); downstream platforms excluded (synthetic \u2014 see catalog.json)",
+  "distribution": {
+    "n": 4966,
+    "mean": 0.3424,
+    "sd": 0.1371,
+    "min": 0.0,
+    "max": 0.895,
+    "median": 0.3233,
+    "q1": 0.25,
+    "q3": 0.4225,
+    "hist_bins": 20,
+    "hist": [
+      45,
+      57,
+      213,
+      249,
+      573,
+      1069,
+      541,
+      544,
+      661,
+      289,
+      356,
+      155,
+      31,
+      136,
+      23,
+      5,
+      15,
+      4,
+      0,
+      0
+    ]
+  },
+  "by_year": {
+    "2017": {
+      "n": 459,
+      "dci": 0.3647,
+      "INTERROGATIVE": 0.2956,
+      "DECODE": 0.0915,
+      "REDACTION": 0.1855,
+      "BREVITY": 0.3297,
+      "NONCONCRETE": 0.8715,
+      "NONGROUNDED": 0.7102
+    },
+    "2018": {
+      "n": 2183,
+      "dci": 0.3414,
+      "INTERROGATIVE": 0.2353,
+      "DECODE": 0.0673,
+      "REDACTION": 0.3456,
+      "BREVITY": 0.387,
+      "NONCONCRETE": 0.8644,
+      "NONGROUNDED": 0.3623
+    },
+    "2019": {
+      "n": 1132,
+      "dci": 0.3332,
+      "INTERROGATIVE": 0.2418,
+      "DECODE": 0.0292,
+      "REDACTION": 0.3103,
+      "BREVITY": 0.4508,
+      "NONCONCRETE": 0.9134,
+      "NONGROUNDED": 0.2668
+    },
+    "2020": {
+      "n": 1179,
+      "dci": 0.3443,
+      "INTERROGATIVE": 0.2174,
+      "DECODE": 0.0144,
+      "REDACTION": 0.3792,
+      "BREVITY": 0.4963,
+      "NONCONCRETE": 0.8779,
+      "NONGROUNDED": 0.3062
+    },
+    "2022": {
+      "n": 13,
+      "dci": 0.3454,
+      "INTERROGATIVE": 0.4615,
+      "DECODE": 0.0,
+      "REDACTION": 0.0289,
+      "BREVITY": 0.2423,
+      "NONCONCRETE": 0.8462,
+      "NONGROUNDED": 0.7692
+    }
+  },
+  "ods": {
+    "overall_per_year": -0.00262,
+    "per_component_per_year": {
+      "INTERROGATIVE": -0.00983,
+      "DECODE": -0.02906,
+      "REDACTION": 0.03399,
+      "BREVITY": 0.05037,
+      "NONCONCRETE": 0.00581,
+      "NONGROUNDED": -0.07562
+    },
+    "placebo_mean_abs_slope": 0.00173,
+    "interpretation": "real overall slope vs ~0 placebo; per-component shows which signals drive drift"
+  },
+  "fer": {
+    "2017": {
+      "decode_share": 0.0915,
+      "concrete_share": 0.1285,
+      "fer": 0.712
+    },
+    "2018": {
+      "decode_share": 0.0673,
+      "concrete_share": 0.1356,
+      "fer": 0.497
+    },
+    "2019": {
+      "decode_share": 0.0292,
+      "concrete_share": 0.0866,
+      "fer": 0.337
+    }
+  },
+  "weight_invariance": {
+    "pearson_weighted_vs_uniform": 0.9601,
+    "ods_uniform_per_year": -0.00406,
+    "year_order_preserved": true
+  },
+  "leave_one_out": {
+    "INTERROGATIVE": {
+      "mean": 0.3716,
+      "ods_per_year": -0.00059,
+      "r_vs_full": 0.818
+    },
+    "DECODE": {
+      "mean": 0.4159,
+      "ods_per_year": 0.00399,
+      "r_vs_full": 0.9502
+    },
+    "REDACTION": {
+      "mean": 0.3451,
+      "ods_per_year": -0.01066,
+      "r_vs_full": 0.8196
+    },
+    "BREVITY": {
+      "mean": 0.3283,
+      "ods_per_year": -0.01197,
+      "r_vs_full": 0.9337
+    },
+    "NONCONCRETE": {
+      "mean": 0.2621,
+      "ods_per_year": -0.00388,
+      "r_vs_full": 0.9513
+    },
+    "NONGROUNDED": {
+      "mean": 0.3399,
+      "ods_per_year": 0.00733,
+      "r_vs_full": 0.9079
+    }
+  },
+  "olp": {
+    "note": "BITE scored per-drop via bite_scorer.py; word_count partialled out",
+    "decode_lexicon_overlap_with_bite": 0,
+    "r_dci_bite_total": 0.0481,
+    "partial_r_dci_bite_total_given_wordcount": -0.0319,
+    "bite_T_mean": 0.0303,
+    "bite_T_var": 0.006531,
+    "interpretation": "near-zero BITE-T variance => 'DCI beats BITE-T' would be uninformative; if partial-r collapses vs raw r, any DCI-BITE link is a brevity artifact"
+  },
+  "discriminant": {
+    "highest": [
+      {
+        "dci": 0.895,
+        "words": 14,
+        "text": "Timing of impeachment vote [revised]?\n7pm EST\nInterview w/ Barr?\n7pm EST\nCoincidence? \nQ"
+      },
+      {
+        "dci": 0.88,
+        "words": 16,
+        "text": "Last post before going dark?\nRe: [PP]?\nWhat events followed that post?\nCoincidence?\nAnons understand.\nQ"
+      },
+      {
+        "dci": 0.88,
+        "words": 16,
+        "text": "Suicide weekend?\nHands up?\n[30]\n[0:28]\nImpossible?\nCoincidence?\nWe are in control.\nBIG week ahead.\nQ"
+      }
+    ],
+    "lowest": [
+      {
+        "dci": 0.0,
+        "words": 206,
+        "text": "http://thehill.com/blogs/pundits-blog/presidential-campaign/292310-huma-abedins-ties-to-the-muslim-brotherhood\nThe Clinton campaign is attem"
+      },
+      {
+        "dci": 0.0,
+        "words": 35,
+        "text": ">>5186193\nYour husband answered the call as a brave and selfless Patriot. \nWe are forever grateful for his service & sacrifice to this Count"
+      },
+      {
+        "dci": 0.0,
+        "words": 42,
+        "text": ">>6958495\nSessions began the Epstein investigation. When that is revealed those who doubted may see the light.\nThe wheels of Justice turn sl"
+      }
+    ]
+  }
+}

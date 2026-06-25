@@ -1,0 +1,26 @@
+{
+  "generated": "2026-06-25T09:55:16.607754+00:00",
+  "device_target": "t4",
+  "analysis_method": "bertopic",
+  "sweep_method": "bertopic",
+  "best_ablation_run": {
+    "ablation": "main",
+    "tag": "MiniLM-L6_mcs40",
+    "model": "all-MiniLM-L6-v2",
+    "mcs": 40,
+    "n_topics": 2,
+    "silhouette": 0.7948,
+    "coherence": 0.4784,
+    "mean_persistence": 0.525,
+    "file": "run_MiniLM-L6_mcs40.json",
+    "score": 0.5966
+  },
+  "n_ablation_runs": 12,
+  "plots": {
+    "bite_totals": "results/improved/plots/bite_totals.png",
+    "overlap_pairs": "results/improved/plots/top_overlap_pairs.png",
+    "migration_totals": "results/improved/plots/migration_platform_totals.png",
+    "ablation_scoreboard": "results/improved/plots/ablation_scoreboard.png"
+  },
+  "codebook": "results/improved/improved_experiment_codebook.json"
+}

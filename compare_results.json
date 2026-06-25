@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-25T09:25:08.981407+00:00",
+  "generated": "2026-06-25T09:45:08.107728+00:00",
   "method": "bertopic",
   "n_datasets": 7,
   "datasets": [
@@ -21,8 +21,8 @@
     "min_bite_total": 0.0184,
     "min_bite_dataset": "qdrops",
     "max_overlap": 0.2727,
-    "min_overlap": 0.0291,
-    "mean_overlap": 0.1169,
+    "min_overlap": 0.0272,
+    "mean_overlap": 0.1171,
     "median_overlap": 0.1135
   },
   "dataset_meta": [
@@ -634,12 +634,54 @@
       ]
     },
     {
+      "pair": "qdrops|reddit_qanon",
+      "ds_a": "qdrops",
+      "ds_b": "reddit_qanon",
+      "jaccard": 0.0577,
+      "shared": [
+        "anons",
+        "bless",
+        "can",
+        "dc",
+        "do",
+        "evil",
+        "fake",
+        "fear",
+        "fighting",
+        "fisa",
+        "future",
+        "game",
+        "god",
+        "happens",
+        "here",
+        "in",
+        "is",
+        "knew",
+        "map",
+        "not",
+        "offline",
+        "panic",
+        "past",
+        "patriots",
+        "people",
+        "potus",
+        "proves",
+        "pure",
+        "real",
+        "report",
+        "them",
+        "to",
+        "trust",
+        "truth",
+        "when"
+      ]
+    },
+    {
       "pair": "qdrops|4chan_pol",
       "ds_a": "qdrops",
       "ds_b": "4chan_pol",
-      "jaccard": 0.0565,
+      "jaccard": 0.0541,
       "shared": [
-        "archive",
         "arrests",
         "bless",
         "cia",
@@ -652,9 +694,9 @@
         "knew",
         "map",
         "military",
-        "msm",
         "never",
         "news",
+        "not",
         "now",
         "offline",
         "on",
@@ -662,13 +704,11 @@
         "patriots",
         "post",
         "ready",
-        "red",
         "sa",
-        "something",
         "they",
-        "timing",
         "to",
         "trip",
+        "trust",
         "tweet",
         "watch",
         "we",
@@ -678,70 +718,63 @@
       ]
     },
     {
-      "pair": "qdrops|reddit_qanon",
+      "pair": "qdrops|twitter",
       "ds_a": "qdrops",
-      "ds_b": "reddit_qanon",
-      "jaccard": 0.0549,
+      "ds_b": "twitter",
+      "jaccard": 0.051,
       "shared": [
-        "anons",
-        "archive",
+        "are",
         "bless",
-        "can",
-        "children",
-        "dc",
+        "control",
+        "declas",
         "do",
-        "evil",
-        "fake",
-        "fear",
         "fighting",
         "fisa",
-        "future",
-        "game",
+        "follow",
+        "freedom",
         "god",
-        "great",
-        "happens",
-        "here",
+        "how",
         "in",
         "is",
-        "knew",
-        "map",
-        "msm",
-        "offline",
-        "panic",
-        "past",
+        "money",
+        "news",
+        "not",
+        "now",
+        "on",
         "patriots",
-        "people",
-        "potus",
-        "proves",
+        "qanon",
+        "ready",
         "real",
-        "report",
-        "to",
+        "show",
+        "them",
+        "they",
+        "trust",
         "truth",
-        "when"
+        "we",
+        "wwg1wga",
+        "you",
+        "your"
       ]
     },
     {
       "pair": "qdrops|8kun_qresearch",
       "ds_a": "qdrops",
       "ds_b": "8kun_qresearch",
-      "jaccard": 0.0533,
+      "jaccard": 0.0507,
       "shared": [
         "alice",
         "anons",
         "arrests",
-        "barr",
-        "big",
         "boom",
+        "bread",
         "can",
         "dc",
         "epstein",
         "general",
         "godspeed",
-        "great",
         "here",
         "in",
         "island",
-        "light",
         "map",
         "move",
         "on",
@@ -763,49 +796,11 @@
       ]
     },
     {
-      "pair": "qdrops|twitter",
-      "ds_a": "qdrops",
-      "ds_b": "twitter",
-      "jaccard": 0.0437,
-      "shared": [
-        "bless",
-        "control",
-        "declas",
-        "do",
-        "fighting",
-        "fisa",
-        "follow",
-        "freedom",
-        "god",
-        "how",
-        "in",
-        "is",
-        "money",
-        "msm",
-        "news",
-        "now",
-        "on",
-        "patriots",
-        "qanon",
-        "ready",
-        "real",
-        "show",
-        "they",
-        "truth",
-        "we",
-        "wwg1wga",
-        "you",
-        "your"
-      ]
-    },
-    {
       "pair": "qdrops|telegram",
       "ds_a": "qdrops",
       "ds_b": "telegram",
-      "jaccard": 0.0419,
+      "jaccard": 0.0422,
       "shared": [
-        "anyone",
-        "archive",
         "arrests",
         "boom",
         "can",
@@ -821,6 +816,7 @@
         "patriots",
         "qanon",
         "ready",
+        "silence",
         "silent",
         "this",
         "truth",
@@ -837,22 +833,20 @@
       "pair": "qdrops|parler",
       "ds_a": "qdrops",
       "ds_b": "parler",
-      "jaccard": 0.0291,
+      "jaccard": 0.0272,
       "shared": [
-        "big",
+        "are",
         "bless",
         "conspiracy",
         "fear",
         "fisa",
         "god",
-        "great",
-        "msm",
         "our",
         "patriots",
         "ready",
         "real",
-        "red",
         "show",
+        "them",
         "theory",
         "they",
         "trump",
@@ -1027,22 +1021,6 @@
       ]
     },
     {
-      "keyword": "msm",
-      "pair_count": 10,
-      "pairs": [
-        "4chan_pol|parler",
-        "4chan_pol|twitter",
-        "parler|twitter",
-        "qdrops|4chan_pol",
-        "qdrops|parler",
-        "qdrops|reddit_qanon",
-        "qdrops|twitter",
-        "reddit_qanon|4chan_pol",
-        "reddit_qanon|parler",
-        "reddit_qanon|twitter"
-      ]
-    },
-    {
       "keyword": "on",
       "pair_count": 10,
       "pairs": [
@@ -1123,18 +1101,6 @@
       ]
     },
     {
-      "keyword": "archive",
-      "pair_count": 6,
-      "pairs": [
-        "4chan_pol|telegram",
-        "qdrops|4chan_pol",
-        "qdrops|reddit_qanon",
-        "qdrops|telegram",
-        "reddit_qanon|4chan_pol",
-        "reddit_qanon|telegram"
-      ]
-    },
-    {
       "keyword": "arrests",
       "pair_count": 6,
       "pairs": [
@@ -1156,18 +1122,6 @@
         "qdrops|telegram",
         "reddit_qanon|8kun_qresearch",
         "reddit_qanon|telegram"
-      ]
-    },
-    {
-      "keyword": "great",
-      "pair_count": 6,
-      "pairs": [
-        "8kun_qresearch|parler",
-        "qdrops|8kun_qresearch",
-        "qdrops|parler",
-        "qdrops|reddit_qanon",
-        "reddit_qanon|8kun_qresearch",
-        "reddit_qanon|parler"
       ]
     },
     {
@@ -1207,6 +1161,30 @@
       ]
     },
     {
+      "keyword": "msm",
+      "pair_count": 6,
+      "pairs": [
+        "4chan_pol|parler",
+        "4chan_pol|twitter",
+        "parler|twitter",
+        "reddit_qanon|4chan_pol",
+        "reddit_qanon|parler",
+        "reddit_qanon|twitter"
+      ]
+    },
+    {
+      "keyword": "not",
+      "pair_count": 6,
+      "pairs": [
+        "4chan_pol|twitter",
+        "qdrops|4chan_pol",
+        "qdrops|reddit_qanon",
+        "qdrops|twitter",
+        "reddit_qanon|4chan_pol",
+        "reddit_qanon|twitter"
+      ]
+    },
+    {
       "keyword": "of",
       "pair_count": 6,
       "pairs": [
@@ -1239,6 +1217,30 @@
         "qdrops|reddit_qanon",
         "qdrops|twitter",
         "reddit_qanon|parler",
+        "reddit_qanon|twitter"
+      ]
+    },
+    {
+      "keyword": "them",
+      "pair_count": 6,
+      "pairs": [
+        "parler|twitter",
+        "qdrops|parler",
+        "qdrops|reddit_qanon",
+        "qdrops|twitter",
+        "reddit_qanon|parler",
+        "reddit_qanon|twitter"
+      ]
+    },
+    {
+      "keyword": "trust",
+      "pair_count": 6,
+      "pairs": [
+        "4chan_pol|twitter",
+        "qdrops|4chan_pol",
+        "qdrops|reddit_qanon",
+        "qdrops|twitter",
+        "reddit_qanon|4chan_pol",
         "reddit_qanon|twitter"
       ]
     },
@@ -1285,21 +1287,30 @@
       ]
     },
     {
+      "keyword": "archive",
+      "pair_count": 3,
+      "pairs": [
+        "4chan_pol|telegram",
+        "reddit_qanon|4chan_pol",
+        "reddit_qanon|telegram"
+      ]
+    },
+    {
+      "keyword": "are",
+      "pair_count": 3,
+      "pairs": [
+        "parler|twitter",
+        "qdrops|parler",
+        "qdrops|twitter"
+      ]
+    },
+    {
       "keyword": "because",
       "pair_count": 3,
       "pairs": [
         "4chan_pol|parler",
         "4chan_pol|twitter",
         "parler|twitter"
-      ]
-    },
-    {
-      "keyword": "big",
-      "pair_count": 3,
-      "pairs": [
-        "8kun_qresearch|parler",
-        "qdrops|8kun_qresearch",
-        "qdrops|parler"
       ]
     },
     {
@@ -1393,6 +1404,15 @@
       ]
     },
     {
+      "keyword": "great",
+      "pair_count": 3,
+      "pairs": [
+        "8kun_qresearch|parler",
+        "reddit_qanon|8kun_qresearch",
+        "reddit_qanon|parler"
+      ]
+    },
+    {
       "keyword": "has",
       "pair_count": 3,
       "pairs": [
@@ -1462,15 +1482,6 @@
         "4chan_pol|twitter",
         "qdrops|4chan_pol",
         "qdrops|twitter"
-      ]
-    },
-    {
-      "keyword": "not",
-      "pair_count": 3,
-      "pairs": [
-        "4chan_pol|twitter",
-        "reddit_qanon|4chan_pol",
-        "reddit_qanon|twitter"
       ]
     },
     {
@@ -1546,15 +1557,6 @@
       ]
     },
     {
-      "keyword": "red",
-      "pair_count": 3,
-      "pairs": [
-        "4chan_pol|parler",
-        "qdrops|4chan_pol",
-        "qdrops|parler"
-      ]
-    },
-    {
       "keyword": "report",
       "pair_count": 3,
       "pairs": [
@@ -1609,15 +1611,6 @@
       ]
     },
     {
-      "keyword": "them",
-      "pair_count": 3,
-      "pairs": [
-        "parler|twitter",
-        "reddit_qanon|parler",
-        "reddit_qanon|twitter"
-      ]
-    },
-    {
       "keyword": "this",
       "pair_count": 3,
       "pairs": [
@@ -1642,15 +1635,6 @@
         "4chan_pol|8kun_qresearch",
         "qdrops|4chan_pol",
         "qdrops|8kun_qresearch"
-      ]
-    },
-    {
-      "keyword": "trust",
-      "pair_count": 3,
-      "pairs": [
-        "4chan_pol|twitter",
-        "reddit_qanon|4chan_pol",
-        "reddit_qanon|twitter"
       ]
     },
     {
@@ -1772,20 +1756,6 @@
       ]
     },
     {
-      "keyword": "anyone",
-      "pair_count": 1,
-      "pairs": [
-        "qdrops|telegram"
-      ]
-    },
-    {
-      "keyword": "are",
-      "pair_count": 1,
-      "pairs": [
-        "parler|twitter"
-      ]
-    },
-    {
       "keyword": "at",
       "pair_count": 1,
       "pairs": [
@@ -1807,17 +1777,24 @@
       ]
     },
     {
-      "keyword": "barr",
-      "pair_count": 1,
-      "pairs": [
-        "qdrops|8kun_qresearch"
-      ]
-    },
-    {
       "keyword": "be",
       "pair_count": 1,
       "pairs": [
         "parler|telegram"
+      ]
+    },
+    {
+      "keyword": "big",
+      "pair_count": 1,
+      "pairs": [
+        "8kun_qresearch|parler"
+      ]
+    },
+    {
+      "keyword": "bread",
+      "pair_count": 1,
+      "pairs": [
+        "qdrops|8kun_qresearch"
       ]
     },
     {
@@ -1846,13 +1823,6 @@
       "pair_count": 1,
       "pairs": [
         "parler|telegram"
-      ]
-    },
-    {
-      "keyword": "children",
-      "pair_count": 1,
-      "pairs": [
-        "qdrops|reddit_qanon"
       ]
     },
     {
@@ -1996,13 +1966,6 @@
       ]
     },
     {
-      "keyword": "light",
-      "pair_count": 1,
-      "pairs": [
-        "qdrops|8kun_qresearch"
-      ]
-    },
-    {
       "keyword": "link",
       "pair_count": 1,
       "pairs": [
@@ -2073,10 +2036,24 @@
       ]
     },
     {
+      "keyword": "pure",
+      "pair_count": 1,
+      "pairs": [
+        "qdrops|reddit_qanon"
+      ]
+    },
+    {
       "keyword": "rc",
       "pair_count": 1,
       "pairs": [
         "qdrops|8kun_qresearch"
+      ]
+    },
+    {
+      "keyword": "red",
+      "pair_count": 1,
+      "pairs": [
+        "4chan_pol|parler"
       ]
     },
     {
@@ -2087,17 +2064,17 @@
       ]
     },
     {
-      "keyword": "silent",
+      "keyword": "silence",
       "pair_count": 1,
       "pairs": [
         "qdrops|telegram"
       ]
     },
     {
-      "keyword": "something",
+      "keyword": "silent",
       "pair_count": 1,
       "pairs": [
-        "qdrops|4chan_pol"
+        "qdrops|telegram"
       ]
     },
     {
@@ -2133,13 +2110,6 @@
       "pair_count": 1,
       "pairs": [
         "qdrops|8kun_qresearch"
-      ]
-    },
-    {
-      "keyword": "timing",
-      "pair_count": 1,
-      "pairs": [
-        "qdrops|4chan_pol"
       ]
     },
     {
@@ -2772,12 +2742,12 @@
   "cluster_quality": [
     {
       "dataset": "qdrops",
-      "n_clusters": 95,
+      "n_clusters": 91,
       "silhouette": 0,
       "top_topics": [
         "status · twitter · com",
-        "politics · www · trump",
-        "boom · test · qrv",
+        "politics · www · nunes",
+        "test · boom · knowingly",
         "qanon · conspiracy · www",
         "wwg1wga · status · twitter"
       ]
@@ -2918,7 +2888,7 @@
       {
         "experiment": "Hoseini et al. 2021",
         "replicated_via": "Jaccard overlap on top topic keywords",
-        "our_result": "Max overlap parler x twitter = 0.2727; range 0.0291-0.2727",
+        "our_result": "Max overlap parler x twitter = 0.2727; range 0.0272-0.2727",
         "paper_expected": "Cross-platform diffusion with partial lexical convergence",
         "match_status": "match_directional",
         "caption": "Low-to-moderate overlap still indicates shared narrative anchors across platforms."

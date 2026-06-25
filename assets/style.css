@@ -279,14 +279,14 @@
    ============================================================ */
 
 /* ---------- Cross-page switcher (in rail) ---------- */
-.xnav{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border:1px solid var(--rule-2); margin:0 0 16px;
+.xnav{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border:1px solid var(--rule-2); margin:0 0 16px;
   font-family:var(--mono)}
 .xnav a{text-align:center; text-decoration:none; padding:8px 3px;
   font-size:9.5px; letter-spacing:.1em; text-transform:uppercase;
   color:var(--ink-3); border-right:1px solid var(--rule-2); border-bottom:1px solid var(--rule-2);
   background:var(--paper-2); transition:background .15s,color .15s; min-width:0}
-.xnav a:nth-child(4n){border-right:none}
-.xnav a:nth-last-child(-n+4){border-bottom:none}
+.xnav a:nth-child(3n){border-right:none}
+.xnav a:nth-last-child(-n+3){border-bottom:none}
 .xnav a:last-child{border-right:none}
 .xnav a:hover{background:var(--paper-3); color:var(--ink)}
 .xnav a.here{background:var(--ink); color:var(--paper)}
