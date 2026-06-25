@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Methods Audit · Self-Critique &amp; Fixes · QAnon Research</title>
+<meta name="description" content="A research-standards self-audit of this QAnon dossier and computational lab: 35 adversarially-verified flaws across data provenance, construct validity, statistics, replication, code, and interpretation — with the fix status of each.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:8px 0}
+  .kpis>div{border:1px solid var(--rule-2);border-radius:8px;background:var(--paper-2);padding:12px 14px;text-align:center}
+  .kpis .v{font-family:var(--serif);font-size:30px;line-height:1;color:var(--ink)}
+  .kpis .k{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-top:5px}
+  .kpis .crit .v{color:#9b2c2c}.kpis .high .v{color:#b06b00}
+  .assess{border:1px solid var(--rule-2);border-left:4px solid var(--accent);background:var(--paper-2);border-radius:8px;padding:14px 18px;margin:10px 0;font-size:14px;line-height:1.62;color:var(--ink-2)}
+  .assess b{color:var(--ink)}
+  .pill{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:20px;white-space:nowrap;display:inline-block}
+  .sev-crit{background:rgba(155,44,44,.12);color:#9b2c2c;border:1px solid rgba(155,44,44,.45)}
+  .sev-high{background:rgba(176,107,0,.12);color:#b06b00;border:1px solid rgba(176,107,0,.4)}
+  .sev-med{background:rgba(120,120,120,.12);color:#5b5b5b;border:1px solid rgba(120,120,120,.4)}
+  .sev-low{background:rgba(120,120,120,.08);color:#7a7a7a;border:1px solid rgba(120,120,120,.3)}
+  .st-fixed{background:rgba(46,125,82,.12);color:#2e7d52;border:1px solid rgba(46,125,82,.45)}
+  .st-mit{background:rgba(176,124,20,.12);color:#8a5a00;border:1px solid rgba(176,124,20,.4)}
+  .st-doc{background:rgba(46,85,117,.10);color:#2e5575;border:1px solid rgba(46,85,117,.4)}
+  .st-open{background:rgba(155,44,44,.08);color:#9b2c2c;border:1px solid rgba(155,44,44,.3)}
+  table.aud{width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0}
+  table.aud th,table.aud td{border:1px solid var(--rule);padding:7px 9px;text-align:left;vertical-align:top}
+  table.aud thead th{background:var(--paper-3);color:var(--ink-2);font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;font-weight:600}
+  table.aud td .ttl{font-weight:600;color:var(--ink);display:block;margin-bottom:3px}
+  table.aud td .ev{color:var(--ink-2);line-height:1.5}
+  table.aud td.c{text-align:center;white-space:nowrap}
+  table.aud code{font-family:var(--mono);font-size:11px;background:var(--paper-3);padding:1px 4px;border-radius:3px}
+  .legendrow{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 10px;font-family:var(--mono);font-size:10.5px;color:var(--ink-3);align-items:center}
+  .fixlist{list-style:none;padding:0;margin:6px 0 0}
+  .fixlist li{display:grid;grid-template-columns:96px 1fr;gap:12px;padding:9px 0;border-top:1px dashed var(--rule);font-size:13px;color:var(--ink-2);line-height:1.55}
+  .fixlist li:first-child{border-top:none}
+  .fixlist b{color:var(--ink)}
+  .strengths{margin:6px 0 0;padding-left:18px}
+  .strengths li{font-size:13.5px;color:var(--ink-2);line-height:1.6;margin-bottom:7px}
+  .secbody p{color:var(--ink-2);line-height:1.62}
+  .secbody code{font-family:var(--mono);font-size:12px;background:var(--paper-3);padding:1px 5px;border-radius:4px}
+</style>
+</head>
+<body>
+
+<button class="railtoggle" id="railtoggle" aria-label="Open contents">☰ Contents</button>
+<div class="scrim" id="scrim"></div>
+
+<div class="shell">
+  <aside class="rail">
+    <div class="rail-inner" id="rail">
+      <div class="seal"><b>Audit</b><span>Self-critique &amp; fixes</span></div>
+      <nav class="xnav">
+        <a href="index.html">Home</a>
+        <a href="dossier.html">Dossier</a>
+        <a href="research.html">Research</a>
+        <a href="review.html">Review</a>
+        <a href="timeline.html">Timeline</a>
+        <a href="drops.html">Drops</a>
+        <a href="results.html">Results</a>
+        <a href="methods.html">Methods</a>
+        <a href="future.html">Future</a>
+      </nav>
+      <div class="reffile">
+        REF · <span>METHODS-AUDIT</span><br>
+        METHOD · <span>6-dim adversarial</span><br>
+        FINDINGS · <span>35 verified</span><br>
+        CRITICAL · <span>4 · HIGH · 15</span>
+      </div>
+
+      <p class="railhead">On this page</p>
+      <nav class="toc" id="toc">
+        <a href="#verdict"><span class="n">★</span><span>Verdict &amp; counts</span></a>
+        <a href="#method"><span class="n">1</span><span>How the audit was run</span></a>
+        <a href="#critical"><span class="n">▲</span><span>Critical findings</span></a>
+        <a href="#high"><span class="n">2</span><span>High-severity findings</span></a>
+        <a href="#medlow"><span class="n">3</span><span>Medium &amp; low</span></a>
+        <a href="#fixes"><span class="n">✚</span><span>Fixes implemented</span></a>
+        <a href="#strengths"><span class="n">+</span><span>What holds up</span></a>
+      </nav>
+
+      <div class="legend">
+        <p class="railhead">Status key</p>
+        <div class="row"><span class="pill st-fixed">Fixed</span><span class="def">Corrected in code/pages this pass.</span></div>
+        <div class="row"><span class="pill st-mit">Mitigated</span><span class="def">Caveated/disclaimed; full fix needs more.</span></div>
+        <div class="row"><span class="pill st-doc">Documented</span><span class="def">Disclosed as a known limitation.</span></div>
+        <div class="row"><span class="pill st-open">Open</span><span class="def">Needs real data or a study to resolve.</span></div>
+      </div>
+    </div>
+  </aside>
+
+  <main>
+    <header class="mast">
+      <div class="classbar">
+        <span><span class="dot"></span>Research-standards audit</span>
+        <span class="sep">/</span><span>Adversarially verified</span>
+        <span class="sep">/</span><span>Fixes applied</span>
+        <span class="sep">/</span><span>Self-critique</span>
+      </div>
+      <h1 class="title">Methods <span class="q">Audit</span></h1>
+      <p class="subtitle">A critical review of this project <em>by</em> this project. Thirteen agents across six research-standard dimensions found, then adversarially verified, <strong>35 flaws</strong> — from fabricated downstream data to a mislabeled scoring formula. This page lists every confirmed finding with file-line evidence and its current fix status, plus an honest account of what still holds up.</p>
+    </header>
+
+    <div class="pagebody">
+      <p class="lede">The dossier's contract is to grade every claim by evidence. This page applies that contract to the dossier's own methods. Nothing here is hidden: the synthetic-data problem, the unvalidated lexicons, the circular silhouette, and a formula this site previously misreported are all on the record below, each tagged Fixed, Mitigated, Documented, or Open.</p>
+    </div>
+
+    <!-- ★ VERDICT -->
+    <section class="dz" id="verdict" style="border-top:none">
+      <div class="sechd"><div class="secno">★</div>
+        <div><h2 class="sech">Verdict &amp; severity counts</h2>
+        <p class="sectag">Descriptive Q-corpus work is sound; cross-platform &amp; "cult-quantification" claims are overstated</p></div></div>
+      <div class="secbody">
+        <div class="kpis">
+          <div class="crit"><div class="v">4</div><div class="k">Critical</div></div>
+          <div class="high"><div class="v">15</div><div class="k">High</div></div>
+          <div><div class="v">11</div><div class="k">Medium</div></div>
+          <div><div class="v">5</div><div class="k">Low</div></div>
+        </div>
+        <div class="assess">
+          <b>Overall assessment.</b> The conclusions split sharply by data source. The descriptive analysis of the <b>real 4,966-drop Q corpus</b> — that the drops are an affect-heavy, vague, low-concreteness stream on a US-timezone clock — is broadly supported, reproducible from the committed JSON, and often honestly caveated. But <b>every cross-platform and "replication" conclusion is unsupported as presented</b>: six of seven datasets are fabricated from a handful of Q-saturated templates, the iDRAMA "diaspora" merely echoes hard-coded timestamps, and the replication badges are mechanical presence checks. The two custom "cult-control" instruments (BITE, motivated reasoning) are <b>unvalidated keyword lexicons with no stance handling</b>, so they conflate topic mention with coercion. The statistics are exploratory: no CIs or multiple-comparison control, a mislabeled persistence-dominant composite, and a circular UMAP-space silhouette propping up the "2 robust topics" headline. Net: a transparent, partially self-critical exploratory dossier whose real-corpus descriptive claims are defensible but whose cross-platform, replication, and cult-quantification claims should be re-scoped before being presented as findings.
+        </div>
+      </div>
+    </section>
+
+    <!-- 1 · METHOD -->
+    <section class="dz" id="method">
+      <div class="sechd"><div class="secno">1</div>
+        <div><h2 class="sech">How the audit was run</h2>
+        <p class="sectag">Find → adversarially verify → synthesize, so the critique meets its own standard</p></div></div>
+      <div class="secbody">
+        <p style="margin-top:0">Six dimensions — <strong>statistical validity, construct/measurement validity, data provenance, replication, code correctness, and interpretation/ethics</strong> — were each handed to a "finder" agent that read the actual files and cited <code>file:line</code>. Every finding then went to an independent <strong>adversarial verifier</strong> that re-opened the cited evidence and could confirm, downgrade, or <em>refute</em> it (a critique that is itself wrong is worse than none). A final agent synthesized only the non-refuted findings. Thirteen agents, ~575k tokens. The most load-bearing numbers were also re-derived by hand from the committed artifacts.</p>
+        <p>This is the same discipline the <a href="future.html">Delegated-Closure</a> page used on its own theory — applied here to the whole project.</p>
+      </div>
+    </section>
+
+    <!-- ▲ CRITICAL -->
+    <section class="dz" id="critical">
+      <div class="sechd"><div class="secno">▲</div>
+        <div><h2 class="sech">Critical findings</h2>
+        <p class="sectag">Each invalidates a headline claim as presented</p></div></div>
+      <div class="secbody">
+        <table class="aud">
+          <thead><tr><th style="width:34%">Finding</th><th>Evidence</th><th class="c">Sev</th><th class="c">Status</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span class="ttl">Six of seven datasets are 100% synthetic</span><span class="ev">The entire cross-platform analysis is fabricated data, yet overlap/"shared lexicon" claims were presented largely uncaveated.</span></td>
+              <td class="ev"><code>collect_datasets.py:353-375</code> cycles ~10 hard-coded Q-saturated seed sentences per dataset; the dispatcher falls back to <code>make_sample</code> whenever the real file is absent — always true (<code>catalog.json</code> <code>local_path:null</code> for all six). Every downstream record carries <code>sample_type='sample'</code>.</td>
+              <td class="c"><span class="pill sev-crit">Critical</span></td>
+              <td class="c"><span class="pill st-mit">Mitigated</span></td>
+            </tr>
+            <tr>
+              <td><span class="ttl">iDRAMA "diaspora" replication is circular</span><span class="ev">The migration ordering is authored, not observed: each platform's first-appearance month equals an injected constant.</span></td>
+              <td class="ev"><code>collect_datasets.py:343-350</code> hard-codes BASE_TIMES (reddit 2017-11, 8kun 2018-11, parler 2020-01, telegram 2020-12); the recomputed first-appearance months from <code>results/index.json</code> match them exactly. <code>compare_results.py</code> then labels this "match_strong".</td>
+              <td class="c"><span class="pill sev-crit">Critical</span></td>
+              <td class="c"><span class="pill st-doc">Documented</span></td>
+            </tr>
+            <tr>
+              <td><span class="ttl">BITE lexicon is unvalidated</span><span class="ev">The central cult-coercion instrument has no ground truth, no human coding, no inter-rater reliability.</span></td>
+              <td class="ev">Repo-wide search for <code>kappa|inter-rater|annotat|validat</code> over <code>bite_scorer.py</code> returns nothing; weights are hand-set with no citation (e.g. "enemy of the people"=1.0). The saturation constant 3.0 is a tuning choice.</td>
+              <td class="c"><span class="pill sev-crit">Critical</span></td>
+              <td class="c"><span class="pill st-mit">Mitigated</span></td>
+            </tr>
+            <tr>
+              <td><span class="ttl">BITE conflates mention with coercion</span><span class="ev">Pure substring presence, no stance/negation, so debunking and academic text score as "control".</span></td>
+              <td class="ev"><code>bite_scorer.py:_raw_score</code> is <code>pat.search(text)</code> only; no negation/stance handling. A QAnon-<em>debunking</em> sentence scores T=0.54 ("strongly present") purely from containing the terms. It measures topic salience, not control.</td>
+              <td class="c"><span class="pill sev-crit">Critical</span></td>
+              <td class="c"><span class="pill st-mit">Mitigated</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size:12.5px;color:var(--ink-3);line-height:1.6">Mitigations applied: loud synthetic-data disclosures on Home/Results/Future + a <code>collect_datasets.py</code> note; a construct-validity + no-stance disclaimer in <code>bite_scorer.py</code> and on the Results BITE panel; the iDRAMA badge caveated and the merge bug documented in code. <strong>Full resolution is the Phase-0 roadmap item: collect real, provenance-documented downstream corpora</strong> (see <a href="future.html#roadmap">Future</a>). Until then, no cross-platform number is evidence.</p>
+      </div>
+    </section>
+
+    <!-- 2 · HIGH -->
+    <section class="dz" id="high">
+      <div class="sechd"><div class="secno">2</div>
+        <div><h2 class="sech">High-severity findings</h2>
+        <p class="sectag">Inference, measurement, and reproducibility problems</p></div></div>
+      <div class="secbody">
+        <table class="aud">
+          <thead><tr><th style="width:36%">Finding</th><th>Evidence &amp; fix</th><th class="c">Status</th></tr></thead>
+          <tbody>
+            <tr><td><span class="ttl">Composite formula was misreported</span><span class="ev">Pages claimed "⅓ each"; the real rule is persistence-dominant.</span></td><td class="ev"><code>improved_experiment.py:133</code> = <code>0.50·persistence + 0.30·silhouette + 0.20·coherence</code>. Only these weights reproduce the published scores. <b>Fix:</b> corrected the caption on Home, Results &amp; README.</td><td class="c"><span class="pill st-fixed">Fixed</span></td></tr>
+            <tr><td><span class="ttl">Persistence rewards degenerate solutions</span><span class="ev">The 0.50-weighted metric biases toward the coarsest split.</span></td><td class="ev">Recomputed r(n_topics, persistence) = <b>−0.99</b>. The "winning" 2-topic run is ~98% one topic. <b>Fix:</b> caveated at every "2 robust topics" site; topic-count-controlled metric is Open.</td><td class="c"><span class="pill st-mit">Mitigated</span></td></tr>
+            <tr><td><span class="ttl">Silhouette is circular (UMAP space)</span><span class="ev">It scores separation in the very space HDBSCAN optimised.</span></td><td class="ev"><code>qdrops_cluster.py:compute_validity</code> runs <code>silhouette_score</code> on the 5-D UMAP output. <b>Fix:</b> code comment + page relabel as "internal sanity check, not external validity"; pre-UMAP silhouette is Open.</td><td class="c"><span class="pill st-mit">Mitigated</span></td></tr>
+            <tr><td><span class="ttl">No CIs / p-values / multiple-comparison control</span><span class="ev">Winner = a single max over 12 runs &amp; 21 Jaccards.</span></td><td class="ev">No bootstrap/inference anywhere. <b>Fix:</b> <code>dci.py</code> now reports a 1,000-iteration permutation p-value (the openness drift comes out p=0.54, null); full bootstrap CIs across the grid are Open.</td><td class="c"><span class="pill st-mit">Mitigated</span></td></tr>
+            <tr><td><span class="ttl">"Full 4,966-drop corpus" was actually 4,248</span><span class="ev">A silent 14.5% reduction in the clustering pipeline.</span></td><td class="ev"><code>stability_report.json</code> n_drops=4,248 (admin 4,135) vs the advertised 4,966. <b>Fix:</b> corrected the N at every ablation claim on Home, Results &amp; README.</td><td class="c"><span class="pill st-fixed">Fixed</span></td></tr>
+            <tr><td><span class="ttl">"Single operator" contradicted the Critical Review</span><span class="ev">The Review concludes multiple authors.</span></td><td class="ev"><b>Fix:</b> downgraded to "US-timezone-clustered posting, authorship unresolved" on Home (heading, pattern D, theory T1), reconciling the two pages.</td><td class="c"><span class="pill st-fixed">Fixed</span></td></tr>
+            <tr><td><span class="ttl">"143×" ratio rests on n=3 drops</span><span class="ev">An unstable single-hour denominator, no uncertainty.</span></td><td class="ev">Quietest-hour count = 3 of 4,966. <b>Fix:</b> the windowed contrast (deepest 3 h &lt;0.5%) is now the headline; the 143× is flagged as fragile.</td><td class="c"><span class="pill st-fixed">Fixed</span></td></tr>
+            <tr><td><span class="ttl">Replication badges are mechanical</span><span class="ev">"match_strong/directional/partial" are near-unfalsifiable.</span></td><td class="ev">Labels assigned by presence, not effect-size targets. <b>Fix:</b> caveat added on the Results replication panel; iDRAMA badge flagged as synthetic-driven.</td><td class="c"><span class="pill st-mit">Mitigated</span></td></tr>
+            <tr><td><span class="ttl">Hoseini Jaccard inflated by stopwords</span><span class="ev">~27% of "shared keywords" were function words ("in", "they", "and").</span></td><td class="ev"><code>multi_dataset_analysis.py</code> overlap retained stopwords. <b>Fix:</b> added a stopword + digit filter to the overlap (<code>_content_keywords</code>); displayed Jaccards await a real-data re-run.</td><td class="c"><span class="pill st-fixed">Fixed</span></td></tr>
+            <tr><td><span class="ttl">DCI REDACTION confounded by acronyms</span><span class="ev">~32% of drops scored on ALLCAPS alone (POTUS/FBI/FISA).</span></td><td class="ev"><b>Fix:</b> removed the ALLCAPS-ratio signal from <code>dci.py</code> REDACTION; re-ran — DCI mean 0.342→0.329 and all Future-page numbers updated.</td><td class="c"><span class="pill st-fixed">Fixed</span></td></tr>
+            <tr><td><span class="ttl">Multi-dataset BERTopic had no seed</span><span class="ev">Flagship cross-platform numbers were not reproducible.</span></td><td class="ev"><b>Fix:</b> passed a seeded UMAP (<code>random_state=seed</code>) into the multi-dataset BERTopic in <code>multi_dataset_analysis.py</code>. (The single-corpus <code>qdrops_cluster.py</code> was already seeded.)</td><td class="c"><span class="pill st-fixed">Fixed</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 3 · MEDIUM & LOW -->
+    <section class="dz" id="medlow">
+      <div class="sechd"><div class="secno">3</div>
+        <div><h2 class="sech">Medium &amp; low findings (selected)</h2>
+        <p class="sectag">Smaller bugs, framing, and disclosure gaps</p></div></div>
+      <div class="secbody">
+        <table class="aud">
+          <thead><tr><th style="width:40%">Finding</th><th>Fix / status</th><th class="c">Sev</th><th class="c">Status</th></tr></thead>
+          <tbody>
+            <tr><td><span class="ttl">BITE median off-by-one for even n</span></td><td class="ev"><code>sorted(vals)[n//2]</code> never averaged the two central values. <b>Fix:</b> now <code>statistics.median</code>.</td><td class="c"><span class="pill sev-med">Med</span></td><td class="c"><span class="pill st-fixed">Fixed</span></td></tr>
+            <tr><td><span class="ttl">DCI placebo was an invalid null</span></td><td class="ev">Signed real slope vs mean-absolute shuffled slope, no p-value. <b>Fix:</b> proper two-sided permutation test (p=0.54).</td><td class="c"><span class="pill sev-med">Med</span></td><td class="c"><span class="pill st-fixed">Fixed</span></td></tr>
+            <tr><td><span class="ttl">catalog.json date range wrong</span></td><td class="ev">Listed Q-drops ending 2020-12-08; data extends to 2022-11-28. <b>Fix:</b> corrected; archive limitations noted.</td><td class="c"><span class="pill sev-med">Med</span></td><td class="c"><span class="pill st-fixed">Fixed</span></td></tr>
+            <tr><td><span class="ttl">Circadian caption inconsistency</span></td><td class="ev">"08–13 UTC" vs "11–13 UTC" used interchangeably. <b>Fix:</b> reconciled wording on Home.</td><td class="c"><span class="pill sev-med">Med</span></td><td class="c"><span class="pill st-fixed">Fixed</span></td></tr>
+            <tr><td><span class="ttl">"Audience is the amplifier" still strong</span></td><td class="ev">Headline outran its now-synthetic pillar. <b>Fix:</b> softened to "appears to be (provisional)".</td><td class="c"><span class="pill sev-med">Med</span></td><td class="c"><span class="pill st-fixed">Fixed</span></td></tr>
+            <tr><td><span class="ttl">DCI "0 BITE overlap" was hard-coded</span></td><td class="ev">Asserted, not computed. <b>Fix:</b> <code>dci.py</code> now computes it (result: 0 tokens).</td><td class="c"><span class="pill sev-low">Low</span></td><td class="c"><span class="pill st-fixed">Fixed</span></td></tr>
+            <tr><td><span class="ttl">Migration mixes real + synthetic platform labels</span></td><td class="ev">"4ch"/"8ch"/"8kun" (real) blended with synthetic "4chan"/"8kun". <b>Documented</b> in code; a naive label-merge was rejected as it would erase the real 8chan→8kun transition.</td><td class="c"><span class="pill sev-med">Med</span></td><td class="c"><span class="pill st-doc">Documented</span></td></tr>
+            <tr><td><span class="ttl">BITE saturation &amp; weights arbitrary</span></td><td class="ev">Undocumented tuning. <b>Documented</b> in the new <code>bite_scorer.py</code> limitations block.</td><td class="c"><span class="pill sev-med">Med</span></td><td class="c"><span class="pill st-doc">Documented</span></td></tr>
+            <tr><td><span class="ttl">Set-Jaccard conflates vocabulary size with similarity</span></td><td class="ev">10-keyword set overlap is corpus-size sensitive. <b>Documented</b>; a frequency-weighted measure is Open.</td><td class="c"><span class="pill sev-med">Med</span></td><td class="c"><span class="pill st-doc">Documented</span></td></tr>
+            <tr><td><span class="ttl">DCI is ~40% length-driven by construction</span></td><td class="ev">Discriminant examples partly reflect brevity. <b>Documented</b> on Future; partialled in code.</td><td class="c"><span class="pill sev-low">Low</span></td><td class="c"><span class="pill st-doc">Documented</span></td></tr>
+            <tr><td><span class="ttl">Lifton scorecard framing inflates the cult read</span></td><td class="ev">"8/8 present" beside "6 met / 2 partial". <b>Open</b> — flagged for a dossier wording pass.</td><td class="c"><span class="pill sev-med">Med</span></td><td class="c"><span class="pill st-open">Open</span></td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:12px;color:var(--ink-3)">Full verified finding set (35) and the agent transcripts are in the session workflow artifacts; the highest-impact items are shown here.</p>
+      </div>
+    </section>
+
+    <!-- ✚ FIXES -->
+    <section class="dz" id="fixes">
+      <div class="sechd"><div class="secno">✚</div>
+        <div><h2 class="sech">Fixes implemented this pass</h2>
+        <p class="sectag">What actually changed in the code and pages</p></div></div>
+      <div class="secbody">
+        <ul class="fixlist">
+          <li><b><code>dci.py</code></b><span>Removed the acronym-confounded ALLCAPS signal from REDACTION; replaced the eyeballed placebo with a 1,000-iteration two-sided permutation p-value; replaced the hard-coded "0 BITE overlap" with a computed check. Re-ran → DCI mean 0.342→0.329, openness-drift p=0.54.</span></li>
+          <li><b><code>bite_scorer.py</code></b><span>Fixed the even-n median (now <code>statistics.median</code>); added a prominent construct-validity + no-stance-handling limitations block to the docstring.</span></li>
+          <li><b><code>multi_dataset_analysis.py</code></b><span>Added stopword + digit filtering to the topic-overlap keyword sets (de-inflating the Hoseini Jaccard); seeded the multi-dataset BERTopic's UMAP for reproducibility; documented the real/synthetic migration conflation.</span></li>
+          <li><b><code>qdrops_cluster.py</code></b><span>Labelled the silhouette as a UMAP-space internal sanity check, not external validity.</span></li>
+          <li><b><code>datasets/catalog.json</code></b><span>Corrected the Q-drop date range to 2017-10-28 → 2022-11-28 and noted the third-party-archive limitations.</span></li>
+          <li><b>Home / Results / Future / README</b><span>Corrected the composite formula (0.50/0.30/0.20), the analyzed N (4,248/4,135), the circadian and single-operator framing, the cross-platform synthetic caveats, the BITE construct-validity disclaimer, the replication-label caveat, and all updated DCI numbers.</span></li>
+        </ul>
+        <p style="font-size:12.5px;color:var(--ink-3);margin-top:10px">What is <em>not</em> fixed here, by honesty: collecting real downstream data, a κ-validated human-coding study of BITE, full bootstrap CIs and multiple-comparison control across the grid, and a pre-UMAP silhouette. These need new data or new studies and are tracked as Open / Phase-0 on the <a href="future.html#roadmap">roadmap</a>.</p>
+      </div>
+    </section>
+
+    <!-- + STRENGTHS -->
+    <section class="dz" id="strengths">
+      <div class="sechd"><div class="secno">+</div>
+        <div><h2 class="sech">What holds up</h2>
+        <p class="sectag">A fair audit credits the calibrated parts too</p></div></div>
+      <div class="secbody">
+        <ul class="strengths">
+          <li><b>The real-corpus descriptive work is grounded.</b> The circadian, style, BITE-on-Q, and DCI analyses run on the actual 4,966 drops and recompute exactly from the committed JSON.</li>
+          <li><b>Unusual transparency.</b> The code self-documents its gaps (<code>no_confidence_reporting:true</code>; the DCI page discloses its missing κ), which is why verification was fast — good-faith reporting, not concealment.</li>
+          <li><b>Several headlines were already calibrated.</b> The Future page reports its 2-of-3 hypothesis failures and calls the synthetic-data disclosure "the most important result"; the amplification number was already flagged provisional.</li>
+          <li><b>DCI was deliberately built non-circular.</b> It excludes BITE tokens and partials word-count — awareness of construct contamination, now verified (0-token overlap, r≈0.03).</li>
+          <li><b>The interpretive instruments carry humility.</b> The dossier already calls the Lifton/BITE scores "interpretive instruments, not measured quantities."</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="foot">
+      <p class="disc"><b>The point of publishing this.</b> A project that analyses a conspiracy movement by computational means is only as trustworthy as its willingness to turn the same scrutiny on itself. The descriptive Q-corpus findings survive that scrutiny; the cross-platform and cult-quantification claims do not, and are now marked as such throughout. The honest path forward is the roadmap, not louder claims.</p>
+      <p style="margin-top:14px">Compiled 2026 · QAnon research dossier · Methods audit &amp; self-critique · <a href="future.html" style="color:var(--rep);text-decoration:none">See the roadmap →</a></p>
+    </div>
+
+  </main>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

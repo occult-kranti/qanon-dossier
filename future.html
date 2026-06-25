@@ -130,9 +130,9 @@
       <h1 class="title">Delegated <span class="q">Closure</span></h1>
       <p class="subtitle">A new, falsifiable <em>measurement</em> theory of how Q drops work — and the research program that would test it. The producer/consumer "guided apophenia" reading is not new (Berkowitz, Argentino, Phillips &amp; Milner). What is new is the <strong>Delegated-Closure Index (DCI)</strong>: the first per-post, embedding-free, LLM-free, regex-computable measure of how much interpretive closure a drop withholds — built to be non-circular and tested against its own pre-registered falsifiers, negatives and all.</p>
       <div class="hero-stats" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-top:4px">
-        <div style="background:var(--paper);padding:13px 15px"><div style="font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)">DCI mean</div><div style="font-family:var(--serif);font-size:21px;color:var(--ink);margin-top:3px">0.342</div></div>
+        <div style="background:var(--paper);padding:13px 15px"><div style="font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)">DCI mean</div><div style="font-family:var(--serif);font-size:21px;color:var(--ink);margin-top:3px">0.329</div></div>
         <div style="background:var(--paper);padding:13px 15px"><div style="font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)">Drops scored</div><div style="font-family:var(--serif);font-size:21px;color:var(--ink);margin-top:3px">4,966</div></div>
-        <div style="background:var(--paper);padding:13px 15px"><div style="font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)">BITE corr.</div><div style="font-family:var(--serif);font-size:21px;color:var(--ink);margin-top:3px">≈0.05</div></div>
+        <div style="background:var(--paper);padding:13px 15px"><div style="font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)">BITE corr.</div><div style="font-family:var(--serif);font-size:21px;color:var(--ink);margin-top:3px">≈0.03</div></div>
         <div style="background:var(--paper);padding:13px 15px"><div style="font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)">LLM used</div><div style="font-family:var(--serif);font-size:21px;color:var(--ink);margin-top:3px">None</div></div>
       </div>
     </header>
@@ -167,7 +167,7 @@
           <tbody>
             <tr><td><b>INTERROGATIVE</b></td><td class="num">0.22</td><td>min(1, count('?')/3). Pure prediction-error raisers. <span class="mk">37.6% of drops carry '?'</span></td></tr>
             <tr><td><b>DECODE</b></td><td class="num">0.20</td><td>presence of a <em>BITE-disjoint</em> decode-prompt: <span class="mk">re_read · expand your thinking · connect the dots · you have more than you know · think mirror · coincidence? · stringer</span></td></tr>
-            <tr><td><b>REDACTION</b></td><td class="num">0.18</td><td>max of: <code>[..]</code> bracket span · <code>RE_READ</code>/<code>D____</code> underscore-blackout · ALLCAPS-token ratio · bare pronoun with no proper noun &amp; no back-reference</td></tr>
+            <tr><td><b>REDACTION</b></td><td class="num">0.18</td><td>max of: <code>[..]</code> bracket span · <code>RE_READ</code>/<code>D____</code> underscore-blackout · bare pronoun with no proper noun &amp; no back-reference. <span style="color:#9b2c2c">Post-audit: the ALLCAPS-ratio signal was <strong>removed</strong> — it was confounded by ordinary acronyms (POTUS/FBI/FISA), inflating ~32% of drops. See <a href="audit.html">Audit</a>.</span></td></tr>
             <tr><td><b>BREVITY</b></td><td class="num">0.15</td><td>1 − min(1, words/20). Shorter drops name fewer referents.</td></tr>
             <tr><td><b>1 − CONCRETENESS</b></td><td class="num">0.13</td><td>CONCRETENESS = 1 if a date (<code>\d{1,2}/\d{1,2}</code> or month) or action claim (<code>will be|arrested|indict|extradition|tomorrow…</code>) is present. Falsifiable specifics <em>lower</em> DCI.</td></tr>
             <tr><td><b>1 − GROUNDING</b></td><td class="num">0.12</td><td>GROUNDING = 1 if a URL is present or <code>referenced_posts</code> is non-empty. External anchoring <em>lowers</em> DCI.</td></tr>
@@ -177,17 +177,17 @@
 
         <h3 style="font-family:var(--serif);font-size:16px;margin:16px 0 4px;color:var(--ink)">Distribution over the real 4,966-drop corpus</h3>
         <div class="kpis">
-          <div><div class="k">Mean ± SD</div><div class="v">0.342<span style="font-size:13px">±0.137</span></div><div class="s">non-degenerate</div></div>
-          <div><div class="k">Median</div><div class="v">0.323</div><div class="s">Q1 0.25 · Q3 0.42</div></div>
+          <div><div class="k">Mean ± SD</div><div class="v">0.329<span style="font-size:13px">±0.136</span></div><div class="s">non-degenerate</div></div>
+          <div><div class="k">Median</div><div class="v">0.31</div><div class="s">Q1 0.24 · Q3 0.40</div></div>
           <div><div class="k">Range</div><div class="v">0.00–0.90</div><div class="s">full spread used</div></div>
           <div><div class="k">Weight-invariance</div><div class="v">r=0.96</div><div class="s">vs uniform 1/6</div></div>
         </div>
         <div class="hist">
           <div class="bars">
-            <i style="height:4%"></i><i style="height:5%"></i><i style="height:20%"></i><i style="height:23%"></i><i style="height:54%"></i><i style="height:100%"></i><i class="med" style="height:51%"></i><i style="height:51%"></i><i style="height:62%"></i><i style="height:27%"></i><i style="height:33%"></i><i style="height:14%"></i><i style="height:3%"></i><i style="height:13%"></i><i style="height:2%"></i><i style="height:1%"></i><i style="height:1%"></i><i style="height:1%"></i><i style="height:1%"></i><i style="height:1%"></i>
+            <i style="height:5%"></i><i style="height:6%"></i><i style="height:26%"></i><i style="height:23%"></i><i style="height:65%"></i><i style="height:100%"></i><i class="med" style="height:56%"></i><i style="height:48%"></i><i style="height:55%"></i><i style="height:25%"></i><i style="height:28%"></i><i style="height:11%"></i><i style="height:2%"></i><i style="height:13%"></i><i style="height:2%"></i><i style="height:1%"></i><i style="height:1%"></i><i style="height:1%"></i><i style="height:1%"></i><i style="height:1%"></i>
           </div>
           <div class="axis"><span>0.0</span><span>0.25</span><span>0.5</span><span>0.75</span><span>1.0</span></div>
-          <div class="cap">DCI histogram (20 bins). Red bar ≈ median (0.323). A genuine spread, not a spike — DCI discriminates rather than labelling everything the same.</div>
+          <div class="cap">DCI histogram (20 bins). Red bar ≈ median (0.31). A genuine spread, not a spike — DCI discriminates rather than labelling everything the same.</div>
         </div>
         <p class="note2">Face validity (discriminant check): the highest-DCI drops are pure interrogative cascades — <em>"Timing of impeachment vote [revised]? 7pm EST … Coincidence? Q"</em> (DCI 0.90) — while the lowest-DCI drops are URL-grounded link posts and concrete replies (DCI 0.00). The index separates gap-leaving from self-resolving text exactly as intended.</p>
       </div>
@@ -205,7 +205,7 @@
           <li style="padding:11px 0;border-top:1px dashed var(--rule)"><h4 style="font-family:var(--serif);font-size:15.5px;margin:0 0 3px;color:var(--ink)">2 · BITE-shared tokens removed from DECODE</h4><p style="margin:0;font-size:13px;color:var(--ink-2);line-height:1.55">The phrases <code>future proves past</code>, <code>trust the plan</code>, and <code>the map</code> are scored by <a href="https://github.com/occult-kranti/qanon-dossier/blob/main/bite_scorer.py">bite_scorer.py</a> (lines 104/124/105). They are <strong>deliberately excluded</strong> from DCI's DECODE lexicon, so DCI and BITE never count the same string under opposite labels.</p></li>
           <li style="padding:11px 0;border-top:1px dashed var(--rule)"><h4 style="font-family:var(--serif);font-size:15.5px;margin:0 0 3px;color:var(--ink)">3 · Word-count partialled out</h4><p style="margin:0;font-size:13px;color:var(--ink-2);line-height:1.55">Because brevity inflates DCI and deflates any keyword density, every DCI-vs-BITE comparison removes <code>word_count</code> first, so a brevity coincidence can't masquerade as a finding.</p></li>
         </ol>
-        <div class="formula" style="border-left-color:#2e7d52">Empirical result (computed by <code>dci.py</code>): correlation of DCI with BITE-total = <b>0.048</b>; partial correlation controlling word-count = <b>−0.032</b>. DCI and BITE are statistically independent. <br>Caveat reported, not hidden: per-drop BITE-Thought variance is only 0.0065 (mean 0.0303) — a near-floor — so any claim that "DCI out-predicts BITE-T" would be <em>uninformative</em>, and we withdraw it.</div>
+        <div class="formula" style="border-left-color:#2e7d52">Empirical result (computed by <code>dci.py</code>): the DECODE↔BITE lexicon overlap is <b>0 tokens</b> (now computed, not asserted); correlation of DCI with BITE-total = <b>0.034</b>; partial correlation controlling word-count = <b>−0.054</b>. DCI and BITE are statistically independent. <br>Caveat reported, not hidden: per-drop BITE-Thought variance is only 0.0065 (mean 0.0303) — a near-floor — so any claim that "DCI out-predicts BITE-T" would be <em>uninformative</em>, and we withdraw it.</div>
       </div>
     </section>
 
@@ -217,11 +217,11 @@
       <div class="secbody">
         <p style="margin-top:0">Honesty over tidiness. The metric is sound, but two temporal hypotheses were not supported and the headline cross-platform claim is not computable here. All numbers are from <a href="results/improved/dci_findings.json">dci_findings.json</a>.</p>
         <div class="scard">
-          <div class="r"><div class="t"><b>DCI is computable &amp; non-degenerate.</b> Mean 0.342±0.137, range 0.00–0.90 over 4,966 drops.</div><span class="pill pass">Pass</span></div>
-          <div class="r"><div class="t"><b>DCI is measurement-independent of BITE.</b> r=0.048; partial-r (word-count out) = −0.032.</div><span class="pill pass">Pass</span></div>
+          <div class="r"><div class="t"><b>DCI is computable &amp; non-degenerate.</b> Mean 0.329±0.136, range 0.00–0.90 over 4,966 drops.</div><span class="pill pass">Pass</span></div>
+          <div class="r"><div class="t"><b>DCI is measurement-independent of BITE.</b> 0-token lexicon overlap; r=0.034; partial-r (word-count out) = −0.054.</div><span class="pill pass">Pass</span></div>
           <div class="r"><div class="t"><b>DCI is weight-invariant.</b> Weighted vs uniform-1/6 correlate at r=0.96; year-ordering preserved; ablation stable.</div><span class="pill pass">Pass</span></div>
           <div class="r"><div class="t"><b>DCI discriminates gap-leaving from self-resolving text.</b> Highest = interrogative cascades; lowest = URL-grounded links.</div><span class="pill pass">Pass</span></div>
-          <div class="r"><div class="t"><b>Openness drifts upward over the migration.</b> Overall slope −0.0026/yr ≈ placebo 0.0017 — flat. Components move in opposite directions and cancel.</div><span class="pill down">Downgraded</span></div>
+          <div class="r"><div class="t"><b>Openness drifts upward over the migration.</b> Overall slope +0.0012/yr; permutation test <b>p=0.54</b> — indistinguishable from noise. Components move in opposite directions and cancel.</div><span class="pill down">Downgraded</span></div>
           <div class="r"><div class="t"><b>Falsifiability economy (deferral rises vs concreteness).</b> FER <em>falls</em> 0.71→0.50→0.34 across 2017–19 — its own falsifier fires.</div><span class="pill fail">Rejected</span></div>
           <div class="r"><div class="t"><b>Source openness predicts downstream control (5.6–7.1× "amplification").</b> Downstream corpora are synthetic — not computable here.</div><span class="pill block">Blocked</span></div>
         </div>
@@ -234,10 +234,10 @@
         <div><h2 class="sech">Openness "drift" and the falsifiability economy</h2>
         <p class="sectag">The honest negatives — and why the per-component view is more interesting than the headline</p></div></div>
       <div class="secbody">
-        <p style="margin-top:0"><strong>Openness Drift Slope (ODS).</strong> We regressed DCI on posting time. The <em>overall</em> slope is <strong>−0.0026/yr</strong> against a time-shuffle placebo of <strong>0.0017</strong> — statistically flat. Composite DCI does <em>not</em> rise. But the per-component breakout (the test the red-team demanded) tells a sharper story: the drops shifted <em>mode</em> of openness rather than raising its level.</p>
+        <p style="margin-top:0"><strong>Openness Drift Slope (ODS).</strong> We regressed DCI on posting time. The <em>overall</em> slope is <strong>+0.0012/yr</strong>, and a 1,000-iteration permutation test gives <strong>p=0.54</strong> — fully indistinguishable from noise. Composite DCI does <em>not</em> trend. But the per-component breakout (the test the red-team demanded) tells a sharper story: the drops shifted <em>mode</em> of openness rather than raising its level.</p>
         <div class="divhd"><span></span><span class="l">← toward closure /yr</span><span></span><span class="r">toward openness /yr →</span><span></span></div>
         <div class="div"><span class="lab">BREVITY</span><span class="neg"></span><span class="mid"></span><span class="pos"><b style="width:67%"></b></span><span class="val">+0.050</span></div>
-        <div class="div"><span class="lab">REDACTION</span><span class="neg"></span><span class="mid"></span><span class="pos"><b style="width:45%"></b></span><span class="val">+0.034</span></div>
+        <div class="div"><span class="lab">REDACTION</span><span class="neg"></span><span class="mid"></span><span class="pos"><b style="width:73%"></b></span><span class="val">+0.056</span></div>
         <div class="div"><span class="lab">1−CONCRETE</span><span class="neg"></span><span class="mid"></span><span class="pos"><b style="width:8%"></b></span><span class="val">+0.006</span></div>
         <div class="div"><span class="lab">INTERROGATIVE</span><span class="neg"><b style="width:13%"></b></span><span class="mid"></span><span class="pos"></span><span class="val">−0.010</span></div>
         <div class="div"><span class="lab">DECODE</span><span class="neg"><b style="width:38%"></b></span><span class="mid"></span><span class="pos"></span><span class="val">−0.029</span></div>
@@ -285,7 +285,7 @@
         <table class="dtab">
           <thead><tr><th>Prior work</th><th>What we borrow</th><th>Our departure</th></tr></thead>
           <tbody>
-            <tr><td>Berkowitz, <em>A Game Designer's Analysis of QAnon</em> (2020) — guided apophenia, gaps-for-the-player</td><td>The whole producer/consumer division of labor: Q leaves gaps; the audience fills them and feels self-discovery.</td><td>Berkowitz asserts gap-leaving qualitatively. DCI is the first per-drop, embedding-free, computable score of it (mean 0.342±0.137).</td></tr>
+            <tr><td>Berkowitz, <em>A Game Designer's Analysis of QAnon</em> (2020) — guided apophenia, gaps-for-the-player</td><td>The whole producer/consumer division of labor: Q leaves gaps; the audience fills them and feels self-discovery.</td><td>Berkowitz asserts gap-leaving qualitatively. DCI is the first per-drop, embedding-free, computable score of it (mean 0.329±0.136).</td></tr>
             <tr><td>Argentino (QAnon-as-ARG); Phillips &amp; Milner (participatory disinformation); Muirhead &amp; Rosenblum ("conspiracy without the theory")</td><td>Cross-platform participatory meaning-making; validation-by-repetition; audience as co-author.</td><td>We convert the qualitative claim into (a) a computable per-post index and (b) a pre-registered, slogan-controlled source→downstream gradient test.</td></tr>
             <tr><td>Hassan BITE model; Lifton thought-reform</td><td>The B/I/T/E dimensions and the observation that Thought-control dominates while Behaviour-control ≈ 0.</td><td>We measure control-<em>solicitation</em> (DCI), not control-content, and de-overlap DCI from the BITE lexicon so the two are independent.</td></tr>
             <tr><td>Festinger (failed prophecy / dissonance) &amp; the disconfirmation-immunity literature</td><td>The prophecy↔belief-maintenance link and Q's disconfirmation resistance.</td><td>We narrow our novel delta to one measurable thing they lack — the selection-out of concreteness (FER) — and report that the corpus <em>rejected</em> it. We demote "open prophecy" from falsifiable to descriptive.</td></tr>

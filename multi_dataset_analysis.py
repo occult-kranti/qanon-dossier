@@ -135,13 +135,20 @@ def cluster_bertopic(texts, min_cluster_size=10, seed=42):
     try:
         from bertopic import BERTopic
         from sentence_transformers import SentenceTransformer
+        from umap import UMAP
     except ImportError:
         print("  [warn] BERTopic not available, falling back to KMeans")
         return cluster_kmeans(texts, seed=seed)
 
     texts_clean = [t if t and t.strip() else "empty" for t in texts]
     embed_model = SentenceTransformer("all-MiniLM-L6-v2")
+    # POST-AUDIT FIX: pass a SEEDED UMAP so multi-dataset BERTopic runs are
+    # reproducible. Previously UMAP was left to its random default, so the
+    # published cross-platform topics/overlaps were not bit-for-bit reproducible.
+    umap_model = UMAP(n_neighbors=15, n_components=5, min_dist=0.0,
+                      metric="cosine", random_state=seed)
     bt = BERTopic(embedding_model=embed_model,
+                  umap_model=umap_model,
                   min_topic_size=min_cluster_size,
                   calculate_probabilities=False,
                   verbose=False)
@@ -175,6 +182,14 @@ def platform_migration(all_datasets):
     Build a cross-platform timeline: for each month, count posts per platform.
     Replicates the iDRAMA Lab's platform-diaspora analysis.
     """
+    # POST-AUDIT NOTE (see audit.html): this timeline is NOT a clean platform
+    # diaspora. Its columns mix two incompatible sources: the REAL qdrops board
+    # labels ("4ch"=4chan-era, "8ch"=8chan, "8kun"=8kun) and the SYNTHETIC platform
+    # samples ("4chan", "reddit", "parler", "telegram", "twitter", and a synthetic
+    # "8kun"). We deliberately do NOT merge "8ch"→"8kun" (they are a real 2019
+    # transition, not duplicate labels) nor "4ch"→"4chan" (that would blend real
+    # qdrops with synthetic seed data). The iDRAMA "diaspora" replication is invalid
+    # on this data until real downstream corpora replace the synthetic samples.
     monthly = defaultdict(lambda: defaultdict(int))
     for ds_id, posts in all_datasets.items():
         for p in posts:
@@ -206,22 +221,45 @@ def jaccard(set_a, set_b):
     return round(inter / union, 4) if union else 0.0
 
 
+# POST-AUDIT FIX: strip English function words before computing topic overlap.
+# Previously ~27% of "shared keywords" across pairs were stopwords ("in", "on",
+# "they", "and"…), inflating the Jaccard so it partly measured shared grammar
+# rather than shared narrative. BERTopic's c-TF-IDF labels retain stopwords, so we
+# filter them here at the overlap step.
+try:
+    from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS as _SK_STOP
+    OVERLAP_STOPWORDS = set(_SK_STOP)
+except Exception:  # keep the script runnable without sklearn
+    OVERLAP_STOPWORDS = set(
+        "a an and are as at be been but by can could do does did for from had has have "
+        "he her here him his how i in is it its me my no not now of on or our out so that "
+        "the their them then there these they this those to up us was we were what when "
+        "where which who why will with you your".split())
+
+
+def _content_keywords(topics, k=10):
+    """Top-k keywords per topic with English stopwords and empties removed."""
+    kws = set()
+    for t in topics:
+        for w in t.get("keywords", [])[:k]:
+            w = (w or "").strip().lower()
+            if w and w not in OVERLAP_STOPWORDS and not w.isdigit():
+                kws.add(w)
+    return kws
+
+
 def cross_platform_topic_overlap(dataset_topics):
     """
     For each pair of datasets compute Jaccard overlap of their top-10 topic keywords.
-    Replicates Hoseini et al. 2021's cross-platform topic matching.
+    Replicates Hoseini et al. 2021's cross-platform topic matching (stopword-filtered).
     """
     dataset_ids = list(dataset_topics.keys())
     overlap_matrix = {}
 
     for i, ds_a in enumerate(dataset_ids):
         for ds_b in dataset_ids[i+1:]:
-            kws_a = set()
-            kws_b = set()
-            for t in dataset_topics[ds_a]:
-                kws_a.update(t.get("keywords", [])[:10])
-            for t in dataset_topics[ds_b]:
-                kws_b.update(t.get("keywords", [])[:10])
+            kws_a = _content_keywords(dataset_topics[ds_a])
+            kws_b = _content_keywords(dataset_topics[ds_b])
             j = jaccard(kws_a, kws_b)
             overlap_matrix[f"{ds_a}|{ds_b}"] = {
                 "dataset_a": ds_a,

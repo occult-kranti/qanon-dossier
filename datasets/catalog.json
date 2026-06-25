@@ -6,8 +6,14 @@
       "id": "qdrops",
       "name": "Q Drops (JSON-QAnon)",
       "platform": "4chan,8chan,8kun",
-      "boards": ["/pol", "/qresearch"],
-      "period": {"start": "2017-10-28", "end": "2020-12-08"},
+      "boards": [
+        "/pol",
+        "/qresearch"
+      ],
+      "period": {
+        "start": "2017-10-28",
+        "end": "2022-11-28"
+      },
       "post_count": 4966,
       "format": "json",
       "license": "research-only",
@@ -16,15 +22,31 @@
       "sample_path": "datasets/samples/qdrops_sample.json",
       "url": "https://raw.githubusercontent.com/jkingsman/JSON-QAnon/main/posts.json",
       "doi": "10.13140/RG.2.2.28778.32964",
-      "schema_raw": {"top_level": "posts[]", "fields": ["post_metadata", "text", "referenced_posts"]},
-      "notes": "Primary Q drops corpus. Already in use by qdrops_cluster.py."
+      "schema_raw": {
+        "top_level": "posts[]",
+        "fields": [
+          "post_metadata",
+          "text",
+          "referenced_posts"
+        ]
+      },
+      "notes": "Primary Q drops corpus. Already in use by qdrops_cluster.py. NOTE: JSON-QAnon is a third-party archive; deleted/edited drops, tripcode changes, and scraping gaps are not reconstructable here."
     },
     {
       "id": "reddit_qanon",
       "name": "Reddit QAnon Subreddits",
       "platform": "reddit",
-      "boards": ["r/greatawakening", "r/CBTS_Stream", "r/The_Great_Awakening", "r/qanon", "r/WWG1WGA"],
-      "period": {"start": "2017-10-01", "end": "2021-12-31"},
+      "boards": [
+        "r/greatawakening",
+        "r/CBTS_Stream",
+        "r/The_Great_Awakening",
+        "r/qanon",
+        "r/WWG1WGA"
+      ],
+      "period": {
+        "start": "2017-10-01",
+        "end": "2021-12-31"
+      },
       "post_count": 1600000,
       "format": "json-lines",
       "license": "research",
@@ -32,15 +54,30 @@
       "local_path": null,
       "sample_path": "datasets/samples/reddit_qanon_sample.json",
       "url": "https://academictorrents.com/details/9c263fc85366c1ef8f5bb9da0203f4c8c8db75f4",
-      "schema_raw": {"fields": ["id","subreddit","author","created_utc","body","selftext","score"]},
+      "schema_raw": {
+        "fields": [
+          "id",
+          "subreddit",
+          "author",
+          "created_utc",
+          "body",
+          "selftext",
+          "score"
+        ]
+      },
       "notes": "PushShift archive. r/greatawakening banned Jun 2018 (~70K members)."
     },
     {
       "id": "4chan_pol",
       "name": "4chan /pol/ Q-Thread Sample",
       "platform": "4chan",
-      "boards": ["/pol/"],
-      "period": {"start": "2017-10-01", "end": "2018-02-01"},
+      "boards": [
+        "/pol/"
+      ],
+      "period": {
+        "start": "2017-10-01",
+        "end": "2018-02-01"
+      },
       "post_count": 5000,
       "format": "json",
       "license": "public-domain",
@@ -48,15 +85,30 @@
       "local_path": null,
       "sample_path": "datasets/samples/4chan_pol_sample.json",
       "url": "https://archive.4plebs.org/_/api/chan/search/",
-      "schema_raw": {"fields": ["num","thread_num","op","timestamp","comment","trip","poster_country"]},
+      "schema_raw": {
+        "fields": [
+          "num",
+          "thread_num",
+          "op",
+          "timestamp",
+          "comment",
+          "trip",
+          "poster_country"
+        ]
+      },
       "notes": "4plebs public API. Rate-limited; collector samples ~1K posts."
     },
     {
       "id": "8kun_qresearch",
       "name": "8kun /qresearch/ Archive",
       "platform": "8kun",
-      "boards": ["/qresearch/"],
-      "period": {"start": "2018-11-01", "end": "2020-12-31"},
+      "boards": [
+        "/qresearch/"
+      ],
+      "period": {
+        "start": "2018-11-01",
+        "end": "2020-12-31"
+      },
       "post_count": 3000000,
       "format": "json",
       "license": "public",
@@ -64,15 +116,31 @@
       "local_path": null,
       "sample_path": "datasets/samples/8kun_qresearch_sample.json",
       "url": "https://archive.org/details/8kun-qresearch",
-      "schema_raw": {"fields": ["no","time","name","trip","id","com","sub"]},
+      "schema_raw": {
+        "fields": [
+          "no",
+          "time",
+          "name",
+          "trip",
+          "id",
+          "com",
+          "sub"
+        ]
+      },
       "notes": "Main Q research board community replies. ~3M+ posts."
     },
     {
       "id": "parler",
       "name": "Parler QAnon Posts",
       "platform": "parler",
-      "boards": ["qanon", "greatawakening"],
-      "period": {"start": "2018-08-01", "end": "2021-01-11"},
+      "boards": [
+        "qanon",
+        "greatawakening"
+      ],
+      "period": {
+        "start": "2018-08-01",
+        "end": "2021-01-11"
+      },
       "post_count": 400000,
       "format": "json-lines",
       "license": "research/journalism",
@@ -80,15 +148,32 @@
       "local_path": null,
       "sample_path": "datasets/samples/parler_sample.json",
       "url": "https://www.propublica.org/datastore/dataset/parler-data",
-      "schema_raw": {"fields": ["PostId","UserId","Body","CreatedAt","HashtagsAll","Impressions"]},
+      "schema_raw": {
+        "fields": [
+          "PostId",
+          "UserId",
+          "Body",
+          "CreatedAt",
+          "HashtagsAll",
+          "Impressions"
+        ]
+      },
       "notes": "QAnon heavy platform pre-Jan 2021 takedown. ProPublica curated set."
     },
     {
       "id": "telegram",
       "name": "Telegram Q Channels",
       "platform": "telegram",
-      "boards": ["QMovement", "QAnon", "WWG1WGA", "GreatAwakening"],
-      "period": {"start": "2019-01-01", "end": "2023-12-31"},
+      "boards": [
+        "QMovement",
+        "QAnon",
+        "WWG1WGA",
+        "GreatAwakening"
+      ],
+      "period": {
+        "start": "2019-01-01",
+        "end": "2023-12-31"
+      },
       "post_count": 200000,
       "format": "json",
       "license": "public-messages",
@@ -96,15 +181,32 @@
       "local_path": null,
       "sample_path": "datasets/samples/telegram_sample.json",
       "url": "https://tgstat.com/",
-      "schema_raw": {"fields": ["id","type","date","from","text","forwarded_from"]},
+      "schema_raw": {
+        "fields": [
+          "id",
+          "type",
+          "date",
+          "from",
+          "text",
+          "forwarded_from"
+        ]
+      },
       "notes": "Post-ban migration platform. Use Telegram's built-in Export Chat History."
     },
     {
       "id": "twitter",
       "name": "Twitter/X QAnon Hashtag Corpus",
       "platform": "twitter",
-      "boards": ["#QAnon", "#WWG1WGA", "#GreatAwakening", "#TrustThePlan"],
-      "period": {"start": "2018-01-01", "end": "2021-12-31"},
+      "boards": [
+        "#QAnon",
+        "#WWG1WGA",
+        "#GreatAwakening",
+        "#TrustThePlan"
+      ],
+      "period": {
+        "start": "2018-01-01",
+        "end": "2021-12-31"
+      },
       "post_count": 10000000,
       "format": "json",
       "license": "academic-ids-only",
@@ -112,7 +214,15 @@
       "local_path": null,
       "sample_path": "datasets/samples/twitter_sample.json",
       "url": "https://doi.org/10.5281/zenodo.4586545",
-      "schema_raw": {"fields": ["id","text","author_id","created_at","public_metrics"]},
+      "schema_raw": {
+        "fields": [
+          "id",
+          "text",
+          "author_id",
+          "created_at",
+          "public_metrics"
+        ]
+      },
       "notes": "Sharma et al. 2021 tweet-ID dataset on Zenodo. Requires rehydration via API."
     }
   ]

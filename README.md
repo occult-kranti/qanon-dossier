@@ -4,6 +4,8 @@ A fully-cited academic website and **multi-dataset NLP research platform** exami
 
 > **Purpose & ethics.** This project documents and analyses QAnon; it does **not** amplify or endorse its claims. Debunked claims are flagged with rebuttals; survivor-support resources are linked throughout.
 
+> **⚠ Read the [Methods Audit](audit.html) first.** A research-standards self-critique found 35 verified flaws (4 critical). In short: the **real 4,966-drop Q-corpus** descriptive work is sound, but the **cross-platform / "replication" claims rest on synthetic placeholder data** and the BITE/motivated-reasoning lexicons are unvalidated. Cross-platform numbers are illustrative, not evidence. Fixes applied this pass are listed on that page.
+
 ## Quick start
 
 ```bash
@@ -62,7 +64,9 @@ Paste this in one Colab cell:
 
 ## Latest run — best result, setup & LLM
 
-**Experiment setup.** BERTopic (sentence-transformers → UMAP → HDBSCAN) on the full **4,966-drop** Q corpus, device target **T4 GPU**, run as a 12-cell ablation: three embedding models — **BAAI/bge-large-en-v1.5** (primary), **all-mpnet-base-v2**, **all-MiniLM-L6-v2** — crossed with **min_cluster_size ∈ {15, 25, 40}**, in both the full and admin-filtered corpora. Each run is scored on a composite of silhouette separation, gensim c<sub>v</sub> coherence, and cross-run topic persistence.
+**Experiment setup.** BERTopic (sentence-transformers → UMAP → HDBSCAN) on the Q corpus — **4,248 drops** after empty/duplicate removal (4,135 with the admin filter), *not* the full 4,966 — device target **T4 GPU**, run as a 12-cell ablation: three embedding models — **BAAI/bge-large-en-v1.5** (primary), **all-mpnet-base-v2**, **all-MiniLM-L6-v2** — crossed with **min_cluster_size ∈ {15, 25, 40}**, in both the full and admin-filtered corpora. Each run is scored as **0.50·persistence + 0.30·silhouette + 0.20·coherence** ([`improved_experiment.py:133`](improved_experiment.py)).
+
+> **⚠ Read with the [Methods Audit](audit.html).** Persistence is the heaviest term and mechanically rewards coarse few-topic splits (r≈−0.99 with topic count); silhouette is measured in the UMAP space HDBSCAN optimised (internal sanity check, not external validity); and the winner is a single max over many runs with no confidence intervals. So the "2 robust topics" headline is a property of this scoring, not external proof.
 
 **Best run (composite winner):**
 
@@ -118,11 +122,11 @@ Built to be **non-circular**: engagement is never an input; tokens shared with `
 
 | Claim | Verdict | Evidence |
 |---|---|---|
-| DCI computable & non-degenerate | ✅ Pass | mean 0.342 ± 0.137, range 0.00–0.90 |
-| DCI independent of BITE (non-circular) | ✅ Pass | r=0.05; partial-r (word-count out) = −0.03 |
+| DCI computable & non-degenerate | ✅ Pass | mean 0.329 ± 0.136, range 0.00–0.90 |
+| DCI independent of BITE (non-circular) | ✅ Pass | 0-token lexicon overlap; r=0.03; partial-r (word-count out) = −0.05 |
 | DCI weight-invariant | ✅ Pass | weighted vs uniform-1/6 r=0.96 |
 | DCI discriminates gap-leaving vs self-resolving | ✅ Pass | high = "Coincidence?" cascades; low = URL-grounded links |
-| Openness drifts upward over time (ODS) | ⬇ Downgraded | overall −0.0026/yr ≈ placebo 0.0017 → a **mode-shift**, not a rise |
+| Openness drifts upward over time (ODS) | ⬇ Downgraded | +0.0012/yr, permutation **p=0.54** (null) → a **mode-shift**, not a rise |
 | Falsifiability economy (FER rises) | ❌ Rejected | FER **falls** 0.71→0.50→0.34 across 2017–19 |
 | Source openness → downstream control (5.6–7.1×) | ⛔ Blocked | downstream corpora are **synthetic** — not computable here |
 
@@ -170,6 +174,7 @@ Results land in `compare_results.json` and `compare_results.html` (web dashboard
 | **`timeline.html`** | A **sourced event chronology** in seven eras — precursors, the first Q drop, platform migrations, key drops, violent incidents, parallel global events, and a final **"Current events & the news"** era (2022–2026) linking QAnon's mythology to live news: Trump's Q embrace, the January 2025 pardons of the "QAnon Shaman," and the Epstein-files fracture. |
 | **`drops.html`** | An **interactive drop-cluster explorer + analytics dashboard**. Reads `qdrops_clustered.json` and renders a UMAP **cluster map**, **topic breakdown**, **searchable reader**, drops-per-year and monthly-volume charts (with literature milestones), **per-topic temporal sparklines**, a **validity readout** (silhouette + c_v), **corpus composition** and **board-migration** charts, a **tripcode-rotation timeline** (an authenticity signal), an **administrative-drop filter**, a **cross-reference table** vs. the peer-reviewed literature, and a **Stability panel** (loads `stability_report.json`; **click a stable topic to read its drops** in the reader). Works the moment the JSON is present; otherwise offers a file-picker + schema-preview demo. |
 | **`methods.html`** | A consolidated **methods and data map**: all databases/derived files used, grouped experiment setup (normalization → clustering → validity → stability), and peer-reviewed tracks grouped by analytical role for quick reproducibility and evidence lookup. |
+| **`audit.html`** | A research-standards **self-critique**: 35 adversarially-verified flaws (4 critical, 15 high) across data provenance, construct validity, statistics, replication, code, and interpretation — each with file-line evidence and a fix status (Fixed / Mitigated / Documented / Open). The honest companion to the rest of the site. |
 | **`future.html`** | The newest page: a **novel measurement theory — "Delegated Closure"** — and its metric, the **Delegated-Closure Index (DCI)**, the first per-post, embedding-free, LLM-free, regex-computable measure of how much interpretive closure a drop withholds. Carries an honest results scorecard (4 passes, 1 downgrade, 1 rejected hypothesis, 1 blocked), the **synthetic-downstream-data disclosure**, a prior-research ledger, and a phased research roadmap. Reads `results/improved/dci_findings.json`. |
 | `qdrops_cluster.py` | The **clustering pipeline** (run locally). Downloads the research-only [JSON-QAnon](https://github.com/jkingsman/JSON-QAnon) dataset, embeds each drop, and lets topics form themselves via **embeddings → UMAP → HDBSCAN** (BERTopic; also `--method hdbscan` and a no-torch `--method kmeans`). Reports **validity** (silhouette + gensim c_v coherence), extracts **metadata** (images, references, tripcodes, source board → corpus composition + board migration), and **tags administrative drops** (`--drop-admin`). Exports `qdrops_clustered.json` + CSV. |
 | `qdrops_patterns.py` | A **metadata pattern-miner** over the raw archive. Extracts the signatures the topic/BITE pipeline discards — posting **circadian rhythm** (UTC hour-of-day), **stylistic phase shifts** across the board migration, falsifiable-claim ("concreteness") decay, source-vs-platform **BITE amplification**, and inter-drop cadence. Writes `results/improved/original_findings.json`; backs the patterns & theories panels. |

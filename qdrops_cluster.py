@@ -472,6 +472,12 @@ def compute_validity(space, topics, docs, keywords, do_coherence=True):
     out = {"silhouette": None, "coherence_cv_mean": None, "per_topic_coherence": {}}
 
     # --- silhouette on the clustering space (excluding noise) ---
+    # CAVEAT (see audit.html): `space` is the UMAP-reduced space that HDBSCAN was
+    # run on, so this silhouette measures separation in the space the clusterer
+    # already optimized — it is an internal sanity check, NOT external validation,
+    # and it inflates for coarse (few-topic) solutions. Do not read it as proof
+    # that the original embedding has real structure.
+    out["silhouette_space"] = "umap_reduced (internal sanity check, not external validity)"
     try:
         from sklearn.metrics import silhouette_score
         t = np.array(topics)

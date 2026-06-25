@@ -210,7 +210,7 @@
         <div><h2 class="sech">Best result, experiment setup &amp; the LLM used</h2>
         <p class="sectag">Improved ablation run — 3 embedding models × 3 cluster sizes, scored for stability</p></div></div>
       <div class="secbody">
-        <p style="color:var(--ink-2);margin-top:0">The refreshed experiment (<code style="font-family:var(--mono);font-size:12px;background:var(--paper-3);padding:1px 5px;border-radius:4px">improved_experiment.py</code>, device target <strong>T4 GPU</strong>, method <strong>BERTopic</strong>) re-clusters the full <strong>4,966-drop</strong> corpus under an ablation grid — three sentence-embedding models (<strong>BAAI/bge-large-en-v1.5</strong> primary, plus all-mpnet-base-v2 and all-MiniLM-L6-v2) crossed with <strong>min_cluster_size ∈ {15, 25, 40}</strong>, in both the full and admin-filtered corpora (12 runs total). Each run is scored on a composite of silhouette separation, gensim c<sub>v</sub> coherence, and cross-run topic persistence.</p>
+        <p style="color:var(--ink-2);margin-top:0">The refreshed experiment (<code style="font-family:var(--mono);font-size:12px;background:var(--paper-3);padding:1px 5px;border-radius:4px">improved_experiment.py</code>, device target <strong>T4 GPU</strong>, method <strong>BERTopic</strong>) re-clusters the Q corpus under an ablation grid — three sentence-embedding models (<strong>BAAI/bge-large-en-v1.5</strong> primary, plus all-mpnet-base-v2 and all-MiniLM-L6-v2) crossed with <strong>min_cluster_size ∈ {15, 25, 40}</strong>, in both the full and admin-filtered corpora (12 runs total). <span style="color:#9b2c2c">Correction (post-audit): the clustering pipeline analyses <strong>4,248</strong> drops after empty/duplicate removal (4,135 with the admin filter), not the full 4,966</span> — the descriptive/BITE/DCI work below uses all 4,966. Each run is scored on a composite of silhouette, gensim c<sub>v</sub> coherence, and cross-run topic persistence.</p>
         <div class="kpis">
           <div><div class="k">Winning run</div><div class="v">MiniLM·mcs40</div><div class="s">composite 0.5966</div></div>
           <div><div class="k">Silhouette</div><div class="v">0.795</div><div class="s">cluster separation</div></div>
@@ -218,7 +218,7 @@
           <div><div class="k">Mean persistence</div><div class="v">0.525</div><div class="s">stable across runs</div></div>
         </div>
         <table class="dtab">
-          <caption>Top of the 12-run ablation scoreboard (composite = ⅓·silhouette + ⅓·coherence + ⅓·persistence). The two-topic solutions at mcs40 win because they are <em>robust</em>: MiniLM·mcs40 and MPNet·mcs40 agree at Jaccard <b>0.928</b> — nearly the same partition from independent models. Full table: <a href="results/improved/improved_experiment_report.md">improved_experiment_report.md</a>.</caption>
+          <caption>Top of the 12-run ablation scoreboard. <span style="color:#9b2c2c">Correction (post-audit): the real composite is <b>0.50·persistence + 0.30·silhouette + 0.20·coherence</b> (<code>improved_experiment.py:133</code>), not equal thirds.</span> The two-topic mcs40 solutions "win" largely <em>because</em> persistence is the heaviest term and persistence mechanically rewards coarse few-topic splits (r≈−0.99 with topic count), and the silhouette is measured in the UMAP space HDBSCAN optimised. Read "robust 2 topics" as a property of this scoring, not external proof — see the <a href="audit.html">Methods Audit</a>. (The MiniLM/MPNet mcs40 agreement of <b>0.928</b> is real, but two ~99%-in-one-topic splits agree trivially.)</caption>
           <thead><tr><th>Run</th><th>Model</th><th>mcs</th><th>Topics</th><th>Silhouette</th><th>c<sub>v</sub></th><th>Persist.</th><th>Score</th></tr></thead>
           <tbody>
             <tr class="best"><td>MiniLM·mcs40</td><td>all-MiniLM-L6-v2</td><td>40</td><td>2</td><td>0.795</td><td>0.478</td><td>0.525</td><td>0.597</td></tr>
@@ -253,7 +253,7 @@
           <li>
             <span class="tag">A · Shared cross-platform lexicon</span>
             <h4>One vocabulary travels everywhere</h4>
-            <p>Across all 21 platform pairs, the same anchor words recur regardless of which two platforms are compared: <em>storm, patriots, coming, god, fisa, drop, msm, ready, wwg1wga, panic, map, trust, everything</em>. The strongest pair is <strong>Parler × Twitter (Jaccard 0.273)</strong>; the slogan <strong>WWG1WGA</strong> is the single most stable topic across every embedding model. The narrative diffuses as a fixed phrase-set, not as evolving argument.</p>
+            <p>Across all 21 platform pairs, the same anchor words recur regardless of which two platforms are compared: <em>storm, patriots, coming, god, fisa, drop, msm, ready, wwg1wga, panic, map, trust, everything</em>. The strongest pair is <strong>Parler × Twitter (Jaccard 0.273)</strong>; the slogan <strong>WWG1WGA</strong> is the single most stable topic across every embedding model. <span style="color:#9b2c2c">⚠ Caveat (post-audit): every <em>cross-platform</em> number here (the 21 pairs, the 0.273, the "shared lexicon") is computed over <strong>synthetic</strong> downstream samples, and the Jaccard was stopword-inflated (~27% function words; now fixed in code). Treat the cross-platform pattern as illustration, not evidence — see the <a href="audit.html">Methods Audit</a>. The WWG1WGA stability is on the real Q corpus and stands.</span></p>
           </li>
           <li>
             <span class="tag">B · Affective uniformity under clustering</span>
@@ -267,14 +267,14 @@
           </li>
         </ol>
 
-        <h3 style="font-family:var(--serif);font-size:16px;margin:16px 0 2px;color:var(--ink)">D · A single human's clock</h3>
-        <p style="color:var(--ink-2);margin:0 0 4px;font-size:13.5px">Posting time-of-day (UTC, all 4,966 drops) shows a sharp nocturnal trough: the busiest hour holds <strong>143×</strong> the volume of the quietest, and the deepest three-hour window (11–13 UTC) contains just <strong>0.44%</strong> of the entire corpus. That trough lands squarely in the human sleep band under <em>every</em> US time zone (≈03:00 PST → 06:00 EST).</p>
+        <h3 style="font-family:var(--serif);font-size:16px;margin:16px 0 2px;color:var(--ink)">D · A US-timezone posting clock</h3>
+        <p style="color:var(--ink-2);margin:0 0 4px;font-size:13.5px">Posting time-of-day (UTC, all 4,966 drops) shows a sharp nocturnal trough: the deepest three-hour window (<strong>08–13 UTC</strong> band; 11–13 UTC is the very bottom) contains under <strong>0.5%</strong> of the corpus, and it lands in the human sleep band under <em>every</em> US time zone (≈03:00 PST → 06:00 EST). <span style="color:#9b2c2c">Caveat (post-audit): the headline "143× busy/quiet" ratio divides by a single-hour count of just <strong>n=3 drops</strong> — an unstable denominator; the windowed contrast is the robust statistic. And this shows a US-timezone <em>schedule</em>, which does not establish a <em>single</em> author — a team sharing US hours fits equally, consistent with the <a href="review.html">Critical Review</a>'s multiple-author finding.</span></p>
         <div class="circ">
           <div class="bars">
             <i style="height:66%"></i><i style="height:63%"></i><i style="height:71%"></i><i style="height:58%"></i><i style="height:66%"></i><i style="height:52%"></i><i style="height:35%"></i><i style="height:16%"></i><i class="trough" style="height:6%"></i><i class="trough" style="height:2%"></i><i class="trough" style="height:5%"></i><i class="trough" style="height:3%"></i><i class="trough" style="height:1%"></i><i class="trough" style="height:1%"></i><i style="height:9%"></i><i style="height:32%"></i><i style="height:73%"></i><i style="height:97%"></i><i style="height:100%"></i><i style="height:86%"></i><i style="height:79%"></i><i style="height:72%"></i><i style="height:72%"></i><i style="height:88%"></i>
           </div>
           <div class="axis"><span>0</span><span></span><span></span><span>3</span><span></span><span></span><span>6</span><span></span><span></span><span>9</span><span></span><span></span><span>12</span><span></span><span></span><span>15</span><span></span><span></span><span>18</span><span></span><span></span><span>21</span><span></span><span></span></div>
-          <div class="cap">Drops per UTC hour. Red = the 08–13 UTC sleep trough (3–24 drops/hour vs. a 431-drop peak at 18:00 UTC). A 24/7 team would fill the trough; one person on a US clock leaves it empty.</div>
+          <div class="cap">Drops per UTC hour. Red = the 08–13 UTC sleep trough (3–24 drops/hour vs. a 431-drop peak at 18:00 UTC). A 24/7 automated operation would fill the trough; a US-timezone human or team leaves it empty.</div>
         </div>
         <p style="color:var(--ink-3);font-family:var(--mono);font-size:11px;margin:6px 0 0">Cadence corroborates the single-author read: <strong>25.6%</strong> of consecutive drops land &lt;5 minutes apart (typing sessions), with a 0.23 h median gap punctuated by multi-day silences.</p>
       </div>
@@ -290,7 +290,7 @@
         <div class="twocol">
           <div class="theory backed">
             <div class="th"><span class="tlabel">Most backed by data</span>
-              <h3>The drops are an affective engagement engine; the audience is the amplifier</h3></div>
+              <h3>The drops are an affective engagement engine; the audience appears to be the amplifier <span style="font-size:11px;color:#9b2c2c">(amplification provisional)</span></h3></div>
             <div class="bd">
               <p>QAnon's power lives in interpretation and emotion, not instructions — and most of the "cult-control" signal is manufactured downstream by followers, not by Q.</p>
               <ul>
@@ -331,9 +331,9 @@
         <p style="color:var(--ink-2);margin-top:0">These go beyond the existing pipeline. Each is stated as a falsifiable hypothesis with the evidence that motivates it, a concrete experiment, and the result that would <em>disprove</em> it — the discipline the Critical Review demands.</p>
         <ol class="exps">
           <li>
-            <h4><span class="num">T1</span>Single nocturnal operator, not a 24/7 team</h4>
-            <p class="claim">The posting clock is one human's circadian rhythm on a US time zone — inconsistent with the "team of military-intel insiders" the mythology claims.</p>
-            <div class="rowx"><div class="lab">Evidence</div><div class="val">143× busy/quiet hour ratio; deepest 3 h = <b>0.44%</b> of all drops; trough in the sleep band for every US zone; 25.6% of drops &lt;5 min apart.</div></div>
+            <h4><span class="num">T1</span>US-timezone posting clock (authorship unresolved)</h4>
+            <p class="claim">The posting rhythm follows a single US-timezone human schedule — inconsistent with a 24/7 automated operation, though it does <em>not</em> by itself prove a single author (a US-hours team fits too).</p>
+            <div class="rowx"><div class="lab">Evidence</div><div class="val">Deepest 3 h (08–13 UTC) = <b>&lt;0.5%</b> of all drops; trough in the sleep band for every US zone; 25.6% of drops &lt;5 min apart. <span style="color:#9b2c2c">(The "143×" single-hour ratio rests on n=3 and is reported as fragile.)</span></div></div>
             <div class="rowx"><div class="lab">Experiment</div><div class="val">Per-phase UTC-hour KDE (4ch / 8ch / 8kun) + a <b>DST-shift test</b>: does the trough move with US daylight-saving dates? Bootstrap a uniform null.</div></div>
             <div class="rowx"><div class="lab">Predicts</div><div class="val">One stable trough that shifts ≤1–2 h at the 8kun handoff and tracks US DST.</div></div>
             <div class="rowx"><div class="lab">Falsified if</div><div class="val">Activity is ~uniform across 24 h, or the trough ignores DST → consistent with automation / a distributed team.</div></div>
@@ -422,6 +422,11 @@
             <h3><a href="methods.html">Methods</a></h3>
             <p>A single implementation map listing the databases used, the grouped experiment setup, and the peer-reviewed tracks the comparisons are benchmarked against.</p>
             <div class="when">Use this for reproducibility and source-organization in one place.</div>
+          </div></li>
+          <li><div class="ic">AUDT</div><div>
+            <h3><a href="audit.html">Audit</a></h3>
+            <p>A research-standards <strong>self-critique</strong>: 35 adversarially-verified flaws across data provenance, construct validity, statistics, replication, code, and interpretation — each with file-line evidence and a fix status (Fixed / Mitigated / Documented / Open). Reads honestly on what holds up (the real-corpus work) and what is overstated (the synthetic cross-platform claims).</p>
+            <div class="when">Go here for the limitations, the mistakes, and what was corrected.</div>
           </div></li>
           <li><div class="ic">FUTR</div><div>
             <h3><a href="future.html">Future</a></h3>

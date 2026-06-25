@@ -271,6 +271,7 @@
         <p style="font-size:13.5px;color:var(--ink-2);margin:0 0 12px;line-height:1.6">
           Each platform scored on Hassan's four-dimension BITE model using a keyword-weighted NLP lexicon. Scores are mean across all posts in the dataset (0 = absent → 1 = pervasive). The dominant dimension is highlighted.
         </p>
+        <p style="font-size:12px;color:#9b2c2c;margin:0 0 12px;line-height:1.6;border-left:3px solid #9b2c2c;padding-left:10px">⚠ <strong>Construct-validity caveat (post-audit).</strong> This BITE scorer is an <em>unvalidated</em> hand-built keyword lexicon — no human coding, no inter-rater reliability — and it has <strong>no stance/negation handling</strong>, so a sentence that <em>debunks</em> QAnon scores as "control" purely from containing the terms. It measures topic salience, not coercion. And six of the seven datasets here are <strong>synthetic</strong>, so all cross-platform comparisons (including the "amplification" gradient) are illustrative, not evidence. See the <a href="audit.html">Methods Audit</a>.</p>
         <div id="bite-cards" class="bite-grid"></div>
       </section>
 
@@ -326,6 +327,7 @@
         <p style="font-size:13.5px;color:var(--ink-2);margin:0 0 10px;line-height:1.6">
           This table compares this run with directional expectations from cited literature. Match status reflects methodological consistency, not causal proof.
         </p>
+        <p style="font-size:12px;color:#9b2c2c;margin:0 0 12px;line-height:1.6;border-left:3px solid #9b2c2c;padding-left:10px">⚠ <strong>Post-audit:</strong> the "match_strong / directional / partial" badges are <em>mechanically assigned</em>, not pass/fail against quantitative targets from the source papers — they are near-unfalsifiable. In particular the iDRAMA "diaspora" badge is satisfied only by the <strong>synthetic</strong> samples' injected platform labels (the first-appearance month of each platform equals a hard-coded constant), so it cannot count as a replication. See the <a href="audit.html">Methods Audit</a>.</p>
         <div style="overflow:auto">
           <table class="rep-table" id="replication-table">
             <thead>
@@ -358,8 +360,9 @@
           <span style="font-family:var(--mono);font-size:12px;font-weight:400;color:var(--ink-3);margin-left:8px">BERTopic · T4 · 12 runs</span>
         </h2>
         <p style="font-size:13.5px;color:var(--ink-2);margin:0 0 12px;line-height:1.6">
-          The refreshed run (<code style="font-family:var(--mono);font-size:12px;background:var(--paper-3);padding:2px 6px;border-radius:4px">improved_experiment.py</code>) re-clusters the full 4,966-drop corpus across an ablation grid: three embedding models (<strong>BAAI/bge-large-en-v1.5</strong> primary, all-mpnet-base-v2, all-MiniLM-L6-v2) × <strong>min_cluster_size {15, 25, 40}</strong>, in full and admin-filtered corpora. Each run is scored on a composite of silhouette, gensim c<sub>v</sub> coherence, and cross-run topic persistence.
+          The refreshed run (<code style="font-family:var(--mono);font-size:12px;background:var(--paper-3);padding:2px 6px;border-radius:4px">improved_experiment.py</code>) re-clusters the Q corpus (<strong>4,248</strong> drops after empty/duplicate removal; 4,135 with the admin filter — <em>not</em> the full 4,966) across an ablation grid: three embedding models × <strong>min_cluster_size {15, 25, 40}</strong>, in full and admin-filtered corpora. Each run is scored by <strong>0.50·persistence + 0.30·silhouette + 0.20·coherence</strong>.
         </p>
+        <p style="font-size:12px;color:#9b2c2c;margin:0 0 12px;line-height:1.6;border-left:3px solid #9b2c2c;padding-left:10px">⚠ <strong>Read with care (post-audit).</strong> Persistence is the heaviest term and it mechanically rewards coarse few-topic splits (r≈−0.99 with topic count); the silhouette is computed in the UMAP space HDBSCAN optimised (an internal sanity check, not external validity); and the winner is a single max over many runs with no confidence intervals. The "2 robust topics" result is a property of this scoring. See the <a href="audit.html">Methods Audit</a>.</p>
         <div style="overflow:auto">
           <table style="width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12.5px">
             <thead>

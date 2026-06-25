@@ -7,6 +7,19 @@ The BITE model (Hassan, 2018) evaluates authoritarian/cult control across four
 dimensions. Each dimension is scored per-document (0.0–1.0) using a weighted
 keyword lexicon, returning a BITE profile for every post and aggregate statistics.
 
+CONSTRUCT-VALIDITY LIMITATIONS (see audit.html — do not over-read these scores)
+------------------------------------------------------------------------------
+  * UNVALIDATED. The lexicon and per-pattern weights are hand-set; they have NOT
+    been validated against human coding, and no inter-rater reliability (Cohen's
+    kappa) has been computed. Treat outputs as EXPLORATORY, not measured facts.
+  * NO STANCE/NEGATION HANDLING. Scoring is substring presence only. A sentence
+    that *debunks* QAnon ("WWG1WGA is a deep-state slogan") scores high "Thought
+    Control" purely from containing the terms. The scorer therefore measures
+    TOPIC SALIENCE, not coercion — it cannot tell speaker from subject.
+  * The saturation constant (3.0) is a tuning choice, not an estimated parameter.
+These limits matter most for cross-corpus comparisons; they are why the
+cross-platform "amplification" claim is flagged as unsupported.
+
 Dimensions
 ----------
   B  Behavior Control      — compliance, surveillance, control of actions
@@ -311,7 +324,9 @@ class BITEScorer:
                 continue
             agg[dim] = {
                 "mean":   round(sum(vals) / len(vals), 4),
-                "median": round(sorted(vals)[len(vals)//2], 4),
+                # POST-AUDIT FIX: use statistics.median (averages the two central
+                # values for even n) instead of the upper-biased sorted[n//2].
+                "median": round(statistics.median(vals), 4),
                 "std":    round(statistics.pstdev(vals), 4),
                 "max":    round(max(vals), 4),
                 "dist": {

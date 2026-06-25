@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-25T11:49:23.218136+00:00",
+  "generated": "2026-06-25T12:19:38.400091+00:00",
   "theory": "Delegated Closure",
   "metric": "Delegated-Closure Index (DCI)",
   "weights": {
@@ -14,32 +14,32 @@
   "source": "posts.json (real 4,966-drop Q corpus); downstream platforms excluded (synthetic \u2014 see catalog.json)",
   "distribution": {
     "n": 4966,
-    "mean": 0.3424,
-    "sd": 0.1371,
+    "mean": 0.3293,
+    "sd": 0.1362,
     "min": 0.0,
     "max": 0.895,
-    "median": 0.3233,
-    "q1": 0.25,
-    "q3": 0.4225,
+    "median": 0.31,
+    "q1": 0.2425,
+    "q3": 0.4,
     "hist_bins": 20,
     "hist": [
-      45,
-      57,
-      213,
-      249,
-      573,
-      1069,
-      541,
-      544,
-      661,
-      289,
-      356,
-      155,
-      31,
+      50,
+      61,
+      277,
+      242,
+      694,
+      1062,
+      600,
+      513,
+      586,
+      270,
+      296,
+      114,
+      22,
       136,
-      23,
-      5,
-      15,
+      21,
+      4,
+      14,
       4,
       0,
       0
@@ -48,67 +48,69 @@
   "by_year": {
     "2017": {
       "n": 459,
-      "dci": 0.3647,
+      "dci": 0.3525,
       "INTERROGATIVE": 0.2956,
       "DECODE": 0.0915,
-      "REDACTION": 0.1855,
+      "REDACTION": 0.1176,
       "BREVITY": 0.3297,
       "NONCONCRETE": 0.8715,
       "NONGROUNDED": 0.7102
     },
     "2018": {
       "n": 2183,
-      "dci": 0.3414,
+      "dci": 0.3239,
       "INTERROGATIVE": 0.2353,
       "DECODE": 0.0673,
-      "REDACTION": 0.3456,
+      "REDACTION": 0.2487,
       "BREVITY": 0.387,
       "NONCONCRETE": 0.8644,
       "NONGROUNDED": 0.3623
     },
     "2019": {
       "n": 1132,
-      "dci": 0.3332,
+      "dci": 0.3226,
       "INTERROGATIVE": 0.2418,
       "DECODE": 0.0292,
-      "REDACTION": 0.3103,
+      "REDACTION": 0.2509,
       "BREVITY": 0.4508,
       "NONCONCRETE": 0.9134,
       "NONGROUNDED": 0.2668
     },
     "2020": {
       "n": 1179,
-      "dci": 0.3443,
+      "dci": 0.3368,
       "INTERROGATIVE": 0.2174,
       "DECODE": 0.0144,
-      "REDACTION": 0.3792,
+      "REDACTION": 0.3376,
       "BREVITY": 0.4963,
       "NONCONCRETE": 0.8779,
       "NONGROUNDED": 0.3062
     },
     "2022": {
       "n": 13,
-      "dci": 0.3454,
+      "dci": 0.3402,
       "INTERROGATIVE": 0.4615,
       "DECODE": 0.0,
-      "REDACTION": 0.0289,
+      "REDACTION": 0.0,
       "BREVITY": 0.2423,
       "NONCONCRETE": 0.8462,
       "NONGROUNDED": 0.7692
     }
   },
   "ods": {
-    "overall_per_year": -0.00262,
+    "overall_per_year": 0.00125,
     "per_component_per_year": {
       "INTERROGATIVE": -0.00983,
       "DECODE": -0.02906,
-      "REDACTION": 0.03399,
+      "REDACTION": 0.05547,
       "BREVITY": 0.05037,
       "NONCONCRETE": 0.00581,
       "NONGROUNDED": -0.07562
     },
-    "placebo_mean_abs_slope": 0.00173,
-    "interpretation": "real overall slope vs ~0 placebo; per-component shows which signals drive drift"
+    "placebo_mean_abs_slope": 0.00163,
+    "placebo_p_two_sided": 0.54,
+    "n_permutations": 1000,
+    "interpretation": "permutation test: p = P(|shuffled slope| >= |real slope|); p well above 0.05 => the drift is indistinguishable from noise"
   },
   "fer": {
     "2017": {
@@ -128,47 +130,48 @@
     }
   },
   "weight_invariance": {
-    "pearson_weighted_vs_uniform": 0.9601,
-    "ods_uniform_per_year": -0.00406,
+    "pearson_weighted_vs_uniform": 0.9584,
+    "ods_uniform_per_year": -0.00048,
     "year_order_preserved": true
   },
   "leave_one_out": {
     "INTERROGATIVE": {
-      "mean": 0.3716,
-      "ods_per_year": -0.00059,
-      "r_vs_full": 0.818
+      "mean": 0.3549,
+      "ods_per_year": 0.00437,
+      "r_vs_full": 0.8149
     },
     "DECODE": {
-      "mean": 0.4159,
-      "ods_per_year": 0.00399,
-      "r_vs_full": 0.9502
+      "mean": 0.3996,
+      "ods_per_year": 0.00882,
+      "r_vs_full": 0.9496
     },
     "REDACTION": {
       "mean": 0.3451,
       "ods_per_year": -0.01066,
-      "r_vs_full": 0.8196
+      "r_vs_full": 0.8161
     },
     "BREVITY": {
-      "mean": 0.3283,
-      "ods_per_year": -0.01197,
-      "r_vs_full": 0.9337
+      "mean": 0.313,
+      "ods_per_year": -0.00742,
+      "r_vs_full": 0.9335
     },
     "NONCONCRETE": {
-      "mean": 0.2621,
-      "ods_per_year": -0.00388,
-      "r_vs_full": 0.9513
+      "mean": 0.2472,
+      "ods_per_year": 0.00056,
+      "r_vs_full": 0.9507
     },
     "NONGROUNDED": {
-      "mean": 0.3399,
-      "ods_per_year": 0.00733,
-      "r_vs_full": 0.9079
+      "mean": 0.3251,
+      "ods_per_year": 0.01173,
+      "r_vs_full": 0.9062
     }
   },
   "olp": {
     "note": "BITE scored per-drop via bite_scorer.py; word_count partialled out",
     "decode_lexicon_overlap_with_bite": 0,
-    "r_dci_bite_total": 0.0481,
-    "partial_r_dci_bite_total_given_wordcount": -0.0319,
+    "decode_overlap_tokens": [],
+    "r_dci_bite_total": 0.0342,
+    "partial_r_dci_bite_total_given_wordcount": -0.0539,
     "bite_T_mean": 0.0303,
     "bite_T_var": 0.006531,
     "interpretation": "near-zero BITE-T variance => 'DCI beats BITE-T' would be uninformative; if partial-r collapses vs raw r, any DCI-BITE link is a brevity artifact"
@@ -194,18 +197,18 @@
     "lowest": [
       {
         "dci": 0.0,
+        "words": 65,
+        "text": ">>147005381\nHRC extradition already in motion effective yesterday with several countries in case of cross border run. Passport approved to b"
+      },
+      {
+        "dci": 0.0,
         "words": 206,
         "text": "http://thehill.com/blogs/pundits-blog/presidential-campaign/292310-huma-abedins-ties-to-the-muslim-brotherhood\nThe Clinton campaign is attem"
       },
       {
         "dci": 0.0,
-        "words": 35,
-        "text": ">>5186193\nYour husband answered the call as a brave and selfless Patriot. \nWe are forever grateful for his service & sacrifice to this Count"
-      },
-      {
-        "dci": 0.0,
-        "words": 42,
-        "text": ">>6958495\nSessions began the Epstein investigation. When that is revealed those who doubted may see the light.\nThe wheels of Justice turn sl"
+        "words": 20,
+        "text": ">>148751\nPatriot, your country needs you.\nYou are not alone.\nGod is LOVE.\n2018 will be GLORIOUS!\nGod bless,\nQ"
       }
     ]
   }

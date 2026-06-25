@@ -38,8 +38,6 @@ DECODE = re.compile(
     r"|think mirror|coincidence\?|stringer", re.I)
 BRACKET = re.compile(r"\[[^\]]+\]")
 UNDERSCORE = re.compile(r"[A-Z]+_+[A-Z_]*|_{2,}")
-ALLCAPS_TOK = re.compile(r"\b[A-Z]{2,}\b")
-ALPHA_TOK = re.compile(r"\b[A-Za-z]{2,}\b")
 CAPITALIZED = re.compile(r"\b[A-Z][a-z]+\b")
 BARE_PRON = re.compile(r"\b(this|that|they|it)\b", re.I)
 DATEPAT = re.compile(
@@ -57,13 +55,16 @@ def components(text, refs):
     interrogative = min(1.0, t.count("?") / 3.0)
     decode = 1.0 if DECODE.search(t) else 0.0
 
-    # REDACTION = max of purely-lexical blackout signals
+    # REDACTION = max of purely-lexical blackout signals.
+    # POST-AUDIT FIX: the ALLCAPS-ratio signal was REMOVED. It was confounded by
+    # ordinary intelligence acronyms (POTUS/FBI/FISA/DOJ), which drove a nonzero
+    # REDACTION score on ~32% of drops with no actual redaction. REDACTION now
+    # requires a genuine blackout cue: a [..] slot, an underscore-redaction token,
+    # or a context-free bare pronoun.
     bracket = 1.0 if BRACKET.search(t) else 0.0
     underscore = 1.0 if UNDERSCORE.search(t) else 0.0
-    alpha = ALPHA_TOK.findall(t)
-    allcaps_ratio = (len(ALLCAPS_TOK.findall(t)) / len(alpha)) if alpha else 0.0
     bare_pron = 1.0 if (BARE_PRON.search(t) and not CAPITALIZED.search(t) and not refs) else 0.0
-    redaction = max(bracket, underscore, min(1.0, allcaps_ratio), bare_pron)
+    redaction = max(bracket, underscore, bare_pron)
 
     brevity = 1.0 - min(1.0, nw / 20.0)
     concrete = 1.0 if (DATEPAT.search(t) or ACTIONPAT.search(t)) else 0.0
@@ -140,12 +141,19 @@ def main():
     SECS_YR = 365.25 * 24 * 3600
     ods_overall = ols_slope(times, dci) * SECS_YR
     ods_comp = {k: round(ols_slope(times, [r["comp"][k] for r in rows]) * SECS_YR, 5) for k in WEIGHTS}
+    # POST-AUDIT FIX: proper permutation test. Compare |real slope| to the full
+    # distribution of |shuffled slopes| and report a two-sided empirical p-value,
+    # instead of eyeballing the real slope against a single mean-absolute placebo.
     rng = np.random.default_rng(42)
-    placebo = float(np.mean([abs(ols_slope(times, rng.permutation(dci)) * SECS_YR) for _ in range(200)]))
+    NPERM = 1000
+    perm = np.array([ols_slope(times, rng.permutation(dci)) * SECS_YR for _ in range(NPERM)])
+    p_two_sided = float((np.sum(np.abs(perm) >= abs(ods_overall)) + 1) / (NPERM + 1))
     ods = dict(overall_per_year=round(ods_overall, 5),
                per_component_per_year=ods_comp,
-               placebo_mean_abs_slope=round(placebo, 5),
-               interpretation="real overall slope vs ~0 placebo; per-component shows which signals drive drift")
+               placebo_mean_abs_slope=round(float(np.mean(np.abs(perm))), 5),
+               placebo_p_two_sided=round(p_two_sided, 3), n_permutations=NPERM,
+               interpretation="permutation test: p = P(|shuffled slope| >= |real slope|); "
+                              "p well above 0.05 => the drift is indistinguishable from noise")
 
     # ---- FER over 2017-2019 (deferral vs concreteness) ----
     fer = {}
@@ -178,14 +186,19 @@ def main():
     # ---- OLP: DCI vs BITE, partial out word_count + BITE-T variance ----
     olp = {"note": "BITE scored per-drop via bite_scorer.py; word_count partialled out"}
     try:
-        from bite_scorer import BITEScorer
+        from bite_scorer import BITEScorer, LEXICON
+        # POST-AUDIT FIX: compute the BITE/DECODE lexicon overlap instead of asserting 0.
+        bite_pats = {pat.lower() for pats in LEXICON.values() for pat, _ in pats}
+        dci_decode = {"re_read", "reread", "expand your thinking", "connect the dots",
+                      "you have more than you know", "think mirror", "coincidence?", "stringer"}
+        overlap = sorted(t for t in dci_decode if any(t in bp or bp in t for bp in bite_pats))
         sc = BITEScorer()
         bt = np.array([sc.score(r["text"]) for r in rows])
         bite_total = np.array([b["total"] for b in bt])
         bite_T = np.array([b["T"] for b in bt])
         wc = np.array([r["words"] for r in rows], float)
         olp.update(
-            decode_lexicon_overlap_with_bite=0,
+            decode_lexicon_overlap_with_bite=len(overlap), decode_overlap_tokens=overlap,
             r_dci_bite_total=round(pearson(dci, bite_total), 4),
             partial_r_dci_bite_total_given_wordcount=round(partial_r(dci, bite_total, wc), 4),
             bite_T_mean=round(float(bite_T.mean()), 4), bite_T_var=round(float(bite_T.var()), 6),
