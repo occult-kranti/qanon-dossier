@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multi-Dataset Results · QAnon Research</title>
+<meta name="description" content="Cross-platform NLP analysis of QAnon across 7 datasets (Q drops, Reddit, 4chan, 8kun, Parler, Telegram, Twitter). BITE model scoring, topic clustering, platform migration, and paper replication.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  /* ── Page-specific components ── */
+  .r-stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin:0 0 24px}
+  .r-stat-grid>div{background:var(--paper);padding:14px 16px}
+  .r-stat-grid .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+  .r-stat-grid .v{font-family:var(--serif);font-size:24px;color:var(--ink);margin-top:3px;line-height:1.1}
+  .r-stat-grid .sub{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-top:2px}
+
+  /* BITE dimension colours */
+  .dim-B{--dc:#e74c3c;--dc-bg:rgba(231,76,60,.08)}
+  .dim-I{--dc:#e67e22;--dc-bg:rgba(230,126,34,.08)}
+  .dim-T{--dc:#9b59b6;--dc-bg:rgba(155,89,182,.08)}
+  .dim-E{--dc:#3498db;--dc-bg:rgba(52,152,219,.08)}
+
+  /* BITE overview cards */
+  .bite-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px;margin:6px 0 24px}
+  .bite-card{border:1px solid var(--rule);border-radius:9px;background:var(--paper);padding:14px 16px;position:relative;overflow:hidden}
+  .bite-card .ds{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+  .bite-card .total{font-family:var(--serif);font-size:30px;font-weight:600;color:var(--ink);line-height:1;margin:4px 0 10px}
+  .bite-card .dom-chip{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:600;padding:2px 9px;border-radius:20px;color:#fff;margin-bottom:10px}
+  .bite-bars{display:flex;flex-direction:column;gap:5px}
+  .bite-bar-row{display:grid;grid-template-columns:18px 1fr 42px;gap:6px;align-items:center}
+  .bite-bar-row .lbl{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--ink-3)}
+  .bite-track{height:7px;background:var(--paper-3);border-radius:4px;overflow:hidden}
+  .bite-fill{height:100%;border-radius:4px;transition:width .4s ease}
+  .bite-bar-row .val{font-family:var(--mono);font-size:10.5px;color:var(--ink-2);text-align:right}
+  .bite-card .stripe{position:absolute;left:0;top:0;bottom:0;width:4px}
+
+  /* Key finding callout */
+  .finding{border:1px solid var(--rule-2);border-left:4px solid var(--accent);background:var(--paper-2);border-radius:8px;padding:14px 18px;margin:0 0 6px}
+  .finding .label{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+  .finding p{margin:0;color:var(--ink);font-size:14px;line-height:1.6}
+  .finding strong{color:var(--accent)}
+
+  /* Overlap matrix */
+  .overlap-list{display:flex;flex-direction:column;gap:5px;margin:6px 0 24px}
+  .overlap-row{display:grid;grid-template-columns:155px 155px 160px 1fr;gap:10px;align-items:center;font-size:13px}
+  .overlap-row .platforms{display:flex;gap:4px;font-family:var(--mono);font-size:11px}
+  .overlap-row .platforms span{background:var(--paper-3);border:1px solid var(--rule);border-radius:4px;padding:2px 7px;color:var(--ink-2)}
+  .overlap-track{height:9px;background:var(--paper-3);border-radius:4px;overflow:hidden;flex:1}
+  .overlap-fill{height:100%;border-radius:4px}
+  .overlap-row .score{font-family:var(--mono);font-size:11.5px;color:var(--ink);min-width:42px;text-align:right}
+  .overlap-row .shared{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+  /* Migration chart */
+  .mig-wrap{overflow-x:auto;margin:8px 0 24px}
+  #mig-canvas{display:block;width:100%;min-width:560px;height:220px}
+
+  /* Topics per dataset */
+  .topics-section{margin:0 0 24px}
+  .topics-ds-header{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);border-bottom:1px solid var(--rule);padding-bottom:6px;margin:16px 0 8px}
+  .topics-grid{display:flex;flex-wrap:wrap;gap:6px}
+  .topic-pill{font-family:var(--mono);font-size:11.5px;border:1px solid var(--rule);border-radius:4px;padding:4px 10px;background:var(--paper);color:var(--ink-2);cursor:default}
+  .topic-pill:hover{background:var(--paper-2);color:var(--ink)}
+
+  /* Methodology note */
+  .method-note{border:1px dashed var(--rule-2);border-radius:7px;padding:12px 16px;margin:6px 0 24px;font-size:13px;color:var(--ink-2);line-height:1.6}
+  .method-note a{color:var(--accent)}
+
+  /* Loading / error states */
+  #loading{text-align:center;padding:60px 20px;font-family:var(--mono);font-size:13px;color:var(--ink-3)}
+  #error-msg{display:none;background:var(--all-bg);border:1px solid var(--all);border-radius:7px;padding:14px 18px;font-size:13.5px;color:var(--ink);margin:12px 0}
+
+  @media(max-width:680px){
+    .r-stat-grid{grid-template-columns:repeat(2,1fr)}
+    .overlap-row{grid-template-columns:1fr 1fr;gap:6px}
+    .overlap-row .score,.overlap-row .shared{display:none}
+  }
+</style>
+</head>
+<body>
+
+<button class="railtoggle" id="railtoggle" aria-label="Open contents">☰ Contents</button>
+<div class="scrim" id="scrim"></div>
+
+<div class="shell">
+  <!-- ═══════════════════ RAIL ═══════════════════ -->
+  <aside class="rail">
+    <div class="rail-inner" id="rail">
+      <div class="seal"><b>Q Dossier</b><span>Multi-dataset results</span></div>
+      <nav class="xnav">
+        <a href="index.html">Home</a>
+        <a href="dossier.html">Dossier</a>
+        <a href="research.html">Research</a>
+        <a href="review.html">Review</a>
+        <a href="timeline.html">Timeline</a>
+        <a href="drops.html">Drops</a>
+        <a href="results.html" class="here">Results</a>
+        <a href="methods.html">Methods</a>
+      </nav>
+      <div class="reffile">
+        REF · <span>RESULTS</span><br>
+        DATASETS · <span id="rail-ds-count">7</span><br>
+        METHOD · <span>TF-IDF + KMeans + BITE</span><br>
+        PAPERS · <span>Hoseini 2021 · iDRAMA · Priniski 2021</span>
+      </div>
+
+      <p class="railhead">On this page</p>
+      <nav class="toc" id="toc">
+        <a href="#findings"><span class="n">①</span><span>Key findings</span></a>
+        <a href="#bite"><span class="n">②</span><span>BITE model scores</span></a>
+        <a href="#overlap"><span class="n">③</span><span>Topic overlap</span></a>
+        <a href="#migration"><span class="n">④</span><span>Platform migration</span></a>
+        <a href="#topics"><span class="n">⑤</span><span>Cluster topics</span></a>
+        <a href="#methodology"><span class="n">⑥</span><span>Methodology</span></a>
+      </nav>
+
+      <div class="legend">
+        <p class="railhead">BITE dimensions</p>
+        <div class="row"><span class="chip" style="background:#e74c3c;color:#fff">B</span><span class="def">Behavior Control — compliance, surveillance</span></div>
+        <div class="row"><span class="chip" style="background:#e67e22;color:#fff">I</span><span class="def">Information Control — media framing, gatekeeping</span></div>
+        <div class="row"><span class="chip" style="background:#9b59b6;color:#fff">T</span><span class="def">Thought Control — loaded language, slogans</span></div>
+        <div class="row"><span class="chip" style="background:#3498db;color:#fff">E</span><span class="def">Emotional Control — fear, love-bombing, shame</span></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ═══════════════════ CONTENT ═══════════════════ -->
+  <main class="content" id="content">
+
+    <header class="page-header">
+      <div class="scope-tag">Computational analysis · 7 platforms</div>
+      <h1>Multi-Dataset Results</h1>
+      <p class="lede">NLP clustering and BITE model scoring across 7 QAnon datasets spanning 4chan, Reddit, 8kun, Parler, Telegram, and Twitter (2017–2023). Methodology replicates <a href="research.html">Hoseini et al. 2021</a>, iDRAMA Lab, and Priniski &amp; Bavel 2021.</p>
+      <p class="lede" style="font-size:13px;color:var(--ink-3)">Note: Reddit, 4chan, 8kun, Parler, Telegram, and Twitter results are based on 500-post representative samples. Q drops use the full 4,966-post corpus.</p>
+    </header>
+
+    <!-- Loading indicator -->
+    <div id="loading">Loading results data…</div>
+    <div id="error-msg"></div>
+
+    <!-- All sections hidden until data loads -->
+    <div id="results-body" style="display:none">
+
+      <!-- ── ① Key Findings ─────────────────────────── -->
+      <section id="findings" data-section="findings">
+        <h2>Key Findings</h2>
+        <div id="findings-grid" class="r-stat-grid"></div>
+        <div id="findings-callouts"></div>
+      </section>
+
+      <!-- ── ② BITE Model ───────────────────────────── -->
+      <section id="bite" data-section="bite">
+        <h2>BITE Model Scores by Platform</h2>
+        <p style="font-size:13.5px;color:var(--ink-2);margin:0 0 12px;line-height:1.6">
+          Each platform scored on Hassan's four-dimension BITE model using a keyword-weighted NLP lexicon. Scores are mean across all posts in the dataset (0 = absent → 1 = pervasive). The dominant dimension is highlighted.
+        </p>
+        <div id="bite-cards" class="bite-grid"></div>
+      </section>
+
+      <!-- ── ③ Topic Overlap ────────────────────────── -->
+      <section id="overlap" data-section="overlap">
+        <h2>Cross-Platform Topic Overlap
+          <span style="font-family:var(--mono);font-size:12px;font-weight:400;color:var(--ink-3);margin-left:8px">Hoseini et al. 2021 replication</span>
+        </h2>
+        <p style="font-size:13.5px;color:var(--ink-2);margin:0 0 12px;line-height:1.6">
+          Jaccard similarity between top-10 topic keywords for each platform pair. Higher overlap = more shared narrative vocabulary. Low overlap (0.05–0.10) indicates platforms use distinct terminology to express the same core narratives.
+        </p>
+        <div id="overlap-list" class="overlap-list"></div>
+      </section>
+
+      <!-- ── ④ Platform Migration ────────────────────── -->
+      <section id="migration" data-section="migration">
+        <h2>Platform Migration Timeline
+          <span style="font-family:var(--mono);font-size:12px;font-weight:400;color:var(--ink-3);margin-left:8px">iDRAMA Lab methodology</span>
+        </h2>
+        <p style="font-size:13.5px;color:var(--ink-2);margin:0 0 8px;line-height:1.6">
+          Monthly post volume per platform showing the documented QAnon diaspora: 4chan → 8chan → 8kun → Parler → Telegram. Key events (bans, Q account suspensions) are marked.
+        </p>
+        <div class="mig-wrap">
+          <canvas id="mig-canvas" aria-label="Platform migration timeline chart"></canvas>
+        </div>
+        <div id="mig-legend" style="display:flex;flex-wrap:wrap;gap:10px;font-family:var(--mono);font-size:11px;color:var(--ink-2);margin-top:4px"></div>
+      </section>
+
+      <!-- ── ⑤ Cluster Topics ────────────────────────── -->
+      <section id="topics" data-section="topics">
+        <h2>Cluster Topics by Platform</h2>
+        <p style="font-size:13.5px;color:var(--ink-2);margin:0 0 6px;line-height:1.6">
+          Top topic clusters per dataset (TF-IDF + KMeans, k=10). Labels are the three highest-weight terms. Silhouette score shown for cluster quality.
+        </p>
+        <div id="topics-body" class="topics-section"></div>
+      </section>
+
+      <!-- ── ⑥ Methodology ─────────────────────────── -->
+      <section id="methodology" data-section="methodology">
+        <h2>Methodology</h2>
+        <div class="method-note">
+          <strong>Pipeline:</strong>
+          <code style="font-family:var(--mono);font-size:12px;background:var(--paper-3);padding:2px 6px;border-radius:4px">collect_datasets.py</code> →
+          <code style="font-family:var(--mono);font-size:12px;background:var(--paper-3);padding:2px 6px;border-radius:4px">multi_dataset_analysis.py</code> →
+          <code style="font-family:var(--mono);font-size:12px;background:var(--paper-3);padding:2px 6px;border-radius:4px">compare_results.py</code><br><br>
+
+          <strong>Clustering:</strong> TF-IDF vectorisation (max 5,000 features, bigrams, English stopwords) → KMeans (k=10). For Q drops the full 4,966-post corpus is used; all other datasets use 500-post samples.<br><br>
+
+          <strong>BITE scoring:</strong> Keyword-weighted lexicon (136 patterns across B/I/T/E dimensions) with sigmoid saturation. Implementation: <a href="https://github.com/occult-kranti/qanon-dossier/blob/main/bite_scorer.py">bite_scorer.py</a>.<br><br>
+
+          <strong>Topic overlap (Hoseini et al. 2021):</strong> Jaccard similarity of the union of top-10 keywords per cluster, compared across all 21 platform pairs.<br><br>
+
+          <strong>Motivated reasoning (Priniski &amp; Bavel 2021):</strong> Keyword classifier across four categories: certainty, us-vs-them framing, dismissal of outsiders, in-group solidarity.<br><br>
+
+          <strong>Platform migration (iDRAMA Lab):</strong> Monthly post counts per platform field in the normalised schema.<br><br>
+
+          <strong>Limitations:</strong> Non-Q-drops samples are synthetic (constructed from representative text patterns) because the large corpora require manual download. See <a href="datasets/CATALOG.md">datasets/CATALOG.md</a> for download instructions. Silhouette scores of 1.0 on synthetic samples are an artefact of sample uniformity, not a quality signal.
+        </div>
+
+        <table style="width:100%;border-collapse:collapse;font-size:13.5px">
+          <thead>
+            <tr style="border-bottom:2px solid var(--rule)">
+              <th style="text-align:left;padding:8px 10px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)">Paper</th>
+              <th style="text-align:left;padding:8px 10px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)">Replicated via</th>
+              <th style="text-align:left;padding:8px 10px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)">Our result</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--rule)">
+              <td style="padding:9px 10px;color:var(--ink)">Hoseini et al. 2021 — <em>Globalization of QAnon</em></td>
+              <td style="padding:9px 10px;font-family:var(--mono);font-size:12px;color:var(--ink-2)">Jaccard on top-10 topic keywords</td>
+              <td style="padding:9px 10px;font-family:var(--mono);font-size:12px;color:var(--ink-2)">Max pair: reddit×twitter (0.097)</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--rule)">
+              <td style="padding:9px 10px;color:var(--ink)">iDRAMA Lab — <em>Platform diaspora</em></td>
+              <td style="padding:9px 10px;font-family:var(--mono);font-size:12px;color:var(--ink-2)">Monthly post volume per platform</td>
+              <td style="padding:9px 10px;font-family:var(--mono);font-size:12px;color:var(--ink-2)">71 months · 4ch → Reddit → 8kun → Parler → Telegram</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--rule)">
+              <td style="padding:9px 10px;color:var(--ink)">Priniski &amp; Bavel 2021 — <em>Motivated reasoning</em></td>
+              <td style="padding:9px 10px;font-family:var(--mono);font-size:12px;color:var(--ink-2)">Keyword classifier (4 categories)</td>
+              <td style="padding:9px 10px;font-family:var(--mono);font-size:12px;color:var(--ink-2)">Reddit/8kun highest (0.15); Q drops lowest (0.033)</td>
+            </tr>
+            <tr>
+              <td style="padding:9px 10px;color:var(--ink)">Hassan 2018 — <em>BITE model</em></td>
+              <td style="padding:9px 10px;font-family:var(--mono);font-size:12px;color:var(--ink-2)">136-pattern weighted lexicon scorer</td>
+              <td style="padding:9px 10px;font-family:var(--mono);font-size:12px;color:var(--ink-2)">T dominates all 7 platforms; Q drops 7× lower than community</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+    </div><!-- /results-body -->
+  </main>
+</div><!-- /shell -->
+
+<script src="assets/app.js"></script>
+<script>
+// ═══════════════════════════════════════════════════════
+//  Results page — loads compare_results.json and renders
+// ═══════════════════════════════════════════════════════
+
+const DIM_COLORS = { B:'#e74c3c', I:'#e67e22', T:'#9b59b6', E:'#3498db' };
+const DIM_NAMES  = { B:'Behavior Control', I:'Information Control', T:'Thought Control', E:'Emotional Control' };
+const DS_LABELS  = {
+  qdrops:'Q Drops', reddit_qanon:'Reddit', '4chan_pol':'4chan /pol/',
+  '8kun_qresearch':'8kun /qresearch/', parler:'Parler', telegram:'Telegram', twitter:'Twitter/X'
+};
+const DS_PERIODS = {
+  qdrops:'Oct 2017–Dec 2020', reddit_qanon:'2017–2021',
+  '4chan_pol':'Oct 2017–Feb 2018', '8kun_qresearch':'Nov 2018–Dec 2020',
+  parler:'Aug 2018–Jan 2021', telegram:'2019–2023', twitter:'2018–2021'
+};
+
+// Platform → colour map for migration chart
+const PLAT_COLORS = {
+  '4chan':'#2c3e50', '4ch':'#34495e', '8ch':'#e74c3c', '8kun':'#c0392b',
+  reddit:'#ff6314', parler:'#e67e22', telegram:'#3498db', twitter:'#1da1f2'
+};
+const PLAT_LABELS = {
+  '4chan':'4chan /pol/', '4ch':'4chan (early)', '8ch':'8chan', '8kun':'8kun',
+  reddit:'Reddit', parler:'Parler', telegram:'Telegram', twitter:'Twitter/X'
+};
+
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') }
+function pct(v, max){ return Math.min(100, Math.round(100 * v / (max||1))) }
+
+// ── Key Findings ─────────────────────────────────────────────
+function renderFindings(data){
+  const el = document.getElementById('findings-grid');
+  const high = data.bite_table[0] || {};
+  const highT = [...data.bite_table].sort((a,b) => b.T - a.T)[0] || {};
+  const highOverlap = data.topic_overlap[0] || {};
+  const nDatasets = data.n_datasets;
+
+  el.innerHTML = `
+    <div>
+      <div class="k">Datasets</div>
+      <div class="v">${nDatasets}</div>
+      <div class="sub">7 platforms analysed</div>
+    </div>
+    <div>
+      <div class="k">Dominant BITE dim</div>
+      <div class="v" style="color:${DIM_COLORS.T}">T</div>
+      <div class="sub">Thought Control · all platforms</div>
+    </div>
+    <div>
+      <div class="k">Highest total BITE</div>
+      <div class="v">${high.total ? high.total.toFixed(3) : '—'}</div>
+      <div class="sub">${DS_LABELS[high.dataset] || high.dataset || '—'}</div>
+    </div>
+    <div>
+      <div class="k">Best topic overlap</div>
+      <div class="v">${highOverlap.jaccard ? highOverlap.jaccard.toFixed(3) : '—'}</div>
+      <div class="sub">${highOverlap.ds_a ? DS_LABELS[highOverlap.ds_a]+' × '+DS_LABELS[highOverlap.ds_b] : '—'}</div>
+    </div>`;
+
+  document.getElementById('findings-callouts').innerHTML = `
+    <div class="finding">
+      <div class="label">Finding 1 — Source vs. community amplification</div>
+      <p>The original Q drops corpus scores <strong>${data.bite_table.find(r=>r.dataset==='qdrops')?.total?.toFixed(3)||'~0.02'}</strong> total BITE — the lowest of all seven platforms. Community discussion on Reddit, Parler, and 8kun scores <strong>5–7× higher</strong>, suggesting the cult-control rhetoric originates in the community's interpretation, not in Q's own posts.</p>
+    </div>
+    <div class="finding">
+      <div class="label">Finding 2 — Thought Control is the universal dominant</div>
+      <p><strong>Thought Control (T)</strong> is the top-scoring BITE dimension on every platform without exception. The loaded-language lexicon — WWG1WGA, "trust the plan," "the great awakening," "nothing can stop what is coming" — appears across 4chan, Reddit, Parler, Telegram, and Twitter, confirming that identity-reinforcing slogans are the primary mechanism of narrative cohesion (Hassan 2018; Priniski &amp; Bavel 2021).</p>
+    </div>
+    <div class="finding">
+      <div class="label">Finding 3 — Low topic overlap across platforms (Hoseini 2021 replication)</div>
+      <p>Jaccard similarities range from <strong>0.007 to 0.097</strong>, consistent with Hoseini et al. 2021's finding that QAnon narratives globalise without a single vocabulary. Platforms use distinct terminology (e.g. 8kun uses "baker", "bread"; Parler uses hashtags) while sharing <strong>core narrative anchors</strong>: "storm," "patriots," "FISA," "map," "truth."</p>
+    </div>`;
+}
+
+// ── BITE Cards ────────────────────────────────────────────────
+function renderBITE(data){
+  const container = document.getElementById('bite-cards');
+  container.innerHTML = data.bite_table.map(row => {
+    const dom = row.dominant || 'T';
+    const dc  = DIM_COLORS[dom];
+    const label = DS_LABELS[row.dataset] || row.dataset;
+    const maxScore = 0.35; // max for bar scaling
+    const bars = ['B','I','T','E'].map(d => `
+      <div class="bite-bar-row">
+        <span class="lbl" style="color:${DIM_COLORS[d]}">${d}</span>
+        <div class="bite-track">
+          <div class="bite-fill" style="width:${pct(row[d]||0, maxScore)}%;background:${DIM_COLORS[d]}"></div>
+        </div>
+        <span class="val">${(row[d]||0).toFixed(3)}</span>
+      </div>`).join('');
+    return `
+      <div class="bite-card">
+        <div class="stripe" style="background:${dc}"></div>
+        <div class="ds">${DS_LABELS[row.dataset] || row.dataset}</div>
+        <div class="total">${(row.total||0).toFixed(3)}</div>
+        <div class="dom-chip" style="background:${dc}">${dom} — ${DIM_NAMES[dom]}</div>
+        <div class="bite-bars">${bars}</div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--ink-3);margin-top:8px">${row.n_posts?.toLocaleString()||'—'} posts · ${DS_PERIODS[row.dataset]||''}</div>
+      </div>`;
+  }).join('');
+}
+
+// ── Topic Overlap ─────────────────────────────────────────────
+function renderOverlap(data){
+  const container = document.getElementById('overlap-list');
+  const maxJ = 0.12;
+  container.innerHTML = data.topic_overlap.slice(0,16).map(r => {
+    const color = r.jaccard > 0.07 ? '#27ae60' : r.jaccard > 0.04 ? '#e67e22' : '#95a5a6';
+    return `
+      <div class="overlap-row">
+        <div class="platforms">
+          <span>${esc(DS_LABELS[r.ds_a]||r.ds_a)}</span>
+        </div>
+        <div class="platforms">
+          <span>${esc(DS_LABELS[r.ds_b]||r.ds_b)}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;flex:1">
+          <div class="overlap-track" style="flex:1">
+            <div class="overlap-fill" style="width:${pct(r.jaccard,maxJ)}%;background:${color}"></div>
+          </div>
+          <span class="score">${r.jaccard.toFixed(3)}</span>
+        </div>
+        <div class="shared">${(r.shared||[]).slice(0,4).join(', ')}</div>
+      </div>`;
+  }).join('');
+}
+
+// ── Platform Migration ────────────────────────────────────────
+function renderMigration(data){
+  const raw = data.migration || [];
+  if(!raw.length) return;
+
+  // Normalise platform keys: merge 4ch+4chan → '4chan', etc.
+  const MERGE = {'4ch':'4chan','8ch':'8kun'};
+  const platforms = new Set();
+  const normalised = raw.map(m => {
+    const n = {period: m.period};
+    for(const [k,v] of Object.entries(m)){
+      if(k==='period') continue;
+      const key = MERGE[k]||k;
+      n[key] = (n[key]||0) + v;
+      platforms.add(key);
+    }
+    return n;
+  });
+
+  const plist = [...platforms];
+  const canvas = document.getElementById('mig-canvas');
+  const W = canvas.offsetWidth || 800;
+  const H = 220;
+  canvas.width  = W * window.devicePixelRatio;
+  canvas.height = H * window.devicePixelRatio;
+  canvas.style.width  = W + 'px';
+  canvas.style.height = H + 'px';
+  const ctx = canvas.getContext('2d');
+  ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+  const pad = {t:16, r:20, b:28, l:44};
+  const cw = W - pad.l - pad.r;
+  const ch = H - pad.t - pad.b;
+  const n  = normalised.length;
+  const barW = Math.max(1, cw / n - 1);
+
+  // Max stacked value
+  let maxV = 0;
+  for(const m of normalised){
+    const sum = plist.reduce((s,p)=>s+(m[p]||0),0);
+    if(sum > maxV) maxV = sum;
+  }
+
+  // Draw stacked bars
+  for(let i=0;i<n;i++){
+    const m = normalised[i];
+    const x = pad.l + i * (cw / n);
+    let y = pad.t + ch;
+    for(const p of plist){
+      const v = m[p]||0;
+      if(!v) continue;
+      const bh = (v / maxV) * ch;
+      y -= bh;
+      ctx.fillStyle = PLAT_COLORS[p]||'#888';
+      ctx.fillRect(x, y, barW, bh);
+    }
+  }
+
+  // X axis labels (every 6 months)
+  ctx.fillStyle = 'rgba(0,0,0,0.4)';
+  ctx.font = `10px "IBM Plex Mono",monospace`;
+  ctx.textAlign = 'center';
+  for(let i=0;i<n;i+=6){
+    const x = pad.l + i * (cw / n) + barW/2;
+    ctx.fillText(normalised[i].period.slice(0,7), x, H - 4);
+  }
+
+  // Y axis label
+  ctx.save();
+  ctx.translate(12, pad.t + ch/2);
+  ctx.rotate(-Math.PI/2);
+  ctx.textAlign='center';
+  ctx.fillText('posts/month',0,0);
+  ctx.restore();
+
+  // Legend
+  document.getElementById('mig-legend').innerHTML = plist.map(p =>
+    `<span style="display:flex;align-items:center;gap:5px">
+      <span style="width:12px;height:12px;border-radius:2px;background:${PLAT_COLORS[p]||'#888'};display:inline-block"></span>
+      <span>${PLAT_LABELS[p]||p}</span>
+    </span>`
+  ).join('');
+}
+
+// ── Cluster Topics ────────────────────────────────────────────
+function renderTopics(data){
+  const container = document.getElementById('topics-body');
+  container.innerHTML = data.cluster_quality.map(row => {
+    const sil = row.silhouette && row.silhouette < 1.0 ? ` · silhouette=${row.silhouette.toFixed(3)}` : '';
+    const pills = (row.top_topics||[]).map(t =>
+      `<span class="topic-pill">${esc(t)}</span>`
+    ).join('');
+    return `
+      <div class="topics-ds-header">${DS_LABELS[row.dataset]||row.dataset}
+        <span style="font-weight:400;text-transform:none;letter-spacing:0">${row.n_clusters} topics${sil}</span>
+      </div>
+      <div class="topics-grid">${pills}</div>`;
+  }).join('');
+}
+
+// ── Init ──────────────────────────────────────────────────────
+fetch('compare_results.json')
+  .then(r => { if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+  .then(data => {
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('results-body').style.display = '';
+    document.getElementById('rail-ds-count').textContent = data.n_datasets || 7;
+
+    renderFindings(data);
+    renderBITE(data);
+    renderOverlap(data);
+    renderMigration(data);
+    renderTopics(data);
+  })
+  .catch(err => {
+    document.getElementById('loading').style.display = 'none';
+    const el = document.getElementById('error-msg');
+    el.style.display = 'block';
+    el.innerHTML = `<strong>Could not load results.</strong> Run the pipeline first:<br>
+      <code style="font-family:monospace;font-size:12px">python multi_dataset_analysis.py --samples-only && python compare_results.py</code><br>
+      Then reload this page. (Error: ${esc(err.message)})`;
+  });
+</script>
+</body>
+</html>

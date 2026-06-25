@@ -1,0 +1,72 @@
+name: Analyse & Deploy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**.py"
+      - "posts.json"
+      - "datasets/catalog.json"
+      - "datasets/samples/**"
+  workflow_dispatch:
+
+jobs:
+  analyse:
+    name: Cluster + BITE + Compare
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # ── Data Engineer ──────────────────────────────────────────────────
+      - name: "[data-engineer] Collect & organise datasets"
+        run: python collect_datasets.py --samples-only
+
+      # ── Executor ───────────────────────────────────────────────────────
+      - name: "[executor] Run multi-dataset analysis (samples)"
+        run: python multi_dataset_analysis.py --samples-only
+
+      # ── Analyst + Web Developer ────────────────────────────────────────
+      - name: "[analyst] Generate comparison report"
+        run: python compare_results.py
+
+      # ── QA ─────────────────────────────────────────────────────────────
+      - name: "[qa] Validate BITE scorer"
+        run: |
+          python bite_scorer.py --text "WWG1WGA trust the plan the great awakening patriots"
+          python -c "
+          import json, sys
+          r = json.load(open('compare_results.json'))
+          assert r['n_datasets'] >= 1, 'No datasets in comparison'
+          bite = r['bite_table']
+          assert len(bite) >= 1, 'Empty BITE table'
+          t_scores = [row.get('T', 0) for row in bite]
+          assert max(t_scores) > 0, 'All T scores are zero — scorer may be broken'
+          print(f'QA PASS: {len(bite)} datasets, max T={max(t_scores):.3f}')
+          "
+
+      # ── DevOps ─────────────────────────────────────────────────────────
+      - name: "[devops] Deploy to GitHub Pages"
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          exclude_assets: >-
+            .github,
+            __pycache__,
+            .git,
+            .team,
+            datasets/normalised,
+            *.py,
+            *.log

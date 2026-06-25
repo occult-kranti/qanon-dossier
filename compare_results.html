@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cross-Dataset Comparison — QAnon NLP Analysis</title>
+<style>
+  body{font-family:system-ui,sans-serif;margin:0;padding:24px;background:#f8f9fa;color:#212529}
+  h1{color:#2c3e50;border-bottom:3px solid #3498db;padding-bottom:8px}
+  h2{color:#34495e;margin-top:32px}
+  table{border-collapse:collapse;width:100%;background:#fff;
+        box-shadow:0 1px 3px rgba(0,0,0,.1);border-radius:6px;overflow:hidden}
+  th{background:#2c3e50;color:#fff;padding:10px 12px;text-align:left;font-size:.9em}
+  td{padding:9px 12px;border-bottom:1px solid #ecf0f1;font-size:.9em}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{background:#f8f9fa}
+  .meta{color:#666;font-size:.85em;margin-bottom:24px}
+  .section{margin-bottom:40px}
+  .note{background:#eaf4fb;border-left:4px solid #3498db;padding:10px 16px;
+         border-radius:3px;font-size:.9em;color:#2c3e50;margin:12px 0}
+</style>
+</head>
+<body>
+<h1>QAnon Multi-Dataset Comparison Report</h1>
+<p class="meta">
+  Generated: 2026-06-25T08:12:22.857738+00:00 ·
+  Datasets: 7 ·
+  <a href="compare_results.json">Download JSON</a>
+</p>
+
+<div class="note">
+  <strong>Methodology.</strong> Clustering: TF-IDF + KMeans (or BERTopic where available).
+  BITE scoring: keyword-weighted lexicon (Hassan 2018). Topic overlap: Jaccard similarity
+  on top-10 cluster keywords (Hoseini et al. 2021). Motivated reasoning: keyword classifier
+  (Priniski &amp; Bavel 2021). Platform migration: monthly post counts per platform (iDRAMA Lab).
+</div>
+
+<div class="section">
+<h2>Dataset Highlights</h2>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+
+<div style="border:2px solid #9b59b6;border-radius:8px;padding:16px;margin:8px;
+            min-width:200px;max-width:260px;display:inline-block;vertical-align:top">
+  <div style="font-size:1.1em;font-weight:bold;color:#9b59b6">qdrops</div>
+  <div style="font-size:0.85em;color:#666;margin:4px 0">Dominant: Thought Control</div>
+  <div style="font-size:1.8em;font-weight:bold">0.02</div>
+  <div style="font-size:0.8em;color:#888">avg BITE score</div>
+  <div style="font-size:0.8em;margin-top:6px">
+    Peak: <strong>2020-03</strong>
+    (T=0.297)
+  </div>
+</div>
+<div style="border:2px solid #9b59b6;border-radius:8px;padding:16px;margin:8px;
+            min-width:200px;max-width:260px;display:inline-block;vertical-align:top">
+  <div style="font-size:1.1em;font-weight:bold;color:#9b59b6">reddit_qanon</div>
+  <div style="font-size:0.85em;color:#666;margin:4px 0">Dominant: Thought Control</div>
+  <div style="font-size:1.8em;font-weight:bold">0.13</div>
+  <div style="font-size:0.8em;color:#888">avg BITE score</div>
+  <div style="font-size:0.8em;margin-top:6px">
+    Peak: <strong>2020-06</strong>
+    (T=0.578)
+  </div>
+</div>
+<div style="border:2px solid #9b59b6;border-radius:8px;padding:16px;margin:8px;
+            min-width:200px;max-width:260px;display:inline-block;vertical-align:top">
+  <div style="font-size:1.1em;font-weight:bold;color:#9b59b6">4chan_pol</div>
+  <div style="font-size:0.85em;color:#666;margin:4px 0">Dominant: Thought Control</div>
+  <div style="font-size:1.8em;font-weight:bold">0.11</div>
+  <div style="font-size:0.8em;color:#888">avg BITE score</div>
+  <div style="font-size:0.8em;margin-top:6px">
+    Peak: <strong>2020-05</strong>
+    (T=0.333)
+  </div>
+</div>
+<div style="border:2px solid #9b59b6;border-radius:8px;padding:16px;margin:8px;
+            min-width:200px;max-width:260px;display:inline-block;vertical-align:top">
+  <div style="font-size:1.1em;font-weight:bold;color:#9b59b6">8kun_qresearch</div>
+  <div style="font-size:0.85em;color:#666;margin:4px 0">Dominant: Thought Control</div>
+  <div style="font-size:1.8em;font-weight:bold">0.10</div>
+  <div style="font-size:0.8em;color:#888">avg BITE score</div>
+  <div style="font-size:0.8em;margin-top:6px">
+    Peak: <strong>2021-06</strong>
+    (T=0.423)
+  </div>
+</div>
+<div style="border:2px solid #9b59b6;border-radius:8px;padding:16px;margin:8px;
+            min-width:200px;max-width:260px;display:inline-block;vertical-align:top">
+  <div style="font-size:1.1em;font-weight:bold;color:#9b59b6">parler</div>
+  <div style="font-size:0.85em;color:#666;margin:4px 0">Dominant: Thought Control</div>
+  <div style="font-size:1.8em;font-weight:bold">0.13</div>
+  <div style="font-size:0.8em;color:#888">avg BITE score</div>
+  <div style="font-size:0.8em;margin-top:6px">
+    Peak: <strong>2021-10</strong>
+    (T=0.335)
+  </div>
+</div>
+<div style="border:2px solid #9b59b6;border-radius:8px;padding:16px;margin:8px;
+            min-width:200px;max-width:260px;display:inline-block;vertical-align:top">
+  <div style="font-size:1.1em;font-weight:bold;color:#9b59b6">telegram</div>
+  <div style="font-size:0.85em;color:#666;margin:4px 0">Dominant: Thought Control</div>
+  <div style="font-size:1.8em;font-weight:bold">0.11</div>
+  <div style="font-size:0.8em;color:#888">avg BITE score</div>
+  <div style="font-size:0.8em;margin-top:6px">
+    Peak: <strong>2023-06</strong>
+    (T=0.371)
+  </div>
+</div>
+<div style="border:2px solid #9b59b6;border-radius:8px;padding:16px;margin:8px;
+            min-width:200px;max-width:260px;display:inline-block;vertical-align:top">
+  <div style="font-size:1.1em;font-weight:bold;color:#9b59b6">twitter</div>
+  <div style="font-size:0.85em;color:#666;margin:4px 0">Dominant: Thought Control</div>
+  <div style="font-size:1.8em;font-weight:bold">0.11</div>
+  <div style="font-size:0.8em;color:#888">avg BITE score</div>
+  <div style="font-size:0.8em;margin-top:6px">
+    Peak: <strong>2019-02</strong>
+    (T=0.351)
+  </div>
+</div>
+</div>
+</div>
+
+<div class="section">
+<h2>BITE Model Scores by Dataset</h2>
+<p style="font-size:.85em;color:#666">Mean score per dimension (0 = absent → 1 = pervasive).
+  Dominant dimension shown as coloured badge.</p>
+<table>
+<tr>
+  <th>Dataset</th><th>Posts</th>
+  <th>B – Behavior</th><th>I – Information</th>
+  <th>T – Thought</th><th>E – Emotional</th>
+  <th>Total</th><th>Dominant</th>
+</tr>
+<tr><td><strong>reddit_qanon</strong></td><td>500</td><td style="white-space:nowrap"><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#e74c3c;width:4%;height:10px;border-radius:3px;"></div></div> <small>0.040</small></td><td style="white-space:nowrap"><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#e67e22;width:13%;height:10px;border-radius:3px;"></div></div> <small>0.135</small></td><td style="white-space:nowrap"><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#9b59b6;width:28%;height:10px;border-radius:3px;"></div></div> <small>0.279</small></td><td style="white-space:nowrap"><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#3498db;width:7%;height:10px;border-radius:3px;"></div></div> <small>0.067</small></td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#3498db;width:13%;height:10px;border-radius:3px;"></div></div> <small>0.130</small></td><td><span style="background:#9b59b6;color:#fff;padding:2px 8px;border-radius:12px;font-size:0.85em">T – Thought Control</span></td></tr>
+<tr><td><strong>parler</strong></td><td>500</td><td style="white-space:nowrap"><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#e74c3c;width:0%;height:10px;border-radius:3px;"></div></div> <small>0.000</small></td><td style="white-space:nowrap"><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#e67e22;width:12%;height:10px;border-radius:3px;"></div></div> <small>0.123</small></td><td style="white-space:nowrap"><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#9b59b6;width:26%;height:10px;border-radius:3px;"></div></div> <small>0.257</small></td><td style="white-space:nowrap"><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#3498db;width:13%;height:10px;border-radius:3px;"></div></div> <small>0.130</small></td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#3498db;width:13%;height:10px;border-radius:3px;"></div></div> <small>0.128</small></td><td><span style="background:#9b59b6;color:#fff;padding:2px 8px;border-radius:12px;font-size:0.85em">T – Thought Control</span></td></tr>
+<tr><td><strong>telegram</strong></td><td>500</td><td style="white-space:nowrap"><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#e74c3c;width:2%;height:10px;border-radius:3px;"></div></div> <small>0.023</small></td><td style="white-space:nowrap"><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#e67e22;width:7%;height:10px;border-radius:3px;"></div></div> <small>0.073</small></td><td style="white-space:nowrap"><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#9b59b6;width:27%;height:10px;border-radius:3px;"></div></div> <small>0.266</small></td><td style="white-space:nowrap"><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#3498db;width:8%;height:10px;border-radius:3px;"></div></div> <small>0.085</small></td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#3498db;width:11%;height:10px;border-radius:3px;"></div></div> <small>0.112</small></td><td><span style="background:#9b59b6;color:#fff;padding:2px 8px;border-radius:12px;font-size:0.85em">T – Thought Control</span></td></tr>
+<tr><td><strong>twitter</strong></td><td>500</td><td style="white-space:nowrap"><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#e74c3c;width:0%;height:10px;border-radius:3px;"></div></div> <small>0.000</small></td><td style="white-space:nowrap"><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#e67e22;width:11%;height:10px;border-radius:3px;"></div></div> <small>0.111</small></td><td style="white-space:nowrap"><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#9b59b6;width:24%;height:10px;border-radius:3px;"></div></div> <small>0.242</small></td><td style="white-space:nowrap"><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#3498db;width:8%;height:10px;border-radius:3px;"></div></div> <small>0.076</small></td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#3498db;width:11%;height:10px;border-radius:3px;"></div></div> <small>0.107</small></td><td><span style="background:#9b59b6;color:#fff;padding:2px 8px;border-radius:12px;font-size:0.85em">T – Thought Control</span></td></tr>
+<tr><td><strong>4chan_pol</strong></td><td>500</td><td style="white-space:nowrap"><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#e74c3c;width:2%;height:10px;border-radius:3px;"></div></div> <small>0.023</small></td><td style="white-space:nowrap"><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#e67e22;width:9%;height:10px;border-radius:3px;"></div></div> <small>0.090</small></td><td style="white-space:nowrap"><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#9b59b6;width:20%;height:10px;border-radius:3px;"></div></div> <small>0.196</small></td><td style="white-space:nowrap"><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#3498db;width:11%;height:10px;border-radius:3px;"></div></div> <small>0.113</small></td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#3498db;width:11%;height:10px;border-radius:3px;"></div></div> <small>0.105</small></td><td><span style="background:#9b59b6;color:#fff;padding:2px 8px;border-radius:12px;font-size:0.85em">T – Thought Control</span></td></tr>
+<tr><td><strong>8kun_qresearch</strong></td><td>500</td><td style="white-space:nowrap"><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#e74c3c;width:1%;height:10px;border-radius:3px;"></div></div> <small>0.014</small></td><td style="white-space:nowrap"><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#e67e22;width:1%;height:10px;border-radius:3px;"></div></div> <small>0.014</small></td><td style="white-space:nowrap"><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#9b59b6;width:32%;height:10px;border-radius:3px;"></div></div> <small>0.322</small></td><td style="white-space:nowrap"><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#3498db;width:6%;height:10px;border-radius:3px;"></div></div> <small>0.060</small></td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#3498db;width:10%;height:10px;border-radius:3px;"></div></div> <small>0.103</small></td><td><span style="background:#9b59b6;color:#fff;padding:2px 8px;border-radius:12px;font-size:0.85em">T – Thought Control</span></td></tr>
+<tr><td><strong>qdrops</strong></td><td>500</td><td style="white-space:nowrap"><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#e74c3c;width:0%;height:10px;border-radius:3px;"></div></div> <small>0.002</small></td><td style="white-space:nowrap"><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#e67e22;width:3%;height:10px;border-radius:3px;"></div></div> <small>0.027</small></td><td style="white-space:nowrap"><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#9b59b6;width:3%;height:10px;border-radius:3px;"></div></div> <small>0.028</small></td><td style="white-space:nowrap"><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#3498db;width:2%;height:10px;border-radius:3px;"></div></div> <small>0.020</small></td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#3498db;width:2%;height:10px;border-radius:3px;"></div></div> <small>0.019</small></td><td><span style="background:#9b59b6;color:#fff;padding:2px 8px;border-radius:12px;font-size:0.85em">T – Thought Control</span></td></tr>
+
+</table>
+</div>
+
+<div class="section">
+<h2>Cross-Platform Topic Overlap <small style="font-weight:normal;color:#666">(Hoseini et al. 2021)</small></h2>
+<p style="font-size:.85em;color:#666">Jaccard similarity of top-10 cluster keywords between dataset pairs.
+  Higher = more narrative overlap across platforms.</p>
+<table>
+<tr><th>Dataset A</th><th>Dataset B</th><th>Jaccard Overlap</th><th>Shared Keywords</th></tr>
+<tr><td>reddit_qanon</td><td>twitter</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#95a5a6;width:12%;height:10px;border-radius:3px;"></div></div> <small>0.097</small></td><td style="font-size:0.85em">bless, deep state, fisa, god, god bless, media</td></tr>
+<tr><td>parler</td><td>twitter</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#95a5a6;width:9%;height:10px;border-radius:3px;"></div></div> <small>0.074</small></td><td style="font-size:0.85em">banned, fisa, greatawakening qanon, qanon maga, state, storm</td></tr>
+<tr><td>reddit_qanon</td><td>8kun_qresearch</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#95a5a6;width:8%;height:10px;border-radius:3px;"></div></div> <small>0.067</small></td><td style="font-size:0.85em">dark, dark light, huber, map, panic, panic dc</td></tr>
+<tr><td>reddit_qanon</td><td>telegram</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#95a5a6;width:7%;height:10px;border-radius:3px;"></div></div> <small>0.060</small></td><td style="font-size:0.85em">drop, god, map, media, patriots, stop</td></tr>
+<tr><td>qdrops</td><td>reddit_qanon</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#95a5a6;width:7%;height:10px;border-radius:3px;"></div></div> <small>0.056</small></td><td style="font-size:0.85em">coming, game, great, msm, news media, patriots</td></tr>
+<tr><td>reddit_qanon</td><td>parler</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#95a5a6;width:7%;height:10px;border-radius:3px;"></div></div> <small>0.053</small></td><td style="font-size:0.85em">coming god, drop, fisa, great awakening, storm, truth</td></tr>
+<tr><td>telegram</td><td>twitter</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#95a5a6;width:6%;height:10px;border-radius:3px;"></div></div> <small>0.046</small></td><td style="font-size:0.85em">god, mainstream, mainstream media, media, ready, storm</td></tr>
+<tr><td>reddit_qanon</td><td>4chan_pol</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#95a5a6;width:5%;height:10px;border-radius:3px;"></div></div> <small>0.039</small></td><td style="font-size:0.85em">drop, map, media, offline, panic, patriots</td></tr>
+<tr><td>4chan_pol</td><td>telegram</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#95a5a6;width:5%;height:10px;border-radius:3px;"></div></div> <small>0.039</small></td><td style="font-size:0.85em">archive, cabal, drop, map, media, patriots</td></tr>
+<tr><td>parler</td><td>telegram</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#95a5a6;width:5%;height:10px;border-radius:3px;"></div></div> <small>0.039</small></td><td style="font-size:0.85em">cabal, censored, drop, plan qanon, storm, truth</td></tr>
+<tr><td>qdrops</td><td>4chan_pol</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#95a5a6;width:4%;height:10px;border-radius:3px;"></div></div> <small>0.034</small></td><td style="font-size:0.85em">news, patriots, private, target, watch</td></tr>
+<tr><td>qdrops</td><td>8kun_qresearch</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#95a5a6;width:3%;height:10px;border-radius:3px;"></div></div> <small>0.027</small></td><td style="font-size:0.85em">boom, potus, trip, want</td></tr>
+<tr><td>4chan_pol</td><td>8kun_qresearch</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#95a5a6;width:3%;height:10px;border-radius:3px;"></div></div> <small>0.026</small></td><td style="font-size:0.85em">map, panic, tweet, week</td></tr>
+<tr><td>8kun_qresearch</td><td>telegram</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#95a5a6;width:3%;height:10px;border-radius:3px;"></div></div> <small>0.026</small></td><td style="font-size:0.85em">map, stop, stop coming, storm</td></tr>
+<tr><td>qdrops</td><td>twitter</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#95a5a6;width:3%;height:10px;border-radius:3px;"></div></div> <small>0.020</small></td><td style="font-size:0.85em">msm, ready, real</td></tr>
+<tr><td>qdrops</td><td>telegram</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#95a5a6;width:3%;height:10px;border-radius:3px;"></div></div> <small>0.020</small></td><td style="font-size:0.85em">know, patriots, ready</td></tr>
+<tr><td>4chan_pol</td><td>twitter</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#95a5a6;width:2%;height:10px;border-radius:3px;"></div></div> <small>0.019</small></td><td style="font-size:0.85em">media, patriots control, wake</td></tr>
+<tr><td>4chan_pol</td><td>parler</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#95a5a6;width:2%;height:10px;border-radius:3px;"></div></div> <small>0.019</small></td><td style="font-size:0.85em">cabal, conspiracy, drop</td></tr>
+<tr><td>8kun_qresearch</td><td>twitter</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#95a5a6;width:2%;height:10px;border-radius:3px;"></div></div> <small>0.013</small></td><td style="font-size:0.85em">connects, storm</td></tr>
+<tr><td>qdrops</td><td>parler</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#95a5a6;width:1%;height:10px;border-radius:3px;"></div></div> <small>0.007</small></td><td style="font-size:0.85em">justice</td></tr>
+
+</table>
+</div>
+
+<div class="section">
+<h2>Motivated Reasoning <small style="font-weight:normal;color:#666">(Priniski &amp; Bavel 2021)</small></h2>
+<p style="font-size:.85em;color:#666">Mean score of identity-protective reasoning markers
+  (certainty, us-vs-them, dismissal, in-group language).</p>
+<table>
+<tr><th>Dataset</th><th>Mean Score</th><th>% High Scorers</th></tr>
+<tr><td>reddit_qanon</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#9b59b6;width:15%;height:10px;border-radius:3px;"></div></div> <small>0.150</small></td><td>0.0%</td></tr>
+<tr><td>8kun_qresearch</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#9b59b6;width:15%;height:10px;border-radius:3px;"></div></div> <small>0.150</small></td><td>0.0%</td></tr>
+<tr><td>parler</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#9b59b6;width:15%;height:10px;border-radius:3px;"></div></div> <small>0.150</small></td><td>0.0%</td></tr>
+<tr><td>4chan_pol</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#9b59b6;width:12%;height:10px;border-radius:3px;"></div></div> <small>0.125</small></td><td>0.0%</td></tr>
+<tr><td>twitter</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#9b59b6;width:12%;height:10px;border-radius:3px;"></div></div> <small>0.125</small></td><td>0.0%</td></tr>
+<tr><td>telegram</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#9b59b6;width:9%;height:10px;border-radius:3px;"></div></div> <small>0.087</small></td><td>0.0%</td></tr>
+<tr><td>qdrops</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#9b59b6;width:3%;height:10px;border-radius:3px;"></div></div> <small>0.033</small></td><td>0.2%</td></tr>
+
+</table>
+</div>
+
+<div class="section">
+<h2>Cluster Quality</h2>
+<p style="font-size:.85em;color:#666">Silhouette score (−1 to 1; higher = better-separated topics).</p>
+<table>
+<tr><th>Dataset</th><th>Clusters</th><th>Silhouette</th><th>Top Topics</th></tr>
+<tr><td>qdrops</td><td>10</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#27ae60;width:4%;height:10px;border-radius:3px;"></div></div> <small>0.044</small></td><td style="font-size:0.85em">united · wwg1wga · fighting; target · intended · intended target; patriot · country · times</td></tr>
+<tr><td>reddit_qanon</td><td>10</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#27ae60;width:100%;height:10px;border-radius:3px;"></div></div> <small>1.000</small></td><td style="font-size:0.85em">1234 says · dark light · dark; warned truth · warned · truth; trust · wray · wray trust</td></tr>
+<tr><td>4chan_pol</td><td>10</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#27ae60;width:100%;height:10px;border-radius:3px;"></div></div> <small>1.000</small></td><td style="font-size:0.85em">week · week trust · watch; control god · bank rothschilds · pill; knew msm · knew · conspiracy</td></tr>
+<tr><td>8kun_qresearch</td><td>10</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#27ae60;width:100%;height:10px;border-radius:3px;"></div></div> <small>1.000</small></td><td style="font-size:0.85em">wonderland reference · wonderland · latest; wwg1wga shield · want · want divide; shift · shift best · stop</td></tr>
+<tr><td>parler</td><td>10</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#27ae60;width:100%;height:10px;border-radius:3px;"></div></div> <small>1.000</small></td><td style="font-size:0.85em">msm connected · state msm · state; years ago · years · true wake; movement greatawakening · movement · theory</td></tr>
+<tr><td>telegram</td><td>10</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#27ae60;width:100%;height:10px;border-radius:3px;"></div></div> <small>1.000</small></td><td style="font-size:0.85em">white rabbit · white · follow; want distracted · cabal · afraid god; wins wwg1wga · banned facebook · facebook</td></tr>
+<tr><td>twitter</td><td>10</td><td><div style="background:#eee;border-radius:3px;height:10px;width:200px;display:inline-block;"><div style="background:#27ae60;width:100%;height:10px;border-radius:3px;"></div></div> <small>1.000</small></td><td style="font-size:0.85em">plan · working · wwg1wga trust; warned fakenews · warned · qanon god; truth qanon · qanon greatawakening · citizen journalists</td></tr>
+
+</table>
+</div>
+
+<div class="section">
+<h2>Platform Migration Timeline <small style="font-weight:normal;color:#666">(iDRAMA Lab)</small></h2>
+<p style="font-size:.85em;color:#666">Monthly post volume per platform (last 12 available periods).</p>
+<table>
+<tr><th>Period</th><th>parler</th><th>telegram</th></tr>
+<tr><td>2022-09</td><td>—</td><td style="text-align:right">10</td></tr>
+<tr><td>2022-10</td><td style="text-align:right">1</td><td style="text-align:right">9</td></tr>
+<tr><td>2022-11</td><td>—</td><td style="text-align:right">6</td></tr>
+<tr><td>2022-12</td><td>—</td><td style="text-align:right">4</td></tr>
+<tr><td>2023-01</td><td>—</td><td style="text-align:right">4</td></tr>
+<tr><td>2023-02</td><td>—</td><td style="text-align:right">4</td></tr>
+<tr><td>2023-03</td><td>—</td><td style="text-align:right">1</td></tr>
+<tr><td>2023-04</td><td>—</td><td style="text-align:right">3</td></tr>
+<tr><td>2023-05</td><td>—</td><td style="text-align:right">2</td></tr>
+<tr><td>2023-06</td><td>—</td><td style="text-align:right">4</td></tr>
+<tr><td>2023-07</td><td>—</td><td style="text-align:right">1</td></tr>
+<tr><td>2023-08</td><td>—</td><td style="text-align:right">2</td></tr>
+
+</table>
+</div>
+
+<div class="note" style="margin-top:40px">
+  <strong>References.</strong><br>
+  Hoseini et al. (2021). <em>How Globalization of QAnon Bypasses Twitter's Ban.</em> ICWSM.<br>
+  iDRAMA Lab (2021). <em>An Early Look at the Parler Online Social Network.</em> ICWSM.<br>
+  Priniski &amp; Bavel (2021). <em>Identity-based motivation and QAnon.</em> Perspectives on Psychological Science.<br>
+  Hassan, S. (2018). <em>Combating Cult Mind Control.</em> Freedom of Mind Press.<br>
+  Kingsman, J. (2025). <em>JSON-QAnon.</em> DOI 10.13140/RG.2.2.28778.32964.
+</div>
+</body>
+</html>

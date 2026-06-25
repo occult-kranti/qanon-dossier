@@ -1,8 +1,59 @@
-# QAnon — Research Dossier, Literature & Timeline
+# QAnon — Research Dossier & Computational Analysis
 
-A self-contained, fully-cited academic website examining **QAnon as a documented political movement and digital cult**. It treats conspiracy claims strictly as *discourse objects* and labels every load-bearing statement with an epistemic tag (Documented / Reported / Alleged / Disputed / Debunked / Conspiracy). The site is built for academic, journalistic, and educational use.
+A fully-cited academic website and **multi-dataset NLP research platform** examining QAnon as a political movement and digital cult. Conspiracy claims are treated as *discourse objects*, labelled with epistemic tags (Documented / Reported / Alleged / Disputed / Debunked / Conspiracy), and never amplified.
 
-> **Purpose & ethics.** This project documents and analyses QAnon; it does **not** amplify or endorse its claims. Conspiracy assertions are clearly marked as such, debunked claims are flagged with rebuttals, and survivor-support resources are linked throughout.
+> **Purpose & ethics.** This project documents and analyses QAnon; it does **not** amplify or endorse its claims. Debunked claims are flagged with rebuttals; survivor-support resources are linked throughout.
+
+## Quick start
+
+```bash
+pip install -r requirements.txt
+
+# 1 – collect & organise all datasets
+python collect_datasets.py
+
+# 2 – run BITE scoring + clustering on every dataset
+python multi_dataset_analysis.py
+
+# 3 – compare results across datasets
+python compare_results.py
+
+# 4 – single-dataset explorer (original pipeline)
+python qdrops_cluster.py          # Q drops only, BERTopic
+python qdrops_sweep.py            # stability sweep
+
+# 5 – view results
+python3 -m http.server 8000       # → http://localhost:8000
+```
+
+## Datasets
+
+See [`datasets/CATALOG.md`](datasets/CATALOG.md) for the full database list with sources, licenses, and download instructions. The collector (`collect_datasets.py`) auto-downloads freely available datasets and documents the rest.
+
+## BITE model scoring
+
+`bite_scorer.py` implements Steven Hassan's four-dimension BITE model as an NLP scorer:
+
+| Dimension | Measures |
+|---|---|
+| **B** Behavior | Compliance instructions, surveillance, control rhetoric |
+| **I** Information | Gatekeeping, enemy-media framing, insider knowledge |
+| **T** Thought | Loaded language, thought-stopping slogans, black/white thinking |
+| **E** Emotional | Fear, love-bombing, shame, urgency |
+
+Scores are produced per-document and aggregated per dataset/time-window.
+
+## Replicating related work
+
+`multi_dataset_analysis.py` replicates the methodology of three key papers:
+
+| Paper | Replicated via |
+|---|---|
+| Hoseini et al. 2021 – *Globalization of QAnon* | Cross-platform topic overlap (Jaccard on BERTopic word sets) |
+| iDRAMA Lab – platform diaspora | Board-migration timeline per dataset |
+| Priniski & Bavel 2021 – motivated reasoning | Identity-protective reasoning keyword classifier |
+
+Results land in `compare_results.json` and `compare_results.html` (web dashboard tab).
 
 ---
 

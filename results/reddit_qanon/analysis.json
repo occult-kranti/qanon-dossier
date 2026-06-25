@@ -1,0 +1,530 @@
+{
+  "dataset_id": "reddit_qanon",
+  "n_posts": 500,
+  "cluster": {
+    "method": "kmeans",
+    "n_clusters": 10,
+    "metrics": {
+      "silhouette": 1.0,
+      "n_clusters": 10
+    },
+    "topics": [
+      {
+        "id": 0,
+        "label": "1234 says · dark light · dark",
+        "keywords": [
+          "1234 says",
+          "dark light",
+          "dark",
+          "game",
+          "game dark",
+          "drop 1234",
+          "drop",
+          "news trust"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 1,
+        "label": "warned truth · warned · truth",
+        "keywords": [
+          "warned truth",
+          "warned",
+          "truth",
+          "rescued",
+          "coming god",
+          "children",
+          "children rescued",
+          "truth coming"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 2,
+        "label": "trust · wray · wray trust",
+        "keywords": [
+          "trust",
+          "wray",
+          "wray trust",
+          "huber",
+          "fisa",
+          "fisa abuse",
+          "huber trust",
+          "plan wwg1wga"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 3,
+        "label": "ago crumbs · crumbs · crumbs lead",
+        "keywords": [
+          "ago crumbs",
+          "crumbs",
+          "crumbs lead",
+          "offline",
+          "offline qanon",
+          "knew months",
+          "lead",
+          "lead archive"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 4,
+        "label": "deep state · exposed given · exposed",
+        "keywords": [
+          "deep state",
+          "exposed given",
+          "exposed",
+          "past wwg1wga",
+          "past",
+          "map",
+          "map future",
+          "proves past"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 5,
+        "label": "waking day · day · day panic",
+        "keywords": [
+          "waking day",
+          "day",
+          "day panic",
+          "great awakening",
+          "great",
+          "panic",
+          "panic dc",
+          "people"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 6,
+        "label": "won report · won · fear happens",
+        "keywords": [
+          "won report",
+          "won",
+          "fear happens",
+          "happens wake",
+          "news media",
+          "media won",
+          "media",
+          "report fear"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 7,
+        "label": "waking trust · terrified waking · terrified",
+        "keywords": [
+          "waking trust",
+          "terrified waking",
+          "terrified",
+          "covering research",
+          "covering",
+          "msm",
+          "msm covering",
+          "research"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 8,
+        "label": "coming · stop coming · wwg1wga patriots",
+        "keywords": [
+          "coming",
+          "stop coming",
+          "wwg1wga patriots",
+          "storm",
+          "coming stop",
+          "plan storm",
+          "patriots",
+          "stop"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 9,
+        "label": "god · bless · god bless",
+        "keywords": [
+          "god",
+          "bless",
+          "god bless",
+          "potus",
+          "pure",
+          "pure evil",
+          "light defeat",
+          "potus fighting"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      }
+    ],
+    "time_s": 0.06
+  },
+  "bite": {
+    "aggregate": {
+      "B": {
+        "mean": 0.0398,
+        "median": 0.0,
+        "std": 0.0808,
+        "max": 0.2308,
+        "dist": {
+          "not_detected": 400,
+          "weak": 100,
+          "moderate": 0,
+          "strong": 0,
+          "pervasive": 0
+        }
+      },
+      "I": {
+        "mean": 0.1346,
+        "median": 0.1667,
+        "std": 0.143,
+        "max": 0.3333,
+        "dist": {
+          "not_detected": 250,
+          "weak": 250,
+          "moderate": 0,
+          "strong": 0,
+          "pervasive": 0
+        }
+      },
+      "T": {
+        "mean": 0.2792,
+        "median": 0.375,
+        "std": 0.1842,
+        "max": 0.5775,
+        "dist": {
+          "not_detected": 150,
+          "weak": 100,
+          "moderate": 200,
+          "strong": 50,
+          "pervasive": 0
+        }
+      },
+      "E": {
+        "mean": 0.0665,
+        "median": 0.0,
+        "std": 0.1109,
+        "max": 0.3333,
+        "dist": {
+          "not_detected": 400,
+          "weak": 100,
+          "moderate": 0,
+          "strong": 0,
+          "pervasive": 0
+        }
+      },
+      "total": {
+        "mean": 0.13,
+        "median": 0.136,
+        "std": 0.0449,
+        "max": 0.2028,
+        "dist": {
+          "not_detected": 350,
+          "weak": 150,
+          "moderate": 0,
+          "strong": 0,
+          "pervasive": 0
+        }
+      },
+      "corpus_dominant": "T",
+      "n_posts": 500
+    },
+    "timeline": [
+      {
+        "period": "2017-11",
+        "n": 45,
+        "B_mean": 0.0353,
+        "I_mean": 0.0981,
+        "T_mean": 0.3081,
+        "E_mean": 0.0909
+      },
+      {
+        "period": "2017-12",
+        "n": 45,
+        "B_mean": 0.0331,
+        "I_mean": 0.1207,
+        "T_mean": 0.2681,
+        "E_mean": 0.0771
+      },
+      {
+        "period": "2018-01",
+        "n": 52,
+        "B_mean": 0.0542,
+        "I_mean": 0.1491,
+        "T_mean": 0.2986,
+        "E_mean": 0.0484
+      },
+      {
+        "period": "2018-02",
+        "n": 27,
+        "B_mean": 0.0271,
+        "I_mean": 0.1372,
+        "T_mean": 0.2767,
+        "E_mean": 0.0757
+      },
+      {
+        "period": "2018-03",
+        "n": 25,
+        "B_mean": 0.0544,
+        "I_mean": 0.1275,
+        "T_mean": 0.3312,
+        "E_mean": 0.0399
+      },
+      {
+        "period": "2018-04",
+        "n": 39,
+        "B_mean": 0.0408,
+        "I_mean": 0.1303,
+        "T_mean": 0.2846,
+        "E_mean": 0.0719
+      },
+      {
+        "period": "2018-05",
+        "n": 28,
+        "B_mean": 0.0082,
+        "I_mean": 0.1228,
+        "T_mean": 0.2334,
+        "E_mean": 0.0916
+      },
+      {
+        "period": "2018-06",
+        "n": 13,
+        "B_mean": 0.0355,
+        "I_mean": 0.1026,
+        "T_mean": 0.2309,
+        "E_mean": 0.0914
+      },
+      {
+        "period": "2018-07",
+        "n": 20,
+        "B_mean": 0.0397,
+        "I_mean": 0.1528,
+        "T_mean": 0.2615,
+        "E_mean": 0.0499
+      },
+      {
+        "period": "2018-08",
+        "n": 14,
+        "B_mean": 0.0779,
+        "I_mean": 0.1341,
+        "T_mean": 0.2207,
+        "E_mean": 0.1054
+      },
+      {
+        "period": "2018-09",
+        "n": 18,
+        "B_mean": 0.0755,
+        "I_mean": 0.1452,
+        "T_mean": 0.2426,
+        "E_mean": 0.0685
+      },
+      {
+        "period": "2018-10",
+        "n": 20,
+        "B_mean": 0.05,
+        "I_mean": 0.1116,
+        "T_mean": 0.3426,
+        "E_mean": 0.0808
+      },
+      {
+        "period": "2018-11",
+        "n": 18,
+        "B_mean": 0.0256,
+        "I_mean": 0.1817,
+        "T_mean": 0.2067,
+        "E_mean": 0.0395
+      },
+      {
+        "period": "2018-12",
+        "n": 17,
+        "B_mean": 0.0136,
+        "I_mean": 0.1238,
+        "T_mean": 0.3359,
+        "E_mean": 0.084
+      },
+      {
+        "period": "2019-01",
+        "n": 12,
+        "B_mean": 0.0769,
+        "I_mean": 0.1363,
+        "T_mean": 0.2678,
+        "E_mean": 0.0119
+      },
+      {
+        "period": "2019-02",
+        "n": 11,
+        "B_mean": 0.0361,
+        "I_mean": 0.1196,
+        "T_mean": 0.3738,
+        "E_mean": 0.0562
+      },
+      {
+        "period": "2019-03",
+        "n": 13,
+        "B_mean": 0.0256,
+        "I_mean": 0.2023,
+        "T_mean": 0.3012,
+        "E_mean": 0.0658
+      },
+      {
+        "period": "2019-04",
+        "n": 12,
+        "B_mean": 0.0908,
+        "I_mean": 0.1009,
+        "T_mean": 0.1874,
+        "E_mean": 0.0871
+      },
+      {
+        "period": "2019-05",
+        "n": 10,
+        "B_mean": 0.0397,
+        "I_mean": 0.1044,
+        "T_mean": 0.3021,
+        "E_mean": 0.0952
+      },
+      {
+        "period": "2019-06",
+        "n": 8,
+        "B_mean": 0.0,
+        "I_mean": 0.1211,
+        "T_mean": 0.2506,
+        "E_mean": 0.0652
+      },
+      {
+        "period": "2019-07",
+        "n": 6,
+        "B_mean": 0.0,
+        "I_mean": 0.1666,
+        "T_mean": 0.2956,
+        "E_mean": 0.0476
+      },
+      {
+        "period": "2019-08",
+        "n": 10,
+        "B_mean": 0.0231,
+        "I_mean": 0.1802,
+        "T_mean": 0.2235,
+        "E_mean": 0.0189
+      },
+      {
+        "period": "2019-09",
+        "n": 6,
+        "B_mean": 0.0769,
+        "I_mean": 0.2119,
+        "T_mean": 0.245,
+        "E_mean": 0.0
+      },
+      {
+        "period": "2019-10",
+        "n": 6,
+        "B_mean": 0.0278,
+        "I_mean": 0.2418,
+        "T_mean": 0.3561,
+        "E_mean": 0.0238
+      },
+      {
+        "period": "2019-11",
+        "n": 2,
+        "B_mean": 0.0,
+        "I_mean": 0.0,
+        "T_mean": 0.1052,
+        "E_mean": 0.2612
+      },
+      {
+        "period": "2019-12",
+        "n": 7,
+        "B_mean": 0.0476,
+        "I_mean": 0.203,
+        "T_mean": 0.219,
+        "E_mean": 0.027
+      },
+      {
+        "period": "2020-01",
+        "n": 3,
+        "B_mean": 0.0,
+        "I_mean": 0.1008,
+        "T_mean": 0.4622,
+        "E_mean": 0.0476
+      },
+      {
+        "period": "2020-02",
+        "n": 5,
+        "B_mean": 0.0333,
+        "I_mean": 0.1088,
+        "T_mean": 0.2604,
+        "E_mean": 0.0378
+      },
+      {
+        "period": "2020-03",
+        "n": 1,
+        "B_mean": 0.0,
+        "I_mean": 0.3333,
+        "T_mean": 0.2308,
+        "E_mean": 0.0
+      },
+      {
+        "period": "2020-04",
+        "n": 3,
+        "B_mean": 0.0,
+        "I_mean": 0.2222,
+        "T_mean": 0.0769,
+        "E_mean": 0.0631
+      },
+      {
+        "period": "2020-05",
+        "n": 2,
+        "B_mean": 0.0833,
+        "I_mean": 0.1052,
+        "T_mean": 0.4109,
+        "E_mean": 0.0
+      },
+      {
+        "period": "2020-06",
+        "n": 1,
+        "B_mean": 0.0,
+        "I_mean": 0.0,
+        "T_mean": 0.5775,
+        "E_mean": 0.1429
+      },
+      {
+        "period": "2020-07",
+        "n": 1,
+        "B_mean": 0.0,
+        "I_mean": 0.0,
+        "T_mean": 0.3878,
+        "E_mean": 0.0
+      }
+    ]
+  },
+  "motivated_reasoning": {
+    "mean_score": 0.15,
+    "distribution": {
+      "medium": 200,
+      "low": 300
+    }
+  },
+  "corpus": {
+    "boards": {
+      "r/greatawakening": 500
+    },
+    "by_year": {
+      "2017": 90,
+      "2018": 291,
+      "2019": 103,
+      "2020": 16
+    }
+  }
+}

@@ -1,0 +1,521 @@
+{
+  "dataset_id": "parler",
+  "n_posts": 500,
+  "cluster": {
+    "method": "kmeans",
+    "n_clusters": 10,
+    "metrics": {
+      "silhouette": 1.0,
+      "n_clusters": 10
+    },
+    "topics": [
+      {
+        "id": 0,
+        "label": "msm connected · state msm · state",
+        "keywords": [
+          "msm connected",
+          "state msm",
+          "state",
+          "wake sheeple",
+          "big pharma",
+          "connected wake",
+          "deep",
+          "big"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 1,
+        "label": "years ago · years · true wake",
+        "keywords": [
+          "years ago",
+          "years",
+          "true wake",
+          "wake america",
+          "pilled years",
+          "america god",
+          "true",
+          "pilled"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 2,
+        "label": "movement greatawakening · movement · theory",
+        "keywords": [
+          "movement greatawakening",
+          "movement",
+          "theory",
+          "theory awakening",
+          "awakening movement",
+          "conspiracy",
+          "greatawakening qanon",
+          "greatawakening"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 3,
+        "label": "won told · told · told months",
+        "keywords": [
+          "won told",
+          "told",
+          "told months",
+          "won",
+          "awakening real",
+          "ago great",
+          "great awakening",
+          "msm won"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 4,
+        "label": "qanon maga · plan qanon · trump",
+        "keywords": [
+          "qanon maga",
+          "plan qanon",
+          "trump",
+          "trump knows",
+          "bless patriots",
+          "knows",
+          "knows trust",
+          "maga"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 5,
+        "label": "today · today confirms · storm",
+        "keywords": [
+          "today",
+          "today confirms",
+          "storm",
+          "trusttheplan",
+          "drop today",
+          "drop",
+          "confirms storm",
+          "confirms"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 6,
+        "label": "telegram link · telegram · stopped qanon",
+        "keywords": [
+          "telegram link",
+          "telegram",
+          "stopped qanon",
+          "truth stopped",
+          "join telegram",
+          "censored",
+          "censored truth",
+          "link censored"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 7,
+        "label": "stolen warned · stolen · warned",
+        "keywords": [
+          "stolen warned",
+          "stolen",
+          "warned",
+          "warned happen",
+          "happen",
+          "election stolen",
+          "election",
+          "hold line"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 8,
+        "label": "fear truth · silenced · silenced trust",
+        "keywords": [
+          "fear truth",
+          "silenced",
+          "silenced trust",
+          "truth silenced",
+          "banned",
+          "banned fear",
+          "fear",
+          "truth"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 9,
+        "label": "coming god · cabal · corrupt",
+        "keywords": [
+          "coming god",
+          "cabal",
+          "corrupt",
+          "corrupt cabal",
+          "justice",
+          "fisa",
+          "justice coming",
+          "bring corrupt"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      }
+    ],
+    "time_s": 0.06
+  },
+  "bite": {
+    "aggregate": {
+      "B": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "max": 0.0,
+        "dist": {
+          "not_detected": 500,
+          "weak": 0,
+          "moderate": 0,
+          "strong": 0,
+          "pervasive": 0
+        }
+      },
+      "I": {
+        "mean": 0.1232,
+        "median": 0.1667,
+        "std": 0.1335,
+        "max": 0.3478,
+        "dist": {
+          "not_detected": 250,
+          "weak": 250,
+          "moderate": 0,
+          "strong": 0,
+          "pervasive": 0
+        }
+      },
+      "T": {
+        "mean": 0.2574,
+        "median": 0.2683,
+        "std": 0.1628,
+        "max": 0.4643,
+        "dist": {
+          "not_detected": 100,
+          "weak": 250,
+          "moderate": 150,
+          "strong": 0,
+          "pervasive": 0
+        }
+      },
+      "E": {
+        "mean": 0.1303,
+        "median": 0.1892,
+        "std": 0.1139,
+        "max": 0.2857,
+        "dist": {
+          "not_detected": 250,
+          "weak": 250,
+          "moderate": 0,
+          "strong": 0,
+          "pervasive": 0
+        }
+      },
+      "total": {
+        "mean": 0.1277,
+        "median": 0.1363,
+        "std": 0.069,
+        "max": 0.2458,
+        "dist": {
+          "not_detected": 300,
+          "weak": 200,
+          "moderate": 0,
+          "strong": 0,
+          "pervasive": 0
+        }
+      },
+      "corpus_dominant": "T",
+      "n_posts": 500
+    },
+    "timeline": [
+      {
+        "period": "2020-01",
+        "n": 12,
+        "B_mean": 0.0,
+        "I_mean": 0.1311,
+        "T_mean": 0.2983,
+        "E_mean": 0.1461
+      },
+      {
+        "period": "2020-02",
+        "n": 53,
+        "B_mean": 0.0,
+        "I_mean": 0.1042,
+        "T_mean": 0.2569,
+        "E_mean": 0.1314
+      },
+      {
+        "period": "2020-03",
+        "n": 56,
+        "B_mean": 0.0,
+        "I_mean": 0.1064,
+        "T_mean": 0.2475,
+        "E_mean": 0.1338
+      },
+      {
+        "period": "2020-04",
+        "n": 27,
+        "B_mean": 0.0,
+        "I_mean": 0.1642,
+        "T_mean": 0.2931,
+        "E_mean": 0.1383
+      },
+      {
+        "period": "2020-05",
+        "n": 29,
+        "B_mean": 0.0,
+        "I_mean": 0.1407,
+        "T_mean": 0.2795,
+        "E_mean": 0.122
+      },
+      {
+        "period": "2020-06",
+        "n": 19,
+        "B_mean": 0.0,
+        "I_mean": 0.1919,
+        "T_mean": 0.2787,
+        "E_mean": 0.1131
+      },
+      {
+        "period": "2020-07",
+        "n": 24,
+        "B_mean": 0.0,
+        "I_mean": 0.169,
+        "T_mean": 0.2375,
+        "E_mean": 0.0681
+      },
+      {
+        "period": "2020-08",
+        "n": 29,
+        "B_mean": 0.0,
+        "I_mean": 0.1011,
+        "T_mean": 0.2386,
+        "E_mean": 0.1351
+      },
+      {
+        "period": "2020-09",
+        "n": 21,
+        "B_mean": 0.0,
+        "I_mean": 0.1056,
+        "T_mean": 0.2722,
+        "E_mean": 0.1411
+      },
+      {
+        "period": "2020-10",
+        "n": 24,
+        "B_mean": 0.0,
+        "I_mean": 0.0855,
+        "T_mean": 0.225,
+        "E_mean": 0.1315
+      },
+      {
+        "period": "2020-11",
+        "n": 17,
+        "B_mean": 0.0,
+        "I_mean": 0.0828,
+        "T_mean": 0.2898,
+        "E_mean": 0.1634
+      },
+      {
+        "period": "2020-12",
+        "n": 21,
+        "B_mean": 0.0,
+        "I_mean": 0.1325,
+        "T_mean": 0.2803,
+        "E_mean": 0.1568
+      },
+      {
+        "period": "2021-01",
+        "n": 31,
+        "B_mean": 0.0,
+        "I_mean": 0.1829,
+        "T_mean": 0.2893,
+        "E_mean": 0.1127
+      },
+      {
+        "period": "2021-02",
+        "n": 15,
+        "B_mean": 0.0,
+        "I_mean": 0.0421,
+        "T_mean": 0.1573,
+        "E_mean": 0.1205
+      },
+      {
+        "period": "2021-03",
+        "n": 11,
+        "B_mean": 0.0,
+        "I_mean": 0.1345,
+        "T_mean": 0.1829,
+        "E_mean": 0.125
+      },
+      {
+        "period": "2021-04",
+        "n": 10,
+        "B_mean": 0.0,
+        "I_mean": 0.1572,
+        "T_mean": 0.2464,
+        "E_mean": 0.1228
+      },
+      {
+        "period": "2021-05",
+        "n": 18,
+        "B_mean": 0.0,
+        "I_mean": 0.1231,
+        "T_mean": 0.2959,
+        "E_mean": 0.1513
+      },
+      {
+        "period": "2021-06",
+        "n": 11,
+        "B_mean": 0.0,
+        "I_mean": 0.1108,
+        "T_mean": 0.2468,
+        "E_mean": 0.1487
+      },
+      {
+        "period": "2021-07",
+        "n": 13,
+        "B_mean": 0.0,
+        "I_mean": 0.1255,
+        "T_mean": 0.2399,
+        "E_mean": 0.1184
+      },
+      {
+        "period": "2021-08",
+        "n": 9,
+        "B_mean": 0.0,
+        "I_mean": 0.0629,
+        "T_mean": 0.1731,
+        "E_mean": 0.1004
+      },
+      {
+        "period": "2021-09",
+        "n": 7,
+        "B_mean": 0.0,
+        "I_mean": 0.1644,
+        "T_mean": 0.2979,
+        "E_mean": 0.155
+      },
+      {
+        "period": "2021-10",
+        "n": 10,
+        "B_mean": 0.0,
+        "I_mean": 0.1066,
+        "T_mean": 0.3353,
+        "E_mean": 0.1639
+      },
+      {
+        "period": "2021-11",
+        "n": 5,
+        "B_mean": 0.0,
+        "I_mean": 0.0696,
+        "T_mean": 0.2889,
+        "E_mean": 0.1614
+      },
+      {
+        "period": "2021-12",
+        "n": 3,
+        "B_mean": 0.0,
+        "I_mean": 0.1616,
+        "T_mean": 0.2776,
+        "E_mean": 0.1963
+      },
+      {
+        "period": "2022-01",
+        "n": 8,
+        "B_mean": 0.0,
+        "I_mean": 0.0897,
+        "T_mean": 0.2523,
+        "E_mean": 0.1335
+      },
+      {
+        "period": "2022-02",
+        "n": 2,
+        "B_mean": 0.0,
+        "I_mean": 0.2792,
+        "T_mean": 0.2321,
+        "E_mean": 0.0
+      },
+      {
+        "period": "2022-03",
+        "n": 4,
+        "B_mean": 0.0,
+        "I_mean": 0.1525,
+        "T_mean": 0.105,
+        "E_mean": 0.0473
+      },
+      {
+        "period": "2022-04",
+        "n": 1,
+        "B_mean": 0.0,
+        "I_mean": 0.0,
+        "T_mean": 0.3333,
+        "E_mean": 0.2857
+      },
+      {
+        "period": "2022-05",
+        "n": 5,
+        "B_mean": 0.0,
+        "I_mean": 0.1057,
+        "T_mean": 0.2491,
+        "E_mean": 0.1657
+      },
+      {
+        "period": "2022-06",
+        "n": 2,
+        "B_mean": 0.0,
+        "I_mean": 0.0946,
+        "T_mean": 0.21,
+        "E_mean": 0.0946
+      },
+      {
+        "period": "2022-07",
+        "n": 2,
+        "B_mean": 0.0,
+        "I_mean": 0.1591,
+        "T_mean": 0.2273,
+        "E_mean": 0.1052
+      },
+      {
+        "period": "2022-10",
+        "n": 1,
+        "B_mean": 0.0,
+        "I_mean": 0.0,
+        "T_mean": 0.1892,
+        "E_mean": 0.1892
+      }
+    ]
+  },
+  "motivated_reasoning": {
+    "mean_score": 0.15,
+    "distribution": {
+      "medium": 200,
+      "low": 300
+    }
+  },
+  "corpus": {
+    "boards": {
+      "parler": 500
+    },
+    "by_year": {
+      "2020": 332,
+      "2021": 143,
+      "2022": 25
+    }
+  }
+}

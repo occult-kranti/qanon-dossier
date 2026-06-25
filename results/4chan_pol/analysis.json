@@ -1,0 +1,522 @@
+{
+  "dataset_id": "4chan_pol",
+  "n_posts": 500,
+  "cluster": {
+    "method": "kmeans",
+    "n_clusters": 10,
+    "metrics": {
+      "silhouette": 1.0,
+      "n_clusters": 10
+    },
+    "topics": [
+      {
+        "id": 0,
+        "label": "week · week trust · watch",
+        "keywords": [
+          "week",
+          "week trust",
+          "watch",
+          "watch news",
+          "cabal",
+          "cabal panicking",
+          "news week",
+          "news"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 1,
+        "label": "control god · bank rothschilds · pill",
+        "keywords": [
+          "control god",
+          "bank rothschilds",
+          "pill",
+          "pill incoming",
+          "private",
+          "rothschilds control",
+          "reserve",
+          "rothschilds"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 2,
+        "label": "knew msm · knew · conspiracy",
+        "keywords": [
+          "knew msm",
+          "knew",
+          "conspiracy",
+          "conspiracy future",
+          "claim conspiracy",
+          "claim",
+          "anons knew",
+          "historians"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 3,
+        "label": "wwg1wga matter · target wwg1wga · heavy",
+        "keywords": [
+          "wwg1wga matter",
+          "target wwg1wga",
+          "heavy",
+          "heavy tonight",
+          "matter qanon",
+          "matter",
+          "tonight",
+          "target"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 4,
+        "label": "directly debunk · directly · address directly",
+        "keywords": [
+          "directly debunk",
+          "directly",
+          "address directly",
+          "address",
+          "map",
+          "map wwg1wga",
+          "debunk map",
+          "debunk"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 5,
+        "label": "archive · archive offline · arrests",
+        "keywords": [
+          "archive",
+          "archive offline",
+          "arrests",
+          "mode",
+          "offline",
+          "offline god",
+          "panic mode",
+          "panic"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 6,
+        "label": "vs post · vs · tweet",
+        "keywords": [
+          "vs post",
+          "vs",
+          "tweet",
+          "coincidence",
+          "look",
+          "look timing",
+          "post coincidence",
+          "post"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 7,
+        "label": "verified · verified big · confirmed",
+        "keywords": [
+          "verified",
+          "verified big",
+          "confirmed",
+          "confirmed 8ch",
+          "drop",
+          "drop ready",
+          "8ch",
+          "8ch trip"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 8,
+        "label": "wake normies · wake · cia",
+        "keywords": [
+          "wake normies",
+          "wake",
+          "cia",
+          "normies",
+          "operation mockingbird",
+          "operation",
+          "media wake",
+          "media"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      },
+      {
+        "id": 9,
+        "label": "patriots control · patriots · military",
+        "keywords": [
+          "patriots control",
+          "patriots",
+          "military",
+          "bless america",
+          "control trust",
+          "america",
+          "america wwg1wga",
+          "military god"
+        ],
+        "size": 50,
+        "share_pct": 10.0
+      }
+    ],
+    "time_s": 0.06
+  },
+  "bite": {
+    "aggregate": {
+      "B": {
+        "mean": 0.0231,
+        "median": 0.0,
+        "std": 0.0692,
+        "max": 0.2308,
+        "dist": {
+          "not_detected": 450,
+          "weak": 50,
+          "moderate": 0,
+          "strong": 0,
+          "pervasive": 0
+        }
+      },
+      "I": {
+        "mean": 0.0897,
+        "median": 0.0,
+        "std": 0.1182,
+        "max": 0.3333,
+        "dist": {
+          "not_detected": 350,
+          "weak": 150,
+          "moderate": 0,
+          "strong": 0,
+          "pervasive": 0
+        }
+      },
+      "T": {
+        "mean": 0.1958,
+        "median": 0.25,
+        "std": 0.1403,
+        "max": 0.3478,
+        "dist": {
+          "not_detected": 200,
+          "weak": 300,
+          "moderate": 0,
+          "strong": 0,
+          "pervasive": 0
+        }
+      },
+      "E": {
+        "mean": 0.1132,
+        "median": 0.1892,
+        "std": 0.1248,
+        "max": 0.375,
+        "dist": {
+          "not_detected": 250,
+          "weak": 200,
+          "moderate": 50,
+          "strong": 0,
+          "pervasive": 0
+        }
+      },
+      "total": {
+        "mean": 0.1054,
+        "median": 0.0999,
+        "std": 0.0562,
+        "max": 0.2176,
+        "dist": {
+          "not_detected": 400,
+          "weak": 100,
+          "moderate": 0,
+          "strong": 0,
+          "pervasive": 0
+        }
+      },
+      "corpus_dominant": "T",
+      "n_posts": 500
+    },
+    "timeline": [
+      {
+        "period": "2017-10",
+        "n": 6,
+        "B_mean": 0.0385,
+        "I_mean": 0.1032,
+        "T_mean": 0.2445,
+        "E_mean": 0.1571
+      },
+      {
+        "period": "2017-11",
+        "n": 64,
+        "B_mean": 0.0216,
+        "I_mean": 0.0919,
+        "T_mean": 0.1868,
+        "E_mean": 0.1032
+      },
+      {
+        "period": "2017-12",
+        "n": 38,
+        "B_mean": 0.0121,
+        "I_mean": 0.1,
+        "T_mean": 0.2058,
+        "E_mean": 0.1092
+      },
+      {
+        "period": "2018-01",
+        "n": 49,
+        "B_mean": 0.0283,
+        "I_mean": 0.0779,
+        "T_mean": 0.1893,
+        "E_mean": 0.104
+      },
+      {
+        "period": "2018-02",
+        "n": 26,
+        "B_mean": 0.0266,
+        "I_mean": 0.1189,
+        "T_mean": 0.1855,
+        "E_mean": 0.1523
+      },
+      {
+        "period": "2018-03",
+        "n": 26,
+        "B_mean": 0.0266,
+        "I_mean": 0.1148,
+        "T_mean": 0.2165,
+        "E_mean": 0.0873
+      },
+      {
+        "period": "2018-04",
+        "n": 36,
+        "B_mean": 0.0064,
+        "I_mean": 0.0674,
+        "T_mean": 0.206,
+        "E_mean": 0.094
+      },
+      {
+        "period": "2018-05",
+        "n": 26,
+        "B_mean": 0.0355,
+        "I_mean": 0.0716,
+        "T_mean": 0.1869,
+        "E_mean": 0.1453
+      },
+      {
+        "period": "2018-06",
+        "n": 27,
+        "B_mean": 0.0256,
+        "I_mean": 0.0692,
+        "T_mean": 0.1775,
+        "E_mean": 0.1117
+      },
+      {
+        "period": "2018-07",
+        "n": 25,
+        "B_mean": 0.0277,
+        "I_mean": 0.0584,
+        "T_mean": 0.2126,
+        "E_mean": 0.1205
+      },
+      {
+        "period": "2018-08",
+        "n": 15,
+        "B_mean": 0.0308,
+        "I_mean": 0.0648,
+        "T_mean": 0.2221,
+        "E_mean": 0.1133
+      },
+      {
+        "period": "2018-09",
+        "n": 14,
+        "B_mean": 0.0,
+        "I_mean": 0.1282,
+        "T_mean": 0.1868,
+        "E_mean": 0.0676
+      },
+      {
+        "period": "2018-10",
+        "n": 14,
+        "B_mean": 0.0,
+        "I_mean": 0.0893,
+        "T_mean": 0.2063,
+        "E_mean": 0.1076
+      },
+      {
+        "period": "2018-11",
+        "n": 22,
+        "B_mean": 0.0315,
+        "I_mean": 0.1128,
+        "T_mean": 0.2175,
+        "E_mean": 0.1285
+      },
+      {
+        "period": "2018-12",
+        "n": 13,
+        "B_mean": 0.0178,
+        "I_mean": 0.0852,
+        "T_mean": 0.1421,
+        "E_mean": 0.1019
+      },
+      {
+        "period": "2019-01",
+        "n": 14,
+        "B_mean": 0.0165,
+        "I_mean": 0.0301,
+        "T_mean": 0.2586,
+        "E_mean": 0.1076
+      },
+      {
+        "period": "2019-02",
+        "n": 8,
+        "B_mean": 0.0866,
+        "I_mean": 0.0442,
+        "T_mean": 0.1116,
+        "E_mean": 0.0709
+      },
+      {
+        "period": "2019-03",
+        "n": 10,
+        "B_mean": 0.0,
+        "I_mean": 0.1631,
+        "T_mean": 0.2484,
+        "E_mean": 0.151
+      },
+      {
+        "period": "2019-04",
+        "n": 9,
+        "B_mean": 0.0256,
+        "I_mean": 0.0763,
+        "T_mean": 0.2043,
+        "E_mean": 0.042
+      },
+      {
+        "period": "2019-05",
+        "n": 5,
+        "B_mean": 0.0462,
+        "I_mean": 0.0707,
+        "T_mean": 0.1696,
+        "E_mean": 0.0757
+      },
+      {
+        "period": "2019-06",
+        "n": 12,
+        "B_mean": 0.0192,
+        "I_mean": 0.132,
+        "T_mean": 0.1909,
+        "E_mean": 0.1571
+      },
+      {
+        "period": "2019-07",
+        "n": 7,
+        "B_mean": 0.0659,
+        "I_mean": 0.0505,
+        "T_mean": 0.1395,
+        "E_mean": 0.1076
+      },
+      {
+        "period": "2019-08",
+        "n": 2,
+        "B_mean": 0.0,
+        "I_mean": 0.1666,
+        "T_mean": 0.2989,
+        "E_mean": 0.0946
+      },
+      {
+        "period": "2019-09",
+        "n": 4,
+        "B_mean": 0.0577,
+        "I_mean": 0.0526,
+        "T_mean": 0.0982,
+        "E_mean": 0.0473
+      },
+      {
+        "period": "2019-10",
+        "n": 7,
+        "B_mean": 0.0,
+        "I_mean": 0.0981,
+        "T_mean": 0.2303,
+        "E_mean": 0.1612
+      },
+      {
+        "period": "2019-11",
+        "n": 6,
+        "B_mean": 0.0,
+        "I_mean": 0.1608,
+        "T_mean": 0.1373,
+        "E_mean": 0.1571
+      },
+      {
+        "period": "2019-12",
+        "n": 3,
+        "B_mean": 0.0,
+        "I_mean": 0.1403,
+        "T_mean": 0.1159,
+        "E_mean": 0.1261
+      },
+      {
+        "period": "2020-01",
+        "n": 2,
+        "B_mean": 0.0,
+        "I_mean": 0.0714,
+        "T_mean": 0.2679,
+        "E_mean": 0.0946
+      },
+      {
+        "period": "2020-02",
+        "n": 4,
+        "B_mean": 0.1154,
+        "I_mean": 0.1359,
+        "T_mean": 0.0869,
+        "E_mean": 0.1892
+      },
+      {
+        "period": "2020-03",
+        "n": 4,
+        "B_mean": 0.0,
+        "I_mean": 0.1886,
+        "T_mean": 0.1941,
+        "E_mean": 0.1419
+      },
+      {
+        "period": "2020-05",
+        "n": 1,
+        "B_mean": 0.0,
+        "I_mean": 0.0,
+        "T_mean": 0.3333,
+        "E_mean": 0.375
+      },
+      {
+        "period": "2020-06",
+        "n": 1,
+        "B_mean": 0.0,
+        "I_mean": 0.0,
+        "T_mean": 0.3333,
+        "E_mean": 0.375
+      }
+    ]
+  },
+  "motivated_reasoning": {
+    "mean_score": 0.125,
+    "distribution": {
+      "medium": 200,
+      "low": 300
+    }
+  },
+  "corpus": {
+    "boards": {
+      "/pol/": 500
+    },
+    "by_year": {
+      "2017": 108,
+      "2018": 293,
+      "2019": 87,
+      "2020": 12
+    }
+  }
+}

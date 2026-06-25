@@ -1,0 +1,764 @@
+{
+  "generated": "2026-06-25T08:12:14.047295+00:00",
+  "method": "kmeans",
+  "datasets": [
+    "qdrops",
+    "reddit_qanon",
+    "4chan_pol",
+    "8kun_qresearch",
+    "parler",
+    "telegram",
+    "twitter"
+  ],
+  "cross": {
+    "platform_migration": [
+      {
+        "period": "2017-10",
+        "4ch": 2,
+        "4chan": 6
+      },
+      {
+        "period": "2017-11",
+        "4ch": 20,
+        "reddit": 45,
+        "4chan": 64
+      },
+      {
+        "period": "2017-12",
+        "8ch": 21,
+        "4ch": 1,
+        "reddit": 45,
+        "4chan": 38
+      },
+      {
+        "period": "2018-01",
+        "8ch": 28,
+        "reddit": 52,
+        "4chan": 49
+      },
+      {
+        "period": "2018-02",
+        "8ch": 18,
+        "reddit": 27,
+        "4chan": 26
+      },
+      {
+        "period": "2018-03",
+        "8ch": 19,
+        "reddit": 25,
+        "4chan": 26
+      },
+      {
+        "period": "2018-04",
+        "8ch": 29,
+        "reddit": 39,
+        "4chan": 36
+      },
+      {
+        "period": "2018-05",
+        "8ch": 12,
+        "reddit": 28,
+        "4chan": 26
+      },
+      {
+        "period": "2018-06",
+        "8ch": 22,
+        "reddit": 13,
+        "4chan": 27,
+        "twitter": 8
+      },
+      {
+        "period": "2018-07",
+        "8ch": 14,
+        "reddit": 20,
+        "4chan": 25,
+        "twitter": 64
+      },
+      {
+        "period": "2018-08",
+        "8ch": 36,
+        "reddit": 14,
+        "4chan": 15,
+        "twitter": 42
+      },
+      {
+        "period": "2018-09",
+        "8ch": 30,
+        "reddit": 18,
+        "4chan": 14,
+        "twitter": 39
+      },
+      {
+        "period": "2018-10",
+        "8ch": 6,
+        "reddit": 20,
+        "4chan": 14,
+        "twitter": 36
+      },
+      {
+        "period": "2018-11",
+        "8ch": 12,
+        "reddit": 18,
+        "4chan": 22,
+        "8kun": 12,
+        "twitter": 35
+      },
+      {
+        "period": "2018-12",
+        "8ch": 13,
+        "reddit": 17,
+        "4chan": 13,
+        "8kun": 57,
+        "twitter": 30
+      },
+      {
+        "period": "2019-01",
+        "8ch": 3,
+        "reddit": 12,
+        "4chan": 14,
+        "8kun": 44,
+        "twitter": 28
+      },
+      {
+        "period": "2019-02",
+        "8ch": 21,
+        "reddit": 11,
+        "4chan": 8,
+        "8kun": 37,
+        "twitter": 17
+      },
+      {
+        "period": "2019-03",
+        "8ch": 37,
+        "reddit": 13,
+        "4chan": 10,
+        "8kun": 30,
+        "twitter": 17
+      },
+      {
+        "period": "2019-04",
+        "8ch": 2,
+        "reddit": 12,
+        "4chan": 9,
+        "8kun": 24,
+        "twitter": 11
+      },
+      {
+        "period": "2019-05",
+        "8ch": 2,
+        "reddit": 10,
+        "4chan": 5,
+        "8kun": 28,
+        "twitter": 21
+      },
+      {
+        "period": "2019-06",
+        "reddit": 8,
+        "4chan": 12,
+        "8kun": 27,
+        "twitter": 16
+      },
+      {
+        "period": "2019-07",
+        "8ch": 22,
+        "reddit": 6,
+        "4chan": 7,
+        "8kun": 18,
+        "twitter": 16
+      },
+      {
+        "period": "2019-08",
+        "reddit": 10,
+        "4chan": 2,
+        "8kun": 18,
+        "twitter": 15
+      },
+      {
+        "period": "2019-09",
+        "reddit": 6,
+        "4chan": 4,
+        "8kun": 26,
+        "twitter": 12
+      },
+      {
+        "period": "2019-10",
+        "reddit": 6,
+        "4chan": 7,
+        "8kun": 13,
+        "twitter": 6
+      },
+      {
+        "period": "2019-11",
+        "8kun": 26,
+        "reddit": 2,
+        "4chan": 6,
+        "twitter": 9
+      },
+      {
+        "period": "2019-12",
+        "8kun": 30,
+        "reddit": 7,
+        "4chan": 3,
+        "twitter": 5
+      },
+      {
+        "period": "2020-01",
+        "8kun": 23,
+        "reddit": 3,
+        "4chan": 2,
+        "parler": 12,
+        "twitter": 11
+      },
+      {
+        "period": "2020-02",
+        "8kun": 13,
+        "reddit": 5,
+        "4chan": 4,
+        "parler": 53,
+        "twitter": 7
+      },
+      {
+        "period": "2020-03",
+        "8kun": 15,
+        "reddit": 1,
+        "4chan": 4,
+        "parler": 56,
+        "twitter": 6
+      },
+      {
+        "period": "2020-04",
+        "8kun": 19,
+        "reddit": 3,
+        "parler": 27,
+        "twitter": 10
+      },
+      {
+        "period": "2020-05",
+        "8kun": 37,
+        "reddit": 2,
+        "4chan": 1,
+        "parler": 29,
+        "twitter": 10
+      },
+      {
+        "period": "2020-06",
+        "8kun": 36,
+        "reddit": 1,
+        "4chan": 1,
+        "parler": 19,
+        "twitter": 3
+      },
+      {
+        "period": "2020-07",
+        "8kun": 21,
+        "reddit": 1,
+        "parler": 24,
+        "twitter": 5
+      },
+      {
+        "period": "2020-08",
+        "8kun": 6,
+        "parler": 29,
+        "twitter": 8
+      },
+      {
+        "period": "2020-09",
+        "8kun": 28,
+        "parler": 21,
+        "twitter": 4
+      },
+      {
+        "period": "2020-10",
+        "8kun": 17,
+        "parler": 24,
+        "twitter": 4
+      },
+      {
+        "period": "2020-11",
+        "8kun": 6,
+        "parler": 17,
+        "twitter": 2
+      },
+      {
+        "period": "2020-12",
+        "8kun": 5,
+        "parler": 21,
+        "telegram": 16,
+        "twitter": 1
+      },
+      {
+        "period": "2021-01",
+        "8kun": 1,
+        "parler": 31,
+        "telegram": 56,
+        "twitter": 2
+      },
+      {
+        "period": "2021-02",
+        "8kun": 6,
+        "parler": 15,
+        "telegram": 43
+      },
+      {
+        "period": "2021-03",
+        "parler": 11,
+        "telegram": 36
+      },
+      {
+        "period": "2021-04",
+        "8kun": 1,
+        "parler": 10,
+        "telegram": 38
+      },
+      {
+        "period": "2021-05",
+        "8kun": 4,
+        "parler": 18,
+        "telegram": 27
+      },
+      {
+        "period": "2021-06",
+        "8kun": 1,
+        "parler": 11,
+        "telegram": 37
+      },
+      {
+        "period": "2021-07",
+        "parler": 13,
+        "telegram": 23
+      },
+      {
+        "period": "2021-08",
+        "parler": 9,
+        "telegram": 19
+      },
+      {
+        "period": "2021-09",
+        "parler": 7,
+        "telegram": 20
+      },
+      {
+        "period": "2021-10",
+        "parler": 10,
+        "telegram": 18
+      },
+      {
+        "period": "2021-11",
+        "parler": 5,
+        "telegram": 11
+      },
+      {
+        "period": "2021-12",
+        "parler": 3,
+        "telegram": 13
+      },
+      {
+        "period": "2022-01",
+        "parler": 8,
+        "telegram": 11
+      },
+      {
+        "period": "2022-02",
+        "parler": 2,
+        "telegram": 13
+      },
+      {
+        "period": "2022-03",
+        "parler": 4,
+        "telegram": 18
+      },
+      {
+        "period": "2022-04",
+        "parler": 1,
+        "telegram": 19
+      },
+      {
+        "period": "2022-05",
+        "parler": 5,
+        "telegram": 14
+      },
+      {
+        "period": "2022-06",
+        "8kun": 1,
+        "parler": 2,
+        "telegram": 7
+      },
+      {
+        "period": "2022-07",
+        "parler": 2,
+        "telegram": 5
+      },
+      {
+        "period": "2022-08",
+        "telegram": 6
+      },
+      {
+        "period": "2022-09",
+        "telegram": 10
+      },
+      {
+        "period": "2022-10",
+        "parler": 1,
+        "telegram": 9
+      },
+      {
+        "period": "2022-11",
+        "telegram": 6
+      },
+      {
+        "period": "2022-12",
+        "telegram": 4
+      },
+      {
+        "period": "2023-01",
+        "telegram": 4
+      },
+      {
+        "period": "2023-02",
+        "telegram": 4
+      },
+      {
+        "period": "2023-03",
+        "telegram": 1
+      },
+      {
+        "period": "2023-04",
+        "telegram": 3
+      },
+      {
+        "period": "2023-05",
+        "telegram": 2
+      },
+      {
+        "period": "2023-06",
+        "telegram": 4
+      },
+      {
+        "period": "2023-07",
+        "telegram": 1
+      },
+      {
+        "period": "2023-08",
+        "telegram": 2
+      }
+    ],
+    "topic_overlap": {
+      "qdrops|reddit_qanon": {
+        "dataset_a": "qdrops",
+        "dataset_b": "reddit_qanon",
+        "jaccard": 0.0559,
+        "shared_keywords": [
+          "coming",
+          "game",
+          "great",
+          "msm",
+          "news media",
+          "patriots",
+          "people",
+          "potus"
+        ]
+      },
+      "qdrops|4chan_pol": {
+        "dataset_a": "qdrops",
+        "dataset_b": "4chan_pol",
+        "jaccard": 0.0342,
+        "shared_keywords": [
+          "news",
+          "patriots",
+          "private",
+          "target",
+          "watch"
+        ]
+      },
+      "qdrops|8kun_qresearch": {
+        "dataset_a": "qdrops",
+        "dataset_b": "8kun_qresearch",
+        "jaccard": 0.0272,
+        "shared_keywords": [
+          "boom",
+          "potus",
+          "trip",
+          "want"
+        ]
+      },
+      "qdrops|parler": {
+        "dataset_a": "qdrops",
+        "dataset_b": "parler",
+        "jaccard": 0.0067,
+        "shared_keywords": [
+          "justice"
+        ]
+      },
+      "qdrops|telegram": {
+        "dataset_a": "qdrops",
+        "dataset_b": "telegram",
+        "jaccard": 0.0203,
+        "shared_keywords": [
+          "know",
+          "patriots",
+          "ready"
+        ]
+      },
+      "qdrops|twitter": {
+        "dataset_a": "qdrops",
+        "dataset_b": "twitter",
+        "jaccard": 0.0204,
+        "shared_keywords": [
+          "msm",
+          "ready",
+          "real"
+        ]
+      },
+      "reddit_qanon|4chan_pol": {
+        "dataset_a": "reddit_qanon",
+        "dataset_b": "4chan_pol",
+        "jaccard": 0.039,
+        "shared_keywords": [
+          "drop",
+          "map",
+          "media",
+          "offline",
+          "panic",
+          "patriots"
+        ]
+      },
+      "reddit_qanon|8kun_qresearch": {
+        "dataset_a": "reddit_qanon",
+        "dataset_b": "8kun_qresearch",
+        "jaccard": 0.0667,
+        "shared_keywords": [
+          "dark",
+          "dark light",
+          "huber",
+          "map",
+          "panic",
+          "panic dc",
+          "potus",
+          "stop",
+          "stop coming",
+          "storm"
+        ]
+      },
+      "reddit_qanon|parler": {
+        "dataset_a": "reddit_qanon",
+        "dataset_b": "parler",
+        "jaccard": 0.0526,
+        "shared_keywords": [
+          "coming god",
+          "drop",
+          "fisa",
+          "great awakening",
+          "storm",
+          "truth",
+          "warned",
+          "won"
+        ]
+      },
+      "reddit_qanon|telegram": {
+        "dataset_a": "reddit_qanon",
+        "dataset_b": "telegram",
+        "jaccard": 0.0596,
+        "shared_keywords": [
+          "drop",
+          "god",
+          "map",
+          "media",
+          "patriots",
+          "stop",
+          "stop coming",
+          "storm",
+          "truth"
+        ]
+      },
+      "reddit_qanon|twitter": {
+        "dataset_a": "reddit_qanon",
+        "dataset_b": "twitter",
+        "jaccard": 0.0966,
+        "shared_keywords": [
+          "bless",
+          "deep state",
+          "fisa",
+          "god",
+          "god bless",
+          "media",
+          "media won",
+          "msm",
+          "research",
+          "storm",
+          "terrified",
+          "truth",
+          "warned",
+          "won"
+        ]
+      },
+      "4chan_pol|8kun_qresearch": {
+        "dataset_a": "4chan_pol",
+        "dataset_b": "8kun_qresearch",
+        "jaccard": 0.0256,
+        "shared_keywords": [
+          "map",
+          "panic",
+          "tweet",
+          "week"
+        ]
+      },
+      "4chan_pol|parler": {
+        "dataset_a": "4chan_pol",
+        "dataset_b": "parler",
+        "jaccard": 0.0191,
+        "shared_keywords": [
+          "cabal",
+          "conspiracy",
+          "drop"
+        ]
+      },
+      "4chan_pol|telegram": {
+        "dataset_a": "4chan_pol",
+        "dataset_b": "telegram",
+        "jaccard": 0.039,
+        "shared_keywords": [
+          "archive",
+          "cabal",
+          "drop",
+          "map",
+          "media",
+          "patriots"
+        ]
+      },
+      "4chan_pol|twitter": {
+        "dataset_a": "4chan_pol",
+        "dataset_b": "twitter",
+        "jaccard": 0.0192,
+        "shared_keywords": [
+          "media",
+          "patriots control",
+          "wake"
+        ]
+      },
+      "8kun_qresearch|parler": {
+        "dataset_a": "8kun_qresearch",
+        "dataset_b": "parler",
+        "jaccard": 0.0063,
+        "shared_keywords": [
+          "storm"
+        ]
+      },
+      "8kun_qresearch|telegram": {
+        "dataset_a": "8kun_qresearch",
+        "dataset_b": "telegram",
+        "jaccard": 0.0256,
+        "shared_keywords": [
+          "map",
+          "stop",
+          "stop coming",
+          "storm"
+        ]
+      },
+      "8kun_qresearch|twitter": {
+        "dataset_a": "8kun_qresearch",
+        "dataset_b": "twitter",
+        "jaccard": 0.0127,
+        "shared_keywords": [
+          "connects",
+          "storm"
+        ]
+      },
+      "parler|telegram": {
+        "dataset_a": "parler",
+        "dataset_b": "telegram",
+        "jaccard": 0.039,
+        "shared_keywords": [
+          "cabal",
+          "censored",
+          "drop",
+          "plan qanon",
+          "storm",
+          "truth"
+        ]
+      },
+      "parler|twitter": {
+        "dataset_a": "parler",
+        "dataset_b": "twitter",
+        "jaccard": 0.0743,
+        "shared_keywords": [
+          "banned",
+          "fisa",
+          "greatawakening qanon",
+          "qanon maga",
+          "state",
+          "storm",
+          "today",
+          "told",
+          "truth",
+          "warned",
+          "won"
+        ]
+      },
+      "telegram|twitter": {
+        "dataset_a": "telegram",
+        "dataset_b": "twitter",
+        "jaccard": 0.0461,
+        "shared_keywords": [
+          "god",
+          "mainstream",
+          "mainstream media",
+          "media",
+          "ready",
+          "storm",
+          "truth"
+        ]
+      }
+    }
+  },
+  "bite_summary": {
+    "qdrops": {
+      "B": 0.002,
+      "I": 0.0271,
+      "T": 0.0282,
+      "E": 0.0197,
+      "total": 0.0193
+    },
+    "reddit_qanon": {
+      "B": 0.0398,
+      "I": 0.1346,
+      "T": 0.2792,
+      "E": 0.0665,
+      "total": 0.13
+    },
+    "4chan_pol": {
+      "B": 0.0231,
+      "I": 0.0897,
+      "T": 0.1958,
+      "E": 0.1132,
+      "total": 0.1054
+    },
+    "8kun_qresearch": {
+      "B": 0.0143,
+      "I": 0.0143,
+      "T": 0.3223,
+      "E": 0.06,
+      "total": 0.1027
+    },
+    "parler": {
+      "B": 0.0,
+      "I": 0.1232,
+      "T": 0.2574,
+      "E": 0.1303,
+      "total": 0.1277
+    },
+    "telegram": {
+      "B": 0.0231,
+      "I": 0.0732,
+      "T": 0.2657,
+      "E": 0.0845,
+      "total": 0.1116
+    },
+    "twitter": {
+      "B": 0.0,
+      "I": 0.111,
+      "T": 0.2422,
+      "E": 0.0761,
+      "total": 0.1073
+    }
+  }
+}
