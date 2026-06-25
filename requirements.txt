@@ -9,6 +9,7 @@
 # --- core (all methods) ---
 scikit-learn>=1.3
 numpy>=1.24
+matplotlib>=3.8
 
 # --- embeddings + density clustering (bertopic / hdbscan) ---
 bertopic>=0.16            # embeddings + UMAP + HDBSCAN + c-TF-IDF labelling

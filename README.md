@@ -26,6 +26,39 @@ python qdrops_sweep.py            # stability sweep
 python3 -m http.server 8000       # → http://localhost:8000
 ```
 
+## Improved Experiment (Ablation + Plots + Bundle)
+
+Use this when you want a paper-style experiment refresh with model/parameter ablations,
+updated reports, and publication-ready figures.
+
+### Recommended runtime
+- Prefer **T4 GPU** for the largest practical sentence-transformer stack in this repo.
+- `v5e-1 TPU` is not ideal for this Python clustering stack (BERTopic/HDBSCAN are GPU/CPU-centric).
+
+### Single-command Colab run
+
+Paste this in one Colab cell:
+
+```bash
+!bash -lc "set -euo pipefail; rm -rf /content/qanon-dossier; git clone --depth 1 --branch main https://github.com/occult-kranti/qanon-dossier.git /content/qanon-dossier; cd /content/qanon-dossier; python -m pip install -q --upgrade pip; python -m pip install -q -r requirements.txt; python improved_experiment.py --device t4 --method bertopic --models BAAI/bge-large-en-v1.5,all-mpnet-base-v2,all-MiniLM-L6-v2 --mcs 15,25,40 --admin-ablation --bundle /content/qanon_results_bundle_improved.zip; echo DONE:/content/qanon_results_bundle_improved.zip"
+```
+
+### What it generates
+- Standard outputs:
+   - `results/<dataset>/analysis.json`
+   - `results/index.json`
+   - `compare_results.json`
+   - `compare_results.html`
+   - `run_*.json`, `stability_report.json`, `stability_report.csv`
+- Improved outputs:
+   - `results/improved/improved_experiment_codebook.json`
+   - `results/improved/improved_experiment_report.json`
+   - `results/improved/improved_experiment_report.md`
+   - `results/improved/improved_experiment_report.html`
+   - `results/improved/plots/*.png`
+- Transfer bundle zip:
+   - `/content/qanon_results_bundle_improved.zip`
+
 ## Datasets
 
 See [`datasets/CATALOG.md`](datasets/CATALOG.md) for the full database list with sources, licenses, and download instructions. The collector (`collect_datasets.py`) auto-downloads freely available datasets and documents the rest.
